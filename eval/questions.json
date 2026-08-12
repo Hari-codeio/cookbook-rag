@@ -1,0 +1,91 @@
+{
+  "_note": "PHASE 1 PLACEHOLDER SET. These 8 questions are written against the synthetic baseline corpus (data/baseline) purely to verify that the eval harness runs end to end. In Phase 2 they are REPLACED by 8 questions written from the 6 supplied fermentation cards in data/new_drop, before any search is run. Delete out/questions.lock.json (or pass --relock) when you swap them.",
+  "_schema": {
+    "id": "stable short id",
+    "question": "the question as asked",
+    "expected_recipe_id": "recipe_id of the card that answers it - known BEFORE searching",
+    "expected_section": "which part of that card holds the answer",
+    "depends_on_table_row": "true when the answer is a row inside the ingredient table",
+    "answer_must_contain": "strings that MUST appear in a retrieved chunk for it to count as a hit. Matching is case-insensitive and whitespace-tolerant, so '7 g' also matches '7g'. This is what makes a hit objective rather than a section-label guess."
+  },
+
+  "questions": [
+    {
+      "id": "q1",
+      "question": "How much fine sea salt is in the beef bourguignon?",
+      "expected_recipe_id": "beef-bourguignon",
+      "expected_section": "ingredients table",
+      "depends_on_table_row": true,
+      "answer_must_contain": ["Fine sea salt", "12 g"]
+    },
+    {
+      "id": "q2",
+      "question": "What is the hydration percentage of the classic rosemary focaccia?",
+      "expected_recipe_id": "classic-focaccia",
+      "expected_section": "ingredients table (water row, baker's %)",
+      "depends_on_table_row": true,
+      "answer_must_contain": ["Water", "80%"]
+    },
+    {
+      "id": "q3",
+      "question": "How much amchur goes into the chana masala?",
+      "expected_recipe_id": "chana-masala",
+      "expected_section": "ingredients table",
+      "depends_on_table_row": true,
+      "answer_must_contain": ["Amchur", "6 g"]
+    },
+    {
+      "id": "q4",
+      "question": "How much double cream is in the chicken tikka masala?",
+      "expected_recipe_id": "chicken-tikka-masala",
+      "expected_section": "ingredients table",
+      "depends_on_table_row": true,
+      "answer_must_contain": ["Double cream", "150 g"]
+    },
+    {
+      "id": "q5",
+      "question": "At what temperature and for how long is the lemon drizzle loaf baked?",
+      "expected_recipe_id": "lemon-drizzle-cake",
+      "expected_section": "method",
+      "depends_on_table_row": false,
+      "answer_must_contain": ["170 C", "45"]
+    },
+    {
+      "id": "q6",
+      "question": "How long should the pad thai rice noodles soak before they go in the wok?",
+      "expected_recipe_id": "pad-thai",
+      "expected_section": "method",
+      "depends_on_table_row": false,
+      "answer_must_contain": ["thirty minutes"]
+    },
+    {
+      "id": "q7",
+      "question": "What allergens does the prawn pad thai contain?",
+      "expected_recipe_id": "pad-thai",
+      "expected_section": "allergens",
+      "depends_on_table_row": false,
+      "answer_must_contain": ["shellfish", "peanuts"]
+    },
+    {
+      "id": "q8",
+      "question": "What is the rice to water ratio for the ginger and spring onion congee?",
+      "expected_recipe_id": "congee",
+      "expected_section": "ingredients table (water row note)",
+      "depends_on_table_row": true,
+      "answer_must_contain": ["1:12"]
+    }
+  ],
+
+  "generation_answerable_ids": ["q1", "q5", "q7"],
+
+  "generation_unanswerable": [
+    "What is the calorie and macronutrient breakdown per serving of the beef bourguignon?",
+    "How many milligrams of sodium are in one portion of the chana masala?",
+    "Which wine does the archive recommend pairing with the chicken tikka masala?"
+  ],
+
+  "bonus": {
+    "question": "When does the fine sea salt go into the beef bourguignon, and how much is it?",
+    "note": "This is the precision/completeness probe. The tight ingredient-row chunk answers 'how much' precisely and carries no method prose about *when*; the looser baseline window may drag in surrounding method text and answer the timing half."
+  }
+}
