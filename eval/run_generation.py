@@ -28,6 +28,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from rag.config import (  # noqa: E402
     GEN_EFFORT,
     GEN_MODEL,
+    GEN_PROVIDER,
     OUT_DIR,
     QUESTIONS_PATH,
     ROOT,
@@ -46,9 +47,11 @@ def main() -> int:
     args = parser.parse_args()
 
     if not api_key():
+        wanted = "ANTHROPIC_API_KEY" if GEN_PROVIDER == "anthropic" else "GEMINI_API_KEY"
         raise SystemExit(
-            "ANTHROPIC_API_KEY is not set — generation cannot run.\n"
+            f"{wanted} is not set — generation cannot run (GEN_PROVIDER={GEN_PROVIDER}).\n"
             "Copy .env.example to .env and put your key in it, or export the variable.\n"
+            "A free Gemini key: https://aistudio.google.com/apikey\n"
             "Everything else (hit-rate, filter demo, chunk invariants) runs without a key."
         )
 

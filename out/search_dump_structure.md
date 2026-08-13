@@ -4,527 +4,514 @@
 embedding model : all-MiniLM-L6-v2 (chromadb ONNX DefaultEmbeddingFunction)   (identical for both strategies)
 top-k           : 5
 questions file  : eval/questions.json
-questions sha256: 5dc74b03fbf46ccbf1fbdbb6aff5a338d9e9e7053fef0b6dcaf71d1e0f1d8d27
-questions locked: 2026-08-12T13:01:22+00:00
-chunk counts    : baseline=30, structure=43
-generated       : 2026-08-12T13:18:07+00:00
+questions sha256: 07436a98184885aa00ba0fe92a1046322e5e4ca05753c3546ae5676eb64c80e5
+questions locked: 2026-08-13T01:56:59+00:00
+chunk counts    : baseline=52, structure=70
+generated       : 2026-08-13T02:46:10+00:00
 ```
 
-### q1 — How much fine sea salt is in the beef bourguignon?
+### q1 — How much fine sea salt goes into the 2kg country sourdough?
 
 ```
-expected recipe_id : beef-bourguignon
-expected section   : ingredients table
-answer must contain: ['Fine sea salt', '12 g']
+expected recipe_id : sourdough-2kg
+expected section   : ingredients table (fine sea salt row)
+answer must contain: ['Fine sea salt', '18 g']
 table-row question : True
 
-1. score=0.6925  beef-bourguignon::structure::c002   <== HIT (contains the answer)
-   section=ingredients  source_file=beef-bourguignon.md
-   | Recipe: Beef Bourguignon (cuisine: french)
-   | Section: Ingredients (rows 9-12 of 12)
-   | | Ingredient | Weight | Notes |
-   | | --- | --- | --- |
-   | | Tomato puree | 25 g | |
-   | | Fine sea salt | 12 g | |
-   | | Bay leaf | 2 leaves | |
-   | | Thyme | 6 g | |
-
-2. score=0.5897  beef-bourguignon::structure::c001   <-- right recipe, but this chunk lacks the answer
-   section=ingredients  source_file=beef-bourguignon.md
-   | Recipe: Beef Bourguignon (cuisine: french)
-   | Section: Ingredients (rows 1-8 of 12)
-   | | Ingredient | Weight | Notes |
-   | | --- | --- | --- |
-   | | Beef shin | 1200 g | cut into 5 cm pieces |
-   | | Smoked bacon lardons | 200 g | |
-   | | Red wine (Burgundy) | 750 g | one bottle |
-   | | Beef stock | 400 g | |
-   | | Button mushrooms | 300 g | |
-   | | Shallots | 250 g | peeled, left whole |
-   | | Carrot | 150 g | thick coins |
-   | | Plain flour | 30 g | for dusting |
-
-3. score=0.5756  beef-bourguignon::structure::c003   <-- right recipe, but this chunk lacks the answer
-   section=method  source_file=beef-bourguignon.md
-   | Recipe: Beef Bourguignon (cuisine: french)
-   | Section: Method
-   | Marinate the beef in the wine with the bay and thyme overnight in the fridge. Drain the meat
-   | and reserve every drop of the wine.
-   | 
-   | Dry the beef thoroughly, dust with the flour, and brown it hard in batches — crowding the
-   | pan is the single most common way to end up with grey stew. Render the lardons in the same
-   | pot, then soften the shallots and carrot in the fat.
-   | 
-   | Return the beef, stir in the tomato puree, pour over the reserved wine and the stock, and
-   | bring barely to a tremble. Cover and cook at 150 C for three hours. Add the mushrooms for
-   | the final thirty minutes so they keep their shape. Season with the salt at the end, once the
-   | liquid has reduced and concentrated.
-
-4. score=0.5623  beef-bourguignon::structure::c000   <-- right recipe, but this chunk lacks the answer
-   section=title  source_file=beef-bourguignon.md
-   | Recipe: Beef Bourguignon (cuisine: french)
-   | Section: Title
-   | # Beef Bourguignon
-
-5. score=0.5510  beef-bourguignon::structure::c004   <-- right recipe, but this chunk lacks the answer
-   section=allergens  source_file=beef-bourguignon.md
-   | Recipe: Beef Bourguignon (cuisine: french)
-   | Section: Allergens
-   | Contains wheat (gluten) from the flour dusting, and alcohol. No dairy.
-
-VERDICT: HIT at rank 1
-```
-### q2 — What is the hydration percentage of the classic rosemary focaccia?
-
-```
-expected recipe_id : classic-focaccia
-expected section   : ingredients table (water row, baker's %)
-answer must contain: ['Water', '80%']
-table-row question : True
-
-1. score=0.6913  classic-focaccia::structure::c001   <== HIT (contains the answer)
-   section=ingredients  source_file=classic-focaccia.md
-   | Recipe: Classic Rosemary Focaccia (cuisine: italian)
-   | Section: Ingredients (rows 1-7 of 7)
+1. score=0.6028  sourdough-2kg::structure::c001   <== HIT (contains the answer)
+   section=ingredients  source_file=card-01-country-sourdough-2kg.md
+   | Recipe: 2kg Country Sourdough (cuisine: european)
+   | Section: Ingredients (rows 1-5 of 5)
    | | Ingredient | Weight | Baker's % |
    | | --- | --- | --- |
-   | | Strong white bread flour | 1000 g | 100% |
-   | | Water (20 C) | 800 g | 80% |
-   | | Extra virgin olive oil | 60 g | 6% |
-   | | Fine sea salt | 20 g | 2% |
-   | | Instant dried yeast | 8 g | 0.8% |
-   | | Fresh rosemary, picked | 12 g | 1.2% |
-   | | Flaky salt, for the top | 6 g | 0.6% |
+   | | Strong white bread flour | 950 g | 95% |
+   | | Wholemeal rye flour | 50 g | 5% |
+   | | Water (28 C) | 760 g | 76% |
+   | | Stiff sourdough starter | 200 g | 20% |
+   | | Fine sea salt | 18 g | 1.8% |
 
-2. score=0.6235  classic-focaccia::structure::c000   <-- right recipe, but this chunk lacks the answer
-   section=title  source_file=classic-focaccia.md
-   | Recipe: Classic Rosemary Focaccia (cuisine: italian)
-   | Section: Title
-   | # Classic Rosemary Focaccia
-   | 
-   | A slow-proved tray bread. Baker's percentages are relative to the total flour weight.
-
-3. score=0.5677  classic-focaccia::structure::c002   <-- right recipe, but this chunk lacks the answer
-   section=method  source_file=classic-focaccia.md
-   | Recipe: Classic Rosemary Focaccia (cuisine: italian)
+2. score=0.5790  sourdough-2kg::structure::c002   <-- right recipe, but this chunk lacks the answer
+   section=method  source_file=card-01-country-sourdough-2kg.md
+   | Recipe: 2kg Country Sourdough (cuisine: european)
    | Section: Method
-   | Whisk the yeast into the water and let it slacken for five minutes. Add the flour and mix
-   | until no dry patches remain, then rest the dough uncovered for twenty minutes so the flour
-   | hydrates fully.
+   | Whisk the starter into the water until no lumps remain, then add both flours and mix to a
+   | shaggy mass. Cover and autolyse for forty minutes. Hold the salt back at this stage: added
+   | before the autolyse it tightens the gluten and the dough fights you for the rest of the day.
    | 
-   | Add the fine sea salt and half the olive oil, then work the dough with wet hands until it
-   | tightens. Fold it in the bowl every thirty minutes for the first two hours.
+   | Sprinkle the fine sea salt over the rested dough and pinch it through with wet hands until
+   | you can no longer feel grains. Bulk ferment at 24 C for four hours, folding the dough in the
+   | bowl every forty-five minutes for the first three.
    | 
-   | Oil a deep tray generously, tip the dough in, and let it relax until it reaches the corners
-   | on its own. Dimple it with flat fingers, scatter the rosemary and flaky salt, and bake at
-   | 230 C for 22 to 25 minutes until the base sounds hollow.
+   | Divide, pre-shape, and rest for twenty minutes. Shape into two tight boules, seam side up in
+   | floured baskets, then cold retard at 4 C overnight for twelve to fourteen hours.
 
-4. score=0.5403  classic-focaccia::structure::c003   <-- right recipe, but this chunk lacks the answer
-   section=allergens  source_file=classic-focaccia.md
-   | Recipe: Classic Rosemary Focaccia (cuisine: italian)
+3. score=0.5294  sourdough-2kg::structure::c004   <-- right recipe, but this chunk lacks the answer
+   section=allergens  source_file=card-01-country-sourdough-2kg.md
+   | Recipe: 2kg Country Sourdough (cuisine: european)
    | Section: Allergens
-   | Contains wheat (gluten). Made in a kitchen that also handles sesame.
+   | Contains wheat and rye (gluten). Made in a kitchen that also handles sesame and tree nuts.
 
-5. score=0.2675  shakshuka::structure::c002
-   section=ingredients  source_file=shakshuka.md
-   | Recipe: Red Pepper Shakshuka (cuisine: middle-eastern)
-   | Section: Ingredients (rows 9-10 of 10)
-   | | Ingredient | Weight | Notes |
-   | | --- | --- | --- |
-   | | Eggs | 6 whole | room temperature |
-   | | Flat leaf parsley | 15 g | to finish |
+4. score=0.5048  sourdough-2kg::structure::c003   <-- right recipe, but this chunk lacks the answer
+   section=method  source_file=card-01-country-sourdough-2kg.md
+   | Recipe: 2kg Country Sourdough (cuisine: european)
+   | Section: Method
+   | Bake straight from the fridge at 250 C with steam for twenty minutes, then vent the oven and
+   | drop to 230 C for a further twenty-five minutes until the crust is deeply coloured.
+
+5. score=0.4941  sourdough-2kg::structure::c000   <-- right recipe, but this chunk lacks the answer
+   section=title  source_file=card-01-country-sourdough-2kg.md
+   | Recipe: 2kg Country Sourdough (cuisine: european)
+   | Section: Title
+   | # 2kg Country Sourdough
+   | 
+   | A two-day naturally leavened loaf. Baker's percentages are relative to the total flour
+   | weight of 1000 g, so the white and rye flours together make 100%.
 
 VERDICT: HIT at rank 1
 ```
-### q3 — How much amchur goes into the chana masala?
+### q2 — What hydration percentage does the 2kg country sourdough run at?
 
 ```
-expected recipe_id : chana-masala
-expected section   : ingredients table
-answer must contain: ['Amchur', '6 g']
+expected recipe_id : sourdough-2kg
+expected section   : ingredients table (water row, baker's %)
+answer must contain: ['Water', '76%']
 table-row question : True
 
-1. score=0.6174  chana-masala::structure::c002   <== HIT (contains the answer)
-   section=ingredients  source_file=chana-masala.md
-   | Recipe: Chana Masala (cuisine: indian)
-   | Section: Ingredients (rows 9-11 of 11)
-   | | Ingredient | Weight | Notes |
+1. score=0.5476  sourdough-2kg::structure::c001   <== HIT (contains the answer)
+   section=ingredients  source_file=card-01-country-sourdough-2kg.md
+   | Recipe: 2kg Country Sourdough (cuisine: european)
+   | Section: Ingredients (rows 1-5 of 5)
+   | | Ingredient | Weight | Baker's % |
    | | --- | --- | --- |
-   | | Amchur (dried mango powder) | 6 g | added at the end |
-   | | Fine sea salt | 10 g | |
-   | | Green chilli, split | 2 whole | |
+   | | Strong white bread flour | 950 g | 95% |
+   | | Wholemeal rye flour | 50 g | 5% |
+   | | Water (28 C) | 760 g | 76% |
+   | | Stiff sourdough starter | 200 g | 20% |
+   | | Fine sea salt | 18 g | 1.8% |
 
-2. score=0.6022  chana-masala::structure::c001   <-- right recipe, but this chunk lacks the answer
-   section=ingredients  source_file=chana-masala.md
-   | Recipe: Chana Masala (cuisine: indian)
-   | Section: Ingredients (rows 1-8 of 11)
-   | | Ingredient | Weight | Notes |
-   | | --- | --- | --- |
-   | | Dried chickpeas | 400 g | soaked overnight |
-   | | Brown onion, diced | 300 g | |
-   | | Tinned plum tomatoes | 400 g | crushed by hand |
-   | | Sunflower oil | 45 g | |
-   | | Ginger, grated | 25 g | |
-   | | Garlic, crushed | 20 g | |
-   | | Ground cumin | 8 g | |
-   | | Ground coriander | 8 g | |
-
-3. score=0.5959  chana-masala::structure::c003   <-- right recipe, but this chunk lacks the answer
-   section=method  source_file=chana-masala.md
-   | Recipe: Chana Masala (cuisine: indian)
-   | Section: Method
-   | Drain the soaked chickpeas, cover with fresh water and simmer for 50 minutes until they
-   | give completely under a spoon. Keep the cooking liquor.
-   | 
-   | Fry the onion in the oil over medium heat for a full fifteen minutes, until it collapses and
-   | takes on colour at the edges. Add the ginger and garlic, then the ground spices, and stir
-   | for a minute so they toast rather than steam.
-   | 
-   | Add the tomatoes and cook until the oil separates and pools at the edge of the pan. Tip in
-   | the chickpeas with enough of their liquor to loosen, season with the salt, and simmer for
-   | twenty minutes. Stir the amchur through off the heat so its sourness stays bright.
-
-4. score=0.5597  chana-masala::structure::c004   <-- right recipe, but this chunk lacks the answer
-   section=allergens  source_file=chana-masala.md
-   | Recipe: Chana Masala (cuisine: indian)
-   | Section: Allergens
-   | No declared allergens. Prepared in a kitchen that handles wheat and dairy.
-
-5. score=0.5559  chana-masala::structure::c000   <-- right recipe, but this chunk lacks the answer
-   section=title  source_file=chana-masala.md
-   | Recipe: Chana Masala (cuisine: indian)
+2. score=0.5359  sourdough-2kg::structure::c000   <-- right recipe, but this chunk lacks the answer
+   section=title  source_file=card-01-country-sourdough-2kg.md
+   | Recipe: 2kg Country Sourdough (cuisine: european)
    | Section: Title
-   | # Chana Masala
+   | # 2kg Country Sourdough
+   | 
+   | A two-day naturally leavened loaf. Baker's percentages are relative to the total flour
+   | weight of 1000 g, so the white and rye flours together make 100%.
+
+3. score=0.4996  sourdough-2kg::structure::c002   <-- right recipe, but this chunk lacks the answer
+   section=method  source_file=card-01-country-sourdough-2kg.md
+   | Recipe: 2kg Country Sourdough (cuisine: european)
+   | Section: Method
+   | Whisk the starter into the water until no lumps remain, then add both flours and mix to a
+   | shaggy mass. Cover and autolyse for forty minutes. Hold the salt back at this stage: added
+   | before the autolyse it tightens the gluten and the dough fights you for the rest of the day.
+   | 
+   | Sprinkle the fine sea salt over the rested dough and pinch it through with wet hands until
+   | you can no longer feel grains. Bulk ferment at 24 C for four hours, folding the dough in the
+   | bowl every forty-five minutes for the first three.
+   | 
+   | Divide, pre-shape, and rest for twenty minutes. Shape into two tight boules, seam side up in
+   | floured baskets, then cold retard at 4 C overnight for twelve to fourteen hours.
+
+4. score=0.4920  sourdough-2kg::structure::c003   <-- right recipe, but this chunk lacks the answer
+   section=method  source_file=card-01-country-sourdough-2kg.md
+   | Recipe: 2kg Country Sourdough (cuisine: european)
+   | Section: Method
+   | Bake straight from the fridge at 250 C with steam for twenty minutes, then vent the oven and
+   | drop to 230 C for a further twenty-five minutes until the crust is deeply coloured.
+
+5. score=0.4594  sourdough-2kg::structure::c004   <-- right recipe, but this chunk lacks the answer
+   section=allergens  source_file=card-01-country-sourdough-2kg.md
+   | Recipe: 2kg Country Sourdough (cuisine: european)
+   | Section: Allergens
+   | Contains wheat and rye (gluten). Made in a kitchen that also handles sesame and tree nuts.
 
 VERDICT: HIT at rank 1
 ```
-### q4 — How much double cream is in the chicken tikka masala?
+### q3 — How much gochugaru goes into the napa cabbage kimchi?
 
 ```
-expected recipe_id : chicken-tikka-masala
-expected section   : ingredients table
-answer must contain: ['Double cream', '150 g']
+expected recipe_id : napa-kimchi
+expected section   : ingredients table (gochugaru row)
+answer must contain: ['Gochugaru', '60 g']
 table-row question : True
 
-1. score=0.7079  chicken-tikka-masala::structure::c001   <== HIT (contains the answer)
-   section=ingredients  source_file=chicken-tikka-masala.md
-   | Recipe: Chicken Tikka Masala (cuisine: indian)
-   | Section: Ingredients (rows 1-8 of 13)
-   | | Ingredient | Weight | Notes |
-   | | --- | --- | --- |
-   | | Chicken thigh, boneless | 900 g | 4 cm pieces |
-   | | Full fat yoghurt | 250 g | for the marinade |
-   | | Double cream | 150 g | |
-   | | Tinned plum tomatoes | 400 g | |
-   | | Brown onion | 250 g | diced |
-   | | Ghee | 50 g | |
-   | | Ginger, grated | 25 g | |
-   | | Garlic, crushed | 20 g | |
+1. score=0.7078  napa-kimchi::structure::c003   <-- right recipe, but this chunk lacks the answer
+   section=method  source_file=card-02-napa-kimchi.md
+   | Recipe: Napa Cabbage Kimchi (cuisine: korean)
+   | Section: Method
+   | Quarter the cabbage lengthways and work the coarse sea salt between every leaf, heaviest at
+   | the stem end. Leave it to weep for two hours, turning the quarters once, then rinse three
+   | times and drain stem-down for thirty minutes.
+   | 
+   | Stir the gochugaru into the cooled rice porridge and let it bloom for ten minutes before
+   | adding the daikon, fish sauce, shrimp paste, garlic and ginger. Paste every leaf, then pack
+   | into the jar and press down until the brine rises above the vegetables.
+   | 
+   | Keep the vegetables submerged below the brine for the whole ferment. Leave at 18 C for two
+   | days until the jar smells sour and fizzes when tapped, then move it to the fridge.
 
-2. score=0.6636  chicken-tikka-masala::structure::c002   <-- right recipe, but this chunk lacks the answer
-   section=ingredients  source_file=chicken-tikka-masala.md
-   | Recipe: Chicken Tikka Masala (cuisine: indian)
-   | Section: Ingredients (rows 9-13 of 13)
-   | | Ingredient | Weight | Notes |
+2. score=0.7067  napa-kimchi::structure::c002   <-- right recipe, but this chunk lacks the answer
+   section=ingredients  source_file=card-02-napa-kimchi.md
+   | Recipe: Napa Cabbage Kimchi (cuisine: korean)
+   | Section: Ingredients (rows 9-9 of 9)
+   | | Ingredient | Weight | Baker's % |
    | | --- | --- | --- |
-   | | Garam masala | 10 g | |
-   | | Ground turmeric | 5 g | |
-   | | Kashmiri chilli powder | 8 g | for colour |
-   | | Fine sea salt | 12 g | |
-   | | Kasoori methi | 4 g | crushed, at the end |
+   | | Ginger, grated | 12 g | 1.2% |
 
-3. score=0.6205  chicken-tikka-masala::structure::c000   <-- right recipe, but this chunk lacks the answer
-   section=title  source_file=chicken-tikka-masala.md
-   | Recipe: Chicken Tikka Masala (cuisine: indian)
+3. score=0.6689  napa-kimchi::structure::c001   <== HIT (contains the answer)
+   section=ingredients  source_file=card-02-napa-kimchi.md
+   | Recipe: Napa Cabbage Kimchi (cuisine: korean)
+   | Section: Ingredients (rows 1-8 of 9)
+   | | Ingredient | Weight | Baker's % |
+   | | --- | --- | --- |
+   | | Napa cabbage, trimmed | 1000 g | 100% |
+   | | Coarse sea salt, for the dry brine | 40 g | 4% |
+   | | Gochugaru (Korean chilli flakes) | 60 g | 6% |
+   | | Daikon, julienned | 200 g | 20% |
+   | | Glutinous rice porridge, cooled | 100 g | 10% |
+   | | Fish sauce | 45 g | 4.5% |
+   | | Salted shrimp paste (saeujeot) | 20 g | 2% |
+   | | Garlic, grated | 30 g | 3% |
+
+4. score=0.5692  napa-kimchi::structure::c000   <-- right recipe, but this chunk lacks the answer
+   section=title  source_file=card-02-napa-kimchi.md
+   | Recipe: Napa Cabbage Kimchi (cuisine: korean)
    | Section: Title
-   | # Chicken Tikka Masala
-
-4. score=0.6106  chicken-tikka-masala::structure::c003   <-- right recipe, but this chunk lacks the answer
-   section=method  source_file=chicken-tikka-masala.md
-   | Recipe: Chicken Tikka Masala (cuisine: indian)
-   | Section: Method
-   | Marinate the chicken in the yoghurt with half the ginger, garlic and spices for at least
-   | four hours, ideally overnight. The acid in the yoghurt does the tenderising; more than
-   | twenty-four hours and the texture turns mealy.
+   | # Napa Cabbage Kimchi
    | 
-   | Thread onto skewers and grill hard until the edges char in places. You want colour, not
-   | doneness — the pieces finish in the sauce.
-   | 
-   | Soften the onion in the ghee, add the remaining ginger, garlic and spices, then the tomatoes.
-   | Cook until thick and glossy, blend smooth, and return to the pan. Add the grilled chicken
-   | and simmer for ten minutes, then stir in the cream and the crushed kasoori methi off the
-   | heat.
+   | A cold-fermented winter kimchi. Percentages are relative to the trimmed cabbage weight of
+   | 1000 g, not to the finished jar.
 
-5. score=0.6071  chicken-tikka-masala::structure::c004   <-- right recipe, but this chunk lacks the answer
-   section=allergens  source_file=chicken-tikka-masala.md
-   | Recipe: Chicken Tikka Masala (cuisine: indian)
+5. score=0.5656  napa-kimchi::structure::c004   <-- right recipe, but this chunk lacks the answer
+   section=allergens  source_file=card-02-napa-kimchi.md
+   | Recipe: Napa Cabbage Kimchi (cuisine: korean)
    | Section: Allergens
-   | Contains dairy (yoghurt, cream, ghee). Naturally gluten free.
+   | Contains fish (fish sauce) and shellfish (salted shrimp paste). Not suitable for anyone with
+   | a shellfish allergy. Gluten-free despite the name of the glutinous rice.
 
-VERDICT: HIT at rank 1
+VERDICT: HIT at rank 3
 ```
-### q5 — At what temperature and for how long is the lemon drizzle loaf baked?
+### q4 — How much coarse sea salt do the half-sour dill pickles need?
 
 ```
-expected recipe_id : lemon-drizzle-cake
-expected section   : method
-answer must contain: ['170 C', '45']
-table-row question : False
+expected recipe_id : dill-pickles
+expected section   : ingredients table (coarse sea salt row)
+answer must contain: ['Coarse sea salt', '24 g']
+table-row question : True
 
-1. score=0.7225  lemon-drizzle-cake::structure::c002   <== HIT (contains the answer)
-   section=method  source_file=lemon-drizzle-cake.md
-   | Recipe: Lemon Drizzle Loaf (cuisine: british)
+1. score=0.6886  dill-pickles::structure::c002   <-- right recipe, but this chunk lacks the answer
+   section=method  source_file=card-03-half-sour-dill-pickles.md
+   | Recipe: Half-Sour Dill Pickles (cuisine: eastern-european)
    | Section: Method
-   | Beat the butter and caster sugar until the mixture turns pale and increases visibly in
-   | volume — five minutes in a stand mixer, and no less. Add the eggs one at a time, beating
-   | fully between each.
+   | Dissolve the coarse sea salt in the filtered water and leave the brine to come to room
+   | temperature. Trim the blossom end from every cucumber; the enzyme that lives there is what
+   | turns a jar of pickles soft.
    | 
-   | Fold in the flour, salt and zest with a spatula, stopping the moment the flour disappears.
-   | Scrape into a lined 900 g loaf tin and bake at 170 C for 45 to 50 minutes.
+   | Lay the dill, garlic, mustard seed and peppercorns in the base of the jar, stand the
+   | cucumbers upright on top, and tuck the grape leaf across the surface. Pour over the brine
+   | and press down until the brine rises above the vegetables.
    | 
-   | Stir the granulated sugar into the lemon juice without heating it — the crust should end up
-   | crunchy, not glazed. Spike the hot loaf all over with a skewer and spoon the drizzle over
-   | while the cake is still in the tin. Let it cool completely before turning out.
+   | Keep the vegetables submerged below the brine for the whole ferment. Leave at 20 C for four
+   | days, skimming any white bloom from the surface, then refrigerate while the cucumbers are
+   | still translucent at the centre rather than fully sour.
 
-2. score=0.6169  lemon-drizzle-cake::structure::c001   <-- right recipe, but this chunk lacks the answer
-   section=ingredients  source_file=lemon-drizzle-cake.md
-   | Recipe: Lemon Drizzle Loaf (cuisine: british)
+2. score=0.6656  dill-pickles::structure::c001   <== HIT (contains the answer)
+   section=ingredients  source_file=card-03-half-sour-dill-pickles.md
+   | Recipe: Half-Sour Dill Pickles (cuisine: eastern-european)
    | Section: Ingredients (rows 1-8 of 8)
-   | | Ingredient | Weight | Notes |
+   | | Ingredient | Weight | Baker's % |
    | | --- | --- | --- |
-   | | Unsalted butter | 225 g | soft |
-   | | Caster sugar | 225 g | |
-   | | Self-raising flour | 225 g | |
-   | | Eggs | 4 whole | room temperature |
-   | | Lemon zest | 12 g | from 3 lemons |
-   | | Lemon juice, for the drizzle | 75 g | |
-   | | Granulated sugar, for the drizzle | 100 g | |
-   | | Fine sea salt | 2 g | |
+   | | Small pickling cucumbers | 1000 g | 100% |
+   | | Filtered water | 700 g | 70% |
+   | | Coarse sea salt | 24 g | 2.4% |
+   | | Fresh dill, flowering heads | 20 g | 2% |
+   | | Garlic cloves, crushed | 15 g | 1.5% |
+   | | Yellow mustard seed | 5 g | 0.5% |
+   | | Black peppercorns | 4 g | 0.4% |
+   | | Grape leaf, for tannin | 2 g | 0.2% |
 
-3. score=0.5984  lemon-drizzle-cake::structure::c000   <-- right recipe, but this chunk lacks the answer
-   section=title  source_file=lemon-drizzle-cake.md
-   | Recipe: Lemon Drizzle Loaf (cuisine: british)
+3. score=0.6279  dill-pickles::structure::c000   <-- right recipe, but this chunk lacks the answer
+   section=title  source_file=card-03-half-sour-dill-pickles.md
+   | Recipe: Half-Sour Dill Pickles (cuisine: eastern-european)
    | Section: Title
-   | # Lemon Drizzle Loaf
+   | # Half-Sour Dill Pickles
+   | 
+   | A short brine ferment that keeps the cucumbers snapping. Percentages are relative to the
+   | cucumber weight of 1000 g.
 
-4. score=0.5152  lemon-drizzle-cake::structure::c003   <-- right recipe, but this chunk lacks the answer
-   section=allergens  source_file=lemon-drizzle-cake.md
-   | Recipe: Lemon Drizzle Loaf (cuisine: british)
+4. score=0.6166  dill-pickles::structure::c003   <-- right recipe, but this chunk lacks the answer
+   section=allergens  source_file=card-03-half-sour-dill-pickles.md
+   | Recipe: Half-Sour Dill Pickles (cuisine: eastern-european)
    | Section: Allergens
-   | Contains wheat (gluten), egg and dairy.
+   | Contains mustard. No gluten, dairy or nut ingredients; made in a kitchen that also handles
+   | wheat and sesame.
 
-5. score=0.3115  classic-focaccia::structure::c002
-   section=method  source_file=classic-focaccia.md
-   | Recipe: Classic Rosemary Focaccia (cuisine: italian)
-   | Section: Method
-   | Whisk the yeast into the water and let it slacken for five minutes. Add the flour and mix
-   | until no dry patches remain, then rest the dough uncovered for twenty minutes so the flour
-   | hydrates fully.
-   | 
-   | Add the fine sea salt and half the olive oil, then work the dough with wet hands until it
-   | tightens. Fold it in the bowl every thirty minutes for the first two hours.
-   | 
-   | Oil a deep tray generously, tip the dough in, and let it relax until it reaches the corners
-   | on its own. Dimple it with flat fingers, scatter the rosemary and flaky salt, and bake at
-   | 230 C for 22 to 25 minutes until the base sounds hollow.
-
-VERDICT: HIT at rank 1
-```
-### q6 — How long should the pad thai rice noodles soak before they go in the wok?
-
-```
-expected recipe_id : pad-thai
-expected section   : method
-answer must contain: ['thirty minutes']
-table-row question : False
-
-1. score=0.6198  pad-thai::structure::c003   <== HIT (contains the answer)
-   section=method  source_file=pad-thai.md
-   | Recipe: Prawn Pad Thai (cuisine: thai)
-   | Section: Method
-   | Soak the noodles in warm water for thirty minutes until pliable but still firm at the core.
-   | They finish cooking in the pan and will turn to paste if you soften them fully now.
-   | 
-   | Melt the palm sugar with the tamarind and fish sauce over low heat until it forms a smooth
-   | syrup. This sauce is the whole dish; taste it and adjust before it goes near the wok.
-
-2. score=0.4953  pad-thai::structure::c004   <-- right recipe, but this chunk lacks the answer
-   section=method  source_file=pad-thai.md
-   | Recipe: Prawn Pad Thai (cuisine: thai)
-   | Section: Method
-   | Get the wok properly hot. Fry the tofu until it takes colour, add the prawns and cook until
-   | just opaque, then push everything to one side and scramble the eggs in the clear space.
-   | Add the drained noodles and the sauce and toss hard for two minutes. Kill the heat, fold
-   | through the beansprouts and chives so they stay crisp, and finish with the peanuts.
-
-3. score=0.4445  congee::structure::c002
-   section=method  source_file=congee.md
-   | Recipe: Ginger and Spring Onion Congee (cuisine: chinese)
-   | Section: Method
-   | Rinse the rice until the water runs clear, then freeze it for an hour if you have time — the
-   | ice fractures the grains and they break down far faster.
-   | 
-   | Bring the rice, water, ginger coins and spring onion whites to a boil, then drop to the
-   | barest simmer. Stir every ten minutes or so, scraping the base, for ninety minutes. The
-   | grains should dissolve into a loose, pourable porridge that thickens as it cools.
-   | 
-   | Season with the salt, soy and white pepper at the end; salting early slows the grains from
-   | breaking down. Finish each bowl with the sesame oil, the sliced greens and fresh ginger.
-
-4. score=0.4406  chicken-tikka-masala::structure::c003
-   section=method  source_file=chicken-tikka-masala.md
-   | Recipe: Chicken Tikka Masala (cuisine: indian)
-   | Section: Method
-   | Marinate the chicken in the yoghurt with half the ginger, garlic and spices for at least
-   | four hours, ideally overnight. The acid in the yoghurt does the tenderising; more than
-   | twenty-four hours and the texture turns mealy.
-   | 
-   | Thread onto skewers and grill hard until the edges char in places. You want colour, not
-   | doneness — the pieces finish in the sauce.
-   | 
-   | Soften the onion in the ghee, add the remaining ginger, garlic and spices, then the tomatoes.
-   | Cook until thick and glossy, blend smooth, and return to the pan. Add the grilled chicken
-   | and simmer for ten minutes, then stir in the cream and the crushed kasoori methi off the
-   | heat.
-
-5. score=0.3778  pad-thai::structure::c001   <-- right recipe, but this chunk lacks the answer
-   section=ingredients  source_file=pad-thai.md
-   | Recipe: Prawn Pad Thai (cuisine: thai)
-   | Section: Ingredients (rows 1-8 of 11)
-   | | Ingredient | Weight | Notes |
+5. score=0.4461  napa-kimchi::structure::c001
+   section=ingredients  source_file=card-02-napa-kimchi.md
+   | Recipe: Napa Cabbage Kimchi (cuisine: korean)
+   | Section: Ingredients (rows 1-8 of 9)
+   | | Ingredient | Weight | Baker's % |
    | | --- | --- | --- |
-   | | Flat rice noodles | 250 g | dried |
-   | | Raw prawns | 300 g | peeled, deveined |
-   | | Firm tofu | 150 g | diced small |
-   | | Eggs | 2 whole | beaten |
-   | | Tamarind paste | 60 g | |
-   | | Palm sugar | 50 g | shaved |
-   | | Fish sauce | 45 g | |
-   | | Roasted peanuts | 60 g | roughly crushed |
+   | | Napa cabbage, trimmed | 1000 g | 100% |
+   | | Coarse sea salt, for the dry brine | 40 g | 4% |
+   | | Gochugaru (Korean chilli flakes) | 60 g | 6% |
+   | | Daikon, julienned | 200 g | 20% |
+   | | Glutinous rice porridge, cooled | 100 g | 10% |
+   | | Fish sauce | 45 g | 4.5% |
+   | | Salted shrimp paste (saeujeot) | 20 g | 2% |
+   | | Garlic, grated | 30 g | 3% |
+
+VERDICT: HIT at rank 2
+```
+### q5 — How many grams of live kefir grains go into one litre of milk?
+
+```
+expected recipe_id : milk-kefir
+expected section   : ingredients table (kefir grains row)
+answer must contain: ['kefir grains', '50 g']
+table-row question : True
+
+1. score=0.6574  milk-kefir::structure::c001   <== HIT (contains the answer)
+   section=ingredients  source_file=card-05-milk-kefir.md
+   | Recipe: Milk Kefir (cuisine: caucasian)
+   | Section: Ingredients (rows 1-3 of 3)
+   | | Ingredient | Weight | Baker's % |
+   | | --- | --- | --- |
+   | | Whole cow's milk | 1000 g | 100% |
+   | | Live kefir grains | 50 g | 5% |
+   | | Lemon peel, for the second ferment | 5 g | 0.5% |
+
+2. score=0.6534  milk-kefir::structure::c000   <-- right recipe, but this chunk lacks the answer
+   section=title  source_file=card-05-milk-kefir.md
+   | Recipe: Milk Kefir (cuisine: caucasian)
+   | Section: Title
+   | # Milk Kefir
+   | 
+   | A continuous grain-cultured milk ferment. Percentages are relative to the milk weight of
+   | 1000 g, one batch per day.
+
+3. score=0.5415  milk-kefir::structure::c002   <-- right recipe, but this chunk lacks the answer
+   section=method  source_file=card-05-milk-kefir.md
+   | Recipe: Milk Kefir (cuisine: caucasian)
+   | Section: Method
+   | Tip the live kefir grains into a clean jar and pour the whole milk over them. Cover with
+   | cloth rather than a sealed lid, because the grains need to breathe and the jar will build
+   | pressure otherwise.
+   | 
+   | Leave at 22 C for twenty-four hours. The kefir is ready when it coats the side of the jar
+   | and pulls away from the glass in one sheet; past that point it splits into curd and whey and
+   | turns aggressively sour.
+   | 
+   | Strain through a nylon sieve, never metal, and stir the grains straight into fresh milk to
+   | begin the next batch. For a second ferment, seal the strained kefir with the lemon peel and
+   | leave it at room temperature for a further twelve hours.
+
+4. score=0.5085  milk-kefir::structure::c003   <-- right recipe, but this chunk lacks the answer
+   section=allergens  source_file=card-05-milk-kefir.md
+   | Recipe: Milk Kefir (cuisine: caucasian)
+   | Section: Allergens
+   | Contains dairy (cow's milk). Not lactose-free, although fermentation reduces the lactose
+   | load. Not suitable for anyone with a milk protein allergy.
+
+5. score=0.4280  sourdough-2kg::structure::c001
+   section=ingredients  source_file=card-01-country-sourdough-2kg.md
+   | Recipe: 2kg Country Sourdough (cuisine: european)
+   | Section: Ingredients (rows 1-5 of 5)
+   | | Ingredient | Weight | Baker's % |
+   | | --- | --- | --- |
+   | | Strong white bread flour | 950 g | 95% |
+   | | Wholemeal rye flour | 50 g | 5% |
+   | | Water (28 C) | 760 g | 76% |
+   | | Stiff sourdough starter | 200 g | 20% |
+   | | Fine sea salt | 18 g | 1.8% |
 
 VERDICT: HIT at rank 1
 ```
-### q7 — What allergens does the prawn pad thai contain?
+### q6 — How long does the red cabbage sauerkraut ferment, and at what temperature?
 
 ```
-expected recipe_id : pad-thai
-expected section   : allergens
-answer must contain: ['shellfish', 'peanuts']
+expected recipe_id : red-sauerkraut
+expected section   : method
+answer must contain: ['three to four weeks', '18 C']
 table-row question : False
 
-1. score=0.8267  pad-thai::structure::c005   <== HIT (contains the answer)
+1. score=0.7252  red-sauerkraut::structure::c002   <== HIT (contains the answer)
+   section=method  source_file=card-04-red-cabbage-sauerkraut.md
+   | Recipe: Red Cabbage Sauerkraut (cuisine: german)
+   | Section: Method
+   | Scatter the fine sea salt over the shredded cabbage and massage it hard for ten minutes.
+   | The cabbage will collapse to roughly half its volume and a purple brine will pool in the
+   | bowl; that liquid is the ferment, so none of it is thrown away.
+   | 
+   | Fold through the grated apple, caraway and juniper, then pack into the jar a fistful at a
+   | time, tamping each layer until the brine rises above the vegetables.
+   | 
+   | Keep the vegetables submerged below the brine for the whole ferment. Leave at 18 C for
+   | three to four weeks, releasing the lid every few days for the first week. The colour shifts
+   | from blue-purple to bright magenta as the acidity climbs, which is the clearest sign it is
+   | working.
+
+2. score=0.6638  red-sauerkraut::structure::c001   <-- right recipe, but this chunk lacks the answer
+   section=ingredients  source_file=card-04-red-cabbage-sauerkraut.md
+   | Recipe: Red Cabbage Sauerkraut (cuisine: german)
+   | Section: Ingredients (rows 1-5 of 5)
+   | | Ingredient | Weight | Baker's % |
+   | | --- | --- | --- |
+   | | Red cabbage, finely shredded | 1000 g | 100% |
+   | | Fine sea salt | 20 g | 2% |
+   | | Grated apple | 80 g | 8% |
+   | | Caraway seed | 6 g | 0.6% |
+   | | Juniper berries | 4 g | 0.4% |
+
+3. score=0.6401  red-sauerkraut::structure::c003   <-- right recipe, but this chunk lacks the answer
+   section=allergens  source_file=card-04-red-cabbage-sauerkraut.md
+   | Recipe: Red Cabbage Sauerkraut (cuisine: german)
+   | Section: Allergens
+   | No declared allergens. Made in a kitchen that also handles wheat, mustard and sesame.
+
+4. score=0.5369  red-sauerkraut::structure::c000   <-- right recipe, but this chunk lacks the answer
+   section=title  source_file=card-04-red-cabbage-sauerkraut.md
+   | Recipe: Red Cabbage Sauerkraut (cuisine: german)
+   | Section: Title
+   | # Red Cabbage Sauerkraut
+   | 
+   | A dry-salted kraut that draws its own brine. Percentages are relative to the shredded
+   | cabbage weight of 1000 g.
+
+5. score=0.5053  napa-kimchi::structure::c003
+   section=method  source_file=card-02-napa-kimchi.md
+   | Recipe: Napa Cabbage Kimchi (cuisine: korean)
+   | Section: Method
+   | Quarter the cabbage lengthways and work the coarse sea salt between every leaf, heaviest at
+   | the stem end. Leave it to weep for two hours, turning the quarters once, then rinse three
+   | times and drain stem-down for thirty minutes.
+   | 
+   | Stir the gochugaru into the cooled rice porridge and let it bloom for ten minutes before
+   | adding the daikon, fish sauce, shrimp paste, garlic and ginger. Paste every leaf, then pack
+   | into the jar and press down until the brine rises above the vegetables.
+   | 
+   | Keep the vegetables submerged below the brine for the whole ferment. Leave at 18 C for two
+   | days until the jar smells sour and fizzes when tapped, then move it to the fridge.
+
+VERDICT: HIT at rank 1
+```
+### q7 — Is the napa cabbage kimchi safe for someone with a shellfish allergy?
+
+```
+expected recipe_id : napa-kimchi
+expected section   : allergens
+answer must contain: ['shellfish', 'shrimp']
+table-row question : False
+
+1. score=0.7967  napa-kimchi::structure::c004   <== HIT (contains the answer)
+   section=allergens  source_file=card-02-napa-kimchi.md
+   | Recipe: Napa Cabbage Kimchi (cuisine: korean)
+   | Section: Allergens
+   | Contains fish (fish sauce) and shellfish (salted shrimp paste). Not suitable for anyone with
+   | a shellfish allergy. Gluten-free despite the name of the glutinous rice.
+
+2. score=0.6459  napa-kimchi::structure::c003   <-- right recipe, but this chunk lacks the answer
+   section=method  source_file=card-02-napa-kimchi.md
+   | Recipe: Napa Cabbage Kimchi (cuisine: korean)
+   | Section: Method
+   | Quarter the cabbage lengthways and work the coarse sea salt between every leaf, heaviest at
+   | the stem end. Leave it to weep for two hours, turning the quarters once, then rinse three
+   | times and drain stem-down for thirty minutes.
+   | 
+   | Stir the gochugaru into the cooled rice porridge and let it bloom for ten minutes before
+   | adding the daikon, fish sauce, shrimp paste, garlic and ginger. Paste every leaf, then pack
+   | into the jar and press down until the brine rises above the vegetables.
+   | 
+   | Keep the vegetables submerged below the brine for the whole ferment. Leave at 18 C for two
+   | days until the jar smells sour and fizzes when tapped, then move it to the fridge.
+
+3. score=0.5535  napa-kimchi::structure::c001   <-- right recipe, but this chunk lacks the answer
+   section=ingredients  source_file=card-02-napa-kimchi.md
+   | Recipe: Napa Cabbage Kimchi (cuisine: korean)
+   | Section: Ingredients (rows 1-8 of 9)
+   | | Ingredient | Weight | Baker's % |
+   | | --- | --- | --- |
+   | | Napa cabbage, trimmed | 1000 g | 100% |
+   | | Coarse sea salt, for the dry brine | 40 g | 4% |
+   | | Gochugaru (Korean chilli flakes) | 60 g | 6% |
+   | | Daikon, julienned | 200 g | 20% |
+   | | Glutinous rice porridge, cooled | 100 g | 10% |
+   | | Fish sauce | 45 g | 4.5% |
+   | | Salted shrimp paste (saeujeot) | 20 g | 2% |
+   | | Garlic, grated | 30 g | 3% |
+
+4. score=0.5258  napa-kimchi::structure::c002   <-- right recipe, but this chunk lacks the answer
+   section=ingredients  source_file=card-02-napa-kimchi.md
+   | Recipe: Napa Cabbage Kimchi (cuisine: korean)
+   | Section: Ingredients (rows 9-9 of 9)
+   | | Ingredient | Weight | Baker's % |
+   | | --- | --- | --- |
+   | | Ginger, grated | 12 g | 1.2% |
+
+5. score=0.4974  pad-thai::structure::c005
    section=allergens  source_file=pad-thai.md
    | Recipe: Prawn Pad Thai (cuisine: thai)
    | Section: Allergens
    | Contains shellfish, egg, peanuts and fish. Naturally gluten free, but check the fish sauce
    | brand.
 
-2. score=0.6691  pad-thai::structure::c001   <-- right recipe, but this chunk lacks the answer
-   section=ingredients  source_file=pad-thai.md
-   | Recipe: Prawn Pad Thai (cuisine: thai)
-   | Section: Ingredients (rows 1-8 of 11)
-   | | Ingredient | Weight | Notes |
-   | | --- | --- | --- |
-   | | Flat rice noodles | 250 g | dried |
-   | | Raw prawns | 300 g | peeled, deveined |
-   | | Firm tofu | 150 g | diced small |
-   | | Eggs | 2 whole | beaten |
-   | | Tamarind paste | 60 g | |
-   | | Palm sugar | 50 g | shaved |
-   | | Fish sauce | 45 g | |
-   | | Roasted peanuts | 60 g | roughly crushed |
-
-3. score=0.6603  pad-thai::structure::c002   <-- right recipe, but this chunk lacks the answer
-   section=ingredients  source_file=pad-thai.md
-   | Recipe: Prawn Pad Thai (cuisine: thai)
-   | Section: Ingredients (rows 9-11 of 11)
-   | | Ingredient | Weight | Notes |
-   | | --- | --- | --- |
-   | | Beansprouts | 150 g | |
-   | | Garlic chives | 50 g | 4 cm lengths |
-   | | Neutral oil | 40 g | |
-
-4. score=0.6526  pad-thai::structure::c000   <-- right recipe, but this chunk lacks the answer
-   section=title  source_file=pad-thai.md
-   | Recipe: Prawn Pad Thai (cuisine: thai)
-   | Section: Title
-   | # Prawn Pad Thai
-
-5. score=0.6222  pad-thai::structure::c003   <-- right recipe, but this chunk lacks the answer
-   section=method  source_file=pad-thai.md
-   | Recipe: Prawn Pad Thai (cuisine: thai)
-   | Section: Method
-   | Soak the noodles in warm water for thirty minutes until pliable but still firm at the core.
-   | They finish cooking in the pan and will turn to paste if you soften them fully now.
-   | 
-   | Melt the palm sugar with the tamarind and fish sauce over low heat until it forms a smooth
-   | syrup. This sauce is the whole dish; taste it and adjust before it goes near the wok.
-
 VERDICT: HIT at rank 1
 ```
-### q8 — What is the rice to water ratio for the ginger and spring onion congee?
+### q8 — At what temperature and for how long is the white rice miso fermented?
 
 ```
-expected recipe_id : congee
-expected section   : ingredients table (water row note)
-answer must contain: ['1:12']
-table-row question : True
+expected recipe_id : white-miso
+expected section   : method
+answer must contain: ['28 C', 'four to eight weeks']
+table-row question : False
 
-1. score=0.7365  congee::structure::c001   <== HIT (contains the answer)
-   section=ingredients  source_file=congee.md
-   | Recipe: Ginger and Spring Onion Congee (cuisine: chinese)
-   | Section: Ingredients (rows 1-8 of 8)
-   | | Ingredient | Weight | Notes |
-   | | --- | --- | --- |
-   | | Short grain rice | 200 g | rinsed until the water runs clear |
-   | | Water | 2400 g | a 1:12 ratio by weight |
-   | | Ginger | 40 g | in coins, plus more to finish |
-   | | Spring onion | 60 g | whites and greens separated |
-   | | Light soy sauce | 20 g | |
-   | | Toasted sesame oil | 10 g | |
-   | | Fine sea salt | 6 g | |
-   | | White pepper | 1 g | |
-
-2. score=0.7003  congee::structure::c002   <-- right recipe, but this chunk lacks the answer
-   section=method  source_file=congee.md
-   | Recipe: Ginger and Spring Onion Congee (cuisine: chinese)
+1. score=0.7067  white-miso::structure::c003   <== HIT (contains the answer)
+   section=method  source_file=card-06-white-rice-miso.md
+   | Recipe: White Rice Miso (cuisine: japanese)
    | Section: Method
-   | Rinse the rice until the water runs clear, then freeze it for an hour if you have time — the
-   | ice fractures the grains and they break down far faster.
-   | 
-   | Bring the rice, water, ginger coins and spring onion whites to a boil, then drop to the
-   | barest simmer. Stir every ten minutes or so, scraping the base, for ninety minutes. The
-   | grains should dissolve into a loose, pourable porridge that thickens as it cools.
-   | 
-   | Season with the salt, soy and white pepper at the end; salting early slows the grains from
-   | breaking down. Finish each bowl with the sesame oil, the sliced greens and fresh ginger.
+   | Press the paste into the crock in fistfuls, knocking out air pockets as you go, and smooth
+   | the surface flat. Smear the seed miso across the top, weight it, and ferment at 28 C for
+   | four to eight weeks, which is short because the high koji ratio does the work quickly.
 
-3. score=0.6045  congee::structure::c000   <-- right recipe, but this chunk lacks the answer
-   section=title  source_file=congee.md
-   | Recipe: Ginger and Spring Onion Congee (cuisine: chinese)
-   | Section: Title
-   | # Ginger and Spring Onion Congee
-
-4. score=0.5424  congee::structure::c003   <-- right recipe, but this chunk lacks the answer
-   section=allergens  source_file=congee.md
-   | Recipe: Ginger and Spring Onion Congee (cuisine: chinese)
-   | Section: Allergens
-   | Contains soy (soy sauce) and sesame. Use tamari to keep it gluten free.
-
-5. score=0.4430  shakshuka::structure::c001
-   section=ingredients  source_file=shakshuka.md
-   | Recipe: Red Pepper Shakshuka (cuisine: middle-eastern)
-   | Section: Ingredients (rows 1-8 of 10)
-   | | Ingredient | Weight | Notes |
+2. score=0.6067  white-miso::structure::c001   <-- right recipe, but this chunk lacks the answer
+   section=ingredients  source_file=card-06-white-rice-miso.md
+   | Recipe: White Rice Miso (cuisine: japanese)
+   | Section: Ingredients (rows 1-5 of 5)
+   | | Ingredient | Weight | Baker's % |
    | | --- | --- | --- |
-   | | Red peppers | 450 g | deseeded, sliced |
-   | | Brown onion | 200 g | sliced |
-   | | Tinned plum tomatoes | 400 g | |
-   | | Olive oil | 40 g | |
-   | | Garlic | 15 g | sliced thin |
-   | | Sweet paprika | 6 g | |
-   | | Ground cumin | 4 g | |
-   | | Fine sea salt | 8 g | |
+   | | Dried soybeans | 1000 g | 100% |
+   | | Short-grain rice koji | 1200 g | 120% |
+   | | Fine sea salt | 130 g | 13% |
+   | | Seed miso from a previous batch | 50 g | 5% |
+   | | Soybean cooking liquid, reserved | 200 g | 20% |
+
+3. score=0.6067  white-miso::structure::c002   <-- right recipe, but this chunk lacks the answer
+   section=method  source_file=card-06-white-rice-miso.md
+   | Recipe: White Rice Miso (cuisine: japanese)
+   | Section: Method
+   | Soak the soybeans for eighteen hours, then simmer them until a bean crushes flat between
+   | finger and thumb with no resistance at the core. Reserve the cooking liquid before draining
+   | and let the beans cool to below 40 C, because anything hotter kills the koji.
+   | 
+   | Mash the beans coarsely, then work in the rice koji and the fine sea salt until the mixture
+   | holds together when squeezed. Slacken with the reserved cooking liquid a little at a time.
+
+4. score=0.5474  white-miso::structure::c000   <-- right recipe, but this chunk lacks the answer
+   section=title  source_file=card-06-white-rice-miso.md
+   | Recipe: White Rice Miso (cuisine: japanese)
+   | Section: Title
+   | # White Rice Miso
+   | 
+   | A short-aged sweet shiro miso, heavy on koji and light on salt. Percentages are relative to
+   | the dried soybean weight of 1000 g.
+
+5. score=0.4887  white-miso::structure::c004   <-- right recipe, but this chunk lacks the answer
+   section=allergens  source_file=card-06-white-rice-miso.md
+   | Recipe: White Rice Miso (cuisine: japanese)
+   | Section: Allergens
+   | Contains soy. Gluten-free provided the koji is grown on rice rather than barley. Made in a
+   | kitchen that also handles wheat and sesame.
 
 VERDICT: HIT at rank 1
 ```

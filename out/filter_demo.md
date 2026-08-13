@@ -4,208 +4,208 @@
 strategy        : structure
 embedding model : all-MiniLM-L6-v2 (chromadb ONNX DefaultEmbeddingFunction)
 top-k           : 5
-dietary tags    : ['contains-alcohol', 'contains-dairy', 'contains-egg', 'contains-peanut', 'contains-sesame', 'contains-shellfish', 'contains-soy', 'dairy-free', 'gluten-free', 'nut-free', 'vegan', 'vegetarian']
-generated       : 2026-08-12T13:29:14+00:00
+dietary tags    : ['contains-alcohol', 'contains-dairy', 'contains-egg', 'contains-fish', 'contains-peanut', 'contains-sesame', 'contains-shellfish', 'contains-soy', 'dairy-free', 'gluten-free', 'nut-free', 'vegan', 'vegetarian']
+generated       : 2026-08-13T01:59:47+00:00
 ```
 
-Swept 16 quer(y/ies) x 12 tag(s) = 192 comparisons; **141** of them changed the top-1 result.
+Swept 16 quer(y/ies) x 13 tag(s) = 208 comparisons; **156** of them changed the top-1 result.
 
 ## Cases where the filter changed top-1
 
-**Query:** `How much double cream is in the chicken tikka masala?`
-**Filter:** `where={'tag_dairy_free': True}`  (dietary_tags contains `dairy-free`)
+**Query:** `How long does the red cabbage sauerkraut ferment, and at what temperature?`
+**Filter:** `where={'tag_contains_fish': True}`  (dietary_tags contains `contains-fish`)
 
 ```text
 UNFILTERED  (top-5)
-  1. score=0.7079  chicken-tikka-masala::structure::c001
-     recipe_id=chicken-tikka-masala  section=ingredients  dietary_tags=[gluten-free|contains-dairy]
-  2. score=0.6636  chicken-tikka-masala::structure::c002
-     recipe_id=chicken-tikka-masala  section=ingredients  dietary_tags=[gluten-free|contains-dairy]
-  3. score=0.6205  chicken-tikka-masala::structure::c000
-     recipe_id=chicken-tikka-masala  section=title  dietary_tags=[gluten-free|contains-dairy]
-  4. score=0.6106  chicken-tikka-masala::structure::c003
-     recipe_id=chicken-tikka-masala  section=method  dietary_tags=[gluten-free|contains-dairy]
-  5. score=0.6071  chicken-tikka-masala::structure::c004
-     recipe_id=chicken-tikka-masala  section=allergens  dietary_tags=[gluten-free|contains-dairy]
+  1. score=0.7252  red-sauerkraut::structure::c002
+     recipe_id=red-sauerkraut  section=method  dietary_tags=[vegan|gluten-free|dairy-free]
+  2. score=0.6638  red-sauerkraut::structure::c001
+     recipe_id=red-sauerkraut  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
+  3. score=0.6401  red-sauerkraut::structure::c003
+     recipe_id=red-sauerkraut  section=allergens  dietary_tags=[vegan|gluten-free|dairy-free]
+  4. score=0.5369  red-sauerkraut::structure::c000
+     recipe_id=red-sauerkraut  section=title  dietary_tags=[vegan|gluten-free|dairy-free]
+  5. score=0.5053  napa-kimchi::structure::c003
+     recipe_id=napa-kimchi  section=method  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
 
-FILTERED    (top-5)  where={'tag_dairy_free': True}
-  1. score=0.5479  chana-masala::structure::c002
-     recipe_id=chana-masala  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
-  2. score=0.5440  chana-masala::structure::c001
-     recipe_id=chana-masala  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
-  3. score=0.5179  chana-masala::structure::c003
-     recipe_id=chana-masala  section=method  dietary_tags=[vegan|gluten-free|dairy-free]
-  4. score=0.4667  chana-masala::structure::c000
-     recipe_id=chana-masala  section=title  dietary_tags=[vegan|gluten-free|dairy-free]
-  5. score=0.4311  chana-masala::structure::c004
-     recipe_id=chana-masala  section=allergens  dietary_tags=[vegan|gluten-free|dairy-free]
+FILTERED    (top-5)  where={'tag_contains_fish': True}
+  1. score=0.5053  napa-kimchi::structure::c003
+     recipe_id=napa-kimchi  section=method  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  2. score=0.4896  napa-kimchi::structure::c001
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  3. score=0.4659  napa-kimchi::structure::c002
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  4. score=0.3605  napa-kimchi::structure::c000
+     recipe_id=napa-kimchi  section=title  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  5. score=0.3506  napa-kimchi::structure::c004
+     recipe_id=napa-kimchi  section=allergens  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
 
-top-1 unfiltered : chicken-tikka-masala::structure::c001 (recipe_id=chicken-tikka-masala, score=0.7079)
-top-1 filtered   : chana-masala::structure::c002 (recipe_id=chana-masala, score=0.5479)
+top-1 unfiltered : red-sauerkraut::structure::c002 (recipe_id=red-sauerkraut, score=0.7252)
+top-1 filtered   : napa-kimchi::structure::c003 (recipe_id=napa-kimchi, score=0.5053)
 TOP-1 CHANGED    : YES
 ```
 
-**Query:** `How much double cream is in the chicken tikka masala?`
-**Filter:** `where={'tag_vegan': True}`  (dietary_tags contains `vegan`)
+**Query:** `How long does the red cabbage sauerkraut ferment, and at what temperature?`
+**Filter:** `where={'tag_contains_shellfish': True}`  (dietary_tags contains `contains-shellfish`)
 
 ```text
 UNFILTERED  (top-5)
-  1. score=0.7079  chicken-tikka-masala::structure::c001
-     recipe_id=chicken-tikka-masala  section=ingredients  dietary_tags=[gluten-free|contains-dairy]
-  2. score=0.6636  chicken-tikka-masala::structure::c002
-     recipe_id=chicken-tikka-masala  section=ingredients  dietary_tags=[gluten-free|contains-dairy]
-  3. score=0.6205  chicken-tikka-masala::structure::c000
-     recipe_id=chicken-tikka-masala  section=title  dietary_tags=[gluten-free|contains-dairy]
-  4. score=0.6106  chicken-tikka-masala::structure::c003
-     recipe_id=chicken-tikka-masala  section=method  dietary_tags=[gluten-free|contains-dairy]
-  5. score=0.6071  chicken-tikka-masala::structure::c004
-     recipe_id=chicken-tikka-masala  section=allergens  dietary_tags=[gluten-free|contains-dairy]
+  1. score=0.7252  red-sauerkraut::structure::c002
+     recipe_id=red-sauerkraut  section=method  dietary_tags=[vegan|gluten-free|dairy-free]
+  2. score=0.6638  red-sauerkraut::structure::c001
+     recipe_id=red-sauerkraut  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
+  3. score=0.6401  red-sauerkraut::structure::c003
+     recipe_id=red-sauerkraut  section=allergens  dietary_tags=[vegan|gluten-free|dairy-free]
+  4. score=0.5369  red-sauerkraut::structure::c000
+     recipe_id=red-sauerkraut  section=title  dietary_tags=[vegan|gluten-free|dairy-free]
+  5. score=0.5053  napa-kimchi::structure::c003
+     recipe_id=napa-kimchi  section=method  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
 
-FILTERED    (top-5)  where={'tag_vegan': True}
-  1. score=0.5479  chana-masala::structure::c002
-     recipe_id=chana-masala  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
-  2. score=0.5440  chana-masala::structure::c001
-     recipe_id=chana-masala  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
-  3. score=0.5179  chana-masala::structure::c003
-     recipe_id=chana-masala  section=method  dietary_tags=[vegan|gluten-free|dairy-free]
-  4. score=0.4667  chana-masala::structure::c000
-     recipe_id=chana-masala  section=title  dietary_tags=[vegan|gluten-free|dairy-free]
-  5. score=0.4311  chana-masala::structure::c004
-     recipe_id=chana-masala  section=allergens  dietary_tags=[vegan|gluten-free|dairy-free]
+FILTERED    (top-5)  where={'tag_contains_shellfish': True}
+  1. score=0.5053  napa-kimchi::structure::c003
+     recipe_id=napa-kimchi  section=method  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  2. score=0.4896  napa-kimchi::structure::c001
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  3. score=0.4659  napa-kimchi::structure::c002
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  4. score=0.3605  napa-kimchi::structure::c000
+     recipe_id=napa-kimchi  section=title  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  5. score=0.3506  napa-kimchi::structure::c004
+     recipe_id=napa-kimchi  section=allergens  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
 
-top-1 unfiltered : chicken-tikka-masala::structure::c001 (recipe_id=chicken-tikka-masala, score=0.7079)
-top-1 filtered   : chana-masala::structure::c002 (recipe_id=chana-masala, score=0.5479)
+top-1 unfiltered : red-sauerkraut::structure::c002 (recipe_id=red-sauerkraut, score=0.7252)
+top-1 filtered   : napa-kimchi::structure::c003 (recipe_id=napa-kimchi, score=0.5053)
 TOP-1 CHANGED    : YES
 ```
 
-**Query:** `a dish finished with fresh herbs`
+**Query:** `Is the napa cabbage kimchi safe for someone with a shellfish allergy?`
 **Filter:** `where={'tag_contains_egg': True}`  (dietary_tags contains `contains-egg`)
 
 ```text
 UNFILTERED  (top-5)
-  1. score=0.4981  classic-focaccia::structure::c001
-     recipe_id=classic-focaccia  section=ingredients  dietary_tags=[vegan|dairy-free|nut-free]
-  2. score=0.4828  shakshuka::structure::c002
-     recipe_id=shakshuka  section=ingredients  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  3. score=0.4663  congee::structure::c001
-     recipe_id=congee  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free|nut-free]
-  4. score=0.4659  classic-focaccia::structure::c003
-     recipe_id=classic-focaccia  section=allergens  dietary_tags=[vegan|dairy-free|nut-free]
-  5. score=0.4659  chana-masala::structure::c001
-     recipe_id=chana-masala  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
+  1. score=0.7967  napa-kimchi::structure::c004
+     recipe_id=napa-kimchi  section=allergens  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  2. score=0.6459  napa-kimchi::structure::c003
+     recipe_id=napa-kimchi  section=method  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  3. score=0.5535  napa-kimchi::structure::c001
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  4. score=0.5258  napa-kimchi::structure::c002
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  5. score=0.4974  pad-thai::structure::c005
+     recipe_id=pad-thai  section=allergens  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
 
 FILTERED    (top-5)  where={'tag_contains_egg': True}
-  1. score=0.4828  shakshuka::structure::c002
-     recipe_id=shakshuka  section=ingredients  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  2. score=0.4594  shakshuka::structure::c001
-     recipe_id=shakshuka  section=ingredients  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  3. score=0.4211  shakshuka::structure::c003
-     recipe_id=shakshuka  section=method  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  4. score=0.4203  shakshuka::structure::c000
-     recipe_id=shakshuka  section=title  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  5. score=0.4112  pad-thai::structure::c002
+  1. score=0.4974  pad-thai::structure::c005
+     recipe_id=pad-thai  section=allergens  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
+  2. score=0.4081  shakshuka::structure::c004
+     recipe_id=shakshuka  section=allergens  dietary_tags=[vegetarian|gluten-free|contains-egg]
+  3. score=0.3603  pad-thai::structure::c003
+     recipe_id=pad-thai  section=method  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
+  4. score=0.3491  pad-thai::structure::c004
+     recipe_id=pad-thai  section=method  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
+  5. score=0.3060  pad-thai::structure::c001
      recipe_id=pad-thai  section=ingredients  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
 
-top-1 unfiltered : classic-focaccia::structure::c001 (recipe_id=classic-focaccia, score=0.4981)
-top-1 filtered   : shakshuka::structure::c002 (recipe_id=shakshuka, score=0.4828)
+top-1 unfiltered : napa-kimchi::structure::c004 (recipe_id=napa-kimchi, score=0.7967)
+top-1 filtered   : pad-thai::structure::c005 (recipe_id=pad-thai, score=0.4974)
 TOP-1 CHANGED    : YES
 ```
 
-**Query:** `a dish finished with fresh herbs`
-**Filter:** `where={'tag_gluten_free': True}`  (dietary_tags contains `gluten-free`)
+**Query:** `Is the napa cabbage kimchi safe for someone with a shellfish allergy?`
+**Filter:** `where={'tag_contains_peanut': True}`  (dietary_tags contains `contains-peanut`)
 
 ```text
 UNFILTERED  (top-5)
-  1. score=0.4981  classic-focaccia::structure::c001
-     recipe_id=classic-focaccia  section=ingredients  dietary_tags=[vegan|dairy-free|nut-free]
-  2. score=0.4828  shakshuka::structure::c002
-     recipe_id=shakshuka  section=ingredients  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  3. score=0.4663  congee::structure::c001
-     recipe_id=congee  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free|nut-free]
-  4. score=0.4659  classic-focaccia::structure::c003
-     recipe_id=classic-focaccia  section=allergens  dietary_tags=[vegan|dairy-free|nut-free]
-  5. score=0.4659  chana-masala::structure::c001
-     recipe_id=chana-masala  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
+  1. score=0.7967  napa-kimchi::structure::c004
+     recipe_id=napa-kimchi  section=allergens  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  2. score=0.6459  napa-kimchi::structure::c003
+     recipe_id=napa-kimchi  section=method  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  3. score=0.5535  napa-kimchi::structure::c001
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  4. score=0.5258  napa-kimchi::structure::c002
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  5. score=0.4974  pad-thai::structure::c005
+     recipe_id=pad-thai  section=allergens  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
 
-FILTERED    (top-5)  where={'tag_gluten_free': True}
-  1. score=0.4828  shakshuka::structure::c002
-     recipe_id=shakshuka  section=ingredients  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  2. score=0.4663  congee::structure::c001
-     recipe_id=congee  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free|nut-free]
-  3. score=0.4659  chana-masala::structure::c001
-     recipe_id=chana-masala  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
-  4. score=0.4594  shakshuka::structure::c001
-     recipe_id=shakshuka  section=ingredients  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  5. score=0.4325  congee::structure::c000
-     recipe_id=congee  section=title  dietary_tags=[vegan|gluten-free|dairy-free|nut-free]
+FILTERED    (top-5)  where={'tag_contains_peanut': True}
+  1. score=0.4974  pad-thai::structure::c005
+     recipe_id=pad-thai  section=allergens  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
+  2. score=0.3603  pad-thai::structure::c003
+     recipe_id=pad-thai  section=method  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
+  3. score=0.3491  pad-thai::structure::c004
+     recipe_id=pad-thai  section=method  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
+  4. score=0.3060  pad-thai::structure::c001
+     recipe_id=pad-thai  section=ingredients  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
+  5. score=0.2962  pad-thai::structure::c002
+     recipe_id=pad-thai  section=ingredients  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
 
-top-1 unfiltered : classic-focaccia::structure::c001 (recipe_id=classic-focaccia, score=0.4981)
-top-1 filtered   : shakshuka::structure::c002 (recipe_id=shakshuka, score=0.4828)
+top-1 unfiltered : napa-kimchi::structure::c004 (recipe_id=napa-kimchi, score=0.7967)
+top-1 filtered   : pad-thai::structure::c005 (recipe_id=pad-thai, score=0.4974)
 TOP-1 CHANGED    : YES
 ```
 
-**Query:** `a dish finished with fresh herbs`
-**Filter:** `where={'tag_vegetarian': True}`  (dietary_tags contains `vegetarian`)
+**Query:** `How much fine sea salt goes into the 2kg country sourdough?`
+**Filter:** `where={'tag_contains_fish': True}`  (dietary_tags contains `contains-fish`)
 
 ```text
 UNFILTERED  (top-5)
-  1. score=0.4981  classic-focaccia::structure::c001
-     recipe_id=classic-focaccia  section=ingredients  dietary_tags=[vegan|dairy-free|nut-free]
-  2. score=0.4828  shakshuka::structure::c002
-     recipe_id=shakshuka  section=ingredients  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  3. score=0.4663  congee::structure::c001
-     recipe_id=congee  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free|nut-free]
-  4. score=0.4659  classic-focaccia::structure::c003
-     recipe_id=classic-focaccia  section=allergens  dietary_tags=[vegan|dairy-free|nut-free]
-  5. score=0.4659  chana-masala::structure::c001
-     recipe_id=chana-masala  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
+  1. score=0.6028  sourdough-2kg::structure::c001
+     recipe_id=sourdough-2kg  section=ingredients  dietary_tags=[vegan|dairy-free|nut-free]
+  2. score=0.5790  sourdough-2kg::structure::c002
+     recipe_id=sourdough-2kg  section=method  dietary_tags=[vegan|dairy-free|nut-free]
+  3. score=0.5294  sourdough-2kg::structure::c004
+     recipe_id=sourdough-2kg  section=allergens  dietary_tags=[vegan|dairy-free|nut-free]
+  4. score=0.5048  sourdough-2kg::structure::c003
+     recipe_id=sourdough-2kg  section=method  dietary_tags=[vegan|dairy-free|nut-free]
+  5. score=0.4941  sourdough-2kg::structure::c000
+     recipe_id=sourdough-2kg  section=title  dietary_tags=[vegan|dairy-free|nut-free]
 
-FILTERED    (top-5)  where={'tag_vegetarian': True}
-  1. score=0.4828  shakshuka::structure::c002
-     recipe_id=shakshuka  section=ingredients  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  2. score=0.4594  shakshuka::structure::c001
-     recipe_id=shakshuka  section=ingredients  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  3. score=0.4211  shakshuka::structure::c003
-     recipe_id=shakshuka  section=method  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  4. score=0.4203  shakshuka::structure::c000
-     recipe_id=shakshuka  section=title  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  5. score=0.3421  shakshuka::structure::c004
-     recipe_id=shakshuka  section=allergens  dietary_tags=[vegetarian|gluten-free|contains-egg]
+FILTERED    (top-5)  where={'tag_contains_fish': True}
+  1. score=0.4887  napa-kimchi::structure::c001
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  2. score=0.4272  napa-kimchi::structure::c003
+     recipe_id=napa-kimchi  section=method  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  3. score=0.3316  napa-kimchi::structure::c002
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  4. score=0.3092  napa-kimchi::structure::c004
+     recipe_id=napa-kimchi  section=allergens  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  5. score=0.2747  napa-kimchi::structure::c000
+     recipe_id=napa-kimchi  section=title  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
 
-top-1 unfiltered : classic-focaccia::structure::c001 (recipe_id=classic-focaccia, score=0.4981)
-top-1 filtered   : shakshuka::structure::c002 (recipe_id=shakshuka, score=0.4828)
+top-1 unfiltered : sourdough-2kg::structure::c001 (recipe_id=sourdough-2kg, score=0.6028)
+top-1 filtered   : napa-kimchi::structure::c001 (recipe_id=napa-kimchi, score=0.4887)
 TOP-1 CHANGED    : YES
 ```
 
-**Query:** `a creamy spiced dish with tomatoes and onion`
-**Filter:** `where={'tag_dairy_free': True}`  (dietary_tags contains `dairy-free`)
+**Query:** `How much fine sea salt goes into the 2kg country sourdough?`
+**Filter:** `where={'tag_contains_shellfish': True}`  (dietary_tags contains `contains-shellfish`)
 
 ```text
 UNFILTERED  (top-5)
-  1. score=0.4964  shakshuka::structure::c003
-     recipe_id=shakshuka  section=method  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  2. score=0.4953  shakshuka::structure::c001
-     recipe_id=shakshuka  section=ingredients  dietary_tags=[vegetarian|gluten-free|contains-egg]
-  3. score=0.4801  congee::structure::c001
-     recipe_id=congee  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free|nut-free]
-  4. score=0.4789  beef-bourguignon::structure::c002
-     recipe_id=beef-bourguignon  section=ingredients  dietary_tags=[dairy-free|contains-alcohol]
-  5. score=0.4544  chana-masala::structure::c001
-     recipe_id=chana-masala  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
+  1. score=0.6028  sourdough-2kg::structure::c001
+     recipe_id=sourdough-2kg  section=ingredients  dietary_tags=[vegan|dairy-free|nut-free]
+  2. score=0.5790  sourdough-2kg::structure::c002
+     recipe_id=sourdough-2kg  section=method  dietary_tags=[vegan|dairy-free|nut-free]
+  3. score=0.5294  sourdough-2kg::structure::c004
+     recipe_id=sourdough-2kg  section=allergens  dietary_tags=[vegan|dairy-free|nut-free]
+  4. score=0.5048  sourdough-2kg::structure::c003
+     recipe_id=sourdough-2kg  section=method  dietary_tags=[vegan|dairy-free|nut-free]
+  5. score=0.4941  sourdough-2kg::structure::c000
+     recipe_id=sourdough-2kg  section=title  dietary_tags=[vegan|dairy-free|nut-free]
 
-FILTERED    (top-5)  where={'tag_dairy_free': True}
-  1. score=0.4801  congee::structure::c001
-     recipe_id=congee  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free|nut-free]
-  2. score=0.4789  beef-bourguignon::structure::c002
-     recipe_id=beef-bourguignon  section=ingredients  dietary_tags=[dairy-free|contains-alcohol]
-  3. score=0.4544  chana-masala::structure::c001
-     recipe_id=chana-masala  section=ingredients  dietary_tags=[vegan|gluten-free|dairy-free]
-  4. score=0.4377  congee::structure::c000
-     recipe_id=congee  section=title  dietary_tags=[vegan|gluten-free|dairy-free|nut-free]
-  5. score=0.4199  sesame-soy-aubergine::structure::c002
-     recipe_id=sesame-soy-aubergine  section=ingredients  dietary_tags=[vegan|dairy-free|contains-soy|contains-sesame]
+FILTERED    (top-5)  where={'tag_contains_shellfish': True}
+  1. score=0.4887  napa-kimchi::structure::c001
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  2. score=0.4272  napa-kimchi::structure::c003
+     recipe_id=napa-kimchi  section=method  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  3. score=0.3316  napa-kimchi::structure::c002
+     recipe_id=napa-kimchi  section=ingredients  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  4. score=0.3092  napa-kimchi::structure::c004
+     recipe_id=napa-kimchi  section=allergens  dietary_tags=[contains-fish|contains-shellfish|gluten-free|dairy-free]
+  5. score=0.2898  pad-thai::structure::c002
+     recipe_id=pad-thai  section=ingredients  dietary_tags=[gluten-free|contains-egg|contains-shellfish|contains-peanut]
 
-top-1 unfiltered : shakshuka::structure::c003 (recipe_id=shakshuka, score=0.4964)
-top-1 filtered   : congee::structure::c001 (recipe_id=congee, score=0.4801)
+top-1 unfiltered : sourdough-2kg::structure::c001 (recipe_id=sourdough-2kg, score=0.6028)
+top-1 filtered   : napa-kimchi::structure::c001 (recipe_id=napa-kimchi, score=0.4887)
 TOP-1 CHANGED    : YES
 ```

@@ -7,15 +7,26 @@ that refuses what it cannot source.
 ## Setup
 
 ```bash
-# Python 3.12 (installed via: winget install Python.Python.3.12)
+# Python 3.13
+py -3.13 -m venv .venv
 .venv/Scripts/python -m pip install -r requirements.txt
 
 # Only needed for the generation step:
-cp .env.example .env      # then put your ANTHROPIC_API_KEY in it
+cp .env.example .env      # then put your GEMINI_API_KEY in it
 ```
 
 Retrieval is entirely local — `chromadb`'s ONNX `all-MiniLM-L6-v2` embedder, no API key and
 no PyTorch. Only `rag.generate` / `eval/run_generation.py` need a key.
+
+**Answering model.** `GEN_PROVIDER` in `rag/config.py` selects it, default `gemini`:
+
+| provider | model | key | cost |
+|---|---|---|---|
+| `gemini` (default) | `gemini-3.6-flash`, with newer fallbacks | `GEMINI_API_KEY` from [AI Studio](https://aistudio.google.com/apikey) | free tier, no card |
+| `anthropic` | `claude-opus-5` | `ANTHROPIC_API_KEY` | needs paid API credit — a Claude Pro/Max subscription does **not** include it |
+
+Switching provider cannot move any number in the chunking bake-off, because retrieval never
+calls a provider. Both refusal gates work identically on either path.
 
 ## The experiment
 

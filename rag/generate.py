@@ -29,13 +29,18 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
 from dataclasses import dataclass, field
 from typing import Any
 
 from .config import (
+    ANTHROPIC_MODEL,
+    GEMINI_MODELS,
     GEN_EFFORT,
     GEN_MAX_TOKENS,
-    GEN_MODEL,
+    GEN_PROVIDER,
+    GEN_RETRY_ATTEMPTS,
+    GEN_RETRY_WAIT_SECONDS,
     REFUSAL_TOKEN,
     STRATEGIES,
     TOP_K,
@@ -156,29 +161,203 @@ def build_context(hits: list[SearchHit]) -> str:
     return "\n\n".join(blocks)
 
 
-def _call_model(client, question: str, context: str, use_fallbacks: bool):
-    user_turn = (
+def _strip_unsupported(node: Any) -> Any:
+    """Gemini's response_schema is an OpenAPI 3.0 subset.
+
+    It rejects ``additionalProperties``, which the Anthropic schema uses to lock
+    the object shape. Everything the two gates actually depend on — the
+    ``required`` list containing ``can_answer``, the types, and the nested
+    ``claims`` items — is supported by both, so dropping this one keyword does
+    not weaken either gate.
+    """
+    if isinstance(node, dict):
+        return {k: _strip_unsupported(v) for k, v in node.items() if k != "additionalProperties"}
+    if isinstance(node, list):
+        return [_strip_unsupported(v) for v in node]
+    return node
+
+
+GEMINI_SCHEMA: dict[str, Any] = _strip_unsupported(RESPONSE_SCHEMA)
+
+
+def build_user_turn(question: str, context: str) -> str:
+    return (
         f"CONTEXT\n=======\n{context}\n\n"
         f"QUESTION\n========\n{question}\n\n"
         f"Answer using only the CONTEXT blocks above."
     )
+
+
+@dataclass
+class ModelReply:
+    """Provider-neutral reply, so the gates below never see a vendor SDK type."""
+
+    text: str
+    model: str
+    stop_reason: str
+    input_tokens: int | None = None
+    output_tokens: int | None = None
+    notes: list[str] = field(default_factory=list)
+
+
+# ---------------------------------------------------------------------------
+# Gemini (default) — Google AI Studio, free tier.
+# ---------------------------------------------------------------------------
+def _call_gemini(client, question: str, context: str) -> ModelReply:
+    from google.genai import types
+
+    notes: list[str] = []
+    last_error: Exception | None = None
+
+    for model_name in GEMINI_MODELS:
+        cfg: dict[str, Any] = {
+            "system_instruction": SYSTEM_PROMPT,
+            "response_mime_type": "application/json",
+            "response_schema": GEMINI_SCHEMA,
+            "max_output_tokens": GEN_MAX_TOKENS,
+            # Deterministic: a grounded extractor should not sample.
+            "temperature": 0.0,
+        }
+        # Thinking tokens are charged against max_output_tokens and can truncate
+        # the JSON. The newest flash models reject thinking_budget=0 outright
+        # (400 INVALID_ARGUMENT) and stay within budget anyway, so the plain
+        # call is tried first and disabling thinking is the fallback for older
+        # models that need it to fit.
+        for thinking in (None, types.ThinkingConfig(thinking_budget=0)):
+            attempt_cfg = dict(cfg)
+            if thinking is not None:
+                attempt_cfg["thinking_config"] = thinking
+
+            for attempt in range(1, GEN_RETRY_ATTEMPTS + 1):
+                try:
+                    response = client.models.generate_content(
+                        model=model_name,
+                        contents=build_user_turn(question, context),
+                        config=types.GenerateContentConfig(**attempt_cfg),
+                    )
+                except Exception as exc:  # noqa: BLE001 - provider taxonomy varies
+                    message = str(exc)
+                    lowered = message.lower()
+
+                    # Free-tier per-minute limit: wait and retry.
+                    if "429" in message or "resource_exhausted" in lowered or "quota" in lowered:
+                        last_error = exc
+                        if attempt < GEN_RETRY_ATTEMPTS:
+                            notes.append(
+                                f"rate limited on {model_name}, waiting "
+                                f"{GEN_RETRY_WAIT_SECONDS}s (attempt {attempt})"
+                            )
+                            time.sleep(GEN_RETRY_WAIT_SECONDS)
+                            continue
+                        break
+
+                    # This model rejects the thinking config. The newest flash
+                    # models return a bare "invalid argument" with no mention of
+                    # thinking, so match on that too rather than on the word.
+                    if thinking is not None and (
+                        "thinking" in lowered
+                        or "invalid_argument" in lowered
+                        or "invalid argument" in lowered
+                    ):
+                        last_error = exc
+                        break
+
+                    # Model not available to this key: try the next model.
+                    if "404" in message or "not found" in lowered or "not supported" in lowered:
+                        last_error = exc
+                        break
+
+                    raise
+
+                usage = getattr(response, "usage_metadata", None)
+                finish = "stop"
+                candidates = getattr(response, "candidates", None) or []
+                if candidates:
+                    finish = str(getattr(candidates[0], "finish_reason", "stop") or "stop")
+
+                notes.append(f"provider: gemini, model={model_name}")
+                if thinking is not None:
+                    notes.append("thinking: disabled (thinking_budget=0)")
+                return ModelReply(
+                    text=response.text or "",
+                    model=model_name,
+                    stop_reason=finish,
+                    input_tokens=getattr(usage, "prompt_token_count", None) if usage else None,
+                    output_tokens=getattr(usage, "candidates_token_count", None) if usage else None,
+                    notes=notes,
+                )
+
+    raise RuntimeError(
+        f"no Gemini model from {list(GEMINI_MODELS)} could be reached. "
+        f"Last error: {last_error}"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Anthropic — only when GEN_PROVIDER=anthropic. Needs paid API credit.
+# ---------------------------------------------------------------------------
+def _call_anthropic(client, question: str, context: str) -> ModelReply:
+    import anthropic
+
     kwargs: dict[str, Any] = {
-        "model": GEN_MODEL,
+        "model": ANTHROPIC_MODEL,
         "max_tokens": GEN_MAX_TOKENS,
         "system": SYSTEM_PROMPT,
         "output_config": {
             "effort": GEN_EFFORT,
             "format": {"type": "json_schema", "schema": RESPONSE_SCHEMA},
         },
-        "messages": [{"role": "user", "content": user_turn}],
+        "messages": [{"role": "user", "content": build_user_turn(question, context)}],
     }
-    if use_fallbacks:
-        # Recommended for claude-opus-5: a policy decline is re-served by the
-        # fallback model inside the same call instead of stopping the run.
-        return client.beta.messages.create(
+
+    notes: list[str] = ["provider: anthropic"]
+    try:
+        # A policy decline is re-served by the fallback model inside the same
+        # call instead of stopping the run.
+        response = client.beta.messages.create(
             betas=["server-side-fallback-2026-07-01"], fallbacks="default", **kwargs
         )
-    return client.messages.create(**kwargs)
+        notes.append("server-side refusal fallbacks: enabled")
+    except anthropic.BadRequestError as exc:
+        if "fallback" not in str(exc).lower() and "beta" not in str(exc).lower():
+            raise
+        response = client.messages.create(**kwargs)
+        notes.append("server-side refusal fallbacks: unavailable on this account, disabled")
+
+    return ModelReply(
+        text=next((b.text for b in response.content if b.type == "text"), ""),
+        model=response.model,
+        stop_reason=str(response.stop_reason),
+        input_tokens=getattr(response.usage, "input_tokens", None),
+        output_tokens=getattr(response.usage, "output_tokens", None),
+        notes=notes,
+    )
+
+
+def build_client():
+    """Construct the client for the configured provider."""
+    key = api_key()
+    if not key:
+        wanted = "GEMINI_API_KEY" if GEN_PROVIDER != "anthropic" else "ANTHROPIC_API_KEY"
+        raise SystemExit(
+            f"{wanted} is not set. Put it in the environment or in a .env file at the "
+            f"project root (see .env.example). Search-only commands "
+            f"(python -m rag.search, eval/run_hitrate.py) do not need a key."
+        )
+    if GEN_PROVIDER == "anthropic":
+        import anthropic
+
+        return anthropic.Anthropic(api_key=key)
+
+    from google import genai
+
+    return genai.Client(api_key=key)
+
+
+def call_model(client, question: str, context: str) -> ModelReply:
+    if GEN_PROVIDER == "anthropic":
+        return _call_anthropic(client, question, context)
+    return _call_gemini(client, question, context)
 
 
 def answer(
@@ -189,42 +368,28 @@ def answer(
     code_gate: bool = True,
     client=None,
 ) -> GenerationResult:
-    import anthropic
-
     collection = get_collection(strategy)
     hits = search(collection, question, k=k, where=where)
     retrieved_ids = {h.chunk_id for h in hits}
 
     if client is None:
-        key = api_key()
-        if not key:
-            raise SystemExit(
-                "ANTHROPIC_API_KEY is not set. Put it in the environment or in a .env "
-                "file at the project root (see .env.example). Search-only commands "
-                "(python -m rag.search, eval/run_hitrate.py) do not need a key."
-            )
-        client = anthropic.Anthropic(api_key=key)
+        client = build_client()
 
-    gate_notes: list[str] = []
-
-    try:
-        response = _call_model(client, question, build_context(hits), use_fallbacks=True)
-        gate_notes.append("server-side refusal fallbacks: enabled")
-    except anthropic.BadRequestError as exc:  # beta unavailable on this account
-        if "fallback" not in str(exc).lower() and "beta" not in str(exc).lower():
-            raise
-        response = _call_model(client, question, build_context(hits), use_fallbacks=False)
-        gate_notes.append("server-side refusal fallbacks: unavailable on this account, disabled")
+    reply = call_model(client, question, build_context(hits))
+    gate_notes: list[str] = list(reply.notes)
 
     usage = {
-        "input_tokens": getattr(response.usage, "input_tokens", None),
-        "output_tokens": getattr(response.usage, "output_tokens", None),
-        "stop_reason": response.stop_reason,
-        "model": response.model,
+        "input_tokens": reply.input_tokens,
+        "output_tokens": reply.output_tokens,
+        "stop_reason": reply.stop_reason,
+        "model": reply.model,
     }
 
-    # Opus 5 safety classifiers can decline; that is a refusal, not an answer.
-    if response.stop_reason == "refusal":
+    # A provider-side safety decline is a refusal, not an answer. Anthropic
+    # reports stop_reason="refusal"; Gemini uses finish_reason SAFETY /
+    # PROHIBITED_CONTENT / BLOCKLIST / RECITATION.
+    declined = {"refusal", "safety", "prohibited_content", "blocklist", "recitation"}
+    if reply.stop_reason.lower().replace("finishreason.", "") in declined:
         return GenerationResult(
             question=question,
             strategy=strategy,
@@ -233,11 +398,11 @@ def answer(
             answer_text="",
             claims=[],
             hits=hits,
-            gate_notes=gate_notes + ["gate: model returned stop_reason=refusal"],
+            gate_notes=gate_notes + [f"gate: model returned stop_reason={reply.stop_reason}"],
             usage=usage,
         )
 
-    text = next((b.text for b in response.content if b.type == "text"), "")
+    text = reply.text
     try:
         payload = json.loads(text)
     except json.JSONDecodeError:

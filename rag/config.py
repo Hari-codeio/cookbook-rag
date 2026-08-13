@@ -74,10 +74,44 @@ COLLECTION_NAMES = {
 
 # --------------------------------------------------------------------------
 # Generation
+#
+# GEN_PROVIDER selects the answering model. Retrieval never touches it — the
+# whole hit-rate measurement runs with no key and no provider at all, so
+# switching this cannot move any number in section 2 of results.md.
+#
+# "gemini"    Google AI Studio, free tier, no card required. The default.
+# "anthropic" Claude. Needs paid API credit (a Claude Pro/Max subscription
+#             does NOT include API credit — they are billed separately).
 # --------------------------------------------------------------------------
-GEN_MODEL = "claude-opus-5"
-GEN_MAX_TOKENS = 4096
+GEN_PROVIDER = os.environ.get("GEN_PROVIDER", "gemini").strip().lower()
+
+# Tried in order; the first model this API key can actually reach is used, so a
+# model being retired does not break the run.
+#
+# Pinned rather than using the "gemini-flash-latest" alias, because the alias can
+# silently move to a different model and the transcripts in results.md are
+# supposed to be reproducible. The alias is kept last as a safety net.
+#
+# Verified reachable on a fresh free-tier key: gemini-2.5-flash and
+# gemini-2.5-flash-lite are listed by models.list() but return 404 "no longer
+# available to new users", so they are deliberately absent from this list.
+GEMINI_MODELS = (
+    "gemini-3.6-flash",
+    "gemini-3.5-flash",
+    "gemini-3.1-flash-lite",
+    "gemini-flash-latest",
+)
+
+# Claude, used only when GEN_PROVIDER=anthropic.
+ANTHROPIC_MODEL = "claude-opus-5"
 GEN_EFFORT = "medium"
+
+GEN_MAX_TOKENS = 4096
+
+# Free-tier rate limits are per-minute, so a run of 9 calls can trip one.
+# Retry rather than losing the run half way through.
+GEN_RETRY_ATTEMPTS = 4
+GEN_RETRY_WAIT_SECONDS = 20
 
 # The exact token the app emits when it will not answer. The prompt gate asks
 # for it and the code gate falls back to it, so every refusal in the transcripts
@@ -85,18 +119,47 @@ GEN_EFFORT = "medium"
 REFUSAL_TOKEN = "INSUFFICIENT_CONTEXT"
 
 
-def api_key() -> str | None:
-    """Read the Anthropic key from the environment or a local .env file."""
-    key = os.environ.get("ANTHROPIC_API_KEY")
-    if key:
-        return key.strip()
+def _read_env(name: str) -> str | None:
+    """Environment first, then a local .env file at the project root."""
+    value = os.environ.get(name)
+    if value and value.strip():
+        return value.strip()
     env_file = ROOT / ".env"
     if env_file.exists():
         for line in env_file.read_text(encoding="utf-8").splitlines():
             line = line.strip()
             if not line or line.startswith("#") or "=" not in line:
                 continue
-            name, _, value = line.partition("=")
-            if name.strip() == "ANTHROPIC_API_KEY":
-                return value.strip().strip('"').strip("'")
+            key_name, _, raw = line.partition("=")
+            if key_name.strip() == name:
+                cleaned = raw.strip().strip('"').strip("'")
+                if cleaned:
+                    return cleaned
     return None
+
+
+def anthropic_api_key() -> str | None:
+    return _read_env("ANTHROPIC_API_KEY")
+
+
+def gemini_api_key() -> str | None:
+    """AI Studio calls it GEMINI_API_KEY; GOOGLE_API_KEY is accepted too."""
+    return _read_env("GEMINI_API_KEY") or _read_env("GOOGLE_API_KEY")
+
+
+def api_key() -> str | None:
+    """The key for whichever provider GEN_PROVIDER selects."""
+    if GEN_PROVIDER == "anthropic":
+        return anthropic_api_key()
+    return gemini_api_key()
+
+
+def gen_model_label() -> str:
+    """What to print in the write-up as the answering model."""
+    if GEN_PROVIDER == "anthropic":
+        return ANTHROPIC_MODEL
+    return GEMINI_MODELS[0]
+
+
+# Kept so existing imports of GEN_MODEL keep working.
+GEN_MODEL = gen_model_label()
