@@ -1,0 +1,8 @@
+config                hit@3   p50 ms    fixes g03?  
+dense (no rerank)     10/12   1021.5    n/a         
+rerank, window=5      10/12   3134.5    no          
+rerank, window=10     10/12   3568.1    no          
+rerank, window=14     11/12   3725.5    YES         
+rerank, window=25     11/12   4234.5    YES         
+
+[exited with code 0]

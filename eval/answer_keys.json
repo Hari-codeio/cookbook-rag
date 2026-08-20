@@ -1,0 +1,17 @@
+{
+  "_note": "Answer-correctness keys, kept OUT of golden_set.jsonl so that file stays byte-identical and its sha256 (recorded in the baseline run) remains valid. An answer counts correct only if it contains one of the required strings, matched case-insensitively and whitespace-tolerantly, so '6 g' also matches '6g'. A refusal is never counted correct - it is recorded as refused and then labelled R or Not-In-Corpus.",
+  "keys": {
+    "g01": {"any_of": ["6 g", "1.2%"], "wrong_if": ["10 g", "2%"]},
+    "g02": {"any_of": ["10 g", "2%"], "wrong_if": ["6 g", "1.2%"]},
+    "g03": {"any_of": ["15 g", "3%"], "wrong_if": []},
+    "g04": {"any_of": ["20 g", "2%"], "wrong_if": []},
+    "g05": {"any_of": ["6 g"], "wrong_if": []},
+    "g06": {"any_of": ["250 C"], "wrong_if": ["240 C"]},
+    "g07": {"any_of": ["225 g", "45%"], "wrong_if": ["250 g", "175 g"]},
+    "g08": {"any_of": ["19 g", "1.9%"], "wrong_if": ["18 g", "20 g"]},
+    "g09": {"any_of": ["80%"], "wrong_if": ["76%", "78%"]},
+    "g10": {"any_of": ["nylon"], "wrong_if": []},
+    "g11": {"any_of": ["blossom"], "wrong_if": []},
+    "g12": {"any_of": ["shrimp", "shellfish"], "wrong_if": []}
+  }
+}

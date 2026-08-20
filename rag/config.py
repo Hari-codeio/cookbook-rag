@@ -44,6 +44,26 @@ HNSW_SPACE = "cosine"
 TOP_K = 5
 
 # --------------------------------------------------------------------------
+# Week 4: THE ONE RETRIEVAL CHANGE — cross-encoder rerank over the top 25.
+#
+# Chosen from the failure tally, not from taste. Both R failures had the
+# correct chunk inside the top 25 already (ranks 14 and 13 of 94), so
+# reordering that window can reach both. See rag/rerank.py for why BM25+RRF
+# was rejected: g09's key term "hydration" appears nowhere on the target
+# card, so a lexical matcher has no bridge to cross.
+#
+# The dense stage is untouched. Same collection, same embedder, same cosine
+# space. The reranker only reorders what dense retrieval already returned.
+# --------------------------------------------------------------------------
+RERANK_CANDIDATES = 25
+RERANK_MODEL = "Xenova/ms-marco-MiniLM-L-6-v2"  # ONNX cross-encoder, ~80 MB, no torch
+
+# Week 4 BONUS: MMR over the reranked window. 1.0 = pure relevance (identical
+# to plain reranking), 0.0 = pure novelty. Tuned in one sweep, see results.md.
+MMR_LAMBDA = 0.7
+
+
+# --------------------------------------------------------------------------
 # Strategy A: "baseline" — the chunker the app already had.
 #
 # A naive fixed-size character window with overlap. It has no idea what a

@@ -209,46 +209,58 @@ def _call_gemini(client, question: str, context: str) -> ModelReply:
     notes: list[str] = []
     last_error: Exception | None = None
 
-    for model_name in GEMINI_MODELS:
-        cfg: dict[str, Any] = {
-            "system_instruction": SYSTEM_PROMPT,
-            "response_mime_type": "application/json",
-            "response_schema": GEMINI_SCHEMA,
-            "max_output_tokens": GEN_MAX_TOKENS,
-            # Deterministic: a grounded extractor should not sample.
-            "temperature": 0.0,
-        }
-        # Thinking tokens are charged against max_output_tokens and can truncate
-        # the JSON. The newest flash models reject thinking_budget=0 outright
-        # (400 INVALID_ARGUMENT) and stay within budget anyway, so the plain
-        # call is tried first and disabling thinking is the fallback for older
-        # models that need it to fit.
-        for thinking in (None, types.ThinkingConfig(thinking_budget=0)):
-            attempt_cfg = dict(cfg)
-            if thinking is not None:
-                attempt_cfg["thinking_config"] = thinking
+    # Models that rejected the thinking config, so later passes stop offering it.
+    reject_thinking: set[str] = set()
 
-            for attempt in range(1, GEN_RETRY_ATTEMPTS + 1):
+    # Outer loop = one full sweep of every model. A 503 means THIS model is busy,
+    # not that the API is down, and models have independent capacity, so the
+    # right move is to try the next model immediately and only sleep once every
+    # model in the list has turned us away.
+    for sweep in range(1, GEN_RETRY_ATTEMPTS + 1):
+        saw_transient = False
+
+        for model_name in GEMINI_MODELS:
+            options: list[Any] = [None]
+            if model_name not in reject_thinking:
+                options.append(types.ThinkingConfig(thinking_budget=0))
+
+            for thinking in options:
+                cfg: dict[str, Any] = {
+                    "system_instruction": SYSTEM_PROMPT,
+                    "response_mime_type": "application/json",
+                    "response_schema": GEMINI_SCHEMA,
+                    "max_output_tokens": GEN_MAX_TOKENS,
+                    # Deterministic: a grounded extractor should not sample.
+                    "temperature": 0.0,
+                }
+                if thinking is not None:
+                    cfg["thinking_config"] = thinking
+
                 try:
                     response = client.models.generate_content(
                         model=model_name,
                         contents=build_user_turn(question, context),
-                        config=types.GenerateContentConfig(**attempt_cfg),
+                        config=types.GenerateContentConfig(**cfg),
                     )
                 except Exception as exc:  # noqa: BLE001 - provider taxonomy varies
                     message = str(exc)
                     lowered = message.lower()
+                    last_error = exc
 
-                    # Free-tier per-minute limit: wait and retry.
-                    if "429" in message or "resource_exhausted" in lowered or "quota" in lowered:
-                        last_error = exc
-                        if attempt < GEN_RETRY_ATTEMPTS:
-                            notes.append(
-                                f"rate limited on {model_name}, waiting "
-                                f"{GEN_RETRY_WAIT_SECONDS}s (attempt {attempt})"
-                            )
-                            time.sleep(GEN_RETRY_WAIT_SECONDS)
-                            continue
+                    # Transient: free-tier per-minute limit (429) or the model
+                    # temporarily overloaded (503). Move to the next model now.
+                    if (
+                        "429" in message
+                        or "resource_exhausted" in lowered
+                        or "quota" in lowered
+                        or "503" in message
+                        or "unavailable" in lowered
+                        or "overloaded" in lowered
+                        or "high demand" in lowered
+                    ):
+                        saw_transient = True
+                        kind = "overloaded" if "503" in message else "rate limited"
+                        notes.append(f"{kind} on {model_name}, trying the next model")
                         break
 
                     # This model rejects the thinking config. The newest flash
@@ -259,12 +271,11 @@ def _call_gemini(client, question: str, context: str) -> ModelReply:
                         or "invalid_argument" in lowered
                         or "invalid argument" in lowered
                     ):
-                        last_error = exc
-                        break
+                        reject_thinking.add(model_name)
+                        continue
 
                     # Model not available to this key: try the next model.
                     if "404" in message or "not found" in lowered or "not supported" in lowered:
-                        last_error = exc
                         break
 
                     raise
@@ -286,6 +297,17 @@ def _call_gemini(client, question: str, context: str) -> ModelReply:
                     output_tokens=getattr(usage, "candidates_token_count", None) if usage else None,
                     notes=notes,
                 )
+
+        # Every model turned us away. Only worth sleeping if the reason was
+        # temporary; a list of 404s will never clear.
+        if not saw_transient:
+            break
+        if sweep < GEN_RETRY_ATTEMPTS:
+            notes.append(
+                f"all {len(GEMINI_MODELS)} models busy, waiting "
+                f"{GEN_RETRY_WAIT_SECONDS}s (sweep {sweep})"
+            )
+            time.sleep(GEN_RETRY_WAIT_SECONDS)
 
     raise RuntimeError(
         f"no Gemini model from {list(GEMINI_MODELS)} could be reached. "
@@ -367,9 +389,15 @@ def answer(
     where: dict[str, Any] | None = None,
     code_gate: bool = True,
     client=None,
+    retriever: str = "dense",
 ) -> GenerationResult:
     collection = get_collection(strategy)
-    hits = search(collection, question, k=k, where=where)
+    if retriever == "rerank":
+        from .rerank import rerank_search
+
+        hits = rerank_search(collection, question, k=k, where=where)
+    else:
+        hits = search(collection, question, k=k, where=where)
     retrieved_ids = {h.chunk_id for h in hits}
 
     if client is None:
