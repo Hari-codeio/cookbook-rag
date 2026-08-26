@@ -1,0 +1,31 @@
+{
+  "seed": 20260826,
+  "n": 20,
+  "source": "random-traffic",
+  "population_size": 150,
+  "population_sha256": "cc2e3b39ec248a6678bcbca9ff7ac362df4e091ad0497a27a9d821ac3984e39b",
+  "sampler": "python random.Random(seed).sample(sorted(population), n), python 3.13.5",
+  "trace_file_sha256": "4e92554c65bcbca16a2d4a6541ec2149675383c246a6b2c4a49efdfc9c7804ba",
+  "trace_ids": [
+    "tr_0cb1bb28c42e",
+    "tr_0f7e2efe3af5",
+    "tr_2343f31d8926",
+    "tr_2c6154629bb2",
+    "tr_3228dac28a01",
+    "tr_3414b9769de5",
+    "tr_351be2af8a72",
+    "tr_36b913af218a",
+    "tr_39a45c43e005",
+    "tr_3c28c307492f",
+    "tr_4796cf8933c6",
+    "tr_5c8a45d5f1f9",
+    "tr_6124bcab3fcb",
+    "tr_86368b7412b3",
+    "tr_b16917339414",
+    "tr_b2c78a0e952e",
+    "tr_cd5496e418be",
+    "tr_e76c2f033e24",
+    "tr_f0918dcbd36b",
+    "tr_f7e8565ee4fc"
+  ]
+}

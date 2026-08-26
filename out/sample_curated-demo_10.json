@@ -1,0 +1,21 @@
+{
+  "seed": 20260826,
+  "n": 10,
+  "source": "curated-demo",
+  "population_size": 12,
+  "population_sha256": "acacf964787aca32a1a0f9304828dbf8b0752f529475e7f85d558b4f777638dc",
+  "sampler": "python random.Random(seed).sample(sorted(population), n), python 3.13.5",
+  "trace_file_sha256": "4e92554c65bcbca16a2d4a6541ec2149675383c246a6b2c4a49efdfc9c7804ba",
+  "trace_ids": [
+    "tr_059e0df1746a",
+    "tr_0b7c7693e0c3",
+    "tr_184d7acc9c86",
+    "tr_2802ae86300e",
+    "tr_2c4fc3c1e36b",
+    "tr_9fef61c54210",
+    "tr_a813163e87d6",
+    "tr_c4f92ef1e7bd",
+    "tr_dc9fdef98a6b",
+    "tr_eb298b6c77ee"
+  ]
+}

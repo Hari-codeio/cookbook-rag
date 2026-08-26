@@ -26,6 +26,16 @@ The context TEXT is deliberately not stored. It is rebuilt from the hits at
 replay time and checked against ``context.sha256``, which proves the stored
 hits are sufficient to reconstruct the call rather than merely asserting it.
 
+Schema history
+--------------
+1.0  the first version, used for all 162 traces of the week analysed in
+     notes.md. It recorded the response schema's sha256 but not the schema,
+     so a replay could verify which schema was used but could not produce
+     it - the one field the replay harness had to fetch from outside the
+     trace. Found by eval/replay_trace.py, not by reading the code.
+1.1  model.params.response_schema now carries the schema inline. A 1.1
+     trace is replayable with nothing but the trace.
+
 Writing is append-only and best-effort: a tracing failure must never take down
 an answer, so :func:`write` swallows its own errors and records them in
 ``out/trace_errors.log``.
@@ -44,7 +54,7 @@ from typing import Any, Iterator
 
 from .config import OUT_DIR
 
-TRACE_SCHEMA = "1.0"
+TRACE_SCHEMA = "1.1"
 TRACE_PATH = OUT_DIR / "traces.jsonl"
 TRACE_ERROR_LOG = OUT_DIR / "trace_errors.log"
 

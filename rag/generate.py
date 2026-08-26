@@ -318,6 +318,7 @@ def _call_gemini(client, question: str, context: str) -> ModelReply:
                     "max_output_tokens": cfg["max_output_tokens"],
                     "response_mime_type": cfg["response_mime_type"],
                     "response_schema_sha256": _schema_sha(GEMINI_SCHEMA),
+                    "response_schema": GEMINI_SCHEMA,
                     "thinking_budget": 0 if thinking is not None else None,
                     "model_candidates": list(GEMINI_MODELS),
                     "sweep": sweep,
@@ -392,6 +393,7 @@ def _call_anthropic(client, question: str, context: str) -> ModelReply:
             "effort": GEN_EFFORT,
             "output_format": "json_schema",
             "response_schema_sha256": _schema_sha(RESPONSE_SCHEMA),
+            "response_schema": RESPONSE_SCHEMA,
         },
     )
 

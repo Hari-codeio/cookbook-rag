@@ -85,13 +85,19 @@ def rebuild_user_turn(question: str, context: str) -> str:
     )
 
 
-def check(label: str, rebuilt: str, recorded: str | None) -> bool:
+def check(label: str, rebuilt: str, recorded: str | None, out) -> bool:
+    """Hash one reconstruction against what was recorded, THROUGH the writer.
+
+    This used to print straight to stdout, so the three hash checks that are the
+    whole evidence of replayability never reached the saved markdown. Anything
+    that is evidence goes through ``out``.
+    """
     got = trc.sha256_text(rebuilt)
     if recorded is None:
-        print(f"  {label:<16} NOT RECORDED IN TRACE  (rebuilt sha {got[:16]})")
+        out(f"  {label:<16} NOT RECORDED IN TRACE  (rebuilt sha {got[:16]})")
         return False
     ok = got == recorded
-    print(f"  {label:<16} {'MATCH  ' if ok else 'MISMATCH'} {got[:16]}  vs recorded {recorded[:16]}")
+    out(f"  {label:<16} {'MATCH  ' if ok else 'MISMATCH'} {got[:16]}  vs recorded {recorded[:16]}")
     return ok
 
 
@@ -199,9 +205,9 @@ def main() -> None:
     context = rebuild_context(rec["retrieval"]["hits"])
     user_turn = rebuild_user_turn(rec["request"]["query"], context)
 
-    ok_prompt = check("system prompt", system_text, rec["prompt"].get("sha256"))
-    ok_ctx = check("context", context, rec.get("context", {}).get("sha256"))
-    ok_turn = check("user turn", user_turn, rec["prompt"].get("user_turn_sha256"))
+    ok_prompt = check("system prompt", system_text, rec["prompt"].get("sha256"), out)
+    ok_ctx = check("context", context, rec.get("context", {}).get("sha256"), out)
+    ok_turn = check("user turn", user_turn, rec["prompt"].get("user_turn_sha256"), out)
 
     schema, self_contained, schema_note = resolve_schema(rec)
     out(f"  {'response schema':<16} {'MATCH  ' if self_contained else 'GAP    '} {schema_note}")
