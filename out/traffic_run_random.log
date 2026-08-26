@@ -1,0 +1,165 @@
+pool        : traffic_queries.jsonl  (150 queries)
+pool sha256 : 4d077003cbc08cadc217fdbd8af9a6668086a5c3e727900bee553f44f5fefdce
+source tag  : random-traffic
+config      : {'strategy': 'structure', 'retriever': 'dense', 'k': 5, 'code_gate': True}
+trace file  : C:\Hari\Python\AI\cookbook-rag\out\traces.jsonl
+
+[  1/150] tq001  tr_3414b9769de5  answered  how much fine sea salt in the 2kg country sourdough
+[  2/150] tq002  tr_aabdf31c9589  answered  gochugaru amount for napa kimchi
+[  3/150] tq003  tr_2213d518262a  answered  how much water in the wholemeal sourdough
+[  4/150] tq004  tr_e9076dcfdc06  answered  xanthan gum gluten free brioche
+[  5/150] tq005  tr_f1d5475e4da2  answered  psyllium husk in the gf sandwich loaf
+[  6/150] tq006  tr_3228dac28a01  answered  how much butter in the classic brioche
+[  7/150] tq007  tr_e72a5d2e883d  answered  salt in the light rye sourdough
+[  8/150] tq008  tr_1a024b6bc73f  answered  how much yeast in the focaccia
+[  9/150] tq009  tr_5071a7be04fd  answered  olive oil in the classic rosemary focaccia
+[ 10/150] tq010  tr_3d285dbfc99d  answered  how many eggs in the shakshuka
+[ 11/150] tq011  tr_a3cbb6b77aca  answered  how much beef shin for the bourguignon
+[ 12/150] tq012  tr_d440d97712b3  answered  tamarind paste quantity pad thai
+[ 13/150] tq013  tr_24c6e714f7ce  answered  how much amchur in the chana masala
+[ 14/150] tq014  tr_2b1362424013  answered  kasoori methi amount chicken tikka masala
+[ 15/150] tq015  tr_6acf06e5c916  answered  how much rice for the congee
+[ 16/150] tq016  tr_379c84fc27a8  answered  how much ginger in the congee
+[ 17/150] tq017  tr_aee0a2b599dd  answered  caraway seed in the red cabbage sauerkraut
+[ 18/150] tq018  tr_4341622a3de0  answered  how much coarse salt for the dill pickles
+[ 19/150] tq019  tr_86368b7412b3  answered  koji amount white rice miso
+[ 20/150] tq020  tr_f34a79fd44b5  answered  how much salt in the miso
+[ 21/150] tq021  tr_9939801c4a7f  REFUSED   kefir grains per litre of milk
+[ 22/150] tq022  tr_4c153005652f  answered  how much daikon in the kimchi
+[ 23/150] tq023  tr_8ef5c6d3cfe1  answered  fish sauce amount kimchi
+[ 24/150] tq024  tr_d445dd129af1  answered  how much sugar in the chocolate brioche
+[ 25/150] tq025  tr_6124bcab3fcb  answered  dark chocolate chips weight brioche
+[ 26/150] tq026  tr_a0d44cabd483  answered  how much milk in the gluten free brioche
+[ 27/150] tq027  tr_3150eaef25d5  answered  how much mirin for the aubergine
+[ 28/150] tq028  tr_7faafa0746c5  answered  sesame seeds aubergine recipe
+[ 29/150] tq029  tr_3977a46fdcae  answered  how much red wine in the beef bourguignon
+[ 30/150] tq030  tr_5c8a45d5f1f9  answered  how much yoghurt for the tikka marinade
+[ 31/150] tq031  tr_94ca2dae131a  answered  how much double cream in the tikka masala
+[ 32/150] tq032  tr_7afa28b69215  answered  lemon zest lemon drizzle
+[ 33/150] tq033  tr_7154fa037713  answered  how much caster sugar in the lemon drizzle loaf
+[ 34/150] tq034  tr_027fa8d3ebc0  answered  granulated sugar for the drizzle
+[ 35/150] tq035  tr_f7e8565ee4fc  answered  how much starter in the rye sourdough
+[ 36/150] tq036  tr_3b736b8e5330  answered  how much rye flour in the light rye sourdough
+[ 37/150] tq037  tr_fe86377506c3  answered  wholemeal flour amount wholemeal sourdough
+[ 38/150] tq038  tr_99ef8edde8b4  answered  how much water in the gf sandwich loaf
+[ 39/150] tq039  tr_1b2c11237860  answered  how much olive oil in the gluten free sandwich loaf
+[ 40/150] tq040  tr_e911b18c1634  answered  how much garlic in the kimchi
+[ 41/150] tq041  tr_c6a45cf32631  answered  peanuts in pad thai how much
+[ 42/150] tq042  tr_c0f93b2b7245  answered  how many prawns in the pad thai
+[ 43/150] tq043  tr_39a45c43e005  answered  how much paprika in the shakshuka
+[ 44/150] tq044  tr_6a67b98c5063  answered  how much juniper in the sauerkraut
+[ 45/150] tq045  tr_36b913af218a  answered  mustard seed dill pickles amount
+[ 46/150] tq046  tr_58b5cbdba689  answered  what temperature do i bake the 2kg sourdough at
+[ 47/150] tq047  tr_63171e725927  answered  how long does the 2kg sourdough bulk ferment
+[ 48/150] tq048  tr_0b73ad81c53e  answered  how long do i cold retard the country sourdough
+[ 49/150] tq049  tr_042fc82b28c9  answered  how long does the kimchi ferment at room temp
+[ 50/150] tq050  tr_6e44bec2d3b9  answered  what temperature for the kimchi ferment
+[ 51/150] tq051  tr_0cb1bb28c42e  answered  how long do i leave the kefir
+[ 52/150] tq052  tr_7206c713895c  answered  what temperature for the milk kefir
+[ 53/150] tq053  tr_d4f203574ece  answered  how long does the miso ferment
+[ 54/150] tq054  tr_b88a83673d72  answered  how long do i salt the cabbage for kimchi
+[ 55/150] tq055  tr_ba6076a3beca  REFUSED   how long to autolyse the sourdough
+[ 56/150] tq056  tr_fb2ad9bae35d  answered  when do i add the salt to the sourdough
+[ 57/150] tq057  tr_e0e485d190e9  answered  how long does the beef bourguignon cook
+[ 58/150] tq058  tr_c6afaff397e0  answered  what oven temp for the bourguignon
+[ 59/150] tq059  tr_16893e1c32e0  answered  how long do the pickles take
+[ 60/150] tq060  tr_49f19c092ad0  answered  how long do i bake the lemon drizzle
+[ 61/150] tq061  tr_389efa8e0910  REFUSED   how long does the focaccia prove
+[ 62/150] tq062  tr_c0f8e430b932  REFUSED   how long to bulk the focaccia
+[ 63/150] tq063  tr_afc4986fb6ee  answered  how long do i cook the congee for
+[ 64/150] tq064  tr_301ea209a52e  answered  how long do i roast the aubergine
+[ 65/150] tq065  tr_1f078175ee32  answered  when do i add the kasoori methi
+[ 66/150] tq066  tr_f7adf587245f  REFUSED   i want to make half the 2kg sourdough, what are the weig
+[ 67/150] tq067  tr_f64447a39fe1  REFUSED   how do i scale the country sourdough down to one loaf
+[ 68/150] tq068  tr_03f53970d951  REFUSED   double the kimchi recipe for me
+[ 69/150] tq069  tr_778fa297a629  REFUSED   i only have 500g cabbage, how much salt for the kimchi
+[ 70/150] tq070  tr_a13e9d5f5263  REFUSED   scale the focaccia to a 500g flour batch
+[ 71/150] tq071  tr_805275ce4cdb  REFUSED   i want to make the brioche with 750g flour
+[ 72/150] tq072  tr_6a1651f38b1d  REFUSED   how much salt if i make 1.5x the rye sourdough
+[ 73/150] tq073  tr_17b42a03de45  REFUSED   can you halve the chana masala
+[ 74/150] tq074  tr_36640b1ddcce  REFUSED   i have 2kg of cucumbers, how much brine salt
+[ 75/150] tq075  tr_439eae1df6f7  REFUSED   triple the congee please
+[ 76/150] tq076  tr_3c28c307492f  REFUSED   i want 3kg of sourdough not 2kg
+[ 77/150] tq077  tr_6beb695fda7c  REFUSED   scale the miso down to 500g soybeans
+[ 78/150] tq078  tr_2343f31d8926  REFUSED   make the shakshuka for 2 people instead of 4
+[ 79/150] tq079  tr_f3cef1d09ccc  REFUSED   i want to make a 1kg wholemeal loaf, what are the weight
+[ 80/150] tq080  tr_b16917339414  REFUSED   how much xanthan gum if i use 250g flour blend
+[ 81/150] tq081  tr_099c16b326ca  REFUSED   can i use instant yeast instead of sourdough starter in 
+[ 82/150] tq082  tr_c5c65e9f6c06  REFUSED   can i swap the fish sauce in the kimchi for soy sauce
+[ 83/150] tq083  tr_b8ad80a3b1f5  REFUSED   what can i use instead of psyllium husk
+[ 84/150] tq084  tr_2e0cbc3a3557  REFUSED   can i use table salt instead of fine sea salt
+[ 85/150] tq085  tr_b358f3f5a920  REFUSED   can i replace the butter in the brioche with oil
+[ 86/150] tq086  tr_4dfd68fc1e08  REFUSED   can i use dried dill instead of fresh in the pickles
+[ 87/150] tq087  tr_c41a1fa76158  REFUSED   is there a substitute for amchur
+[ 88/150] tq088  tr_f0918dcbd36b  REFUSED   can i use greek yoghurt in the tikka masala
+[ 89/150] tq089  tr_0d9cb718a535  REFUSED   can i swap gochugaru for regular chilli flakes
+[ 90/150] tq090  tr_a930a2e2f5e8  REFUSED   what if i dont have grape leaves for the pickles
+[ 91/150] tq091  tr_ef76304bfd8a  REFUSED   can i use almond milk for the kefir
+[ 92/150] tq092  tr_ded59ecd6d7e  REFUSED   can i use white cabbage instead of red for the sauerkrau
+[ 93/150] tq093  tr_f8e4a2e4284c  answered  is the kimchi ok if im allergic to prawns
+[ 94/150] tq094  tr_6bbab08e30d4  answered  is the pad thai safe for a peanut allergy
+[ 95/150] tq095  tr_ef730360d8cd  REFUSED   which recipes are vegan
+[ 96/150] tq096  tr_edd199a8d70f  answered  is the milk kefir lactose free
+[ 97/150] tq097  tr_33b9c4f03850  REFUSED   does the sourdough contain nuts
+[ 98/150] tq098  tr_b3dcbf83a9d9  answered  is the miso gluten free
+[ 99/150] tq099  tr_2c6154629bb2  answered  is the chocolate brioche dairy free
+[100/150] tq100  tr_89d73b926c1d  answered  can a coeliac eat the gf sandwich loaf
+[101/150] tq101  tr_0c70404633fe  answered  does the pad thai have shellfish
+[102/150] tq102  tr_92ef9f1e9cd5  REFUSED   is the congee vegan
+[103/150] tq103  tr_8ae455995c8f  answered  does the tikka masala contain gluten
+[104/150] tq104  tr_fff5ee77053d  REFUSED   is the sauerkraut suitable for vegans
+[105/150] tq105  tr_80a4b261f5fe  answered  which sourdough has the most salt
+[106/150] tq106  tr_6d95100b179f  answered  whats the difference between the classic and chocolate b
+[107/150] tq107  tr_2a96351457ab  answered  which brioche has the most butter
+[108/150] tq108  tr_d0a0f21886c4  REFUSED   compare the hydration of the three sourdoughs
+[109/150] tq109  tr_b64c13f30188  REFUSED   which is hotter, the kimchi or the chana masala
+[110/150] tq110  tr_71a7d4838a9c  answered  do the gf brioche and gf sandwich loaf use the same amou
+[111/150] tq111  tr_e76c2f033e24  REFUSED   which loaf has the highest hydration
+[112/150] tq112  tr_cd05390dfd1d  REFUSED   which of the ferments takes longest
+[113/150] tq113  tr_b56772ce34da  REFUSED   is the wholemeal sourdough wetter than the rye
+[114/150] tq114  tr_2564b296cb6f  REFUSED   which recipe uses the most salt overall
+[115/150] tq115  tr_b2c78a0e952e  answered  do the sourdoughs bake at the same temperature
+[116/150] tq116  tr_3a01cb564370  answered  which brioche has the least butter
+[117/150] tq117  tr_a57ce62fd1ed  REFUSED   how much salt
+[118/150] tq118  tr_98e210dfa9ff  answered  how much butter in the brioche
+[119/150] tq119  tr_84808e0589bc  REFUSED   whats the hydration
+[120/150] tq120  tr_4796cf8933c6  REFUSED   how long does it ferment
+[121/150] tq121  tr_f6d069abb8e5  answered  how much flour do i need
+[122/150] tq122  tr_0afc4145f039  REFUSED   what temperature
+[123/150] tq123  tr_e5ccb2d56448  answered  how much yeast in the brioche
+[124/150] tq124  tr_4471f517ea8c  answered  how much xanthan gum
+[125/150] tq125  tr_6e5478b402f0  REFUSED   how much water in the sourdough
+[126/150] tq126  tr_cbeb3e40660d  REFUSED   salt percentage
+[127/150] tq127  tr_55dc9ec6bdd8  REFUSED   how many cups of flour is 950g
+[128/150] tq128  tr_981542b3f454  REFUSED   what is 250 C in fahrenheit
+[129/150] tq129  tr_0d3e5db7e64f  REFUSED   how many ounces is 760g of water
+[130/150] tq130  tr_5fcafc248f34  REFUSED   how many teaspoons is 18g of salt
+[131/150] tq131  tr_6d53c6dee3f9  REFUSED   convert the focaccia to cups
+[132/150] tq132  tr_62d0ceb3bda6  REFUSED   40g of salt is how many tablespoons
+[133/150] tq133  tr_351be2af8a72  REFUSED   what is 28 C in fahrenheit for the dough water
+[134/150] tq134  tr_aee48790c7e6  REFUSED   how many ml is 800g of water
+[135/150] tq135  tr_f78bcfe411b2  REFUSED   how many calories in a slice of the sourdough
+[136/150] tq136  tr_a24fac97c6c8  REFUSED   how long does the kimchi keep in the fridge
+[137/150] tq137  tr_f2eb1331b280  answered  what wine goes with the beef bourguignon
+[138/150] tq138  tr_c4122604ed8f  REFUSED   can i freeze the brioche
+[139/150] tq139  tr_7aa2a368c499  REFUSED   is this recipe suitable for a diabetic
+[140/150] tq140  tr_7978f5d0b225  REFUSED   how much does the sourdough cost to make
+[141/150] tq141  tr_a7e25ff62b81  REFUSED   where can i buy koji
+[142/150] tq142  tr_cd5496e418be  answered  what size tin for the lemon drizzle
+[143/150] tq143  tr_0f7e2efe3af5  answered  why do my pickles go soft
+[144/150] tq144  tr_bf2e2d2fcd86  answered  can i strain kefir with a metal sieve
+[145/150] tq145  tr_50883c443c51  answered  why hold the salt back in the sourdough
+[146/150] tq146  tr_947c0d0e1ece  answered  why does the kefir split
+[147/150] tq147  tr_044d283e31ea  REFUSED   why rinse the cabbage three times
+[148/150] tq148  tr_7b1ea82b95bc  REFUSED   why does the kimchi need to stay under the brine
+[149/150] tq149  tr_b9213693b37b  REFUSED   why bloom the gochugaru in the porridge
+[150/150] tq150  tr_6b0a3fcee4d0  answered  why cover the kefir with cloth instead of a lid
+
+done: 150 logged, 0 errored, 14.2 min
+{
+  "path": "C:\\Hari\\Python\\AI\\cookbook-rag\\out\\traces.jsonl",
+  "exists": true,
+  "bytes": 1199082,
+  "lines": 150,
+  "sha256": "cc910b5163be8fd925e6f2312e2541bd9342994a74ebd29a904cac1c466a400c"
+}
