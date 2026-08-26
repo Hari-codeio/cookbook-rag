@@ -31,4 +31,4 @@ worth roughly "somewhere between 0% and 15%" and should not be used to order fix
 own.
 
 **Attacking next:** mode 1. Dated, numbered, falsifiable prediction in
-[notes.md](notes.md#the-prediction), committed as `POST_PREDICTION_HASH`.
+[notes.md](notes.md#the-prediction), committed **2026-08-26** as `618744c`.

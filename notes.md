@@ -295,9 +295,16 @@ describing what I saw. Quantities were checked against the source cards in `data
 `git log` shows the last commit before the read was `e8efaa3` and the next commit after it
 is the prediction. Nothing landed in between. Verify:
 
-```bash
-git log --oneline e8efaa3..HEAD    # the prediction commit, and nothing before it
 ```
+$ git log --oneline e8efaa3..618744c
+618744c week 5 prediction, dated 2026-08-26: cut the arithmetic-refusal mode from 20% to under 5%
+20b2824 week 4 leftovers: demo script and demo runbook
+```
+
+`e8efaa3` is the last commit before the read (the tracer fix). `618744c` is the
+prediction. Between them sits one commit that adds a Week 4 demo script and touches no
+file on the answering path. Nothing that could change a retrieval result, a prompt, or a
+gate landed while the twenty traces were being read.
 
 The temptation was real and specific. At trace 15 the fix for the scaling refusals looked
 like one sentence of prompt editing. Had I made it, traces 16 to 20 would have come from a
@@ -351,7 +358,11 @@ Full table in [taxonomy.md](taxonomy.md).
 
 <a name="the-prediction"></a>
 
-> **Dated 2026-08-26.** Committed as `POST_PREDICTION_HASH`, before any fix.
+> **Dated 2026-08-26.** Committed before any fix as
+> **`618744c38f22aeffa8e29e0d688819272f1647cc`** (short `618744c`).
+>
+> The full prediction, with the kill condition, is in that commit message:
+> `git show 618744c --stat` or `git log -1 618744c`.
 
 **Mode I will attack:** mode 1, *refuses to do the arithmetic with the ingredient table
 already on screen*. Currently **4 / 20 = 20%** of the random sample.
