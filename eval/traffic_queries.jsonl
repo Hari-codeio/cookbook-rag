@@ -1,0 +1,151 @@
+{"_note":"THE WEEK'S TRAFFIC. 150 questions written by hand on 2026-08-26 by reading the 21 recipe cards and asking what a food editor and her readers actually type at a recipe assistant. Written BEFORE a single trace was generated and BEFORE any output was read, and committed before the traffic run. `intent` describes the SHAPE OF THE QUESTION, not an expected failure — it is a property of the input, and it is deliberately not a candidate taxonomy. No ground-truth answers are recorded here on purpose: this file is a traffic generator, not an eval set, and this week does not score answers, it reads them. The mix is weighted the way real traffic is: mostly plain lookups, a long tail of everything else. That weighting is my estimate, not measured demand, and notes.md says so."}
+{"id":"tq001","intent":"lookup","query":"how much fine sea salt in the 2kg country sourdough"}
+{"id":"tq002","intent":"lookup","query":"gochugaru amount for napa kimchi"}
+{"id":"tq003","intent":"lookup","query":"how much water in the wholemeal sourdough"}
+{"id":"tq004","intent":"lookup","query":"xanthan gum gluten free brioche"}
+{"id":"tq005","intent":"lookup","query":"psyllium husk in the gf sandwich loaf"}
+{"id":"tq006","intent":"lookup","query":"how much butter in the classic brioche"}
+{"id":"tq007","intent":"lookup","query":"salt in the light rye sourdough"}
+{"id":"tq008","intent":"lookup","query":"how much yeast in the focaccia"}
+{"id":"tq009","intent":"lookup","query":"olive oil in the classic rosemary focaccia"}
+{"id":"tq010","intent":"lookup","query":"how many eggs in the shakshuka"}
+{"id":"tq011","intent":"lookup","query":"how much beef shin for the bourguignon"}
+{"id":"tq012","intent":"lookup","query":"tamarind paste quantity pad thai"}
+{"id":"tq013","intent":"lookup","query":"how much amchur in the chana masala"}
+{"id":"tq014","intent":"lookup","query":"kasoori methi amount chicken tikka masala"}
+{"id":"tq015","intent":"lookup","query":"how much rice for the congee"}
+{"id":"tq016","intent":"lookup","query":"how much ginger in the congee"}
+{"id":"tq017","intent":"lookup","query":"caraway seed in the red cabbage sauerkraut"}
+{"id":"tq018","intent":"lookup","query":"how much coarse salt for the dill pickles"}
+{"id":"tq019","intent":"lookup","query":"koji amount white rice miso"}
+{"id":"tq020","intent":"lookup","query":"how much salt in the miso"}
+{"id":"tq021","intent":"lookup","query":"kefir grains per litre of milk"}
+{"id":"tq022","intent":"lookup","query":"how much daikon in the kimchi"}
+{"id":"tq023","intent":"lookup","query":"fish sauce amount kimchi"}
+{"id":"tq024","intent":"lookup","query":"how much sugar in the chocolate brioche"}
+{"id":"tq025","intent":"lookup","query":"dark chocolate chips weight brioche"}
+{"id":"tq026","intent":"lookup","query":"how much milk in the gluten free brioche"}
+{"id":"tq027","intent":"lookup","query":"how much mirin for the aubergine"}
+{"id":"tq028","intent":"lookup","query":"sesame seeds aubergine recipe"}
+{"id":"tq029","intent":"lookup","query":"how much red wine in the beef bourguignon"}
+{"id":"tq030","intent":"lookup","query":"how much yoghurt for the tikka marinade"}
+{"id":"tq031","intent":"lookup","query":"how much double cream in the tikka masala"}
+{"id":"tq032","intent":"lookup","query":"lemon zest lemon drizzle"}
+{"id":"tq033","intent":"lookup","query":"how much caster sugar in the lemon drizzle loaf"}
+{"id":"tq034","intent":"lookup","query":"granulated sugar for the drizzle"}
+{"id":"tq035","intent":"lookup","query":"how much starter in the rye sourdough"}
+{"id":"tq036","intent":"lookup","query":"how much rye flour in the light rye sourdough"}
+{"id":"tq037","intent":"lookup","query":"wholemeal flour amount wholemeal sourdough"}
+{"id":"tq038","intent":"lookup","query":"how much water in the gf sandwich loaf"}
+{"id":"tq039","intent":"lookup","query":"how much olive oil in the gluten free sandwich loaf"}
+{"id":"tq040","intent":"lookup","query":"how much garlic in the kimchi"}
+{"id":"tq041","intent":"lookup","query":"peanuts in pad thai how much"}
+{"id":"tq042","intent":"lookup","query":"how many prawns in the pad thai"}
+{"id":"tq043","intent":"lookup","query":"how much paprika in the shakshuka"}
+{"id":"tq044","intent":"lookup","query":"how much juniper in the sauerkraut"}
+{"id":"tq045","intent":"lookup","query":"mustard seed dill pickles amount"}
+{"id":"tq046","intent":"method","query":"what temperature do i bake the 2kg sourdough at"}
+{"id":"tq047","intent":"method","query":"how long does the 2kg sourdough bulk ferment"}
+{"id":"tq048","intent":"method","query":"how long do i cold retard the country sourdough"}
+{"id":"tq049","intent":"method","query":"how long does the kimchi ferment at room temp"}
+{"id":"tq050","intent":"method","query":"what temperature for the kimchi ferment"}
+{"id":"tq051","intent":"method","query":"how long do i leave the kefir"}
+{"id":"tq052","intent":"method","query":"what temperature for the milk kefir"}
+{"id":"tq053","intent":"method","query":"how long does the miso ferment"}
+{"id":"tq054","intent":"method","query":"how long do i salt the cabbage for kimchi"}
+{"id":"tq055","intent":"method","query":"how long to autolyse the sourdough"}
+{"id":"tq056","intent":"method","query":"when do i add the salt to the sourdough"}
+{"id":"tq057","intent":"method","query":"how long does the beef bourguignon cook"}
+{"id":"tq058","intent":"method","query":"what oven temp for the bourguignon"}
+{"id":"tq059","intent":"method","query":"how long do the pickles take"}
+{"id":"tq060","intent":"method","query":"how long do i bake the lemon drizzle"}
+{"id":"tq061","intent":"method","query":"how long does the focaccia prove"}
+{"id":"tq062","intent":"method","query":"how long to bulk the focaccia"}
+{"id":"tq063","intent":"method","query":"how long do i cook the congee for"}
+{"id":"tq064","intent":"method","query":"how long do i roast the aubergine"}
+{"id":"tq065","intent":"method","query":"when do i add the kasoori methi"}
+{"id":"tq066","intent":"scaling","query":"i want to make half the 2kg sourdough, what are the weights"}
+{"id":"tq067","intent":"scaling","query":"how do i scale the country sourdough down to one loaf"}
+{"id":"tq068","intent":"scaling","query":"double the kimchi recipe for me"}
+{"id":"tq069","intent":"scaling","query":"i only have 500g cabbage, how much salt for the kimchi"}
+{"id":"tq070","intent":"scaling","query":"scale the focaccia to a 500g flour batch"}
+{"id":"tq071","intent":"scaling","query":"i want to make the brioche with 750g flour"}
+{"id":"tq072","intent":"scaling","query":"how much salt if i make 1.5x the rye sourdough"}
+{"id":"tq073","intent":"scaling","query":"can you halve the chana masala"}
+{"id":"tq074","intent":"scaling","query":"i have 2kg of cucumbers, how much brine salt"}
+{"id":"tq075","intent":"scaling","query":"triple the congee please"}
+{"id":"tq076","intent":"scaling","query":"i want 3kg of sourdough not 2kg"}
+{"id":"tq077","intent":"scaling","query":"scale the miso down to 500g soybeans"}
+{"id":"tq078","intent":"scaling","query":"make the shakshuka for 2 people instead of 4"}
+{"id":"tq079","intent":"scaling","query":"i want to make a 1kg wholemeal loaf, what are the weights"}
+{"id":"tq080","intent":"scaling","query":"how much xanthan gum if i use 250g flour blend"}
+{"id":"tq081","intent":"substitution","query":"can i use instant yeast instead of sourdough starter in the country loaf"}
+{"id":"tq082","intent":"substitution","query":"can i swap the fish sauce in the kimchi for soy sauce"}
+{"id":"tq083","intent":"substitution","query":"what can i use instead of psyllium husk"}
+{"id":"tq084","intent":"substitution","query":"can i use table salt instead of fine sea salt"}
+{"id":"tq085","intent":"substitution","query":"can i replace the butter in the brioche with oil"}
+{"id":"tq086","intent":"substitution","query":"can i use dried dill instead of fresh in the pickles"}
+{"id":"tq087","intent":"substitution","query":"is there a substitute for amchur"}
+{"id":"tq088","intent":"substitution","query":"can i use greek yoghurt in the tikka masala"}
+{"id":"tq089","intent":"substitution","query":"can i swap gochugaru for regular chilli flakes"}
+{"id":"tq090","intent":"substitution","query":"what if i dont have grape leaves for the pickles"}
+{"id":"tq091","intent":"substitution","query":"can i use almond milk for the kefir"}
+{"id":"tq092","intent":"substitution","query":"can i use white cabbage instead of red for the sauerkraut"}
+{"id":"tq093","intent":"allergen","query":"is the kimchi ok if im allergic to prawns"}
+{"id":"tq094","intent":"allergen","query":"is the pad thai safe for a peanut allergy"}
+{"id":"tq095","intent":"allergen","query":"which recipes are vegan"}
+{"id":"tq096","intent":"allergen","query":"is the milk kefir lactose free"}
+{"id":"tq097","intent":"allergen","query":"does the sourdough contain nuts"}
+{"id":"tq098","intent":"allergen","query":"is the miso gluten free"}
+{"id":"tq099","intent":"allergen","query":"is the chocolate brioche dairy free"}
+{"id":"tq100","intent":"allergen","query":"can a coeliac eat the gf sandwich loaf"}
+{"id":"tq101","intent":"allergen","query":"does the pad thai have shellfish"}
+{"id":"tq102","intent":"allergen","query":"is the congee vegan"}
+{"id":"tq103","intent":"allergen","query":"does the tikka masala contain gluten"}
+{"id":"tq104","intent":"allergen","query":"is the sauerkraut suitable for vegans"}
+{"id":"tq105","intent":"comparison","query":"which sourdough has the most salt"}
+{"id":"tq106","intent":"comparison","query":"whats the difference between the classic and chocolate brioche"}
+{"id":"tq107","intent":"comparison","query":"which brioche has the most butter"}
+{"id":"tq108","intent":"comparison","query":"compare the hydration of the three sourdoughs"}
+{"id":"tq109","intent":"comparison","query":"which is hotter, the kimchi or the chana masala"}
+{"id":"tq110","intent":"comparison","query":"do the gf brioche and gf sandwich loaf use the same amount of xanthan"}
+{"id":"tq111","intent":"comparison","query":"which loaf has the highest hydration"}
+{"id":"tq112","intent":"comparison","query":"which of the ferments takes longest"}
+{"id":"tq113","intent":"comparison","query":"is the wholemeal sourdough wetter than the rye"}
+{"id":"tq114","intent":"comparison","query":"which recipe uses the most salt overall"}
+{"id":"tq115","intent":"comparison","query":"do the sourdoughs bake at the same temperature"}
+{"id":"tq116","intent":"comparison","query":"which brioche has the least butter"}
+{"id":"tq117","intent":"underspecified","query":"how much salt"}
+{"id":"tq118","intent":"underspecified","query":"how much butter in the brioche"}
+{"id":"tq119","intent":"underspecified","query":"whats the hydration"}
+{"id":"tq120","intent":"underspecified","query":"how long does it ferment"}
+{"id":"tq121","intent":"underspecified","query":"how much flour do i need"}
+{"id":"tq122","intent":"underspecified","query":"what temperature"}
+{"id":"tq123","intent":"underspecified","query":"how much yeast in the brioche"}
+{"id":"tq124","intent":"underspecified","query":"how much xanthan gum"}
+{"id":"tq125","intent":"underspecified","query":"how much water in the sourdough"}
+{"id":"tq126","intent":"underspecified","query":"salt percentage"}
+{"id":"tq127","intent":"conversion","query":"how many cups of flour is 950g"}
+{"id":"tq128","intent":"conversion","query":"what is 250 C in fahrenheit"}
+{"id":"tq129","intent":"conversion","query":"how many ounces is 760g of water"}
+{"id":"tq130","intent":"conversion","query":"how many teaspoons is 18g of salt"}
+{"id":"tq131","intent":"conversion","query":"convert the focaccia to cups"}
+{"id":"tq132","intent":"conversion","query":"40g of salt is how many tablespoons"}
+{"id":"tq133","intent":"conversion","query":"what is 28 C in fahrenheit for the dough water"}
+{"id":"tq134","intent":"conversion","query":"how many ml is 800g of water"}
+{"id":"tq135","intent":"out-of-scope","query":"how many calories in a slice of the sourdough"}
+{"id":"tq136","intent":"out-of-scope","query":"how long does the kimchi keep in the fridge"}
+{"id":"tq137","intent":"out-of-scope","query":"what wine goes with the beef bourguignon"}
+{"id":"tq138","intent":"out-of-scope","query":"can i freeze the brioche"}
+{"id":"tq139","intent":"out-of-scope","query":"is this recipe suitable for a diabetic"}
+{"id":"tq140","intent":"out-of-scope","query":"how much does the sourdough cost to make"}
+{"id":"tq141","intent":"out-of-scope","query":"where can i buy koji"}
+{"id":"tq142","intent":"method","query":"what size tin for the lemon drizzle"}
+{"id":"tq143","intent":"technique","query":"why do my pickles go soft"}
+{"id":"tq144","intent":"technique","query":"can i strain kefir with a metal sieve"}
+{"id":"tq145","intent":"technique","query":"why hold the salt back in the sourdough"}
+{"id":"tq146","intent":"technique","query":"why does the kefir split"}
+{"id":"tq147","intent":"technique","query":"why rinse the cabbage three times"}
+{"id":"tq148","intent":"technique","query":"why does the kimchi need to stay under the brine"}
+{"id":"tq149","intent":"technique","query":"why bloom the gochugaru in the porridge"}
+{"id":"tq150","intent":"technique","query":"why cover the kefir with cloth instead of a lid"}

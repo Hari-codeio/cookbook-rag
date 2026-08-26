@@ -28,6 +28,7 @@ can demonstrate that the prompt gate still refuses on its own.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import time
 from dataclasses import dataclass, field
@@ -35,17 +36,21 @@ from typing import Any
 
 from .config import (
     ANTHROPIC_MODEL,
+    COLLECTION_NAMES,
+    EMBED_MODEL,
     GEMINI_MODELS,
     GEN_EFFORT,
     GEN_MAX_TOKENS,
     GEN_PROVIDER,
     GEN_RETRY_ATTEMPTS,
     GEN_RETRY_WAIT_SECONDS,
+    HNSW_SPACE,
     REFUSAL_TOKEN,
     STRATEGIES,
     TOP_K,
     api_key,
 )
+from . import trace as trc
 from .store import SearchHit, get_chunk, get_collection, search
 
 # ---------------------------------------------------------------------------
@@ -87,6 +92,20 @@ fact is missing from CONTEXT, set `can_answer` to false.
 6. Do not apologise, do not offer to help further, and do not suggest where the \
 information might otherwise be found.\
 """
+
+# Bumped by hand whenever SYSTEM_PROMPT changes. Every trace records this label
+# AND the sha256 of the text above, so a trace cannot claim a prompt version it
+# did not actually run — the replay harness recomputes the hash and compares.
+PROMPT_VERSION = "grounded-recipe-v1"
+PROMPT_SHA256 = hashlib.sha256(SYSTEM_PROMPT.encode("utf-8")).hexdigest()
+
+
+def _schema_sha(schema: dict[str, Any]) -> str:
+    """Fingerprint of the JSON schema sent as the structured-output contract."""
+    return hashlib.sha256(
+        json.dumps(schema, sort_keys=True, separators=(',', ':')).encode('utf-8')
+    ).hexdigest()
+
 
 RESPONSE_SCHEMA: dict[str, Any] = {
     "type": "object",
@@ -137,6 +156,7 @@ class GenerationResult:
     gate_notes: list[str] = field(default_factory=list)
     model_json: dict[str, Any] | None = None
     usage: dict[str, Any] = field(default_factory=dict)
+    trace_id: str | None = None
 
     def rendered(self) -> str:
         if self.refused:
@@ -198,6 +218,10 @@ class ModelReply:
     input_tokens: int | None = None
     output_tokens: int | None = None
     notes: list[str] = field(default_factory=list)
+    # Every knob actually sent on THIS call, recorded per call rather than read
+    # back from config.py, because the answering model is picked at runtime from
+    # a fallback list and the thinking config is dropped for models that reject it.
+    params: dict[str, Any] = field(default_factory=dict)
 
 
 # ---------------------------------------------------------------------------
@@ -289,6 +313,15 @@ def _call_gemini(client, question: str, context: str) -> ModelReply:
                 notes.append(f"provider: gemini, model={model_name}")
                 if thinking is not None:
                     notes.append("thinking: disabled (thinking_budget=0)")
+                params = {
+                    "temperature": cfg["temperature"],
+                    "max_output_tokens": cfg["max_output_tokens"],
+                    "response_mime_type": cfg["response_mime_type"],
+                    "response_schema_sha256": _schema_sha(GEMINI_SCHEMA),
+                    "thinking_budget": 0 if thinking is not None else None,
+                    "model_candidates": list(GEMINI_MODELS),
+                    "sweep": sweep,
+                }
                 return ModelReply(
                     text=response.text or "",
                     model=model_name,
@@ -296,6 +329,7 @@ def _call_gemini(client, question: str, context: str) -> ModelReply:
                     input_tokens=getattr(usage, "prompt_token_count", None) if usage else None,
                     output_tokens=getattr(usage, "candidates_token_count", None) if usage else None,
                     notes=notes,
+                    params=params,
                 )
 
         # Every model turned us away. Only worth sleeping if the reason was
@@ -353,6 +387,12 @@ def _call_anthropic(client, question: str, context: str) -> ModelReply:
         input_tokens=getattr(response.usage, "input_tokens", None),
         output_tokens=getattr(response.usage, "output_tokens", None),
         notes=notes,
+        params={
+            "max_tokens": GEN_MAX_TOKENS,
+            "effort": GEN_EFFORT,
+            "output_format": "json_schema",
+            "response_schema_sha256": _schema_sha(RESPONSE_SCHEMA),
+        },
     )
 
 
@@ -382,6 +422,96 @@ def call_model(client, question: str, context: str) -> ModelReply:
     return _call_gemini(client, question, context)
 
 
+def _trace_record(
+    *,
+    trace_id: str,
+    question: str,
+    strategy: str,
+    retriever: str,
+    k: int,
+    where: dict[str, Any] | None,
+    code_gate: bool,
+    hits: list[SearchHit],
+    context: str,
+    reply: ModelReply,
+    result: GenerationResult,
+    retrieve_ms: float,
+    model_ms: float,
+    meta: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Everything needed to replay this call without touching the vector store.
+
+    The context STRING is not stored, only its sha256. It is rebuilt from the
+    stored hits at replay time and compared against that hash, which proves the
+    stored hits are sufficient to reconstruct the call rather than just claiming
+    it. Storing the string too would have hidden a missing field.
+    """
+    return {
+        "trace_schema": trc.TRACE_SCHEMA,
+        "trace_id": trace_id,
+        "ts": trc.utc_now(),
+        "app": {"git_sha": trc.git_sha(), "entrypoint": "rag.generate.answer"},
+        "meta": meta or {},
+        "request": {
+            "query": question,
+            "strategy": strategy,
+            "retriever": retriever,
+            "k": k,
+            "where": where,
+            "code_gate": code_gate,
+        },
+        "prompt": {
+            "version": PROMPT_VERSION,
+            "sha256": PROMPT_SHA256,
+            "system_text": SYSTEM_PROMPT,
+            "user_turn_sha256": trc.sha256_text(build_user_turn(question, context)),
+        },
+        "retrieval": {
+            "embed_model": EMBED_MODEL,
+            "space": HNSW_SPACE,
+            "collection": COLLECTION_NAMES[strategy],
+            "n_hits": len(hits),
+            "latency_ms": round(retrieve_ms, 1),
+            "hits": [
+                {
+                    "rank": h.rank,
+                    "chunk_id": h.chunk_id,
+                    "score": round(float(h.score), 6),
+                    "distance": round(float(h.distance), 6),
+                    "recipe_id": h.recipe_id,
+                    "section": h.section,
+                    "source_file": h.source_file,
+                    "dietary_tags": h.dietary_tags,
+                    "char_start": h.metadata.get("char_start"),
+                    "char_end": h.metadata.get("char_end"),
+                    "text": h.text,
+                    "text_sha256": trc.sha256_text(h.text),
+                }
+                for h in hits
+            ],
+        },
+        "context": {"sha256": trc.sha256_text(context), "chars": len(context)},
+        "model": {
+            "provider": GEN_PROVIDER,
+            "name": reply.model,
+            "params": reply.params,
+        },
+        "output": {"raw_text": reply.text, "parsed": result.model_json},
+        "gates": {
+            "refused": result.refused,
+            "refusal_reason": result.refusal_reason,
+            "notes": list(result.gate_notes),
+            "rendered": result.rendered(),
+        },
+        "usage": {
+            "input_tokens": reply.input_tokens,
+            "output_tokens": reply.output_tokens,
+            "stop_reason": reply.stop_reason,
+            "model_latency_ms": round(model_ms, 1),
+        },
+    }
+
+
 def answer(
     question: str,
     strategy: str,
@@ -390,7 +520,10 @@ def answer(
     code_gate: bool = True,
     client=None,
     retriever: str = "dense",
+    trace: bool = True,
+    trace_meta: dict[str, Any] | None = None,
 ) -> GenerationResult:
+    t_retrieve = time.perf_counter()
     collection = get_collection(strategy)
     if retriever == "rerank":
         from .rerank import rerank_search
@@ -398,12 +531,44 @@ def answer(
         hits = rerank_search(collection, question, k=k, where=where)
     else:
         hits = search(collection, question, k=k, where=where)
+    retrieve_ms = (time.perf_counter() - t_retrieve) * 1000.0
     retrieved_ids = {h.chunk_id for h in hits}
+    context = build_context(hits)
 
     if client is None:
         client = build_client()
 
-    reply = call_model(client, question, build_context(hits))
+    t_model = time.perf_counter()
+    reply = call_model(client, question, context)
+    model_ms = (time.perf_counter() - t_model) * 1000.0
+
+    emit = trace and trc.tracing_enabled()
+    trace_id = trc.new_trace_id() if emit else None
+
+    def _finish(result: GenerationResult) -> GenerationResult:
+        """Single exit point, so no branch below can forget to write its trace."""
+        result.trace_id = trace_id
+        if emit and trace_id is not None:
+            trc.write(
+                _trace_record(
+                    trace_id=trace_id,
+                    question=question,
+                    strategy=strategy,
+                    retriever=retriever,
+                    k=k,
+                    where=where,
+                    code_gate=code_gate,
+                    hits=hits,
+                    context=context,
+                    reply=reply,
+                    result=result,
+                    retrieve_ms=retrieve_ms,
+                    model_ms=model_ms,
+                    meta=trace_meta,
+                )
+            )
+        return result
+
     gate_notes: list[str] = list(reply.notes)
 
     usage = {
@@ -418,7 +583,7 @@ def answer(
     # PROHIBITED_CONTENT / BLOCKLIST / RECITATION.
     declined = {"refusal", "safety", "prohibited_content", "blocklist", "recitation"}
     if reply.stop_reason.lower().replace("finishreason.", "") in declined:
-        return GenerationResult(
+        return _finish(GenerationResult(
             question=question,
             strategy=strategy,
             refused=True,
@@ -428,13 +593,13 @@ def answer(
             hits=hits,
             gate_notes=gate_notes + [f"gate: model returned stop_reason={reply.stop_reason}"],
             usage=usage,
-        )
+        ))
 
     text = reply.text
     try:
         payload = json.loads(text)
     except json.JSONDecodeError:
-        return GenerationResult(
+        return _finish(GenerationResult(
             question=question,
             strategy=strategy,
             refused=True,
@@ -444,7 +609,7 @@ def answer(
             hits=hits,
             gate_notes=gate_notes + ["gate: response was not valid JSON"],
             usage=usage,
-        )
+        ))
 
     can_answer = bool(payload.get("can_answer"))
     claims = [c for c in payload.get("claims") or [] if isinstance(c, dict)]
@@ -453,7 +618,7 @@ def answer(
     # ---- Gate 1b: the model's own verdict --------------------------------
     if not can_answer:
         gate_notes.append("gate 1 (prompt/schema): model set can_answer=false")
-        return GenerationResult(
+        return _finish(GenerationResult(
             question=question,
             strategy=strategy,
             refused=True,
@@ -464,13 +629,13 @@ def answer(
             gate_notes=gate_notes,
             model_json=payload,
             usage=usage,
-        )
+        ))
 
     # ---- Gate 2: citations must be real ----------------------------------
     if code_gate:
         if not claims:
             gate_notes.append("gate 2 (code): can_answer=true but zero citations -> discarded")
-            return GenerationResult(
+            return _finish(GenerationResult(
                 question=question,
                 strategy=strategy,
                 refused=True,
@@ -481,14 +646,14 @@ def answer(
                 gate_notes=gate_notes,
                 model_json=payload,
                 usage=usage,
-            )
+            ))
 
         not_retrieved = [c["chunk_id"] for c in claims if c.get("chunk_id") not in retrieved_ids]
         if not_retrieved:
             gate_notes.append(
                 f"gate 2 (code): cited chunk_id(s) not in the retrieved set: {not_retrieved} -> discarded"
             )
-            return GenerationResult(
+            return _finish(GenerationResult(
                 question=question,
                 strategy=strategy,
                 refused=True,
@@ -499,7 +664,7 @@ def answer(
                 gate_notes=gate_notes,
                 model_json=payload,
                 usage=usage,
-            )
+            ))
 
         unresolvable = [
             c["chunk_id"] for c in claims if get_chunk(strategy, c["chunk_id"]) is None
@@ -508,7 +673,7 @@ def answer(
             gate_notes.append(
                 f"gate 2 (code): cited chunk_id(s) do not resolve in the store: {unresolvable} -> discarded"
             )
-            return GenerationResult(
+            return _finish(GenerationResult(
                 question=question,
                 strategy=strategy,
                 refused=True,
@@ -519,7 +684,7 @@ def answer(
                 gate_notes=gate_notes,
                 model_json=payload,
                 usage=usage,
-            )
+            ))
 
         gate_notes.append(
             f"gate 2 (code): all {len(claims)} citation(s) were retrieved for this question and resolve in the store"
@@ -527,7 +692,7 @@ def answer(
     else:
         gate_notes.append("gate 2 (code): DISABLED for this run (--no-code-gate)")
 
-    return GenerationResult(
+    return _finish(GenerationResult(
         question=question,
         strategy=strategy,
         refused=False,
@@ -538,7 +703,7 @@ def answer(
         gate_notes=gate_notes,
         model_json=payload,
         usage=usage,
-    )
+    ))
 
 
 def render_transcript(result: GenerationResult, show_context: bool = False) -> str:
