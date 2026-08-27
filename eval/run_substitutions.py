@@ -70,6 +70,12 @@ def main() -> None:
     records = []
     started = time.time()
 
+    # Written as we go, not at the end. The first attempt at this run hit a
+    # per-DAY quota wall at case 9 and threw away eight completed generations,
+    # each of which had cost an API call that does not come back.
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fh = out_path.open("w", encoding="utf-8")
+
     for i, case in enumerate(cases, start=1):
         result = substitute(
             case["recipe"],
@@ -103,15 +109,14 @@ def main() -> None:
             "usage": result.usage,
         }
         records.append(rec)
+        fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        fh.flush()
         verdict = "substituted" if result.can_substitute else "declined"
         print(f"[{i:>2}/{len(cases)}] {case['id']:<4} {verdict:<12} {case['recipe'][:26]:<26} -> {case['constraint'][:34]}")
         if args.sleep:
             time.sleep(args.sleep)
 
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    with out_path.open("w", encoding="utf-8") as fh:
-        for rec in records:
-            fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    fh.close()
 
     digest = hashlib.sha256(out_path.read_bytes()).hexdigest()
     n_sub = sum(1 for r in records if r["output"].get("can_substitute"))

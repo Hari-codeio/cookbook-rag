@@ -139,8 +139,32 @@ GEMINI_FALLBACK_MODELS = (
 # This also discharges part 1 of the Week 5 prediction (committed 618744c).
 # Part 2, the arithmetic rule, is untouched and still open.
 # --------------------------------------------------------------------------
+# WHICH model to pin to is decided by quota, not by preference. Pinning to
+# gemini-3.6-flash failed on the first real run:
+#
+#   429 RESOURCE_EXHAUSTED
+#   quotaId: GenerateRequestsPerDayPerProjectPerModel-FreeTier
+#   quotaValue: 20   model: gemini-3.6-flash
+#
+# Twenty requests PER DAY, not per minute. Re-reading the Week 5 log in that
+# light, the order the models appear in is unmistakable:
+#
+#   calls   2- 19   gemini-3.6-flash        then never again
+#   calls  20- 50   gemini-3.5-flash        (~18 calls) then never again
+#   calls  51-150   gemini-3.1-flash-lite   carries the rest
+#
+# So Week 5's mode 7 was not "whichever model is free this second". It was the
+# daily quota being spent in ladder order: the first 20 questions of each day
+# get the best model and every question after gets a weaker one, silently and
+# for the rest of the day. taxonomy.md described the symptom correctly and the
+# mechanism loosely; results_week6.md corrects it.
+#
+# flash-lite is therefore the only model in the ladder whose free-tier day can
+# carry an eval of this size, evidenced by its having served 109 of the 150
+# Week 5 traces. It is the weakest of the four, which for a JUDGE is a real
+# limitation and is stated in the write-up rather than hidden.
 GEN_PIN = os.environ.get("GEN_PIN", "1").strip() not in {"0", "false", "off", ""}
-GEN_PINNED_MODEL = os.environ.get("GEN_PINNED_MODEL", "gemini-3.6-flash").strip()
+GEN_PINNED_MODEL = os.environ.get("GEN_PINNED_MODEL", "gemini-3.1-flash-lite").strip()
 
 GEMINI_MODELS = (GEN_PINNED_MODEL,) if GEN_PIN else GEMINI_FALLBACK_MODELS
 

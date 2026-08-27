@@ -1,0 +1,43 @@
+cases        : 25  from substitution_cases.jsonl
+cases sha256 : 9688d5a30d4fbf812ec90989d617751b4c6abbdef2a74d0c4e9d9c4bf2f7db41
+prompt       : substitute-v1  sha 042725f6340de646
+out          : C:\Hari\Python\AI\cookbook-rag\out\substitutions_v1.jsonl
+
+[ 1/25] c01  substituted  classic brioche            -> gluten free
+[ 2/25] c02  declined     chocolate brioche          -> dairy free
+[ 3/25] c03  declined     napa cabbage kimchi        -> vegan, no fish or shellfish
+[ 4/25] c04  substituted  2kg country sourdough      -> wholemeal
+[ 5/25] c05  declined     gluten-free sandwich loaf  -> enriched, like a brioche
+[ 6/25] c06  substituted  chicken tikka masala       -> vegan
+[ 7/25] c09  declined     light rye sourdough        -> higher hydration
+[ 8/25] c11  declined     classic brioche            -> gluten free, and halve it to 250 g
+[ 9/25] c12  declined     2kg country sourdough      -> wholemeal, scaled to 500 g total f
+[10/25] c13  declined     gluten-free sandwich loaf  -> double the batch
+[11/25] c14  declined     red cabbage sauerkraut     -> made with 2 kg of cabbage instead 
+[12/25] c15  substituted  chocolate brioche          -> plain, no chocolate
+[13/25] c16  substituted  wholemeal sourdough        -> light rye instead of wholemeal
+[14/25] c17  declined     gluten-free brioche        -> vegan, no eggs or dairy
+[15/25] c18  substituted  classic brioche            -> chocolate chip version
+[16/25] c19  substituted  the brioches               -> which of them can be made gluten f
+[17/25] c20  substituted  the sourdoughs             -> which has the lowest salt, and swa
+[18/25] c21  substituted  the gluten-free loaves     -> which one is already vegan
+[19/25] c22  substituted  classic brioche            -> swap the milk for the same weight 
+[20/25] c23  declined     2kg country sourdough      -> raise the hydration to match the w
+[21/25] c24  declined                                -> make it dairy free
+[22/25] c25  declined     the loaf                   -> gluten free
+[23/25] r01  declined     chicken tikka masala       -> can i use greek yoghurt in the tik
+[24/25] r02  declined     napa cabbage kimchi        -> can i swap the fish sauce in the k
+[25/25] r03  declined     gluten-free sandwich loaf  -> what can i use instead of psyllium
+
+done in 2.5 min
+substituted : 10/25
+declined    : 15/25
+written     : C:\Hari\Python\AI\cookbook-rag\out\substitutions_v1.jsonl
+sha256      : f50218d27cf5bf2e00ab641c2c3242001e8a5fe415e7e2eb7ef3720343ba6849
+{
+  "path": "C:\\Hari\\Python\\AI\\cookbook-rag\\out\\traces.jsonl",
+  "exists": true,
+  "bytes": 1759003,
+  "lines": 199,
+  "sha256": "1ee3241b47af895fb32e4a1aa672c51d8084c694692481fae74dc330a6ef78de"
+}
