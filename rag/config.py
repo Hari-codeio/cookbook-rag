@@ -115,12 +115,34 @@ GEN_PROVIDER = os.environ.get("GEN_PROVIDER", "gemini").strip().lower()
 # Verified reachable on a fresh free-tier key: gemini-2.5-flash and
 # gemini-2.5-flash-lite are listed by models.list() but return 404 "no longer
 # available to new users", so they are deliberately absent from this list.
-GEMINI_MODELS = (
+GEMINI_FALLBACK_MODELS = (
     "gemini-3.6-flash",
     "gemini-3.5-flash",
     "gemini-3.1-flash-lite",
     "gemini-flash-latest",
 )
+
+# --------------------------------------------------------------------------
+# Week 6: PIN THE MODEL.
+#
+# Week 5 read 20 random traces and found 18 of them had been served by a model
+# other than the configured primary, because the ladder above silently walks
+# down the list whenever a model is rate limited. Four different models served
+# one week of traffic. That is survivable for answering questions and fatal for
+# this week's measurement: an agreement figure before a prompt change and after
+# it are only comparable if the same judge produced both.
+#
+# So the ladder collapses to one model. Transient errors now sleep and retry
+# THAT model rather than quietly substituting a weaker one. A rate limit becomes
+# a delay instead of a silent change of instrument.
+#
+# This also discharges part 1 of the Week 5 prediction (committed 618744c).
+# Part 2, the arithmetic rule, is untouched and still open.
+# --------------------------------------------------------------------------
+GEN_PIN = os.environ.get("GEN_PIN", "1").strip() not in {"0", "false", "off", ""}
+GEN_PINNED_MODEL = os.environ.get("GEN_PINNED_MODEL", "gemini-3.6-flash").strip()
+
+GEMINI_MODELS = (GEN_PINNED_MODEL,) if GEN_PIN else GEMINI_FALLBACK_MODELS
 
 # Claude, used only when GEN_PROVIDER=anthropic.
 ANTHROPIC_MODEL = "claude-opus-5"

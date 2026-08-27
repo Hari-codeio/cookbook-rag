@@ -227,8 +227,20 @@ class ModelReply:
 # ---------------------------------------------------------------------------
 # Gemini (default) — Google AI Studio, free tier.
 # ---------------------------------------------------------------------------
-def _call_gemini(client, question: str, context: str) -> ModelReply:
+def _call_gemini(
+    client,
+    question: str,
+    context: str,
+    *,
+    system_prompt: str | None = None,
+    schema: dict[str, Any] | None = None,
+    max_tokens: int = GEN_MAX_TOKENS,
+    prefer_no_thinking: bool = False,
+) -> ModelReply:
     from google.genai import types
+
+    system_prompt = SYSTEM_PROMPT if system_prompt is None else system_prompt
+    schema = GEMINI_SCHEMA if schema is None else schema
 
     notes: list[str] = []
     last_error: Exception | None = None
@@ -244,16 +256,26 @@ def _call_gemini(client, question: str, context: str) -> ModelReply:
         saw_transient = False
 
         for model_name in GEMINI_MODELS:
-            options: list[Any] = [None]
-            if model_name not in reject_thinking:
-                options.append(types.ThinkingConfig(thinking_budget=0))
+            no_thinking = (
+                types.ThinkingConfig(thinking_budget=0)
+                if model_name not in reject_thinking
+                else None
+            )
+            # Reasoning tokens count against max_output_tokens on Gemini 3.x, so a
+            # long structured response can stop at MAX_TOKENS having emitted very
+            # little. Callers that emit long JSON put thinking off first instead of
+            # finding out by truncation.
+            if prefer_no_thinking and no_thinking is not None:
+                options: list[Any] = [no_thinking, None]
+            else:
+                options = [None] + ([no_thinking] if no_thinking is not None else [])
 
             for thinking in options:
                 cfg: dict[str, Any] = {
-                    "system_instruction": SYSTEM_PROMPT,
+                    "system_instruction": system_prompt,
                     "response_mime_type": "application/json",
-                    "response_schema": GEMINI_SCHEMA,
-                    "max_output_tokens": GEN_MAX_TOKENS,
+                    "response_schema": schema,
+                    "max_output_tokens": max_tokens,
                     # Deterministic: a grounded extractor should not sample.
                     "temperature": 0.0,
                 }
@@ -317,8 +339,8 @@ def _call_gemini(client, question: str, context: str) -> ModelReply:
                     "temperature": cfg["temperature"],
                     "max_output_tokens": cfg["max_output_tokens"],
                     "response_mime_type": cfg["response_mime_type"],
-                    "response_schema_sha256": _schema_sha(GEMINI_SCHEMA),
-                    "response_schema": GEMINI_SCHEMA,
+                    "response_schema_sha256": _schema_sha(schema),
+                    "response_schema": schema,
                     "thinking_budget": 0 if thinking is not None else None,
                     "model_candidates": list(GEMINI_MODELS),
                     "sweep": sweep,
@@ -353,16 +375,28 @@ def _call_gemini(client, question: str, context: str) -> ModelReply:
 # ---------------------------------------------------------------------------
 # Anthropic — only when GEN_PROVIDER=anthropic. Needs paid API credit.
 # ---------------------------------------------------------------------------
-def _call_anthropic(client, question: str, context: str) -> ModelReply:
+def _call_anthropic(
+    client,
+    question: str,
+    context: str,
+    *,
+    system_prompt: str | None = None,
+    schema: dict[str, Any] | None = None,
+    max_tokens: int = GEN_MAX_TOKENS,
+    prefer_no_thinking: bool = False,  # noqa: ARG001 - gemini-only knob
+) -> ModelReply:
     import anthropic
+
+    system_prompt = SYSTEM_PROMPT if system_prompt is None else system_prompt
+    schema = RESPONSE_SCHEMA if schema is None else schema
 
     kwargs: dict[str, Any] = {
         "model": ANTHROPIC_MODEL,
-        "max_tokens": GEN_MAX_TOKENS,
-        "system": SYSTEM_PROMPT,
+        "max_tokens": max_tokens,
+        "system": system_prompt,
         "output_config": {
             "effort": GEN_EFFORT,
-            "format": {"type": "json_schema", "schema": RESPONSE_SCHEMA},
+            "format": {"type": "json_schema", "schema": schema},
         },
         "messages": [{"role": "user", "content": build_user_turn(question, context)}],
     }
@@ -389,11 +423,11 @@ def _call_anthropic(client, question: str, context: str) -> ModelReply:
         output_tokens=getattr(response.usage, "output_tokens", None),
         notes=notes,
         params={
-            "max_tokens": GEN_MAX_TOKENS,
+            "max_tokens": max_tokens,
             "effort": GEN_EFFORT,
             "output_format": "json_schema",
-            "response_schema_sha256": _schema_sha(RESPONSE_SCHEMA),
-            "response_schema": RESPONSE_SCHEMA,
+            "response_schema_sha256": _schema_sha(schema),
+            "response_schema": schema,
         },
     )
 
@@ -418,10 +452,13 @@ def build_client():
     return genai.Client(api_key=key)
 
 
-def call_model(client, question: str, context: str) -> ModelReply:
+def call_model(client, question: str, context: str, **kw: Any) -> ModelReply:
+    """Provider-neutral. ``kw`` forwards system_prompt / schema / max_tokens /
+    prefer_no_thinking, so a caller with a different prompt does not have to
+    reach into this module's globals to use the retry and fallback ladder."""
     if GEN_PROVIDER == "anthropic":
-        return _call_anthropic(client, question, context)
-    return _call_gemini(client, question, context)
+        return _call_anthropic(client, question, context, **kw)
+    return _call_gemini(client, question, context, **kw)
 
 
 def _trace_record(
