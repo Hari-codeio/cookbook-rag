@@ -1,0 +1,56 @@
+PREDICTION - judge v1 -> v2
+Written 2026-08-28, AFTER reading judge v1's four disagreements and BEFORE
+writing a single line of judge_v2.txt. Committed on its own so the order is
+provable.
+
+THE STATE BEING PREDICTED FROM
+  agreement_before = 84.0%  (21/25)
+  disagreements    = c11, c14  (human SOUND / judge UNSOUND)
+                     c16       (human SOUND / judge UNSOUND)
+                     c25       (human UNSOUND / judge SOUND)
+
+WHAT I THINK IS WRONG WITH THE JUDGE
+  Two of the four are one error wearing two hats. On c11 and c14 the judge
+  argues that because the card carries a baker's percentage, the quantity for a
+  halved or doubled batch is derivable, and therefore declining was wrong. It is
+  treating a number it could CALCULATE as a number that is SUPPORTED BY the
+  context. The criterion says every quantity must appear verbatim in a context
+  block; 2 kg of cabbage at 2% salt does not.
+
+THE CHANGE
+  Add exactly two of the judge's OWN disagreements to judge_v2.txt as worked
+  examples, one in each direction, with the correct verdict and the reasoning:
+    c14  the arithmetic error   (judge said UNSOUND, correct answer SOUND)
+    c25  missed on-screen donor (judge said SOUND, correct answer UNSOUND)
+  Nothing else in the prompt changes. No criterion is added, removed or reworded.
+
+THE PREDICTION, IN ONE SENTENCE
+  Showing the judge its own c14 and c25 verdicts as worked examples will stop it
+  counting a quantity it could calculate from a baker's percentage as supported
+  by context, so c11 will flip to SOUND WITHOUT HAVING BEEN SHOWN, taking
+  agreement from 84% (21/25) to 96% (24/25) with c16 left as the only
+  disagreement.
+
+THE NUMBERS I AM COMMITTING TO
+  agreement_after, all 25 cases          : 96%   (24/25)
+  agreement_after, 23 held-out cases     : 95.7% (22/23)
+     - held-out excludes c14 and c25, which are IN the prompt and therefore
+       cannot be scored honestly; the 23-case figure is the one that means
+       anything, and 21/23 = 91.3% is the number it has to beat
+  c11 flips to SOUND                     : yes
+  c16 stays a disagreement               : yes
+  new disagreements created              : 0
+
+I AM WRONG IF
+  c11 does not flip; or c16 flips; or any case that agreed under v1 stops
+  agreeing under v2; or the held-out figure fails to beat 91.3%.
+
+THE RISK I EXPECT TO BE BITTEN BY
+  c16 is the one I am least sure of. The judge called it UNSOUND for building a
+  Light Rye Sourdough out of rye's flours and wholemeal's water and salt. I
+  called it SOUND because it declared the hybrid in `unsupported`. Writing this
+  down before I iterate: I think there is a real chance the judge is right and I
+  was lenient, and that the honest outcome of this week is that ONE of my labels
+  was wrong rather than the judge's. I will not relabel it to make the number
+  look better. If I still think the judge is right after v2, that goes in the
+  write-up as a defeat.

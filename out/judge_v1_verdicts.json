@@ -1,0 +1,159 @@
+{
+  "judge_version": "judge_v1",
+  "judge_prompt_path": "eval\\judge_v1.txt",
+  "judge_prompt_sha256": "ea2b673e2e5bd3e71adc93b9f91927d5d6d5bf0b4b417ad19b03baf0029e9f54",
+  "substitutions_sha256": "f50218d27cf5bf2e00ab641c2c3242001e8a5fe415e7e2eb7ef3720343ba6849",
+  "n": 25,
+  "verdicts": {
+    "c01": {
+      "sound": false,
+      "reason": "The assistant incorrectly combined ingredients from the classic brioche and gluten-free brioche recipes, resulting in an incorrect milk and butter ratio that does not match the provided gluten-free brioche recipe.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": false, \"reason\": \"The assistant incorrectly combined ingredients from the classic brioche and gluten-free brioche recipes, resulting in an incorrect milk and butter ratio that does not match the provided gluten-free brioche recipe.\"}"
+    },
+    "c02": {
+      "sound": true,
+      "reason": "The provided context blocks do not contain any information or substitutions for making the chocolate brioche recipe dairy-free, so the assistant correctly declined the request.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The provided context blocks do not contain any information or substitutions for making the chocolate brioche recipe dairy-free, so the assistant correctly declined the request.\"}"
+    },
+    "c03": {
+      "sound": true,
+      "reason": "The assistant correctly identified that the provided context lacks a vegan substitute for the fish sauce and shrimp paste required by the base recipe.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly identified that the provided context lacks a vegan substitute for the fish sauce and shrimp paste required by the base recipe.\"}"
+    },
+    "c04": {
+      "sound": false,
+      "reason": "The assistant incorrectly claims that the wholemeal-sourdough::structure::c002 chunk supports substituting the ingredients of the 2kg Country Sourdough recipe, when that chunk only provides the method for a different recipe.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": false, \"reason\": \"The assistant incorrectly claims that the wholemeal-sourdough::structure::c002 chunk supports substituting the ingredients of the 2kg Country Sourdough recipe, when that chunk only provides the method for a different recipe.\"}"
+    },
+    "c05": {
+      "sound": false,
+      "reason": "The assistant incorrectly claimed the archive lacks the information to enrich the dough, despite the provided context containing a complete gluten-free brioche recipe with the necessary ingredients and proportions.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": false, \"reason\": \"The assistant incorrectly claimed the archive lacks the information to enrich the dough, despite the provided context containing a complete gluten-free brioche recipe with the necessary ingredients and proportions.\"}"
+    },
+    "c06": {
+      "sound": false,
+      "reason": "The assistant proposed a vegan version of the recipe by removing key ingredients like yoghurt and cream without any evidence in the provided context blocks that these specific substitutions or omissions result in a valid vegan recipe.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": false, \"reason\": \"The assistant proposed a vegan version of the recipe by removing key ingredients like yoghurt and cream without any evidence in the provided context blocks that these specific substitutions or omissions result in a valid vegan recipe.\"}"
+    },
+    "c09": {
+      "sound": true,
+      "reason": "The assistant correctly identified that the provided context lacks instructions or evidence for modifying the hydration level of the Light Rye Sourdough recipe.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly identified that the provided context lacks instructions or evidence for modifying the hydration level of the Light Rye Sourdough recipe.\"}"
+    },
+    "c11": {
+      "sound": false,
+      "reason": "The assistant incorrectly claims it cannot ground the request to halve the recipe, even though the archive provides the baker's percentages in chunk_id gf-brioche::structure::c001 and classic-brioche::structure::c001 which allow for scaling.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": false, \"reason\": \"The assistant incorrectly claims it cannot ground the request to halve the recipe, even though the archive provides the baker's percentages in chunk_id gf-brioche::structure::c001 and classic-brioche::structure::c001 which allow for scaling.\"}"
+    },
+    "c12": {
+      "sound": true,
+      "reason": "The assistant correctly identified that the archive does not provide a mechanism or instructions for scaling the recipe to 500 g total flour.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly identified that the archive does not provide a mechanism or instructions for scaling the recipe to 500 g total flour.\"}"
+    },
+    "c13": {
+      "sound": true,
+      "reason": "The assistant correctly identified that the provided context lacks instructions for scaling the recipe.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly identified that the provided context lacks instructions for scaling the recipe.\"}"
+    },
+    "c14": {
+      "sound": false,
+      "reason": "The assistant incorrectly declined the request to scale the recipe, as the provided context includes baker's percentages that allow for the calculation of ingredients for a 2 kg batch.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": false, \"reason\": \"The assistant incorrectly declined the request to scale the recipe, as the provided context includes baker's percentages that allow for the calculation of ingredients for a 2 kg batch.\"}"
+    },
+    "c15": {
+      "sound": true,
+      "reason": "The assistant correctly removed the chocolate chips from the ingredient list and updated the allergen warning based on the provided context blocks.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly removed the chocolate chips from the ingredient list and updated the allergen warning based on the provided context blocks.\"}"
+    },
+    "c16": {
+      "sound": false,
+      "reason": "The assistant incorrectly claims to have performed a substitution while actually replacing the entire ingredient list and method with a hybrid of two different recipes, which is not supported by the provided context.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": false, \"reason\": \"The assistant incorrectly claims to have performed a substitution while actually replacing the entire ingredient list and method with a hybrid of two different recipes, which is not supported by the provided context.\"}"
+    },
+    "c17": {
+      "sound": true,
+      "reason": "The assistant correctly identified that the provided context blocks do not contain information on how to make the gluten-free brioche recipe vegan.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly identified that the provided context blocks do not contain information on how to make the gluten-free brioche recipe vegan.\"}"
+    },
+    "c18": {
+      "sound": true,
+      "reason": "The assistant correctly identified the ingredient adjustments and method modifications required to transform the classic brioche into a chocolate chip version using the provided context blocks.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly identified the ingredient adjustments and method modifications required to transform the classic brioche into a chocolate chip version using the provided context blocks.\"}"
+    },
+    "c19": {
+      "sound": true,
+      "reason": "The assistant correctly identified the Gluten-Free Brioche recipe from the provided context as the only option that can be made gluten-free.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly identified the Gluten-Free Brioche recipe from the provided context as the only option that can be made gluten-free.\"}"
+    },
+    "c20": {
+      "sound": false,
+      "reason": "The assistant failed to identify the recipe with the lowest salt content (2kg Country Sourdough at 1.8%) and did not perform the requested swap to match that level in the other recipes.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": false, \"reason\": \"The assistant failed to identify the recipe with the lowest salt content (2kg Country Sourdough at 1.8%) and did not perform the requested swap to match that level in the other recipes.\"}"
+    },
+    "c21": {
+      "sound": true,
+      "reason": "The assistant correctly identified the Gluten-Free Sandwich Loaf as the vegan recipe based on the dietary tags and allergen information provided in the context blocks.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly identified the Gluten-Free Sandwich Loaf as the vegan recipe based on the dietary tags and allergen information provided in the context blocks.\"}"
+    },
+    "c22": {
+      "sound": true,
+      "reason": "The assistant correctly identified the milk weight from the gluten-free brioche recipe (150 g) in chunk gf-brioche::structure::c001 and applied it to the classic brioche recipe.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly identified the milk weight from the gluten-free brioche recipe (150 g) in chunk gf-brioche::structure::c001 and applied it to the classic brioche recipe.\"}"
+    },
+    "c23": {
+      "sound": true,
+      "reason": "The archive contains no hydration data for other recipes, making it impossible to identify the wettest loaf or adjust the hydration as requested.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The archive contains no hydration data for other recipes, making it impossible to identify the wettest loaf or adjust the hydration as requested.\"}"
+    },
+    "c24": {
+      "sound": true,
+      "reason": "The assistant correctly identified that the provided archive does not contain a dairy-free substitution for the whole cow's milk required in the Milk Kefir recipe.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly identified that the provided archive does not contain a dairy-free substitution for the whole cow's milk required in the Milk Kefir recipe.\"}"
+    },
+    "c25": {
+      "sound": true,
+      "reason": "The assistant correctly identified that the archive does not contain a gluten-free version of the Lemon Drizzle Loaf or instructions for modifying it.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly identified that the archive does not contain a gluten-free version of the Lemon Drizzle Loaf or instructions for modifying it.\"}"
+    },
+    "r01": {
+      "sound": true,
+      "reason": "The assistant correctly declined the request because the provided context does not contain evidence that Greek yoghurt can be used as a substitute for the full fat yoghurt specified in the recipe.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly declined the request because the provided context does not contain evidence that Greek yoghurt can be used as a substitute for the full fat yoghurt specified in the recipe.\"}"
+    },
+    "r02": {
+      "sound": true,
+      "reason": "The assistant correctly declined the request because the provided context blocks do not contain any information supporting the substitution of fish sauce with soy sauce.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The assistant correctly declined the request because the provided context blocks do not contain any information supporting the substitution of fish sauce with soy sauce.\"}"
+    },
+    "r03": {
+      "sound": true,
+      "reason": "The provided context blocks do not contain any information regarding a substitute for psyllium husk, so the assistant correctly declined the request.",
+      "model": "gemini-3.1-flash-lite",
+      "raw_text": "{\"sound\": true, \"reason\": \"The provided context blocks do not contain any information regarding a substitute for psyllium husk, so the assistant correctly declined the request.\"}"
+    }
+  }
+}
