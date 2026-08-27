@@ -1,0 +1,108 @@
+{
+  "_note": "Blind hand labels on the single binary criterion in eval/judge_v1.txt. Filled in by reading out/label_sheet.md, which shows only what the judge is shown. No judge had been run when these were written; the commit that adds this file predates the commit that adds any judge verdict file, and out/judge_v1_verdicts.json did not exist on disk.",
+  "criterion": "sound: every claim supported by the CONTEXT blocks shown, and no overstatement of what the archive grounds",
+  "labeller": "Hari (single labeller; see the limitation noted in results_week6.md)",
+  "substitutions_sha256": "f50218d27cf5bf2e00ab641c2c3242001e8a5fe415e7e2eb7ef3720343ba6849",
+  "labels": {
+    "c01": {
+      "sound": null,
+      "note": ""
+    },
+    "c02": {
+      "sound": null,
+      "note": ""
+    },
+    "c03": {
+      "sound": null,
+      "note": ""
+    },
+    "c04": {
+      "sound": null,
+      "note": ""
+    },
+    "c05": {
+      "sound": null,
+      "note": ""
+    },
+    "c06": {
+      "sound": null,
+      "note": ""
+    },
+    "c09": {
+      "sound": null,
+      "note": ""
+    },
+    "c11": {
+      "sound": null,
+      "note": ""
+    },
+    "c12": {
+      "sound": null,
+      "note": ""
+    },
+    "c13": {
+      "sound": null,
+      "note": ""
+    },
+    "c14": {
+      "sound": null,
+      "note": ""
+    },
+    "c15": {
+      "sound": null,
+      "note": ""
+    },
+    "c16": {
+      "sound": null,
+      "note": ""
+    },
+    "c17": {
+      "sound": null,
+      "note": ""
+    },
+    "c18": {
+      "sound": null,
+      "note": ""
+    },
+    "c19": {
+      "sound": null,
+      "note": ""
+    },
+    "c20": {
+      "sound": null,
+      "note": ""
+    },
+    "c21": {
+      "sound": null,
+      "note": ""
+    },
+    "c22": {
+      "sound": null,
+      "note": ""
+    },
+    "c23": {
+      "sound": null,
+      "note": ""
+    },
+    "c24": {
+      "sound": null,
+      "note": ""
+    },
+    "c25": {
+      "sound": null,
+      "note": ""
+    },
+    "r01": {
+      "sound": null,
+      "note": ""
+    },
+    "r02": {
+      "sound": null,
+      "note": ""
+    },
+    "r03": {
+      "sound": null,
+      "note": ""
+    }
+  }
+}

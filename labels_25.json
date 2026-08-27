@@ -1,0 +1,54 @@
+{
+  "_note": "BLIND HAND LABELS. Written 2026-08-28 by reading out/label_sheet.md, which shows only what the judge is later shown: the request, the CONTEXT blocks, and the output. No judge had been run when these were written and no judge verdict file existed on disk - `ls out/judge_*` returned 'No such file or directory' immediately before this file was created. The commit that adds this file precedes the commit that adds out/judge_v1_verdicts.json. Citations were checked by hand against the cards in data/.",
+  "criterion": "SOUND iff (a) every claim is supported by the CONTEXT blocks shown, every quantity appears verbatim in one, and every cited chunk_id is one of the blocks shown and does contain the claimed evidence; AND (b) the output does not overstate what the archive supports - declining is SOUND when the archive genuinely does not ground the change, and UNSOUND when the evidence was sitting in the blocks it was given.",
+  "labeller": "Hari, single labeller. This is the study's main weakness and results_week6.md says so: the same person defined the criterion, wrote the labels and later ran the judge. A second independent labeller would give an inter-rater figure this study does not have. The blind protocol and the commit order are what stand in for it.",
+  "substitutions_sha256": "f50218d27cf5bf2e00ab641c2c3242001e8a5fe415e7e2eb7ef3720343ba6849",
+  "labels": {
+    "c01": {
+      "sound": false,
+      "note": "Builds a gluten-free brioche that exists on no card: GF flour blend and xanthan from gf-brioche, but milk 100 g and butter 250 g from classic-brioche. gf-brioche, the only evidence for a GF brioche, states 150 g milk. Every single number is verbatim from some block, and the combination is demonstrated nowhere. Nothing is disclosed in `unsupported`. Compare c16, which builds the same kind of hybrid and declares it."
+    },
+    "c02": { "sound": true, "note": "Declines. Context is three brioche cards, all dairy. No dairy-free enriched dough exists. Reason is terse ('dairy free') but the decline is right." },
+    "c03": { "sound": true, "note": "Declines, naming fish sauce and salted shrimp paste specifically. Context holds napa-kimchi and red-sauerkraut; no vegan donor for either." },
+    "c04": {
+      "sound": false,
+      "note": "Ingredient row reads 'Wholemeal flour 950 g' cited to sourdough-2kg::c001, which says Strong white bread flour 950 g. The citation does not contain the claim. It relabelled the base's white flour as wholemeal and kept the weight; the real wholemeal card is 700 g wholemeal + 300 g white, and its ingredient table was not even retrieved. It also serves the wholemeal method and bake temperature over the 2kg's quantities."
+    },
+    "c05": {
+      "sound": false,
+      "note": "Declines 'the archive does not provide a method or ingredient list to transform a lean sandwich loaf into an enriched brioche-style dough' while gf-brioche::c001, a complete enriched gluten-free ingredient table, sits in the context it was given. Criterion (b): the evidence was on screen."
+    },
+    "c06": {
+      "sound": false,
+      "note": "Swaps chicken thigh for dried chickpeas and ghee for sunflower oil, both cited to chana-masala::c001. That chunk is an ingredient table for a different dish; it lists chickpeas and oil, it does not demonstrate either replacing anything. Produces a 'Vegan Chicken Tikka Masala' that appears on no card. The allergen line is honest, which does not rescue the swaps."
+    },
+    "c09": { "sound": true, "note": "Declines a higher-hydration rye. Context is rye (78%) plus sourdough-2kg (76%), which is LOWER. The 80% loaves were not retrieved, so within the blocks shown there is genuinely no wetter loaf to copy." },
+    "c11": { "sound": true, "note": "Declines. The halving is ungroundable arithmetic, and a partly groundable request is not groundable. The stated reason overreaches by also claiming no evidence for the GF conversion, which gf-brioche::c001 does provide, but the decline itself is correct." },
+    "c12": { "sound": true, "note": "Declines the rescale to 500 g total flour. Correct: no card shows scaled quantities." },
+    "c13": { "sound": true, "note": "Declines doubling the batch. Pure arithmetic, nothing to ground." },
+    "c14": { "sound": true, "note": "Declines 2 kg of cabbage. Terse reason, right call: the 2% ratio is on the card, the multiplication is not." },
+    "c15": { "sound": true, "note": "Removes the chocolate chips and keeps the chocolate-brioche's own numbers, all verbatim from chocolate-brioche::c001. classic-brioche::c001 is also in context and demonstrates a brioche without chocolate. Drops the baker's percentages, which is Week-5 mode 2 and not this criterion." },
+    "c16": {
+      "sound": true,
+      "note": "Same hybrid shape as c01 - rye's flours with wholemeal's water, starter and salt - but it DECLARES it: 'I have used the ingredient quantities from the base recipe while swapping the flour types as requested.' Every quantity verbatim, and the one thing that could mislead is disclosed. The disclosure is the whole difference between this and c01."
+    },
+    "c17": { "sound": true, "note": "Declines a vegan GF brioche. gf-sandwich-loaf, which is vegan, was not retrieved; within the blocks shown there is no egg-free or dairy-free enriched dough." },
+    "c18": { "sound": true, "note": "The chocolate-chip version of the classic brioche IS the chocolate-brioche card. Names both changed rows (butter 250->225, sugar 60->70) and the addition, all cited correctly, all verbatim. Allergen line matches chocolate-brioche::c003 including the soy." },
+    "c19": { "sound": true, "note": "Non-responsive: asked WHICH brioches can be made gluten free, it emits the gf-brioche recipe. But it states nothing false, and every quantity is verbatim from gf-brioche::c001. Sound by the criterion, useless as an answer. Flagged for the RAGAS section: this is what high faithfulness looks like on a question that was not answered." },
+    "c20": {
+      "sound": false,
+      "note": "Asked which of the three sourdoughs has the lowest salt and to swap the others to match. All three ingredient tables were in context. It returns the 2kg unchanged with a swap entry reading '18 g -> 18 g', reporting a swap it did not make, and silently covers one loaf of three. This is Week-5 mode 3, the one I graded as ruining the dish."
+    },
+    "c21": { "sound": true, "note": "Correctly picks gf-sandwich-loaf as the vegan gluten-free loaf. Allergen line 'Gluten free, provided the flour blend is certified. No egg or dairy.' is verbatim from that card, and oven '200 C' matches 'bake at 200 C for 45 minutes' in its method." },
+    "c22": { "sound": true, "note": "Exactly the swap asked for: milk 100 g -> 150 g cited to gf-brioche::c001, which does state 150 g. Everything else verbatim from classic-brioche::c001. Volunteers that both recipes are 500 g flour so no adjustment was needed, which is true and is the right thing to disclose." },
+    "c23": { "sound": true, "note": "Declines raising hydration to match the wettest loaf. Only the TITLE chunks of wholemeal and rye were retrieved, and titles carry no percentages, so within the blocks shown there is no figure to match." },
+    "c24": { "sound": true, "note": "No recipe named. Declines, saying no dairy-free alternative for whole cow's milk exists in the archive, which is true of the blocks shown. It silently resolves 'it' to milk kefir rather than asking which recipe, which is unhelpful but asserts nothing false." },
+    "c25": {
+      "sound": false,
+      "note": "Resolves the ambiguous 'the loaf' to the Lemon Drizzle Loaf, then declines because the archive has no gluten-free lemon drizzle. All four chunks of the Gluten-Free Sandwich Loaf were ranked above it in the same context. It picked the reading it could not serve while a whole gluten-free loaf sat at rank 1."
+    },
+    "r01": { "sound": true, "note": "REGRESSION of tr_f0918dcbd36b. Declines Greek yoghurt. Nothing in the context mentions Greek yoghurt at all, so there is no evidence to cite either way. Same outcome as Week 5 and correct for the same reason." },
+    "r02": { "sound": true, "note": "REGRESSION of tr_c5c65e9f6c06. Declines fish sauce -> soy sauce. No soy-sauce-bearing ingredient table was retrieved, so nothing in the blocks shown demonstrates the swap." },
+    "r03": { "sound": true, "note": "REGRESSION of tr_b8ad80a3b1f5. Declines a psyllium substitute. gf-brioche::c001 is in context and shows a GF dough working with xanthan and no psyllium, but that is a different recipe, not psyllium being replaced. No substitute is demonstrated." }
+  }
+}
