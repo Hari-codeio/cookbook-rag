@@ -21,6 +21,7 @@ in the disagreements, including the two where I now think the judge beat me.
 | one-command eval | `python eval/run_eval.py` |
 | eval output | [out/eval_v1.md](out/eval_v1.md), [out/eval_v2.md](out/eval_v2.md) |
 | the 25 frozen substitutions | [out/substitutions_v1.jsonl](out/substitutions_v1.jsonl) |
+| BONUS - RAGAS, section 8 | [eval/ragas_reference.json](eval/ragas_reference.json) - commit `d4ccfac` ; `python eval/run_ragas.py` ; [out/ragas.md](out/ragas.md) |
 
 ---
 
@@ -362,3 +363,180 @@ part 1 of the Week 5 prediction (`618744c`). Part 2, the arithmetic rule, is
 untouched and still open. flash-lite is the weakest model in the ladder and the
 only one whose free-tier day can carry ~75 calls; a stronger judge might well
 clear the c25 floor, and I cannot test that on this key.
+
+---
+
+## 8. BONUS - RAGAS faithfulness and context precision
+
+Headline, because it is sharper than the thing the bonus asked for:
+
+```
+                        faithfulness   context precision
+the 4 broken cases          1.000            1.000
+the other 21                0.832            0.987
+```
+
+**The broken answers score higher than the healthy ones.** Not "the average hides
+them" - they are the top of the distribution. No threshold on either metric, at
+any value, separates them out, because the direction of the effect is backwards.
+
+| deliverable | file |
+|---|---|
+| reference ground truth | [eval/ragas_reference.json](eval/ragas_reference.json) - commit `d4ccfac` |
+| the two metrics | [eval/ragas_metrics.py](eval/ragas_metrics.py) |
+| one command | `python eval/run_ragas.py` |
+| scored output | [out/ragas.md](out/ragas.md), [out/ragas_scores.json](out/ragas_scores.json) |
+| the run this replaced | [out/ragas_v1_decisionclaim.md](out/ragas_v1_decisionclaim.md) |
+
+### 8.1 What is and is not RAGAS here
+
+The two metrics are implemented against the published definitions rather than
+imported from the `ragas` package, for two reasons worth stating rather than
+burying: the library's faithfulness issues one verification call PER CLAIM, which
+a 20-call free-tier day cannot survive, and its LLM plumbing defaults to a
+different provider, which would mean this section came off a different instrument
+than the rest of the week. Both formulas were stated independently by two readers
+from the published definitions and cross-checked before a line was written; both
+statements are kept at
+[out/ragas_raw/formula_statements.json](out/ragas_raw/formula_statements.json).
+
+Faithfulness keeps RAGAS's two-step shape, including the part that is easy to
+collapse: **decomposition sees only (question, answer), never the context.** Show
+it the context and the model can tailor which claims it extracts to whatever
+happens to be supported. Verification then joins every chunk into one premise,
+exactly as RAGAS does, and that single join is the whole reason the metric cannot
+see attribution.
+
+Context precision is the rank-aware average precision, with the three details
+implementations get wrong: the `if v_k` gate, the denominator being relevants
+FOUND rather than K, and the `+1e-10`. It reproduces the published worked examples
+exactly, checked before it was pointed at any real data:
+
+```
+v=[1,0,1,1,0] -> 0.8055555555     v=[1,1,1,0,0] -> 0.9999999999
+v=[0,0,1,1,1] -> 0.4777777778     v=[0,1]       -> 0.49999999995
+```
+
+One deviation, named: `v_k` is set by exact `recipe_id` membership rather than
+RAGAS's Levenshtein-similarity-over-reference-contexts, because every chunk in
+this corpus carries its `recipe_id` in the block header, so the thing string
+similarity approximates is available exactly.
+
+### 8.2 The reference is blind too, for the same reason the labels were
+
+Context precision needs a per-case statement of which chunk counts as relevant.
+Written after reading the app's answers, that is not a reference, it is a
+rationalisation. So it got the labels' treatment: three readers, each given ONLY
+the case list and the 21 cards, explicitly barred from `out/`, `labels_25.json`
+and this write-up, and deliberately decorrelated by being made to work three
+different ways (case-first, card-first, adversarial). Reconciled by per-recipe_id
+majority, a rule fixed in `eval/build_ragas_reference.py` before it was applied.
+
+**22 of 25 unanimous.** All three splits are recorded in the artefact rather than
+smoothed away. All three readers independently flagged `c25` as ambiguous and all
+three named the same donors, before any metric existed.
+
+Ordering evidence: commit `d4ccfac`, whose message carries the terminal output of
+`ls eval/run_ragas.py eval/ragas_metrics.py out/ragas.md` returning *No such file
+or directory* for every one of them.
+
+### 8.3 The instrument was wrong first, and reading its output is what caught it
+
+The first run scored mean faithfulness **0.699** and flagged **0 of 25** cases.
+Both numbers were artefacts.
+
+`render_response` was turning `can_substitute: false` into the claim "The
+requested substitution cannot be made." The NLI step then returned verdict 0 on
+that claim in **25 cases out of 25**, with the same reason every time: *the
+context does not mention a requested substitution.* It is right. The context is
+recipe cards; it holds no representation of the user's request, so a claim about
+the request is not something the cards can entail or contradict.
+
+That is a constant -1 on every numerator. It moved every score down and
+discriminated between none of them, and it pushed the exact cases this bonus
+exists to find below the 0.9 threshold for a reason that has nothing to do with
+grounding. `can_substitute` is a control-flow decision about the app's own
+behaviour, not an assertion about recipes, so it is no longer rendered as a
+claim. The decline's substance is `unsupported`, which is rendered and is
+scorable.
+
+```
+                        mean faithfulness   cases flagged
+v1  decision-as-claim         0.699             0 / 25
+v2  corrected                 0.859             4 / 25
+```
+
+Both runs are kept. This is the week's own lesson landing on the week's own
+bonus: the number was not wrong because the app was fine, it was wrong because
+nobody had read what the judge was actually being asked.
+
+### 8.4 The case the bonus asks for: `c25`
+
+```
+faithfulness      : 1.000   (4 of 4 claims entailed)
+context precision : 1.000
+grounded on       : lemon-drizzle-cake, at rank 5
+walked past       : gf-sandwich-loaf, ranks 1-4 - Allergens, Ingredients, Title, Method
+```
+
+Request: "the loaf", made gluten free. The retrieved context opens with **all four
+chunks of the Gluten-Free Sandwich Loaf**, the entire card, method included. The
+app resolved "the loaf" to the Lemon Drizzle Loaf at rank 5 and declined, because
+the archive has no gluten-free lemon drizzle.
+
+Every sentence of that decline is true, so all four claims are entailed and
+faithfulness is 1.000. Every retrieved chunk belongs to a card the reference calls
+relevant, so context precision is 1.000. **Both metrics sit at their maximum on an
+answer that declined with a complete gluten-free loaf at rank 1 of its own
+context.**
+
+This is the same case the judge failed in v1, was handed the correct verdict for
+as Example 2 in v2, and failed again in the same words (section 6). Three
+instruments now, none of which catches it.
+
+### 8.5 Why neither metric can catch it, and what does
+
+Not a tuning problem. Structural, and both formula readers reached it
+independently:
+
+* **Faithfulness** joins every chunk into ONE premise before judging. After the
+  join there is no chunk identity left, so "supported by some chunk" and
+  "supported by the RIGHT chunk" are the same event.
+* **Context precision** never reads the answer at all. The with-reference variant
+  does not even accept it. The score is identical whether the app grounded on
+  rank 1, on rank 5, or answered nothing.
+
+Each throws away exactly the axis the other would need, so running both cannot
+recover it. Worse, on `c25` the good ranking *raises* the score: the metric
+rewards the retriever for the very condition that makes the generation failure
+worse.
+
+What catches it costs nothing. No model call, no threshold:
+
+```
+declined_with_donor_on_screen = can_substitute is False
+                                AND a reference donor card appears in the context
+```
+
+That is the judge's criterion (b) made deterministic, and it is the fourth thing
+this week that belongs in `assertions.py` rather than in a prompt.
+
+### 8.6 Where this is weak
+
+**One of the four flags is a false positive, and I am not tuning it away.** `c23`
+fires because `wholemeal-sourdough` is "on screen", but only its **Title** chunk
+is, at rank 6. No hydration figure was retrieved, so the app's decline is correct
+and the check is wrong. The check tests recipe_id presence, not whether the
+retrieved chunk carries the evidence. Precision is therefore **3 of 4**, and the
+fix (require a non-title section) is left for next week, because tightening a
+check after seeing which case it embarrasses is the same move as relabelling
+`c11` would have been.
+
+The other three hold up on inspection: `c25` has the donor's full card including
+Method at ranks 1-4, `c12` has the donor's Ingredients at rank 1 and Method at
+rank 8, `c05` has the donor's Ingredients at rank 5.
+
+Also still true: one labeller wrote the criterion, the labels and the reference,
+and everything ran on `gemini-3.1-flash-lite`, the weakest model in the ladder.
+The blind protocol and the commit order stand in for a second reader. They are not
+a substitute for one.

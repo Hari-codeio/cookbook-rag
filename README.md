@@ -66,7 +66,26 @@ $PY eval/run_generation.py      # 3 cited answers + 3 forced refusals   [needs A
 
 # 5. One-off grounded answer
 $PY -m rag.generate "how much salt is in the 2kg sourdough?" --show-context
+
+# 6. Week 5 — traffic, traces, sampling, replay
+$PY eval/run_traffic.py         # run the traffic pool, writing out/traces.jsonl [needs API key]
+$PY eval/sample_traces.py       # draw the sample to open-code
+$PY eval/trace_summary.py       # opinion-free descriptive summary
+$PY eval/replay_trace.py --trace tr_xxxxxxxx   # replay one trace verbatim
+
+# 7. Week 6 — the eval, and whether its judge can be trusted
+$PY eval/test_assertions.py     # mutate a real output 7 ways, prove each check fires
+$PY eval/run_eval.py --judge eval/judge_v2.txt   # THE one command: assertions,
+                                                 # judge, pass rate by mode, agreement
+
+# 7b. Week 6 bonus — RAGAS faithfulness + context precision
+$PY eval/build_ragas_reference.py   # reconcile the 3 blind reference maps (no API)
+$PY eval/run_ragas.py               # the two metrics + the free grounding check
 ```
+
+The judge and the RAGAS metrics are both cached on the sha256 of their prompt and
+their inputs, so re-running costs no API calls and cannot quietly return different
+numbers. Editing a prompt changes the key and forces a genuine re-run.
 
 Everything writes to `out/`: `ingest_*.md`, `search_dump_baseline.md`,
 `search_dump_structure.md`, `hitrate.md`, `filter_demo.md`, `generation.md`.

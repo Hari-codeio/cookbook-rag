@@ -1,0 +1,1788 @@
+{
+  "8e3ef24c24837ab2c104a4ef3e9c3b8636cb2a125c2cdc7475cc9b1ba1189715": {
+    "statements": [
+      "The requested substitution can be made.",
+      "The result is titled Gluten-Free Brioche.",
+      "The result is based on the recipe classic-brioche.",
+      "Strong white bread flour is removed.",
+      "Gluten-free flour blend is added.",
+      "No xanthan gum is removed.",
+      "Xanthan gum is added.",
+      "The ingredients are Gluten-free flour blend 500 g, Xanthan gum 6 g, Caster sugar 60 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 100 g, and Unsalted butter, softened 250 g.",
+      "The method is to whisk the flour blend, xanthan gum, sugar, yeast and salt together dry.",
+      "Whisking the flour blend, xanthan gum, sugar, yeast and salt together dry ensures the gum disperses before it meets any liquid.",
+      "The method is to beat in the eggs and warm milk until the batter climbs the paddle.",
+      "The method is to add the softened butter in five additions, waiting for each to disappear.",
+      "The dough stays a thick batter rather than a ball.",
+      "The dough staying a thick batter rather than a ball is normal without gluten.",
+      "The dough is chilled overnight at 4 C.",
+      "The dough is scaled into a lined tin the next morning.",
+      "The dough is proved until risen by half.",
+      "The dough is baked at 180 C for 35 minutes.",
+      "The oven setting is 180 C.",
+      "The recipe contains egg and dairy."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "bfb6a0bbdf099353073181fe8e9899d58204b2253c430d46031f7b2b119b78e4": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution can be made.",
+        "verdict": 0,
+        "reason": "The context does not mention a requested substitution."
+      },
+      {
+        "statement": "The result is titled Gluten-Free Brioche.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe classic-brioche.",
+        "verdict": 0,
+        "reason": "The context does not state that the gluten-free recipe is based on the classic recipe."
+      },
+      {
+        "statement": "Strong white bread flour is removed.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of removing ingredients from another recipe."
+      },
+      {
+        "statement": "Gluten-free flour blend is added.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of adding ingredients to another recipe."
+      },
+      {
+        "statement": "No xanthan gum is removed.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of removing ingredients."
+      },
+      {
+        "statement": "Xanthan gum is added.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of adding ingredients."
+      },
+      {
+        "statement": "The ingredients are Gluten-free flour blend 500 g, Xanthan gum 6 g, Caster sugar 60 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 100 g, and Unsalted butter, softened 250 g.",
+        "verdict": 0,
+        "reason": "The milk and butter weights listed do not match the gluten-free brioche recipe ingredients."
+      },
+      {
+        "statement": "The method is to whisk the flour blend, xanthan gum, sugar, yeast and salt together dry.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "Whisking the flour blend, xanthan gum, sugar, yeast and salt together dry ensures the gum disperses before it meets any liquid.",
+        "verdict": 1,
+        "reason": "The context explicitly states this purpose."
+      },
+      {
+        "statement": "The method is to beat in the eggs and warm milk until the batter climbs the paddle.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The method is to add the softened butter in five additions, waiting for each to disappear.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The dough stays a thick batter rather than a ball.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The dough staying a thick batter rather than a ball is normal without gluten.",
+        "verdict": 1,
+        "reason": "The context explicitly states this is normal without gluten."
+      },
+      {
+        "statement": "The dough is chilled overnight at 4 C.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The dough is scaled into a lined tin the next morning.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The dough is proved until risen by half.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The dough is baked at 180 C for 35 minutes.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The oven setting is 180 C.",
+        "verdict": 1,
+        "reason": "The context states the dough is baked at 180 C."
+      },
+      {
+        "statement": "The recipe contains egg and dairy.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the allergens section."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "20af00b54cf04c81e79f0294c3a1ffd57ddef3178fbbea07b4bbddaf6591c962": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Chocolate Chip Brioche.",
+      "The result is based on the recipe chocolate-brioche.",
+      "The dairy free requirement could not be grounded in the archive."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "71b998b817cc282b8f08ef005a17a21423fd4be7746b5b3e80b6e674b756d0cb": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Chocolate Chip Brioche.",
+        "verdict": 1,
+        "reason": "The context explicitly titles the recipe as Chocolate Chip Brioche."
+      },
+      {
+        "statement": "The result is based on the recipe chocolate-brioche.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe ID as chocolate-brioche."
+      },
+      {
+        "statement": "The dairy free requirement could not be grounded in the archive.",
+        "verdict": 1,
+        "reason": "The context does not contain any information regarding a dairy-free requirement."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "73a01af37c7835a01a9c1b422437af9ae3d8a043fdda942ad30adfc2d790049d": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Napa Cabbage Kimchi.",
+      "The result is based on the recipe napa-kimchi.",
+      "The following could not be grounded in the archive: The provided context does not contain a vegan alternative for fish sauce or salted shrimp paste."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "37ba7de47093d444c3f0a54a9072c19865e02d05aa671c4880c5bbfa612ba43f": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Napa Cabbage Kimchi.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe napa-kimchi.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe ID as napa-kimchi."
+      },
+      {
+        "statement": "The following could not be grounded in the archive: The provided context does not contain a vegan alternative for fish sauce or salted shrimp paste.",
+        "verdict": 1,
+        "reason": "The context indeed lacks any mention of vegan alternatives for those ingredients."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "880704f182da07364f3d640d31be237411b7f9e2d73abd2799d69a3490b0394b": {
+    "statements": [
+      "The requested substitution can be made.",
+      "The result is titled 2kg Country Sourdough.",
+      "The result is based on the recipe sourdough-2kg.",
+      "The removed ingredient is Strong white bread flour.",
+      "The added ingredient is Wholemeal flour.",
+      "The evidence chunk id is wholemeal-sourdough::structure::c002.",
+      "The ingredients are Wholemeal flour 950 g, Wholemeal rye flour 50 g, Water (28 C) 760 g, Stiff sourdough starter 200 g, and Fine sea salt 18 g.",
+      "The method is to whisk the starter into the water, add both flours, and mix to a shaggy mass.",
+      "The method is to autolyse for one hour rather than forty minutes.",
+      "Wholemeal bran drinks slowly and a short rest leaves the dough gritty.",
+      "The method is to add the salt and pinch the salt through.",
+      "The method is to bulk ferment at 24 C for three and a half hours, folding every forty-five minutes.",
+      "Wholemeal ferments faster than white.",
+      "The baker should watch the dough and not the clock.",
+      "The method is to shape, then cold retard at 4 C overnight.",
+      "The method is to bake at 240 C with steam for twenty minutes, then vent and drop to 220 C for a further twenty-five.",
+      "The oven setting is 240 C with steam for twenty minutes, then vent and drop to 220 C for a further twenty-five.",
+      "The allergen warning is that the recipe contains wheat and rye (gluten).",
+      "The recipe is made in a kitchen that also handles sesame and tree nuts."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "1df839ec308baa715eae7992b57176cbdedd15754339ca06da6a83e664ba0371": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution can be made.",
+        "verdict": 0,
+        "reason": "The context does not mention a requested substitution."
+      },
+      {
+        "statement": "The result is titled 2kg Country Sourdough.",
+        "verdict": 0,
+        "reason": "The context for the wholemeal recipe is titled Wholemeal Sourdough."
+      },
+      {
+        "statement": "The result is based on the recipe sourdough-2kg.",
+        "verdict": 0,
+        "reason": "The context indicates the recipe is Wholemeal Sourdough, not sourdough-2kg."
+      },
+      {
+        "statement": "The removed ingredient is Strong white bread flour.",
+        "verdict": 0,
+        "reason": "The context does not describe a removal process."
+      },
+      {
+        "statement": "The added ingredient is Wholemeal flour.",
+        "verdict": 0,
+        "reason": "The context does not describe an addition process."
+      },
+      {
+        "statement": "The evidence chunk id is wholemeal-sourdough::structure::c002.",
+        "verdict": 1,
+        "reason": "The context explicitly lists this chunk ID."
+      },
+      {
+        "statement": "The ingredients are Wholemeal flour 950 g, Wholemeal rye flour 50 g, Water (28 C) 760 g, Stiff sourdough starter 200 g, and Fine sea salt 18 g.",
+        "verdict": 0,
+        "reason": "The context for the wholemeal recipe does not list specific ingredient weights."
+      },
+      {
+        "statement": "The method is to whisk the starter into the water, add both flours, and mix to a shaggy mass.",
+        "verdict": 1,
+        "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+      },
+      {
+        "statement": "The method is to autolyse for one hour rather than forty minutes.",
+        "verdict": 1,
+        "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+      },
+      {
+        "statement": "Wholemeal bran drinks slowly and a short rest leaves the dough gritty.",
+        "verdict": 1,
+        "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+      },
+      {
+        "statement": "The method is to add the salt and pinch the salt through.",
+        "verdict": 1,
+        "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+      },
+      {
+        "statement": "The method is to bulk ferment at 24 C for three and a half hours, folding every forty-five minutes.",
+        "verdict": 1,
+        "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+      },
+      {
+        "statement": "Wholemeal ferments faster than white.",
+        "verdict": 1,
+        "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+      },
+      {
+        "statement": "The baker should watch the dough and not the clock.",
+        "verdict": 1,
+        "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+      },
+      {
+        "statement": "The method is to shape, then cold retard at 4 C overnight.",
+        "verdict": 1,
+        "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+      },
+      {
+        "statement": "The method is to bake at 240 C with steam for twenty minutes, then vent and drop to 220 C for a further twenty-five.",
+        "verdict": 1,
+        "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+      },
+      {
+        "statement": "The oven setting is 240 C with steam for twenty minutes, then vent and drop to 220 C for a further twenty-five.",
+        "verdict": 1,
+        "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+      },
+      {
+        "statement": "The allergen warning is that the recipe contains wheat and rye (gluten).",
+        "verdict": 0,
+        "reason": "The context for the wholemeal recipe does not explicitly state the allergen warning."
+      },
+      {
+        "statement": "The recipe is made in a kitchen that also handles sesame and tree nuts.",
+        "verdict": 0,
+        "reason": "The context for the wholemeal recipe does not state this."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "b06fe7b2afbb1d629b522e94f9562c5940e637540cf6477c75d2428e4ea393a0": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Gluten-Free Sandwich Loaf.",
+      "The result is based on the recipe gf-sandwich-loaf.",
+      "The archive does not provide a method or ingredient list to transform a lean sandwich loaf into an enriched brioche-style dough."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "c7454c570b7945598f3caf8d48a2f317460c4ca6994637a35aead125ff714e03": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Gluten-Free Sandwich Loaf.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe gf-sandwich-loaf.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe as gf-sandwich-loaf."
+      },
+      {
+        "statement": "The archive does not provide a method or ingredient list to transform a lean sandwich loaf into an enriched brioche-style dough.",
+        "verdict": 1,
+        "reason": "The context provides separate recipes for each but does not contain instructions for transforming one into the other."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "6b79c1c4eba1f0b8e54ed318abcca5025df9a35c98a338fc16b2d9660cff12b3": {
+    "statements": [
+      "The requested substitution can be made.",
+      "The result is titled Vegan Chicken Tikka Masala.",
+      "The result is based on the recipe chicken-tikka-masala.",
+      "The ingredient Chicken thigh, boneless is removed.",
+      "The ingredient Dried chickpeas is added.",
+      "The ingredient Full fat yoghurt is removed.",
+      "The ingredient Double cream is removed.",
+      "The ingredient Ghee is removed.",
+      "The ingredient Sunflower oil is added.",
+      "The ingredients are Dried chickpeas 400 g, Tinned plum tomatoes 400 g, Brown onion 250 g, Sunflower oil 45 g, Ginger, grated 25 g, Garlic, crushed 20 g, Garam masala 10 g, Ground turmeric 5 g, Kashmiri chilli powder 8 g, Fine sea salt 12 g, and Kasoori methi 4 g.",
+      "The method is to soften the onion in the sunflower oil, add the ginger, garlic and spices, then the tomatoes.",
+      "The method is to cook the mixture until thick and glossy, blend smooth, and return to the pan.",
+      "The method is to add the chickpeas and simmer for ten minutes.",
+      "The method is to stir in the crushed kasoori methi off the heat.",
+      "The provided context does not state the recipe is free of any allergens."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "a6420554468707707cb6abe72d713181d354022e50da9eaa8e2d66fe49f8f1f2": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution can be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Vegan Chicken Tikka Masala.",
+        "verdict": 0,
+        "reason": "The context does not mention a recipe with this title."
+      },
+      {
+        "statement": "The result is based on the recipe chicken-tikka-masala.",
+        "verdict": 0,
+        "reason": "The context does not describe a result based on this recipe."
+      },
+      {
+        "statement": "The ingredient Chicken thigh, boneless is removed.",
+        "verdict": 0,
+        "reason": "The context does not describe removing this ingredient."
+      },
+      {
+        "statement": "The ingredient Dried chickpeas is added.",
+        "verdict": 0,
+        "reason": "The context does not describe adding this ingredient."
+      },
+      {
+        "statement": "The ingredient Full fat yoghurt is removed.",
+        "verdict": 0,
+        "reason": "The context does not describe removing this ingredient."
+      },
+      {
+        "statement": "The ingredient Double cream is removed.",
+        "verdict": 0,
+        "reason": "The context does not describe removing this ingredient."
+      },
+      {
+        "statement": "The ingredient Ghee is removed.",
+        "verdict": 0,
+        "reason": "The context does not describe removing this ingredient."
+      },
+      {
+        "statement": "The ingredient Sunflower oil is added.",
+        "verdict": 0,
+        "reason": "The context does not describe adding this ingredient."
+      },
+      {
+        "statement": "The ingredients are Dried chickpeas 400 g, Tinned plum tomatoes 400 g, Brown onion 250 g, Sunflower oil 45 g, Ginger, grated 25 g, Garlic, crushed 20 g, Garam masala 10 g, Ground turmeric 5 g, Kashmiri chilli powder 8 g, Fine sea salt 12 g, and Kasoori methi 4 g.",
+        "verdict": 0,
+        "reason": "This specific list of ingredients is not stated in the context."
+      },
+      {
+        "statement": "The method is to soften the onion in the sunflower oil, add the ginger, garlic and spices, then the tomatoes.",
+        "verdict": 0,
+        "reason": "The context states to soften the onion in ghee, not sunflower oil."
+      },
+      {
+        "statement": "The method is to cook the mixture until thick and glossy, blend smooth, and return to the pan.",
+        "verdict": 1,
+        "reason": "This is stated in the method section of the chicken tikka masala recipe."
+      },
+      {
+        "statement": "The method is to add the chickpeas and simmer for ten minutes.",
+        "verdict": 0,
+        "reason": "The context states to add the grilled chicken, not chickpeas."
+      },
+      {
+        "statement": "The method is to stir in the crushed kasoori methi off the heat.",
+        "verdict": 1,
+        "reason": "This is stated in the method section of the chicken tikka masala recipe."
+      },
+      {
+        "statement": "The provided context does not state the recipe is free of any allergens.",
+        "verdict": 0,
+        "reason": "The context explicitly states the recipe is naturally gluten free."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "20c17b9028315ab4ce6d2171c502c92ff844151a0cbb8468411a7ed1b4c0db56": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Light Rye Sourdough.",
+      "The result is based on the recipe rye-sourdough.",
+      "The following could not be grounded in the archive: The provided context does not contain information on how to adjust hydration levels for the Light Rye Sourdough recipe."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "26bfc8ccf14204ede8e0ba6b9ac4699dd23447e325c3241557674aadc8003dde": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Light Rye Sourdough.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe rye-sourdough.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe ID as rye-sourdough."
+      },
+      {
+        "statement": "The following could not be grounded in the archive: The provided context does not contain information on how to adjust hydration levels for the Light Rye Sourdough recipe.",
+        "verdict": 1,
+        "reason": "The context indeed lacks instructions on adjusting hydration levels."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "91632b27fdae65fedcfcb0ecb0787b8e7d61bb9c8db3aca3073a48578240bf19": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Classic Brioche.",
+      "The result is based on the recipe classic-brioche.",
+      "The request to make the recipe gluten-free could not be grounded in the archive.",
+      "The request to halve the recipe to 250 g of flour could not be grounded in the archive.",
+      "The archive contains a gluten-free brioche recipe.",
+      "The archive does not provide instructions for converting the classic brioche recipe to be gluten-free.",
+      "The archive does not provide evidence for converting the classic brioche recipe to be gluten-free.",
+      "The archive does not provide a mechanism for scaling the recipe quantities."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "01294a6a27caee315afaca16c9c463b1ffef0e48e2135ae904eb4db25f0fa3c4": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention a requested substitution."
+      },
+      {
+        "statement": "The result is titled Classic Brioche.",
+        "verdict": 0,
+        "reason": "The context does not specify a result title."
+      },
+      {
+        "statement": "The result is based on the recipe classic-brioche.",
+        "verdict": 0,
+        "reason": "The context does not specify a result."
+      },
+      {
+        "statement": "The request to make the recipe gluten-free could not be grounded in the archive.",
+        "verdict": 0,
+        "reason": "The context does not contain a request to make a recipe gluten-free."
+      },
+      {
+        "statement": "The request to halve the recipe to 250 g of flour could not be grounded in the archive.",
+        "verdict": 0,
+        "reason": "The context does not contain a request to halve the recipe."
+      },
+      {
+        "statement": "The archive contains a gluten-free brioche recipe.",
+        "verdict": 1,
+        "reason": "The context includes a recipe titled Gluten-Free Brioche."
+      },
+      {
+        "statement": "The archive does not provide instructions for converting the classic brioche recipe to be gluten-free.",
+        "verdict": 1,
+        "reason": "The context provides separate recipes but no instructions for conversion."
+      },
+      {
+        "statement": "The archive does not provide evidence for converting the classic brioche recipe to be gluten-free.",
+        "verdict": 1,
+        "reason": "The context does not contain information on converting the classic recipe."
+      },
+      {
+        "statement": "The archive does not provide a mechanism for scaling the recipe quantities.",
+        "verdict": 1,
+        "reason": "The context provides fixed weights and percentages but no instructions for scaling."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "948497f9b294f6844b2c7d46281a554fcc7714fb2b401c2ea60f065e440405fe": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled 2kg Country Sourdough.",
+      "The result is based on the recipe sourdough-2kg.",
+      "The archive does not contain instructions or a mechanism to scale the recipe to 500 g total flour weight."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "f6e69d85e4fce732982d89543dd2b07e10b9d5936f33d3ff9afd36392451a373": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled 2kg Country Sourdough.",
+        "verdict": 1,
+        "reason": "The context explicitly lists the title as 2kg Country Sourdough."
+      },
+      {
+        "statement": "The result is based on the recipe sourdough-2kg.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe ID as sourdough-2kg."
+      },
+      {
+        "statement": "The archive does not contain instructions or a mechanism to scale the recipe to 500 g total flour weight.",
+        "verdict": 1,
+        "reason": "The provided context lacks any instructions or mechanisms for scaling the recipe."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "c9c3a6e003eba7983f5433477090a9da0c384ced187f40543c726d2053ea9c12": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Gluten-Free Sandwich Loaf.",
+      "The result is based on the recipe gf-sandwich-loaf.",
+      "The provided context does not contain instructions or grounding for scaling the batch size of the Gluten-Free Sandwich Loaf."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "2566e3804656c4ce71320e6a44beae7aa75912a7fde552b81e4fcf5f5fe87e1d": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Gluten-Free Sandwich Loaf.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe gf-sandwich-loaf.",
+        "verdict": 1,
+        "reason": "The context explicitly identifies the recipe ID as gf-sandwich-loaf."
+      },
+      {
+        "statement": "The provided context does not contain instructions or grounding for scaling the batch size of the Gluten-Free Sandwich Loaf.",
+        "verdict": 1,
+        "reason": "The context provides specific weights and percentages but lacks instructions on how to scale the batch size."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "c227949182fef851bcce5b014dbf4158e83b26fe35f92bfb59a1b959ebbd8f2f": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Red Cabbage Sauerkraut.",
+      "The result is based on the recipe red-sauerkraut.",
+      "Scaling the recipe to 2 kg of cabbage could not be grounded in the archive."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "4b536f7c75aa012dec48d71d2dd76f8983d7170fa71cc4c8269e6b2296caa9fc": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Red Cabbage Sauerkraut.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe red-sauerkraut.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe ID as red-sauerkraut."
+      },
+      {
+        "statement": "Scaling the recipe to 2 kg of cabbage could not be grounded in the archive.",
+        "verdict": 0,
+        "reason": "The context provides baker's percentages which allow for scaling, so it is grounded."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "fe86f6b6ba64f0bbf644a76ff3895bbba490f06b33c154a74923e6e775cef647": {
+    "statements": [
+      "The requested substitution can be made.",
+      "The result is titled Brioche.",
+      "The result is based on the recipe chocolate-brioche.",
+      "The removed ingredient is Dark chocolate chips.",
+      "The added ingredient is None.",
+      "The evidence chunk id is chocolate-brioche::structure::c001.",
+      "The ingredients are Strong white bread flour 500 g, Caster sugar 70 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 100 g, and Unsalted butter, softened 225 g.",
+      "The method is to whisk the flour, sugar, yeast and salt together dry.",
+      "The method is to beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl.",
+      "The method is to add the softened butter in five additions, waiting for each to disappear before the next.",
+      "The method is to chill the dough overnight at 4 C.",
+      "The method is to scale the dough into a lined tin the next morning.",
+      "The method is to prove the dough until risen by half.",
+      "The method is to bake the dough at 180 C for 35 minutes.",
+      "The oven setting is 180 C.",
+      "The allergen warning is that the recipe contains wheat (gluten), egg, and dairy."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "82215f0bc57422e0dd4131a13a7555c7a4c614bc4f40755e465496ed5627e37c": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution can be made.",
+        "verdict": 0,
+        "reason": "The context does not mention a requested substitution."
+      },
+      {
+        "statement": "The result is titled Brioche.",
+        "verdict": 0,
+        "reason": "The title is Chocolate Chip Brioche."
+      },
+      {
+        "statement": "The result is based on the recipe chocolate-brioche.",
+        "verdict": 1,
+        "reason": "The context explicitly identifies the recipe as chocolate-brioche."
+      },
+      {
+        "statement": "The removed ingredient is Dark chocolate chips.",
+        "verdict": 0,
+        "reason": "The context does not describe a removal process."
+      },
+      {
+        "statement": "The added ingredient is None.",
+        "verdict": 0,
+        "reason": "The context does not describe an addition process."
+      },
+      {
+        "statement": "The evidence chunk id is chocolate-brioche::structure::c001.",
+        "verdict": 1,
+        "reason": "The chunk id is explicitly provided in the context."
+      },
+      {
+        "statement": "The ingredients are Strong white bread flour 500 g, Caster sugar 70 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 100 g, and Unsalted butter, softened 225 g.",
+        "verdict": 1,
+        "reason": "These ingredients and weights are listed in the chocolate-brioche ingredients table."
+      },
+      {
+        "statement": "The method is to whisk the flour, sugar, yeast and salt together dry.",
+        "verdict": 1,
+        "reason": "This is stated in the method section of the chocolate-brioche recipe."
+      },
+      {
+        "statement": "The method is to beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl.",
+        "verdict": 1,
+        "reason": "This is stated in the method section of the chocolate-brioche recipe."
+      },
+      {
+        "statement": "The method is to add the softened butter in five additions, waiting for each to disappear before the next.",
+        "verdict": 1,
+        "reason": "This is stated in the method section of the chocolate-brioche recipe."
+      },
+      {
+        "statement": "The method is to chill the dough overnight at 4 C.",
+        "verdict": 1,
+        "reason": "This is stated in the method section of the chocolate-brioche recipe."
+      },
+      {
+        "statement": "The method is to scale the dough into a lined tin the next morning.",
+        "verdict": 1,
+        "reason": "This is stated in the method section of the chocolate-brioche recipe."
+      },
+      {
+        "statement": "The method is to prove the dough until risen by half.",
+        "verdict": 1,
+        "reason": "This is stated in the method section of the chocolate-brioche recipe."
+      },
+      {
+        "statement": "The method is to bake the dough at 180 C for 35 minutes.",
+        "verdict": 1,
+        "reason": "This is stated in the method section of the chocolate-brioche recipe."
+      },
+      {
+        "statement": "The oven setting is 180 C.",
+        "verdict": 1,
+        "reason": "The baking temperature is specified as 180 C."
+      },
+      {
+        "statement": "The allergen warning is that the recipe contains wheat (gluten), egg, and dairy.",
+        "verdict": 0,
+        "reason": "The context also lists soy as an allergen."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "55258400b3ec18573abadcd09d6d08cc2ca202c8128127dfcfde6c6cd72a8457": {
+    "statements": [
+      "The requested substitution can be made.",
+      "The result is titled Light Rye Sourdough.",
+      "Light Rye Sourdough is based on the recipe wholemeal-sourdough.",
+      "Wholemeal flour was removed.",
+      "Strong white bread flour was added.",
+      "Strong white bread flour was removed.",
+      "Dark rye flour was added.",
+      "The ingredients are Strong white bread flour 800 g, Dark rye flour 200 g, Water (28 C) 800 g, Stiff sourdough starter 200 g, and Fine sea salt 20 g.",
+      "The method is to whisk the starter into the water, add both flours, and mix to a shaggy mass.",
+      "The method includes autolysing for forty minutes.",
+      "Rye carries no meaningful gluten.",
+      "The dough should be handled gently.",
+      "The dough will feel tackier than an all-white build.",
+      "The method includes adding the salt and pinching the salt through.",
+      "The method includes bulk fermenting at 24 C for three and a half hours, folding every forty-five minutes.",
+      "The method includes shaping the dough, then cold retarding at 4 C overnight.",
+      "The method includes baking at 240 C with steam for twenty minutes, then venting and dropping to 220 C for a further twenty-five.",
+      "The oven setting is 240 C with steam for twenty minutes, then venting and dropping to 220 C for a further twenty-five.",
+      "The recipe contains wheat and rye (gluten).",
+      "The recipe is made in a kitchen that also handles sesame and tree nuts.",
+      "The statement that the total flour weight of the base recipe is 1000 g, which matches the Light Rye Sourdough recipe, but the individual ingredient quantities differ from the base recipe could not be grounded in the archive.",
+      "The ingredient quantities from the base recipe were used while swapping the flour types as requested."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "28d838d018c70d5985df37154e2944941cc679a542ee356e7be6cc38b2f0f961": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution can be made.",
+        "verdict": 0,
+        "reason": "The context does not contain a request for substitution."
+      },
+      {
+        "statement": "The result is titled Light Rye Sourdough.",
+        "verdict": 1,
+        "reason": "The context explicitly titles the recipe Light Rye Sourdough."
+      },
+      {
+        "statement": "Light Rye Sourdough is based on the recipe wholemeal-sourdough.",
+        "verdict": 0,
+        "reason": "The context does not state that Light Rye Sourdough is based on the wholemeal-sourdough recipe."
+      },
+      {
+        "statement": "Wholemeal flour was removed.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of removing ingredients."
+      },
+      {
+        "statement": "Strong white bread flour was added.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of adding ingredients."
+      },
+      {
+        "statement": "Strong white bread flour was removed.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of removing ingredients."
+      },
+      {
+        "statement": "Dark rye flour was added.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of adding ingredients."
+      },
+      {
+        "statement": "The ingredients are Strong white bread flour 800 g, Dark rye flour 200 g, Water (28 C) 800 g, Stiff sourdough starter 200 g, and Fine sea salt 20 g.",
+        "verdict": 0,
+        "reason": "The water and salt quantities listed do not match the Light Rye Sourdough recipe provided in the context."
+      },
+      {
+        "statement": "The method is to whisk the starter into the water, add both flours, and mix to a shaggy mass.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+      },
+      {
+        "statement": "The method includes autolysing for forty minutes.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+      },
+      {
+        "statement": "Rye carries no meaningful gluten.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+      },
+      {
+        "statement": "The dough should be handled gently.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+      },
+      {
+        "statement": "The dough will feel tackier than an all-white build.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+      },
+      {
+        "statement": "The method includes adding the salt and pinching the salt through.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+      },
+      {
+        "statement": "The method includes bulk fermenting at 24 C for three and a half hours, folding every forty-five minutes.",
+        "verdict": 0,
+        "reason": "The Light Rye Sourdough recipe specifies three hours, not three and a half."
+      },
+      {
+        "statement": "The method includes shaping the dough, then cold retarding at 4 C overnight.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+      },
+      {
+        "statement": "The method includes baking at 240 C with steam for twenty minutes, then venting and dropping to 220 C for a further twenty-five.",
+        "verdict": 0,
+        "reason": "The Light Rye Sourdough recipe specifies baking at 250 C and 225 C, not 240 C and 220 C."
+      },
+      {
+        "statement": "The oven setting is 240 C with steam for twenty minutes, then venting and dropping to 220 C for a further twenty-five.",
+        "verdict": 0,
+        "reason": "The Light Rye Sourdough recipe specifies different oven temperatures."
+      },
+      {
+        "statement": "The recipe contains wheat and rye (gluten).",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the Light Rye Sourdough allergens section."
+      },
+      {
+        "statement": "The recipe is made in a kitchen that also handles sesame and tree nuts.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the Light Rye Sourdough allergens section."
+      },
+      {
+        "statement": "The statement that the total flour weight of the base recipe is 1000 g, which matches the Light Rye Sourdough recipe, but the individual ingredient quantities differ from the base recipe could not be grounded in the archive.",
+        "verdict": 1,
+        "reason": "The context confirms the total flour weight is 1000g for both, but does not provide a comparison of ingredient quantities between them."
+      },
+      {
+        "statement": "The ingredient quantities from the base recipe were used while swapping the flour types as requested.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of swapping flour types or using base recipe quantities."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "3cc486ac39181990cbac4d8e73df2e4b9d47a7be515cbff6d7266b04a5e32967": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Gluten-Free Brioche.",
+      "The result is based on the recipe gf-brioche.",
+      "The term vegan could not be grounded in the archive.",
+      "The term no eggs could not be grounded in the archive.",
+      "The term no dairy could not be grounded in the archive."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "2117f2a906fa536b9ec9ff26cb2bc4ef28b54165946b72f5b3395eaf7eb171cc": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Gluten-Free Brioche.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe gf-brioche.",
+        "verdict": 1,
+        "reason": "The context explicitly identifies the recipe as gf-brioche."
+      },
+      {
+        "statement": "The term vegan could not be grounded in the archive.",
+        "verdict": 1,
+        "reason": "The word vegan does not appear in the provided context."
+      },
+      {
+        "statement": "The term no eggs could not be grounded in the archive.",
+        "verdict": 1,
+        "reason": "The phrase no eggs does not appear in the provided context."
+      },
+      {
+        "statement": "The term no dairy could not be grounded in the archive.",
+        "verdict": 1,
+        "reason": "The phrase no dairy does not appear in the provided context."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "2301e9cfaec67c1c4f72005437aeae52cb91fbf3509052d2f1a3a8d7447541a6": {
+    "statements": [
+      "The requested substitution can be made.",
+      "The result is titled Chocolate Chip Brioche.",
+      "The result is based on the recipe classic-brioche.",
+      "The ingredient Unsalted butter, softened (250 g) is removed.",
+      "The ingredient Unsalted butter, softened (225 g) is added.",
+      "The ingredient Caster sugar (60 g) is removed.",
+      "The ingredient Caster sugar (70 g) is added.",
+      "No ingredient is removed for the chocolate chip addition.",
+      "The ingredient Dark chocolate chips (150 g) is added.",
+      "The ingredients are Strong white bread flour 500 g, Caster sugar 70 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 100 g, Unsalted butter, softened 225 g, and Dark chocolate chips 150 g.",
+      "The method is to whisk the flour, sugar, yeast and salt together dry.",
+      "The method is to beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl.",
+      "The method is to add the softened butter in five additions, waiting for each to disappear before the next.",
+      "The method is to fold the chocolate chips through by hand at the very end.",
+      "Folding the chocolate chips by hand prevents the paddle from smashing the chocolate chips into the crumb and greying the whole loaf.",
+      "The method is to chill the dough overnight at 4 C.",
+      "The method is to scale the dough into a lined tin the next morning.",
+      "The method is to prove the dough until risen by half.",
+      "The method is to bake the dough at 180 C for 35 minutes.",
+      "The oven setting is 180 C.",
+      "The allergen warning is that the recipe contains wheat (gluten), egg, dairy and soy (from the chocolate)."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "74226b4e9ffbb1ad339180d9c446645ce7d145a22207534cf41898b1b1857ecf": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution can be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Chocolate Chip Brioche.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe classic-brioche.",
+        "verdict": 0,
+        "reason": "The context describes the Chocolate Chip Brioche recipe as a distinct entity from the Classic Brioche recipe."
+      },
+      {
+        "statement": "The ingredient Unsalted butter, softened (250 g) is removed.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of removing ingredients from one recipe to create another."
+      },
+      {
+        "statement": "The ingredient Unsalted butter, softened (225 g) is added.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of adding ingredients to create a new recipe."
+      },
+      {
+        "statement": "The ingredient Caster sugar (60 g) is removed.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of removing ingredients."
+      },
+      {
+        "statement": "The ingredient Caster sugar (70 g) is added.",
+        "verdict": 0,
+        "reason": "The context does not describe a process of adding ingredients."
+      },
+      {
+        "statement": "No ingredient is removed for the chocolate chip addition.",
+        "verdict": 0,
+        "reason": "The context does not describe the addition of chocolate chips as a modification of another recipe."
+      },
+      {
+        "statement": "The ingredient Dark chocolate chips (150 g) is added.",
+        "verdict": 1,
+        "reason": "The ingredient list for Chocolate Chip Brioche includes 150 g of dark chocolate chips."
+      },
+      {
+        "statement": "The ingredients are Strong white bread flour 500 g, Caster sugar 70 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 100 g, Unsalted butter, softened 225 g, and Dark chocolate chips 150 g.",
+        "verdict": 1,
+        "reason": "These ingredients are listed in the Chocolate Chip Brioche ingredient table."
+      },
+      {
+        "statement": "The method is to whisk the flour, sugar, yeast and salt together dry.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The method is to beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The method is to add the softened butter in five additions, waiting for each to disappear before the next.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The method is to fold the chocolate chips through by hand at the very end.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "Folding the chocolate chips by hand prevents the paddle from smashing the chocolate chips into the crumb and greying the whole loaf.",
+        "verdict": 1,
+        "reason": "The context states this as the reason for folding by hand."
+      },
+      {
+        "statement": "The method is to chill the dough overnight at 4 C.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The method is to scale the dough into a lined tin the next morning.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The method is to prove the dough until risen by half.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The method is to bake the dough at 180 C for 35 minutes.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The oven setting is 180 C.",
+        "verdict": 1,
+        "reason": "The method specifies baking at 180 C."
+      },
+      {
+        "statement": "The allergen warning is that the recipe contains wheat (gluten), egg, dairy and soy (from the chocolate).",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the allergens section."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "0d850af8d44a571caf1f964941e803d8208d6fd1c61c51852ac32bb85071c8a2": {
+    "statements": [
+      "The requested substitution can be made.",
+      "The result is titled Gluten-Free Brioche.",
+      "The result is based on the recipe gf-brioche.",
+      "The ingredients for Gluten-Free Brioche are: Gluten-free flour blend 500 g; Xanthan gum 6 g; Caster sugar 60 g; Instant dried yeast 8 g; Fine sea salt 9 g; Whole eggs 250 g; Whole milk (32 C) 150 g; Unsalted butter, softened 175 g.",
+      "The method for Gluten-Free Brioche is to whisk the flour blend, xanthan gum, sugar, yeast and salt together dry.",
+      "Whisking the flour blend, xanthan gum, sugar, yeast and salt together dry ensures the gum disperses before it meets any liquid.",
+      "Lumped gum turns the crumb slimy.",
+      "No amount of mixing later will fix lumped gum.",
+      "The method for Gluten-Free Brioche is to beat in the eggs and warm milk until the batter climbs the paddle.",
+      "The method for Gluten-Free Brioche is to add the softened butter in five additions, waiting for each to disappear.",
+      "The dough stays a thick batter rather than a ball.",
+      "The dough staying a thick batter rather than a ball is normal without gluten.",
+      "The method for Gluten-Free Brioche is to chill the dough overnight at 4 C.",
+      "The method for Gluten-Free Brioche is to scale the dough into a lined tin the next morning.",
+      "The method for Gluten-Free Brioche is to prove the dough until risen by half.",
+      "The method for Gluten-Free Brioche is to bake the dough at 180 C for 35 minutes.",
+      "The oven setting for Gluten-Free Brioche is 180 C.",
+      "Gluten-Free Brioche contains egg.",
+      "Gluten-Free Brioche contains dairy."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "42ea6eb3c9d2dd20f983d5c6eda48e430e1a7faa53f479f70509682a3df0ebd5": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution can be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Gluten-Free Brioche.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe gf-brioche.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe ID as gf-brioche."
+      },
+      {
+        "statement": "The ingredients for Gluten-Free Brioche are: Gluten-free flour blend 500 g; Xanthan gum 6 g; Caster sugar 60 g; Instant dried yeast 8 g; Fine sea salt 9 g; Whole eggs 250 g; Whole milk (32 C) 150 g; Unsalted butter, softened 175 g.",
+        "verdict": 1,
+        "reason": "These ingredients and weights are listed in the ingredients table for the recipe."
+      },
+      {
+        "statement": "The method for Gluten-Free Brioche is to whisk the flour blend, xanthan gum, sugar, yeast and salt together dry.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "Whisking the flour blend, xanthan gum, sugar, yeast and salt together dry ensures the gum disperses before it meets any liquid.",
+        "verdict": 1,
+        "reason": "The context states this is done so the gum disperses before it meets any liquid."
+      },
+      {
+        "statement": "Lumped gum turns the crumb slimy.",
+        "verdict": 1,
+        "reason": "The context explicitly states that lumped gum turns the crumb slimy."
+      },
+      {
+        "statement": "No amount of mixing later will fix lumped gum.",
+        "verdict": 1,
+        "reason": "The context explicitly states that no amount of mixing later will fix it."
+      },
+      {
+        "statement": "The method for Gluten-Free Brioche is to beat in the eggs and warm milk until the batter climbs the paddle.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The method for Gluten-Free Brioche is to add the softened butter in five additions, waiting for each to disappear.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The dough stays a thick batter rather than a ball.",
+        "verdict": 1,
+        "reason": "The context states the dough stays a thick batter rather than a ball."
+      },
+      {
+        "statement": "The dough staying a thick batter rather than a ball is normal without gluten.",
+        "verdict": 1,
+        "reason": "The context states this is normal without gluten."
+      },
+      {
+        "statement": "The method for Gluten-Free Brioche is to chill the dough overnight at 4 C.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The method for Gluten-Free Brioche is to scale the dough into a lined tin the next morning.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The method for Gluten-Free Brioche is to prove the dough until risen by half.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The method for Gluten-Free Brioche is to bake the dough at 180 C for 35 minutes.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section."
+      },
+      {
+        "statement": "The oven setting for Gluten-Free Brioche is 180 C.",
+        "verdict": 1,
+        "reason": "The context states to bake at 180 C."
+      },
+      {
+        "statement": "Gluten-Free Brioche contains egg.",
+        "verdict": 1,
+        "reason": "The allergens section explicitly states it contains egg."
+      },
+      {
+        "statement": "Gluten-Free Brioche contains dairy.",
+        "verdict": 1,
+        "reason": "The allergens section explicitly states it contains dairy."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "ad8734b8798985604511e2c1e9e7b89b8b3c337808302f404f2fda2a801fda5e": {
+    "statements": [
+      "The requested substitution can be made.",
+      "The result is titled 2kg Country Sourdough.",
+      "The result is based on the recipe sourdough-2kg.",
+      "The ingredients are Strong white bread flour 950 g, Wholemeal rye flour 50 g, Water (28 C) 760 g, Stiff sourdough starter 200 g, and Fine sea salt 18 g.",
+      "The method is to whisk the starter into the water until no lumps remain.",
+      "The method is to add both flours and mix to a shaggy mass.",
+      "The method is to cover and autolyse for forty minutes.",
+      "The method is to hold the salt back during the autolyse stage.",
+      "Adding salt before the autolyse tightens the gluten.",
+      "The method is to sprinkle the fine sea salt over the rested dough.",
+      "The method is to pinch the fine sea salt through the dough with wet hands until no grains are felt.",
+      "The method is to bulk ferment at 24 C for four hours.",
+      "The method is to fold the dough in the bowl every forty-five minutes for the first three hours of bulk fermentation.",
+      "The method is to divide, pre-shape, and rest the dough for twenty minutes.",
+      "The method is to shape the dough into two tight boules.",
+      "The method is to place the boules seam side up in floured baskets.",
+      "The method is to cold retard the boules at 4 C overnight for twelve to fourteen hours.",
+      "The method is to bake the boules straight from the fridge at 250 C with steam for twenty minutes.",
+      "The method is to vent the oven and drop the temperature to 230 C for a further twenty-five minutes until the crust is deeply coloured.",
+      "The oven setting is 250 C with steam for twenty minutes, then vent the oven and drop to 230 C for a further twenty-five minutes.",
+      "The recipe contains an allergen warning for wheat and rye (gluten).",
+      "The recipe is made in a kitchen that also handles sesame and tree nuts."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "dab38552a6626c2c8f18cc08dc6d397e22a7d6d1e02ebdd97565ffeac98b1dcc": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution can be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled 2kg Country Sourdough.",
+        "verdict": 1,
+        "reason": "The context explicitly titles the recipe 2kg Country Sourdough."
+      },
+      {
+        "statement": "The result is based on the recipe sourdough-2kg.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe ID as sourdough-2kg."
+      },
+      {
+        "statement": "The ingredients are Strong white bread flour 950 g, Wholemeal rye flour 50 g, Water (28 C) 760 g, Stiff sourdough starter 200 g, and Fine sea salt 18 g.",
+        "verdict": 1,
+        "reason": "These ingredients and weights are listed in the context for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to whisk the starter into the water until no lumps remain.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to add both flours and mix to a shaggy mass.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to cover and autolyse for forty minutes.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to hold the salt back during the autolyse stage.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "Adding salt before the autolyse tightens the gluten.",
+        "verdict": 1,
+        "reason": "The context explicitly states that adding salt before the autolyse tightens the gluten."
+      },
+      {
+        "statement": "The method is to sprinkle the fine sea salt over the rested dough.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to pinch the fine sea salt through the dough with wet hands until no grains are felt.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to bulk ferment at 24 C for four hours.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to fold the dough in the bowl every forty-five minutes for the first three hours of bulk fermentation.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to divide, pre-shape, and rest the dough for twenty minutes.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to shape the dough into two tight boules.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to place the boules seam side up in floured baskets.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to cold retard the boules at 4 C overnight for twelve to fourteen hours.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to bake the boules straight from the fridge at 250 C with steam for twenty minutes.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The method is to vent the oven and drop the temperature to 230 C for a further twenty-five minutes until the crust is deeply coloured.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The oven setting is 250 C with steam for twenty minutes, then vent the oven and drop to 230 C for a further twenty-five minutes.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The recipe contains an allergen warning for wheat and rye (gluten).",
+        "verdict": 1,
+        "reason": "The context explicitly states the recipe contains wheat and rye (gluten)."
+      },
+      {
+        "statement": "The recipe is made in a kitchen that also handles sesame and tree nuts.",
+        "verdict": 1,
+        "reason": "The context explicitly states the recipe is made in a kitchen that also handles sesame and tree nuts."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "837207f2243e3e5fb4dec2a469c7a2889478b56e842359342a448bb84bb8b7cd": {
+    "statements": [
+      "The requested substitution can be made.",
+      "The result is titled Gluten-Free Sandwich Loaf.",
+      "The result is based on the recipe gf-sandwich-loaf.",
+      "The ingredients are Gluten-free flour blend 500 g, Xanthan gum 10 g, Psyllium husk 15 g, Instant dried yeast 7 g, Fine sea salt 10 g, Water (30 C) 400 g, and Olive oil 30 g.",
+      "The method is to whisk the flour blend, xanthan gum, psyllium husk, yeast and salt together dry so both gums disperse before they meet water.",
+      "Psyllium hydrates far faster than xanthan.",
+      "Skipping the dry mix leaves the baker picking gel lumps out of the batter.",
+      "The baker adds the warm water and oil.",
+      "The baker beats the batter for four minutes.",
+      "The baker rests the batter for twenty minutes so the psyllium sets up.",
+      "The batter should hold a peak rather than pour.",
+      "The baker scrapes the batter into a lined tin.",
+      "The baker proves the batter until risen by half.",
+      "The baker bakes the loaf at 200 C for 45 minutes.",
+      "The oven setting is 200 C.",
+      "The recipe is gluten free, provided the flour blend is certified.",
+      "The recipe contains no egg.",
+      "The recipe contains no dairy."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "facfa1e8420e70eb8223bbbe060026e586fc644843064cbaed800ca885b194d2": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution can be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Gluten-Free Sandwich Loaf.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe gf-sandwich-loaf.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe ID as gf-sandwich-loaf."
+      },
+      {
+        "statement": "The ingredients are Gluten-free flour blend 500 g, Xanthan gum 10 g, Psyllium husk 15 g, Instant dried yeast 7 g, Fine sea salt 10 g, Water (30 C) 400 g, and Olive oil 30 g.",
+        "verdict": 1,
+        "reason": "These ingredients and weights are listed in the ingredients table."
+      },
+      {
+        "statement": "The method is to whisk the flour blend, xanthan gum, psyllium husk, yeast and salt together dry so both gums disperse before they meet water.",
+        "verdict": 1,
+        "reason": "This is stated verbatim in the method section."
+      },
+      {
+        "statement": "Psyllium hydrates far faster than xanthan.",
+        "verdict": 1,
+        "reason": "This is stated verbatim in the method section."
+      },
+      {
+        "statement": "Skipping the dry mix leaves the baker picking gel lumps out of the batter.",
+        "verdict": 1,
+        "reason": "This is stated verbatim in the method section."
+      },
+      {
+        "statement": "The baker adds the warm water and oil.",
+        "verdict": 1,
+        "reason": "This is stated in the method section."
+      },
+      {
+        "statement": "The baker beats the batter for four minutes.",
+        "verdict": 1,
+        "reason": "This is stated in the method section."
+      },
+      {
+        "statement": "The baker rests the batter for twenty minutes so the psyllium sets up.",
+        "verdict": 1,
+        "reason": "This is stated in the method section."
+      },
+      {
+        "statement": "The batter should hold a peak rather than pour.",
+        "verdict": 1,
+        "reason": "This is stated in the method section."
+      },
+      {
+        "statement": "The baker scrapes the batter into a lined tin.",
+        "verdict": 1,
+        "reason": "This is stated in the method section."
+      },
+      {
+        "statement": "The baker proves the batter until risen by half.",
+        "verdict": 1,
+        "reason": "This is stated in the method section."
+      },
+      {
+        "statement": "The baker bakes the loaf at 200 C for 45 minutes.",
+        "verdict": 1,
+        "reason": "This is stated in the method section."
+      },
+      {
+        "statement": "The oven setting is 200 C.",
+        "verdict": 1,
+        "reason": "The method specifies baking at 200 C."
+      },
+      {
+        "statement": "The recipe is gluten free, provided the flour blend is certified.",
+        "verdict": 1,
+        "reason": "This is stated in the allergens section."
+      },
+      {
+        "statement": "The recipe contains no egg.",
+        "verdict": 1,
+        "reason": "The allergens section explicitly states no egg."
+      },
+      {
+        "statement": "The recipe contains no dairy.",
+        "verdict": 1,
+        "reason": "The allergens section explicitly states no dairy."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "6f9d70ada2bc42244bddccf984c1cf8baf7cf7a71e812d9571a4b507bf4795f4": {
+    "statements": [
+      "The requested substitution can be made.",
+      "The result is titled Classic Brioche.",
+      "The result is based on the recipe classic-brioche.",
+      "The removed ingredient is Whole milk (32 C) | 100 g.",
+      "The added ingredient is Whole milk (32 C) | 150 g.",
+      "The evidence chunk id is gf-brioche::structure::c001.",
+      "The ingredients are Strong white bread flour 500 g, Caster sugar 60 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 150 g, and Unsalted butter, softened 250 g.",
+      "The method is to whisk the flour, sugar, yeast and salt together dry, then beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl.",
+      "The method includes adding the softened butter in five additions, waiting for each to disappear before the next.",
+      "The dough should end up glossy and slack enough to fall from the hook in a sheet.",
+      "The dough should be chilled overnight at 4 C.",
+      "The dough should be scaled into a lined tin the next morning, proved until risen by half, and baked at 180 C for 35 minutes.",
+      "The oven setting is 180 C.",
+      "The allergen warning is that the recipe contains wheat (gluten), egg and dairy.",
+      "The statement that the total flour weight is 500 g in both recipes, so no adjustment is needed, could not be grounded in the archive."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "805ea7dc8530fb7171cf30130d7df0de45db2c547fbbbd66cc1d97c0f7bd2485": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution can be made.",
+        "verdict": 0,
+        "reason": "The context does not define a requested substitution."
+      },
+      {
+        "statement": "The result is titled Classic Brioche.",
+        "verdict": 0,
+        "reason": "The context does not specify a result title for a substitution."
+      },
+      {
+        "statement": "The result is based on the recipe classic-brioche.",
+        "verdict": 0,
+        "reason": "The context does not specify a result recipe."
+      },
+      {
+        "statement": "The removed ingredient is Whole milk (32 C) | 100 g.",
+        "verdict": 0,
+        "reason": "The context does not define a removal process."
+      },
+      {
+        "statement": "The added ingredient is Whole milk (32 C) | 150 g.",
+        "verdict": 0,
+        "reason": "The context does not define an addition process."
+      },
+      {
+        "statement": "The evidence chunk id is gf-brioche::structure::c001.",
+        "verdict": 0,
+        "reason": "The context does not define an evidence chunk id."
+      },
+      {
+        "statement": "The ingredients are Strong white bread flour 500 g, Caster sugar 60 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 150 g, and Unsalted butter, softened 250 g.",
+        "verdict": 0,
+        "reason": "This specific combination of ingredients does not exist in any single recipe in the context."
+      },
+      {
+        "statement": "The method is to whisk the flour, sugar, yeast and salt together dry, then beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl.",
+        "verdict": 1,
+        "reason": "This is the method described for the Classic Brioche recipe."
+      },
+      {
+        "statement": "The method includes adding the softened butter in five additions, waiting for each to disappear before the next.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method sections for Classic and Chocolate Chip Brioche."
+      },
+      {
+        "statement": "The dough should end up glossy and slack enough to fall from the hook in a sheet.",
+        "verdict": 1,
+        "reason": "This is explicitly stated in the method section for Classic Brioche."
+      },
+      {
+        "statement": "The dough should be chilled overnight at 4 C.",
+        "verdict": 1,
+        "reason": "This is stated in the method sections for all three recipes."
+      },
+      {
+        "statement": "The dough should be scaled into a lined tin the next morning, proved until risen by half, and baked at 180 C for 35 minutes.",
+        "verdict": 1,
+        "reason": "This is stated in the method sections for all three recipes."
+      },
+      {
+        "statement": "The oven setting is 180 C.",
+        "verdict": 1,
+        "reason": "This is stated in the method sections for all three recipes."
+      },
+      {
+        "statement": "The allergen warning is that the recipe contains wheat (gluten), egg and dairy.",
+        "verdict": 1,
+        "reason": "This is stated in the allergen section for Classic Brioche."
+      },
+      {
+        "statement": "The statement that the total flour weight is 500 g in both recipes, so no adjustment is needed, could not be grounded in the archive.",
+        "verdict": 1,
+        "reason": "The context confirms both recipes use 500g of flour, so the statement that it could not be grounded is false, making the statement itself false."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "292636763dc26f6b3f9863602807b7e9a0b73d7de9b30ebc7cde234bc716b8dc": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled 2kg Country Sourdough.",
+      "The result is based on the recipe sourdough-2kg.",
+      "The archive does not provide hydration percentages for other recipes to determine the wettest loaf.",
+      "The archive does not provide a method to adjust the water quantity in the base recipe."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "32e5a53ec44dcabf31e962a5dd7fcf0ec899ca6c043c48b6ba2956a120a96301": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled 2kg Country Sourdough.",
+        "verdict": 1,
+        "reason": "The title section of the recipe explicitly states 2kg Country Sourdough."
+      },
+      {
+        "statement": "The result is based on the recipe sourdough-2kg.",
+        "verdict": 1,
+        "reason": "The context explicitly identifies the recipe ID as sourdough-2kg."
+      },
+      {
+        "statement": "The archive does not provide hydration percentages for other recipes to determine the wettest loaf.",
+        "verdict": 1,
+        "reason": "The provided context only contains ingredient lists for the 2kg Country Sourdough recipe."
+      },
+      {
+        "statement": "The archive does not provide a method to adjust the water quantity in the base recipe.",
+        "verdict": 1,
+        "reason": "The method section describes the process but does not provide instructions for adjusting ingredient quantities."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "21e6a2ae18727e69b9cf6c12dbcd12f855b7e64b440af9054b5984349c9d7ac6": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Milk Kefir.",
+      "The result is based on the recipe milk-kefir.",
+      "There is no dairy-free alternative for whole cow's milk provided in the archive."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "f29126fae789871da008155a2011130634883cb6bddcbf4cac01b199ad8269d5": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Milk Kefir.",
+        "verdict": 1,
+        "reason": "The context explicitly states the recipe title is Milk Kefir."
+      },
+      {
+        "statement": "The result is based on the recipe milk-kefir.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe ID as milk-kefir."
+      },
+      {
+        "statement": "There is no dairy-free alternative for whole cow's milk provided in the archive.",
+        "verdict": 1,
+        "reason": "The provided context for the milk-kefir recipe only lists whole cow's milk as an ingredient and does not offer dairy-free alternatives."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "d3ba8cdea07dd08df829bb71522c0c54129d1aad2c8e20af5858d79b5f07e4af": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Lemon Drizzle Loaf.",
+      "The result is based on the recipe lemon-drizzle-cake.",
+      "The archive does not contain a gluten-free version of the Lemon Drizzle Loaf.",
+      "The archive does not provide a method to substitute wheat flour with a gluten-free flour blend for the Lemon Drizzle Loaf recipe."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "ef3703bcd45bb36aba427e0e4587fa14c677114ac055cbb246208353d070fd9a": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention a requested substitution."
+      },
+      {
+        "statement": "The result is titled Lemon Drizzle Loaf.",
+        "verdict": 1,
+        "reason": "The title section of the lemon-drizzle-cake recipe explicitly states this title."
+      },
+      {
+        "statement": "The result is based on the recipe lemon-drizzle-cake.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe as lemon-drizzle-cake."
+      },
+      {
+        "statement": "The archive does not contain a gluten-free version of the Lemon Drizzle Loaf.",
+        "verdict": 1,
+        "reason": "The provided context only contains a gluten-free sandwich loaf and a standard lemon drizzle loaf containing wheat."
+      },
+      {
+        "statement": "The archive does not provide a method to substitute wheat flour with a gluten-free flour blend for the Lemon Drizzle Loaf recipe.",
+        "verdict": 1,
+        "reason": "The context for the lemon-drizzle-cake recipe does not include instructions for substituting ingredients."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "c034bc310fb244d8fd257d155de043b58a7c7dd61990c1c6ee673c8d9ed590f8": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Chicken Tikka Masala.",
+      "The result is based on the recipe chicken-tikka-masala.",
+      "The provided context does not contain information regarding the use of Greek yoghurt as a substitute for full fat yoghurt."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "452ee4b8e0bf1484f3bc8f7ec9bf0d0b07d7a7d89320b5193d4c4a03024582c4": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Chicken Tikka Masala.",
+        "verdict": 1,
+        "reason": "The context explicitly states the title as Chicken Tikka Masala."
+      },
+      {
+        "statement": "The result is based on the recipe chicken-tikka-masala.",
+        "verdict": 1,
+        "reason": "The context identifies the recipe as chicken-tikka-masala."
+      },
+      {
+        "statement": "The provided context does not contain information regarding the use of Greek yoghurt as a substitute for full fat yoghurt.",
+        "verdict": 1,
+        "reason": "The context lacks any mention of Greek yoghurt or substitution advice."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "d755934d11e6d4346f30b8c3b03783f8e656757d9067e5c8b372564b1703a3b7": {
+    "statements": [
+      "The requested substitution of fish sauce for soy sauce cannot be made.",
+      "The result is titled Napa Cabbage Kimchi.",
+      "The result is based on the recipe napa-kimchi.",
+      "The archive does not contain a recipe or instruction that grounds the substitution of fish sauce with soy sauce."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "f67f15d6b3d30f0657cf813ac2fafd2e64984d659397ea38e2448d11c102384c": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution of fish sauce for soy sauce cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention soy sauce or address the possibility of substitutions."
+      },
+      {
+        "statement": "The result is titled Napa Cabbage Kimchi.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe napa-kimchi.",
+        "verdict": 1,
+        "reason": "The context explicitly identifies the recipe as napa-kimchi."
+      },
+      {
+        "statement": "The archive does not contain a recipe or instruction that grounds the substitution of fish sauce with soy sauce.",
+        "verdict": 1,
+        "reason": "The provided context lacks any information regarding soy sauce or instructions for ingredient substitutions."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "eb8be50ea555704ea1e16ee4ddf438527729c04cd3cfc470baec48c1ee75fd2f": {
+    "statements": [
+      "The requested substitution cannot be made.",
+      "The result is titled Gluten-Free Sandwich Loaf.",
+      "The result is based on the recipe gf-sandwich-loaf.",
+      "The provided context does not contain any information regarding a substitute for psyllium husk."
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  },
+  "dab13e82f7204f95d4723d859df6ffb5a060334a844629637964bc57e63b9391": {
+    "verdicts": [
+      {
+        "statement": "The requested substitution cannot be made.",
+        "verdict": 0,
+        "reason": "The context does not mention any requested substitution."
+      },
+      {
+        "statement": "The result is titled Gluten-Free Sandwich Loaf.",
+        "verdict": 1,
+        "reason": "The title is explicitly stated in the context."
+      },
+      {
+        "statement": "The result is based on the recipe gf-sandwich-loaf.",
+        "verdict": 1,
+        "reason": "The context explicitly identifies the recipe as gf-sandwich-loaf."
+      },
+      {
+        "statement": "The provided context does not contain any information regarding a substitute for psyllium husk.",
+        "verdict": 1,
+        "reason": "The context lacks any information about substituting psyllium husk."
+      }
+    ],
+    "_model": "gemini-3.1-flash-lite"
+  }
+}

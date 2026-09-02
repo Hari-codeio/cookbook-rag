@@ -1,0 +1,3971 @@
+{
+  "meta": {
+    "substitutions": "out/substitutions_v1.jsonl",
+    "substitutions_sha256": "f50218d27cf5bf2e00ab641c2c3242001e8a5fe415e7e2eb7ef3720343ba6849",
+    "reference": "eval/ragas_reference.json",
+    "reference_sha256": "5a0faeb1a4366d7ea47d7c842405662943bfc10870b6ead7db3263ab4d673bc0",
+    "n": 25,
+    "model": "gemini-3.1-flash-lite",
+    "calls": 44,
+    "cached": 6
+  },
+  "cases": [
+    {
+      "case_id": "c01",
+      "mode": "refuses-swap-instead-of-quoting-card",
+      "recipe": "classic brioche",
+      "constraint": "gluten free",
+      "reference_relevant_recipe_ids": [
+        "classic-brioche",
+        "gf-brioche"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution can be made.\nThe result is titled Gluten-Free Brioche.\nIt is based on the recipe classic-brioche.\n{\"removed\": \"Strong white bread flour\", \"added\": \"Gluten-free flour blend\", \"evidence_chunk_id\": \"gf-brioche::structure::c001\"}\n{\"removed\": \"No xanthan gum\", \"added\": \"Xanthan gum\", \"evidence_chunk_id\": \"gf-brioche::structure::c001\"}\nThe ingredients are: Gluten-free flour blend 500 g; Xanthan gum 6 g; Caster sugar 60 g; Instant dried yeast 8 g; Fine sea salt 9 g; Whole eggs 250 g; Whole milk (32 C) 100 g; Unsalted butter, softened 250 g.\nThe method is: Whisk the flour blend, xanthan gum, sugar, yeast and salt together dry, so the gum disperses before it meets any liquid. Beat in the eggs and warm milk until the batter climbs the paddle, then add the softened butter in five additions, waiting for each to disappear. The dough stays a thick batter rather than a ball, which is normal without gluten. Chill overnight at 4 C. Scale into a lined tin the next morning, prove until risen by half, and bake at 180 C for 35 minutes.\nThe oven setting is 180 C.\nAllergen warning: Contains egg and dairy.",
+      "faithfulness": 0.65,
+      "n_statements": 20,
+      "n_supported": 13,
+      "verdicts": [
+        {
+          "statement": "The requested substitution can be made.",
+          "verdict": 0,
+          "reason": "The context does not mention a requested substitution."
+        },
+        {
+          "statement": "The result is titled Gluten-Free Brioche.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe classic-brioche.",
+          "verdict": 0,
+          "reason": "The context does not state that the gluten-free recipe is based on the classic recipe."
+        },
+        {
+          "statement": "Strong white bread flour is removed.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of removing ingredients from another recipe."
+        },
+        {
+          "statement": "Gluten-free flour blend is added.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of adding ingredients to another recipe."
+        },
+        {
+          "statement": "No xanthan gum is removed.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of removing ingredients."
+        },
+        {
+          "statement": "Xanthan gum is added.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of adding ingredients."
+        },
+        {
+          "statement": "The ingredients are Gluten-free flour blend 500 g, Xanthan gum 6 g, Caster sugar 60 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 100 g, and Unsalted butter, softened 250 g.",
+          "verdict": 0,
+          "reason": "The milk and butter weights listed do not match the gluten-free brioche recipe ingredients."
+        },
+        {
+          "statement": "The method is to whisk the flour blend, xanthan gum, sugar, yeast and salt together dry.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "Whisking the flour blend, xanthan gum, sugar, yeast and salt together dry ensures the gum disperses before it meets any liquid.",
+          "verdict": 1,
+          "reason": "The context explicitly states this purpose."
+        },
+        {
+          "statement": "The method is to beat in the eggs and warm milk until the batter climbs the paddle.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The method is to add the softened butter in five additions, waiting for each to disappear.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The dough stays a thick batter rather than a ball.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The dough staying a thick batter rather than a ball is normal without gluten.",
+          "verdict": 1,
+          "reason": "The context explicitly states this is normal without gluten."
+        },
+        {
+          "statement": "The dough is chilled overnight at 4 C.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The dough is scaled into a lined tin the next morning.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The dough is proved until risen by half.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The dough is baked at 180 C for 35 minutes.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The oven setting is 180 C.",
+          "verdict": 1,
+          "reason": "The context states the dough is baked at 180 C."
+        },
+        {
+          "statement": "The recipe contains egg and dairy.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the allergens section."
+        }
+      ],
+      "context_precision": 0.9317956349089874,
+      "context_precision_detail": {
+        "score": 0.9317956349089874,
+        "k": 11,
+        "n_relevant_retrieved": 8,
+        "numerator": 7.454365079365079,
+        "denominator": 8.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "gf-brioche::structure::c000",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "gf-brioche::structure::c003",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "classic-brioche::structure::c003",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "gf-brioche::structure::c001",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "chocolate-brioche::structure::c003",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.8,
+            "contribution": 0.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "gf-brioche::structure::c002",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 0.833333,
+            "contribution": 0.833333
+          },
+          {
+            "rank": 7,
+            "chunk_id": "classic-brioche::structure::c002",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 0.857143,
+            "contribution": 0.857143
+          },
+          {
+            "rank": 8,
+            "chunk_id": "classic-brioche::structure::c000",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 0.875,
+            "contribution": 0.875
+          },
+          {
+            "rank": 9,
+            "chunk_id": "classic-brioche::structure::c001",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 0.888889,
+            "contribution": 0.888889
+          },
+          {
+            "rank": 10,
+            "chunk_id": "chocolate-brioche::structure::c002",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.8,
+            "contribution": 0.0
+          },
+          {
+            "rank": 11,
+            "chunk_id": "chocolate-brioche::structure::c000",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.727273,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "classic-brioche",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 3,
+        "best_base_rank": 3,
+        "best_donor_rank": 1,
+        "donors_on_screen": [
+          "gf-brioche"
+        ],
+        "relevant_above": [
+          "gf-brioche"
+        ],
+        "declined": false,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 0,
+      "_cached": 2
+    },
+    {
+      "case_id": "c02",
+      "mode": "refuses-swap-instead-of-quoting-card",
+      "recipe": "chocolate brioche",
+      "constraint": "dairy free",
+      "reference_relevant_recipe_ids": [
+        "chocolate-brioche"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Chocolate Chip Brioche.\nIt is based on the recipe chocolate-brioche.\nThe following could not be grounded in the archive: dairy free",
+      "faithfulness": 0.75,
+      "n_statements": 4,
+      "n_supported": 3,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Chocolate Chip Brioche.",
+          "verdict": 1,
+          "reason": "The context explicitly titles the recipe as Chocolate Chip Brioche."
+        },
+        {
+          "statement": "The result is based on the recipe chocolate-brioche.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe ID as chocolate-brioche."
+        },
+        {
+          "statement": "The dairy free requirement could not be grounded in the archive.",
+          "verdict": 1,
+          "reason": "The context does not contain any information regarding a dairy-free requirement."
+        }
+      ],
+      "context_precision": 0.999999999975,
+      "context_precision_detail": {
+        "score": 0.999999999975,
+        "k": 8,
+        "n_relevant_retrieved": 4,
+        "numerator": 4.0,
+        "denominator": 4.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "chocolate-brioche::structure::c002",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "chocolate-brioche::structure::c000",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "chocolate-brioche::structure::c003",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "chocolate-brioche::structure::c001",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "gf-brioche::structure::c003",
+            "recipe_id": "gf-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.8,
+            "contribution": 0.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "classic-brioche::structure::c002",
+            "recipe_id": "classic-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.666667,
+            "contribution": 0.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "classic-brioche::structure::c001",
+            "recipe_id": "classic-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.571429,
+            "contribution": 0.0
+          },
+          {
+            "rank": 8,
+            "chunk_id": "classic-brioche::structure::c003",
+            "recipe_id": "classic-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.5,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "chocolate-brioche",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": null,
+        "donors_on_screen": [],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 0,
+      "_cached": 2
+    },
+    {
+      "case_id": "c03",
+      "mode": "refuses-swap-instead-of-quoting-card",
+      "recipe": "napa cabbage kimchi",
+      "constraint": "vegan, no fish or shellfish",
+      "reference_relevant_recipe_ids": [
+        "napa-kimchi"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Napa Cabbage Kimchi.\nIt is based on the recipe napa-kimchi.\nThe following could not be grounded in the archive: The provided context does not contain a vegan alternative for fish sauce or salted shrimp paste.",
+      "faithfulness": 0.75,
+      "n_statements": 4,
+      "n_supported": 3,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Napa Cabbage Kimchi.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe napa-kimchi.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe ID as napa-kimchi."
+        },
+        {
+          "statement": "The following could not be grounded in the archive: The provided context does not contain a vegan alternative for fish sauce or salted shrimp paste.",
+          "verdict": 1,
+          "reason": "The context indeed lacks any mention of vegan alternatives for those ingredients."
+        }
+      ],
+      "context_precision": 0.99999999998,
+      "context_precision_detail": {
+        "score": 0.99999999998,
+        "k": 7,
+        "n_relevant_retrieved": 5,
+        "numerator": 5.0,
+        "denominator": 5.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "napa-kimchi::structure::c002",
+            "recipe_id": "napa-kimchi",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "napa-kimchi::structure::c003",
+            "recipe_id": "napa-kimchi",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "napa-kimchi::structure::c004",
+            "recipe_id": "napa-kimchi",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "napa-kimchi::structure::c000",
+            "recipe_id": "napa-kimchi",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "napa-kimchi::structure::c001",
+            "recipe_id": "napa-kimchi",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "red-sauerkraut::structure::c003",
+            "recipe_id": "red-sauerkraut",
+            "v_k": 0,
+            "precision_at_k": 0.833333,
+            "contribution": 0.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "red-sauerkraut::structure::c001",
+            "recipe_id": "red-sauerkraut",
+            "v_k": 0,
+            "precision_at_k": 0.714286,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "napa-kimchi",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": null,
+        "donors_on_screen": [],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 0,
+      "_cached": 2
+    },
+    {
+      "case_id": "c04",
+      "mode": "refuses-swap-instead-of-quoting-card",
+      "recipe": "2kg country sourdough",
+      "constraint": "wholemeal",
+      "reference_relevant_recipe_ids": [
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution can be made.\nThe result is titled 2kg Country Sourdough.\nIt is based on the recipe sourdough-2kg.\n{\"removed\": \"Strong white bread flour\", \"added\": \"Wholemeal flour\", \"evidence_chunk_id\": \"wholemeal-sourdough::structure::c002\"}\nThe ingredients are: Wholemeal flour 950 g; Wholemeal rye flour 50 g; Water (28 C) 760 g; Stiff sourdough starter 200 g; Fine sea salt 18 g.\nThe method is: Whisk the starter into the water, add both flours, and mix to a shaggy mass. Autolyse for one hour rather than forty minutes, because wholemeal bran drinks slowly and a short rest leaves the dough gritty. Add the salt and pinch it through. Bulk ferment at 24 C for three and a half hours, folding every forty-five minutes. Wholemeal ferments faster than white, so watch the dough and not the clock. Shape, then cold retard at 4 C overnight. Bake at 240 C with steam for twenty minutes, then vent and drop to 220 C for a further twenty-five.\nThe oven setting is 240 C with steam for twenty minutes, then vent and drop to 220 C for a further twenty-five.\nAllergen warning: Contains wheat and rye (gluten). Made in a kitchen that also handles sesame and tree nuts.",
+      "faithfulness": 0.5789473684210527,
+      "n_statements": 19,
+      "n_supported": 11,
+      "verdicts": [
+        {
+          "statement": "The requested substitution can be made.",
+          "verdict": 0,
+          "reason": "The context does not mention a requested substitution."
+        },
+        {
+          "statement": "The result is titled 2kg Country Sourdough.",
+          "verdict": 0,
+          "reason": "The context for the wholemeal recipe is titled Wholemeal Sourdough."
+        },
+        {
+          "statement": "The result is based on the recipe sourdough-2kg.",
+          "verdict": 0,
+          "reason": "The context indicates the recipe is Wholemeal Sourdough, not sourdough-2kg."
+        },
+        {
+          "statement": "The removed ingredient is Strong white bread flour.",
+          "verdict": 0,
+          "reason": "The context does not describe a removal process."
+        },
+        {
+          "statement": "The added ingredient is Wholemeal flour.",
+          "verdict": 0,
+          "reason": "The context does not describe an addition process."
+        },
+        {
+          "statement": "The evidence chunk id is wholemeal-sourdough::structure::c002.",
+          "verdict": 1,
+          "reason": "The context explicitly lists this chunk ID."
+        },
+        {
+          "statement": "The ingredients are Wholemeal flour 950 g, Wholemeal rye flour 50 g, Water (28 C) 760 g, Stiff sourdough starter 200 g, and Fine sea salt 18 g.",
+          "verdict": 0,
+          "reason": "The context for the wholemeal recipe does not list specific ingredient weights."
+        },
+        {
+          "statement": "The method is to whisk the starter into the water, add both flours, and mix to a shaggy mass.",
+          "verdict": 1,
+          "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+        },
+        {
+          "statement": "The method is to autolyse for one hour rather than forty minutes.",
+          "verdict": 1,
+          "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+        },
+        {
+          "statement": "Wholemeal bran drinks slowly and a short rest leaves the dough gritty.",
+          "verdict": 1,
+          "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+        },
+        {
+          "statement": "The method is to add the salt and pinch the salt through.",
+          "verdict": 1,
+          "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+        },
+        {
+          "statement": "The method is to bulk ferment at 24 C for three and a half hours, folding every forty-five minutes.",
+          "verdict": 1,
+          "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+        },
+        {
+          "statement": "Wholemeal ferments faster than white.",
+          "verdict": 1,
+          "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+        },
+        {
+          "statement": "The baker should watch the dough and not the clock.",
+          "verdict": 1,
+          "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+        },
+        {
+          "statement": "The method is to shape, then cold retard at 4 C overnight.",
+          "verdict": 1,
+          "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+        },
+        {
+          "statement": "The method is to bake at 240 C with steam for twenty minutes, then vent and drop to 220 C for a further twenty-five.",
+          "verdict": 1,
+          "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+        },
+        {
+          "statement": "The oven setting is 240 C with steam for twenty minutes, then vent and drop to 220 C for a further twenty-five.",
+          "verdict": 1,
+          "reason": "This is stated in the wholemeal-sourdough::structure::c002 chunk."
+        },
+        {
+          "statement": "The allergen warning is that the recipe contains wheat and rye (gluten).",
+          "verdict": 0,
+          "reason": "The context for the wholemeal recipe does not explicitly state the allergen warning."
+        },
+        {
+          "statement": "The recipe is made in a kitchen that also handles sesame and tree nuts.",
+          "verdict": 0,
+          "reason": "The context for the wholemeal recipe does not state this."
+        }
+      ],
+      "context_precision": 0.9999999999857143,
+      "context_precision_detail": {
+        "score": 0.9999999999857143,
+        "k": 7,
+        "n_relevant_retrieved": 7,
+        "numerator": 7.0,
+        "denominator": 7.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "sourdough-2kg::structure::c001",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "sourdough-2kg::structure::c003",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "sourdough-2kg::structure::c000",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "sourdough-2kg::structure::c004",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "sourdough-2kg::structure::c002",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "wholemeal-sourdough::structure::c002",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "wholemeal-sourdough::structure::c000",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "sourdough-2kg",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": 6,
+        "donors_on_screen": [
+          "wholemeal-sourdough"
+        ],
+        "relevant_above": [],
+        "declined": false,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c05",
+      "mode": "refuses-swap-instead-of-quoting-card",
+      "recipe": "gluten-free sandwich loaf",
+      "constraint": "enriched, like a brioche",
+      "reference_relevant_recipe_ids": [
+        "gf-brioche",
+        "gf-sandwich-loaf"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Gluten-Free Sandwich Loaf.\nIt is based on the recipe gf-sandwich-loaf.\nThe following could not be grounded in the archive: The archive does not provide a method or ingredient list to transform a lean sandwich loaf into an enriched brioche-style dough.",
+      "faithfulness": 0.75,
+      "n_statements": 4,
+      "n_supported": 3,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Gluten-Free Sandwich Loaf.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe gf-sandwich-loaf.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe as gf-sandwich-loaf."
+        },
+        {
+          "statement": "The archive does not provide a method or ingredient list to transform a lean sandwich loaf into an enriched brioche-style dough.",
+          "verdict": 1,
+          "reason": "The context provides separate recipes for each but does not contain instructions for transforming one into the other."
+        }
+      ],
+      "context_precision": 0.9999999999833333,
+      "context_precision_detail": {
+        "score": 0.9999999999833333,
+        "k": 8,
+        "n_relevant_retrieved": 6,
+        "numerator": 6.0,
+        "denominator": 6.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "gf-sandwich-loaf::structure::c003",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "gf-sandwich-loaf::structure::c000",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "gf-sandwich-loaf::structure::c001",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "gf-sandwich-loaf::structure::c002",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "gf-brioche::structure::c001",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "gf-brioche::structure::c000",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "lemon-drizzle-cake::structure::c003",
+            "recipe_id": "lemon-drizzle-cake",
+            "v_k": 0,
+            "precision_at_k": 0.857143,
+            "contribution": 0.0
+          },
+          {
+            "rank": 8,
+            "chunk_id": "sourdough-2kg::structure::c000",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 0,
+            "precision_at_k": 0.75,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "gf-sandwich-loaf",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": 5,
+        "donors_on_screen": [
+          "gf-brioche"
+        ],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": true,
+        "wrongly_grounded": true
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c06",
+      "mode": "refuses-swap-instead-of-quoting-card",
+      "recipe": "chicken tikka masala",
+      "constraint": "vegan",
+      "reference_relevant_recipe_ids": [
+        "chicken-tikka-masala"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution can be made.\nThe result is titled Vegan Chicken Tikka Masala.\nIt is based on the recipe chicken-tikka-masala.\n{\"removed\": \"Chicken thigh, boneless\", \"added\": \"Dried chickpeas\", \"evidence_chunk_id\": \"chana-masala::structure::c001\"}\n{\"removed\": \"Full fat yoghurt\", \"added\": \"None\", \"evidence_chunk_id\": \"chana-masala::structure::c001\"}\n{\"removed\": \"Double cream\", \"added\": \"None\", \"evidence_chunk_id\": \"chana-masala::structure::c001\"}\n{\"removed\": \"Ghee\", \"added\": \"Sunflower oil\", \"evidence_chunk_id\": \"chana-masala::structure::c001\"}\nThe ingredients are: Dried chickpeas 400 g; Tinned plum tomatoes 400 g; Brown onion 250 g; Sunflower oil 45 g; Ginger, grated 25 g; Garlic, crushed 20 g; Garam masala 10 g; Ground turmeric 5 g; Kashmiri chilli powder 8 g; Fine sea salt 12 g; Kasoori methi 4 g.\nThe method is: Soften the onion in the sunflower oil, add the ginger, garlic and spices, then the tomatoes. Cook until thick and glossy, blend smooth, and return to the pan. Add the chickpeas and simmer for ten minutes, then stir in the crushed kasoori methi off the heat.\nAllergen warning: The provided context does not state this recipe is free of any allergens.",
+      "faithfulness": 0.13333333333333333,
+      "n_statements": 15,
+      "n_supported": 2,
+      "verdicts": [
+        {
+          "statement": "The requested substitution can be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Vegan Chicken Tikka Masala.",
+          "verdict": 0,
+          "reason": "The context does not mention a recipe with this title."
+        },
+        {
+          "statement": "The result is based on the recipe chicken-tikka-masala.",
+          "verdict": 0,
+          "reason": "The context does not describe a result based on this recipe."
+        },
+        {
+          "statement": "The ingredient Chicken thigh, boneless is removed.",
+          "verdict": 0,
+          "reason": "The context does not describe removing this ingredient."
+        },
+        {
+          "statement": "The ingredient Dried chickpeas is added.",
+          "verdict": 0,
+          "reason": "The context does not describe adding this ingredient."
+        },
+        {
+          "statement": "The ingredient Full fat yoghurt is removed.",
+          "verdict": 0,
+          "reason": "The context does not describe removing this ingredient."
+        },
+        {
+          "statement": "The ingredient Double cream is removed.",
+          "verdict": 0,
+          "reason": "The context does not describe removing this ingredient."
+        },
+        {
+          "statement": "The ingredient Ghee is removed.",
+          "verdict": 0,
+          "reason": "The context does not describe removing this ingredient."
+        },
+        {
+          "statement": "The ingredient Sunflower oil is added.",
+          "verdict": 0,
+          "reason": "The context does not describe adding this ingredient."
+        },
+        {
+          "statement": "The ingredients are Dried chickpeas 400 g, Tinned plum tomatoes 400 g, Brown onion 250 g, Sunflower oil 45 g, Ginger, grated 25 g, Garlic, crushed 20 g, Garam masala 10 g, Ground turmeric 5 g, Kashmiri chilli powder 8 g, Fine sea salt 12 g, and Kasoori methi 4 g.",
+          "verdict": 0,
+          "reason": "This specific list of ingredients is not stated in the context."
+        },
+        {
+          "statement": "The method is to soften the onion in the sunflower oil, add the ginger, garlic and spices, then the tomatoes.",
+          "verdict": 0,
+          "reason": "The context states to soften the onion in ghee, not sunflower oil."
+        },
+        {
+          "statement": "The method is to cook the mixture until thick and glossy, blend smooth, and return to the pan.",
+          "verdict": 1,
+          "reason": "This is stated in the method section of the chicken tikka masala recipe."
+        },
+        {
+          "statement": "The method is to add the chickpeas and simmer for ten minutes.",
+          "verdict": 0,
+          "reason": "The context states to add the grilled chicken, not chickpeas."
+        },
+        {
+          "statement": "The method is to stir in the crushed kasoori methi off the heat.",
+          "verdict": 1,
+          "reason": "This is stated in the method section of the chicken tikka masala recipe."
+        },
+        {
+          "statement": "The provided context does not state the recipe is free of any allergens.",
+          "verdict": 0,
+          "reason": "The context explicitly states the recipe is naturally gluten free."
+        }
+      ],
+      "context_precision": 0.99999999998,
+      "context_precision_detail": {
+        "score": 0.99999999998,
+        "k": 6,
+        "n_relevant_retrieved": 5,
+        "numerator": 5.0,
+        "denominator": 5.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "chicken-tikka-masala::structure::c000",
+            "recipe_id": "chicken-tikka-masala",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "chicken-tikka-masala::structure::c001",
+            "recipe_id": "chicken-tikka-masala",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "chicken-tikka-masala::structure::c004",
+            "recipe_id": "chicken-tikka-masala",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "chicken-tikka-masala::structure::c002",
+            "recipe_id": "chicken-tikka-masala",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "chicken-tikka-masala::structure::c003",
+            "recipe_id": "chicken-tikka-masala",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "chana-masala::structure::c001",
+            "recipe_id": "chana-masala",
+            "v_k": 0,
+            "precision_at_k": 0.833333,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "chicken-tikka-masala",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": null,
+        "donors_on_screen": [],
+        "relevant_above": [],
+        "declined": false,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c09",
+      "mode": "refuses-swap-instead-of-quoting-card",
+      "recipe": "light rye sourdough",
+      "constraint": "higher hydration",
+      "reference_relevant_recipe_ids": [
+        "rye-sourdough",
+        "wholemeal-sourdough"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Light Rye Sourdough.\nIt is based on the recipe rye-sourdough.\nThe following could not be grounded in the archive: The provided context does not contain information on how to adjust hydration levels for the Light Rye Sourdough recipe.",
+      "faithfulness": 0.75,
+      "n_statements": 4,
+      "n_supported": 3,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Light Rye Sourdough.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe rye-sourdough.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe ID as rye-sourdough."
+        },
+        {
+          "statement": "The following could not be grounded in the archive: The provided context does not contain information on how to adjust hydration levels for the Light Rye Sourdough recipe.",
+          "verdict": 1,
+          "reason": "The context indeed lacks instructions on adjusting hydration levels."
+        }
+      ],
+      "context_precision": 0.999999999975,
+      "context_precision_detail": {
+        "score": 0.999999999975,
+        "k": 6,
+        "n_relevant_retrieved": 4,
+        "numerator": 4.0,
+        "denominator": 4.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "rye-sourdough::structure::c002",
+            "recipe_id": "rye-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "rye-sourdough::structure::c003",
+            "recipe_id": "rye-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "rye-sourdough::structure::c001",
+            "recipe_id": "rye-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "rye-sourdough::structure::c000",
+            "recipe_id": "rye-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "sourdough-2kg::structure::c000",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 0,
+            "precision_at_k": 0.8,
+            "contribution": 0.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "sourdough-2kg::structure::c001",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 0,
+            "precision_at_k": 0.666667,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "rye-sourdough",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": null,
+        "donors_on_screen": [],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c11",
+      "mode": "refuses-arithmetic-with-table-on-screen",
+      "recipe": "classic brioche",
+      "constraint": "gluten free, and halve it to 250 g flour",
+      "reference_relevant_recipe_ids": [
+        "classic-brioche",
+        "gf-brioche"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Classic Brioche.\nIt is based on the recipe classic-brioche.\nThe following could not be grounded in the archive: I cannot ground the request to make the recipe gluten-free or to halve the recipe to 250 g of flour. While the archive contains a gluten-free brioche recipe, it does not provide instructions or evidence for converting the classic brioche recipe to be gluten-free, nor does it provide a mechanism for scaling the recipe quantities.",
+      "faithfulness": 0.4444444444444444,
+      "n_statements": 9,
+      "n_supported": 4,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention a requested substitution."
+        },
+        {
+          "statement": "The result is titled Classic Brioche.",
+          "verdict": 0,
+          "reason": "The context does not specify a result title."
+        },
+        {
+          "statement": "The result is based on the recipe classic-brioche.",
+          "verdict": 0,
+          "reason": "The context does not specify a result."
+        },
+        {
+          "statement": "The request to make the recipe gluten-free could not be grounded in the archive.",
+          "verdict": 0,
+          "reason": "The context does not contain a request to make a recipe gluten-free."
+        },
+        {
+          "statement": "The request to halve the recipe to 250 g of flour could not be grounded in the archive.",
+          "verdict": 0,
+          "reason": "The context does not contain a request to halve the recipe."
+        },
+        {
+          "statement": "The archive contains a gluten-free brioche recipe.",
+          "verdict": 1,
+          "reason": "The context includes a recipe titled Gluten-Free Brioche."
+        },
+        {
+          "statement": "The archive does not provide instructions for converting the classic brioche recipe to be gluten-free.",
+          "verdict": 1,
+          "reason": "The context provides separate recipes but no instructions for conversion."
+        },
+        {
+          "statement": "The archive does not provide evidence for converting the classic brioche recipe to be gluten-free.",
+          "verdict": 1,
+          "reason": "The context does not contain information on converting the classic recipe."
+        },
+        {
+          "statement": "The archive does not provide a mechanism for scaling the recipe quantities.",
+          "verdict": 1,
+          "reason": "The context provides fixed weights and percentages but no instructions for scaling."
+        }
+      ],
+      "context_precision": 0.9861111110987848,
+      "context_precision_detail": {
+        "score": 0.9861111110987848,
+        "k": 11,
+        "n_relevant_retrieved": 8,
+        "numerator": 7.888888888888889,
+        "denominator": 8.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "gf-brioche::structure::c000",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "gf-brioche::structure::c001",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "gf-brioche::structure::c002",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "gf-brioche::structure::c003",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "classic-brioche::structure::c002",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "classic-brioche::structure::c000",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "classic-brioche::structure::c003",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 8,
+            "chunk_id": "chocolate-brioche::structure::c003",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.875,
+            "contribution": 0.0
+          },
+          {
+            "rank": 9,
+            "chunk_id": "classic-brioche::structure::c001",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 0.888889,
+            "contribution": 0.888889
+          },
+          {
+            "rank": 10,
+            "chunk_id": "chocolate-brioche::structure::c002",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.8,
+            "contribution": 0.0
+          },
+          {
+            "rank": 11,
+            "chunk_id": "chocolate-brioche::structure::c000",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.727273,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "classic-brioche",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 5,
+        "best_base_rank": 5,
+        "best_donor_rank": 1,
+        "donors_on_screen": [
+          "gf-brioche"
+        ],
+        "relevant_above": [
+          "gf-brioche"
+        ],
+        "declined": true,
+        "declined_with_donor_on_screen": true,
+        "wrongly_grounded": true
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c12",
+      "mode": "refuses-arithmetic-with-table-on-screen",
+      "recipe": "2kg country sourdough",
+      "constraint": "wholemeal, scaled to 500 g total flour",
+      "reference_relevant_recipe_ids": [
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled 2kg Country Sourdough.\nIt is based on the recipe sourdough-2kg.\nThe following could not be grounded in the archive: The archive does not contain instructions or a mechanism to scale the recipe to 500 g total flour weight.",
+      "faithfulness": 0.75,
+      "n_statements": 4,
+      "n_supported": 3,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled 2kg Country Sourdough.",
+          "verdict": 1,
+          "reason": "The context explicitly lists the title as 2kg Country Sourdough."
+        },
+        {
+          "statement": "The result is based on the recipe sourdough-2kg.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe ID as sourdough-2kg."
+        },
+        {
+          "statement": "The archive does not contain instructions or a mechanism to scale the recipe to 500 g total flour weight.",
+          "verdict": 1,
+          "reason": "The provided context lacks any instructions or mechanisms for scaling the recipe."
+        }
+      ],
+      "context_precision": 0.9999999999875,
+      "context_precision_detail": {
+        "score": 0.9999999999875,
+        "k": 8,
+        "n_relevant_retrieved": 8,
+        "numerator": 8.0,
+        "denominator": 8.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "wholemeal-sourdough::structure::c001",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "sourdough-2kg::structure::c001",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "sourdough-2kg::structure::c003",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "sourdough-2kg::structure::c000",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "wholemeal-sourdough::structure::c000",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "sourdough-2kg::structure::c004",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "sourdough-2kg::structure::c002",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 8,
+            "chunk_id": "wholemeal-sourdough::structure::c002",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "sourdough-2kg",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 2,
+        "best_base_rank": 2,
+        "best_donor_rank": 1,
+        "donors_on_screen": [
+          "wholemeal-sourdough"
+        ],
+        "relevant_above": [
+          "wholemeal-sourdough"
+        ],
+        "declined": true,
+        "declined_with_donor_on_screen": true,
+        "wrongly_grounded": true
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c13",
+      "mode": "refuses-arithmetic-with-table-on-screen",
+      "recipe": "gluten-free sandwich loaf",
+      "constraint": "double the batch",
+      "reference_relevant_recipe_ids": [
+        "gf-sandwich-loaf"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Gluten-Free Sandwich Loaf.\nIt is based on the recipe gf-sandwich-loaf.\nThe following could not be grounded in the archive: The provided context does not contain instructions or grounding for scaling the batch size of the Gluten-Free Sandwich Loaf.",
+      "faithfulness": 0.75,
+      "n_statements": 4,
+      "n_supported": 3,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Gluten-Free Sandwich Loaf.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe gf-sandwich-loaf.",
+          "verdict": 1,
+          "reason": "The context explicitly identifies the recipe ID as gf-sandwich-loaf."
+        },
+        {
+          "statement": "The provided context does not contain instructions or grounding for scaling the batch size of the Gluten-Free Sandwich Loaf.",
+          "verdict": 1,
+          "reason": "The context provides specific weights and percentages but lacks instructions on how to scale the batch size."
+        }
+      ],
+      "context_precision": 0.999999999975,
+      "context_precision_detail": {
+        "score": 0.999999999975,
+        "k": 6,
+        "n_relevant_retrieved": 4,
+        "numerator": 4.0,
+        "denominator": 4.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "gf-sandwich-loaf::structure::c003",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "gf-sandwich-loaf::structure::c000",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "gf-sandwich-loaf::structure::c001",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "gf-sandwich-loaf::structure::c002",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "lemon-drizzle-cake::structure::c003",
+            "recipe_id": "lemon-drizzle-cake",
+            "v_k": 0,
+            "precision_at_k": 0.8,
+            "contribution": 0.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "sourdough-2kg::structure::c000",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 0,
+            "precision_at_k": 0.666667,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "gf-sandwich-loaf",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": null,
+        "donors_on_screen": [],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c14",
+      "mode": "refuses-arithmetic-with-table-on-screen",
+      "recipe": "red cabbage sauerkraut",
+      "constraint": "made with 2 kg of cabbage instead of 1 kg",
+      "reference_relevant_recipe_ids": [
+        "red-sauerkraut"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Red Cabbage Sauerkraut.\nIt is based on the recipe red-sauerkraut.\nThe following could not be grounded in the archive: Scaling the recipe to 2 kg of cabbage",
+      "faithfulness": 0.5,
+      "n_statements": 4,
+      "n_supported": 2,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Red Cabbage Sauerkraut.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe red-sauerkraut.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe ID as red-sauerkraut."
+        },
+        {
+          "statement": "Scaling the recipe to 2 kg of cabbage could not be grounded in the archive.",
+          "verdict": 0,
+          "reason": "The context provides baker's percentages which allow for scaling, so it is grounded."
+        }
+      ],
+      "context_precision": 0.999999999975,
+      "context_precision_detail": {
+        "score": 0.999999999975,
+        "k": 7,
+        "n_relevant_retrieved": 4,
+        "numerator": 4.0,
+        "denominator": 4.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "red-sauerkraut::structure::c003",
+            "recipe_id": "red-sauerkraut",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "red-sauerkraut::structure::c001",
+            "recipe_id": "red-sauerkraut",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "red-sauerkraut::structure::c002",
+            "recipe_id": "red-sauerkraut",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "red-sauerkraut::structure::c000",
+            "recipe_id": "red-sauerkraut",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "napa-kimchi::structure::c001",
+            "recipe_id": "napa-kimchi",
+            "v_k": 0,
+            "precision_at_k": 0.8,
+            "contribution": 0.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "shakshuka::structure::c002",
+            "recipe_id": "shakshuka",
+            "v_k": 0,
+            "precision_at_k": 0.666667,
+            "contribution": 0.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "napa-kimchi::structure::c002",
+            "recipe_id": "napa-kimchi",
+            "v_k": 0,
+            "precision_at_k": 0.571429,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "red-sauerkraut",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": null,
+        "donors_on_screen": [],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c15",
+      "mode": "drops-bakers-percentage",
+      "recipe": "chocolate brioche",
+      "constraint": "plain, no chocolate",
+      "reference_relevant_recipe_ids": [
+        "chocolate-brioche",
+        "classic-brioche"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution can be made.\nThe result is titled Brioche.\nIt is based on the recipe chocolate-brioche.\n{\"removed\": \"Dark chocolate chips\", \"added\": \"None\", \"evidence_chunk_id\": \"chocolate-brioche::structure::c001\"}\nThe ingredients are: Strong white bread flour 500 g; Caster sugar 70 g; Instant dried yeast 8 g; Fine sea salt 9 g; Whole eggs 250 g; Whole milk (32 C) 100 g; Unsalted butter, softened 225 g.\nThe method is: Whisk the flour, sugar, yeast and salt together dry, then beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl. Add the softened butter in five additions, waiting for each to disappear before the next. Chill overnight at 4 C. Scale into a lined tin the next morning, prove until risen by half, and bake at 180 C for 35 minutes.\nThe oven setting is 180 C.\nAllergen warning: Contains wheat (gluten), egg, and dairy.",
+      "faithfulness": 0.6875,
+      "n_statements": 16,
+      "n_supported": 11,
+      "verdicts": [
+        {
+          "statement": "The requested substitution can be made.",
+          "verdict": 0,
+          "reason": "The context does not mention a requested substitution."
+        },
+        {
+          "statement": "The result is titled Brioche.",
+          "verdict": 0,
+          "reason": "The title is Chocolate Chip Brioche."
+        },
+        {
+          "statement": "The result is based on the recipe chocolate-brioche.",
+          "verdict": 1,
+          "reason": "The context explicitly identifies the recipe as chocolate-brioche."
+        },
+        {
+          "statement": "The removed ingredient is Dark chocolate chips.",
+          "verdict": 0,
+          "reason": "The context does not describe a removal process."
+        },
+        {
+          "statement": "The added ingredient is None.",
+          "verdict": 0,
+          "reason": "The context does not describe an addition process."
+        },
+        {
+          "statement": "The evidence chunk id is chocolate-brioche::structure::c001.",
+          "verdict": 1,
+          "reason": "The chunk id is explicitly provided in the context."
+        },
+        {
+          "statement": "The ingredients are Strong white bread flour 500 g, Caster sugar 70 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 100 g, and Unsalted butter, softened 225 g.",
+          "verdict": 1,
+          "reason": "These ingredients and weights are listed in the chocolate-brioche ingredients table."
+        },
+        {
+          "statement": "The method is to whisk the flour, sugar, yeast and salt together dry.",
+          "verdict": 1,
+          "reason": "This is stated in the method section of the chocolate-brioche recipe."
+        },
+        {
+          "statement": "The method is to beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl.",
+          "verdict": 1,
+          "reason": "This is stated in the method section of the chocolate-brioche recipe."
+        },
+        {
+          "statement": "The method is to add the softened butter in five additions, waiting for each to disappear before the next.",
+          "verdict": 1,
+          "reason": "This is stated in the method section of the chocolate-brioche recipe."
+        },
+        {
+          "statement": "The method is to chill the dough overnight at 4 C.",
+          "verdict": 1,
+          "reason": "This is stated in the method section of the chocolate-brioche recipe."
+        },
+        {
+          "statement": "The method is to scale the dough into a lined tin the next morning.",
+          "verdict": 1,
+          "reason": "This is stated in the method section of the chocolate-brioche recipe."
+        },
+        {
+          "statement": "The method is to prove the dough until risen by half.",
+          "verdict": 1,
+          "reason": "This is stated in the method section of the chocolate-brioche recipe."
+        },
+        {
+          "statement": "The method is to bake the dough at 180 C for 35 minutes.",
+          "verdict": 1,
+          "reason": "This is stated in the method section of the chocolate-brioche recipe."
+        },
+        {
+          "statement": "The oven setting is 180 C.",
+          "verdict": 1,
+          "reason": "The baking temperature is specified as 180 C."
+        },
+        {
+          "statement": "The allergen warning is that the recipe contains wheat (gluten), egg, and dairy.",
+          "verdict": 0,
+          "reason": "The context also lists soy as an allergen."
+        }
+      ],
+      "context_precision": 0.9999999999833333,
+      "context_precision_detail": {
+        "score": 0.9999999999833333,
+        "k": 7,
+        "n_relevant_retrieved": 6,
+        "numerator": 6.0,
+        "denominator": 6.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "chocolate-brioche::structure::c002",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "chocolate-brioche::structure::c000",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "chocolate-brioche::structure::c001",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "chocolate-brioche::structure::c003",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "classic-brioche::structure::c002",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "classic-brioche::structure::c001",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "gf-brioche::structure::c002",
+            "recipe_id": "gf-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.857143,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "chocolate-brioche",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": 5,
+        "donors_on_screen": [
+          "classic-brioche"
+        ],
+        "relevant_above": [],
+        "declined": false,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c16",
+      "mode": "drops-bakers-percentage",
+      "recipe": "wholemeal sourdough",
+      "constraint": "light rye instead of wholemeal",
+      "reference_relevant_recipe_ids": [
+        "rye-sourdough",
+        "wholemeal-sourdough"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution can be made.\nThe result is titled Light Rye Sourdough.\nIt is based on the recipe wholemeal-sourdough.\n{\"removed\": \"Wholemeal flour\", \"added\": \"Strong white bread flour\", \"evidence_chunk_id\": \"rye-sourdough::structure::c001\"}\n{\"removed\": \"Strong white bread flour\", \"added\": \"Dark rye flour\", \"evidence_chunk_id\": \"rye-sourdough::structure::c001\"}\nThe ingredients are: Strong white bread flour 800 g; Dark rye flour 200 g; Water (28 C) 800 g; Stiff sourdough starter 200 g; Fine sea salt 20 g.\nThe method is: Whisk the starter into the water, add both flours, and mix to a shaggy mass. Autolyse for forty minutes. Rye carries no meaningful gluten, so handle the dough gently and expect it to feel tackier than an all-white build. Add the salt and pinch it through. Bulk ferment at 24 C for three and a half hours, folding every forty-five minutes. Shape, then cold retard at 4 C overnight. Bake at 240 C with steam for twenty minutes, then vent and drop to 220 C for a further twenty-five.\nThe oven setting is 240 C with steam for twenty minutes, then vent and drop to 220 C for a further twenty-five.\nAllergen warning: Contains wheat and rye (gluten). Made in a kitchen that also handles sesame and tree nuts.\nThe following could not be grounded in the archive: The total flour weight of the base recipe is 1000 g, which matches the Light Rye Sourdough recipe, but the individual ingredient quantities differ from the base recipe. I have used the ingredient quantities from the base recipe while swapping the flour types as requested.",
+      "faithfulness": 0.5,
+      "n_statements": 22,
+      "n_supported": 11,
+      "verdicts": [
+        {
+          "statement": "The requested substitution can be made.",
+          "verdict": 0,
+          "reason": "The context does not contain a request for substitution."
+        },
+        {
+          "statement": "The result is titled Light Rye Sourdough.",
+          "verdict": 1,
+          "reason": "The context explicitly titles the recipe Light Rye Sourdough."
+        },
+        {
+          "statement": "Light Rye Sourdough is based on the recipe wholemeal-sourdough.",
+          "verdict": 0,
+          "reason": "The context does not state that Light Rye Sourdough is based on the wholemeal-sourdough recipe."
+        },
+        {
+          "statement": "Wholemeal flour was removed.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of removing ingredients."
+        },
+        {
+          "statement": "Strong white bread flour was added.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of adding ingredients."
+        },
+        {
+          "statement": "Strong white bread flour was removed.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of removing ingredients."
+        },
+        {
+          "statement": "Dark rye flour was added.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of adding ingredients."
+        },
+        {
+          "statement": "The ingredients are Strong white bread flour 800 g, Dark rye flour 200 g, Water (28 C) 800 g, Stiff sourdough starter 200 g, and Fine sea salt 20 g.",
+          "verdict": 0,
+          "reason": "The water and salt quantities listed do not match the Light Rye Sourdough recipe provided in the context."
+        },
+        {
+          "statement": "The method is to whisk the starter into the water, add both flours, and mix to a shaggy mass.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+        },
+        {
+          "statement": "The method includes autolysing for forty minutes.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+        },
+        {
+          "statement": "Rye carries no meaningful gluten.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+        },
+        {
+          "statement": "The dough should be handled gently.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+        },
+        {
+          "statement": "The dough will feel tackier than an all-white build.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+        },
+        {
+          "statement": "The method includes adding the salt and pinching the salt through.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+        },
+        {
+          "statement": "The method includes bulk fermenting at 24 C for three and a half hours, folding every forty-five minutes.",
+          "verdict": 0,
+          "reason": "The Light Rye Sourdough recipe specifies three hours, not three and a half."
+        },
+        {
+          "statement": "The method includes shaping the dough, then cold retarding at 4 C overnight.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the Light Rye Sourdough method section."
+        },
+        {
+          "statement": "The method includes baking at 240 C with steam for twenty minutes, then venting and dropping to 220 C for a further twenty-five.",
+          "verdict": 0,
+          "reason": "The Light Rye Sourdough recipe specifies baking at 250 C and 225 C, not 240 C and 220 C."
+        },
+        {
+          "statement": "The oven setting is 240 C with steam for twenty minutes, then venting and dropping to 220 C for a further twenty-five.",
+          "verdict": 0,
+          "reason": "The Light Rye Sourdough recipe specifies different oven temperatures."
+        },
+        {
+          "statement": "The recipe contains wheat and rye (gluten).",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the Light Rye Sourdough allergens section."
+        },
+        {
+          "statement": "The recipe is made in a kitchen that also handles sesame and tree nuts.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the Light Rye Sourdough allergens section."
+        },
+        {
+          "statement": "The statement that the total flour weight of the base recipe is 1000 g, which matches the Light Rye Sourdough recipe, but the individual ingredient quantities differ from the base recipe could not be grounded in the archive.",
+          "verdict": 1,
+          "reason": "The context confirms the total flour weight is 1000g for both, but does not provide a comparison of ingredient quantities between them."
+        },
+        {
+          "statement": "The ingredient quantities from the base recipe were used while swapping the flour types as requested.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of swapping flour types or using base recipe quantities."
+        }
+      ],
+      "context_precision": 0.9999999999875,
+      "context_precision_detail": {
+        "score": 0.9999999999875,
+        "k": 10,
+        "n_relevant_retrieved": 8,
+        "numerator": 8.0,
+        "denominator": 8.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "rye-sourdough::structure::c003",
+            "recipe_id": "rye-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "rye-sourdough::structure::c002",
+            "recipe_id": "rye-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "wholemeal-sourdough::structure::c002",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "wholemeal-sourdough::structure::c003",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "rye-sourdough::structure::c001",
+            "recipe_id": "rye-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "rye-sourdough::structure::c000",
+            "recipe_id": "rye-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "wholemeal-sourdough::structure::c001",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 8,
+            "chunk_id": "wholemeal-sourdough::structure::c000",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 9,
+            "chunk_id": "sourdough-2kg::structure::c002",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 0,
+            "precision_at_k": 0.888889,
+            "contribution": 0.0
+          },
+          {
+            "rank": 10,
+            "chunk_id": "sourdough-2kg::structure::c004",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 0,
+            "precision_at_k": 0.8,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "wholemeal-sourdough",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 3,
+        "best_base_rank": 3,
+        "best_donor_rank": 1,
+        "donors_on_screen": [
+          "rye-sourdough"
+        ],
+        "relevant_above": [
+          "rye-sourdough"
+        ],
+        "declined": false,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c17",
+      "mode": "drops-bakers-percentage",
+      "recipe": "gluten-free brioche",
+      "constraint": "vegan, no eggs or dairy",
+      "reference_relevant_recipe_ids": [
+        "gf-brioche"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Gluten-Free Brioche.\nIt is based on the recipe gf-brioche.\nThe following could not be grounded in the archive: vegan, no eggs or dairy",
+      "faithfulness": 0.8333333333333334,
+      "n_statements": 6,
+      "n_supported": 5,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Gluten-Free Brioche.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe gf-brioche.",
+          "verdict": 1,
+          "reason": "The context explicitly identifies the recipe as gf-brioche."
+        },
+        {
+          "statement": "The term vegan could not be grounded in the archive.",
+          "verdict": 1,
+          "reason": "The word vegan does not appear in the provided context."
+        },
+        {
+          "statement": "The term no eggs could not be grounded in the archive.",
+          "verdict": 1,
+          "reason": "The phrase no eggs does not appear in the provided context."
+        },
+        {
+          "statement": "The term no dairy could not be grounded in the archive.",
+          "verdict": 1,
+          "reason": "The phrase no dairy does not appear in the provided context."
+        }
+      ],
+      "context_precision": 0.8541666666453125,
+      "context_precision_detail": {
+        "score": 0.8541666666453125,
+        "k": 6,
+        "n_relevant_retrieved": 4,
+        "numerator": 3.4166666666666665,
+        "denominator": 4.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "gf-brioche::structure::c003",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "gf-brioche::structure::c000",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "classic-brioche::structure::c003",
+            "recipe_id": "classic-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.666667,
+            "contribution": 0.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "gf-brioche::structure::c001",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 0.75,
+            "contribution": 0.75
+          },
+          {
+            "rank": 5,
+            "chunk_id": "chocolate-brioche::structure::c003",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.6,
+            "contribution": 0.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "gf-brioche::structure::c002",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 0.666667,
+            "contribution": 0.666667
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "gf-brioche",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": null,
+        "donors_on_screen": [],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c18",
+      "mode": "drops-bakers-percentage",
+      "recipe": "classic brioche",
+      "constraint": "chocolate chip version",
+      "reference_relevant_recipe_ids": [
+        "chocolate-brioche",
+        "classic-brioche"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution can be made.\nThe result is titled Chocolate Chip Brioche.\nIt is based on the recipe classic-brioche.\n{\"removed\": \"Unsalted butter, softened (250 g)\", \"added\": \"Unsalted butter, softened (225 g)\", \"evidence_chunk_id\": \"chocolate-brioche::structure::c001\"}\n{\"removed\": \"Caster sugar (60 g)\", \"added\": \"Caster sugar (70 g)\", \"evidence_chunk_id\": \"chocolate-brioche::structure::c001\"}\n{\"removed\": \"None\", \"added\": \"Dark chocolate chips (150 g)\", \"evidence_chunk_id\": \"chocolate-brioche::structure::c001\"}\nThe ingredients are: Strong white bread flour 500 g; Caster sugar 70 g; Instant dried yeast 8 g; Fine sea salt 9 g; Whole eggs 250 g; Whole milk (32 C) 100 g; Unsalted butter, softened 225 g; Dark chocolate chips 150 g.\nThe method is: Whisk the flour, sugar, yeast and salt together dry, then beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl. Add the softened butter in five additions, waiting for each to disappear before the next. Fold the chocolate chips through by hand at the very end, or the paddle will smash them into the crumb and grey the whole loaf. Chill overnight at 4 C. Scale into a lined tin the next morning, prove until risen by half, and bake at 180 C for 35 minutes.\nThe oven setting is 180 C.\nAllergen warning: Contains wheat (gluten), egg, dairy and soy (from the chocolate).",
+      "faithfulness": 0.6666666666666666,
+      "n_statements": 21,
+      "n_supported": 14,
+      "verdicts": [
+        {
+          "statement": "The requested substitution can be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Chocolate Chip Brioche.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe classic-brioche.",
+          "verdict": 0,
+          "reason": "The context describes the Chocolate Chip Brioche recipe as a distinct entity from the Classic Brioche recipe."
+        },
+        {
+          "statement": "The ingredient Unsalted butter, softened (250 g) is removed.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of removing ingredients from one recipe to create another."
+        },
+        {
+          "statement": "The ingredient Unsalted butter, softened (225 g) is added.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of adding ingredients to create a new recipe."
+        },
+        {
+          "statement": "The ingredient Caster sugar (60 g) is removed.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of removing ingredients."
+        },
+        {
+          "statement": "The ingredient Caster sugar (70 g) is added.",
+          "verdict": 0,
+          "reason": "The context does not describe a process of adding ingredients."
+        },
+        {
+          "statement": "No ingredient is removed for the chocolate chip addition.",
+          "verdict": 0,
+          "reason": "The context does not describe the addition of chocolate chips as a modification of another recipe."
+        },
+        {
+          "statement": "The ingredient Dark chocolate chips (150 g) is added.",
+          "verdict": 1,
+          "reason": "The ingredient list for Chocolate Chip Brioche includes 150 g of dark chocolate chips."
+        },
+        {
+          "statement": "The ingredients are Strong white bread flour 500 g, Caster sugar 70 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 100 g, Unsalted butter, softened 225 g, and Dark chocolate chips 150 g.",
+          "verdict": 1,
+          "reason": "These ingredients are listed in the Chocolate Chip Brioche ingredient table."
+        },
+        {
+          "statement": "The method is to whisk the flour, sugar, yeast and salt together dry.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The method is to beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The method is to add the softened butter in five additions, waiting for each to disappear before the next.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The method is to fold the chocolate chips through by hand at the very end.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "Folding the chocolate chips by hand prevents the paddle from smashing the chocolate chips into the crumb and greying the whole loaf.",
+          "verdict": 1,
+          "reason": "The context states this as the reason for folding by hand."
+        },
+        {
+          "statement": "The method is to chill the dough overnight at 4 C.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The method is to scale the dough into a lined tin the next morning.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The method is to prove the dough until risen by half.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The method is to bake the dough at 180 C for 35 minutes.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The oven setting is 180 C.",
+          "verdict": 1,
+          "reason": "The method specifies baking at 180 C."
+        },
+        {
+          "statement": "The allergen warning is that the recipe contains wheat (gluten), egg, dairy and soy (from the chocolate).",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the allergens section."
+        }
+      ],
+      "context_precision": 0.9999999999875,
+      "context_precision_detail": {
+        "score": 0.9999999999875,
+        "k": 8,
+        "n_relevant_retrieved": 8,
+        "numerator": 8.0,
+        "denominator": 8.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "chocolate-brioche::structure::c002",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "chocolate-brioche::structure::c000",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "chocolate-brioche::structure::c001",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "chocolate-brioche::structure::c003",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "classic-brioche::structure::c002",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "classic-brioche::structure::c000",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "classic-brioche::structure::c001",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 8,
+            "chunk_id": "classic-brioche::structure::c003",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "classic-brioche",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 5,
+        "best_base_rank": 5,
+        "best_donor_rank": 1,
+        "donors_on_screen": [
+          "chocolate-brioche"
+        ],
+        "relevant_above": [
+          "chocolate-brioche"
+        ],
+        "declined": false,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c19",
+      "mode": "compares-only-retrieved-cards",
+      "recipe": "the brioches",
+      "constraint": "which of them can be made gluten free",
+      "reference_relevant_recipe_ids": [
+        "chocolate-brioche",
+        "classic-brioche",
+        "gf-brioche"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution can be made.\nThe result is titled Gluten-Free Brioche.\nIt is based on the recipe gf-brioche.\nThe ingredients are: Gluten-free flour blend 500 g; Xanthan gum 6 g; Caster sugar 60 g; Instant dried yeast 8 g; Fine sea salt 9 g; Whole eggs 250 g; Whole milk (32 C) 150 g; Unsalted butter, softened 175 g.\nThe method is: Whisk the flour blend, xanthan gum, sugar, yeast and salt together dry, so the gum disperses before it meets any liquid. Lumped gum turns the crumb slimy and no amount of mixing later will fix it. Beat in the eggs and warm milk until the batter climbs the paddle, then add the softened butter in five additions, waiting for each to disappear. The dough stays a thick batter rather than a ball, which is normal without gluten. Chill overnight at 4 C. Scale into a lined tin the next morning, prove until risen by half, and bake at 180 C for 35 minutes.\nThe oven setting is 180 C.\nAllergen warning: Contains egg and dairy.",
+      "faithfulness": 0.9473684210526315,
+      "n_statements": 19,
+      "n_supported": 18,
+      "verdicts": [
+        {
+          "statement": "The requested substitution can be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Gluten-Free Brioche.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe gf-brioche.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe ID as gf-brioche."
+        },
+        {
+          "statement": "The ingredients for Gluten-Free Brioche are: Gluten-free flour blend 500 g; Xanthan gum 6 g; Caster sugar 60 g; Instant dried yeast 8 g; Fine sea salt 9 g; Whole eggs 250 g; Whole milk (32 C) 150 g; Unsalted butter, softened 175 g.",
+          "verdict": 1,
+          "reason": "These ingredients and weights are listed in the ingredients table for the recipe."
+        },
+        {
+          "statement": "The method for Gluten-Free Brioche is to whisk the flour blend, xanthan gum, sugar, yeast and salt together dry.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "Whisking the flour blend, xanthan gum, sugar, yeast and salt together dry ensures the gum disperses before it meets any liquid.",
+          "verdict": 1,
+          "reason": "The context states this is done so the gum disperses before it meets any liquid."
+        },
+        {
+          "statement": "Lumped gum turns the crumb slimy.",
+          "verdict": 1,
+          "reason": "The context explicitly states that lumped gum turns the crumb slimy."
+        },
+        {
+          "statement": "No amount of mixing later will fix lumped gum.",
+          "verdict": 1,
+          "reason": "The context explicitly states that no amount of mixing later will fix it."
+        },
+        {
+          "statement": "The method for Gluten-Free Brioche is to beat in the eggs and warm milk until the batter climbs the paddle.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The method for Gluten-Free Brioche is to add the softened butter in five additions, waiting for each to disappear.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The dough stays a thick batter rather than a ball.",
+          "verdict": 1,
+          "reason": "The context states the dough stays a thick batter rather than a ball."
+        },
+        {
+          "statement": "The dough staying a thick batter rather than a ball is normal without gluten.",
+          "verdict": 1,
+          "reason": "The context states this is normal without gluten."
+        },
+        {
+          "statement": "The method for Gluten-Free Brioche is to chill the dough overnight at 4 C.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The method for Gluten-Free Brioche is to scale the dough into a lined tin the next morning.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The method for Gluten-Free Brioche is to prove the dough until risen by half.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The method for Gluten-Free Brioche is to bake the dough at 180 C for 35 minutes.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section."
+        },
+        {
+          "statement": "The oven setting for Gluten-Free Brioche is 180 C.",
+          "verdict": 1,
+          "reason": "The context states to bake at 180 C."
+        },
+        {
+          "statement": "Gluten-Free Brioche contains egg.",
+          "verdict": 1,
+          "reason": "The allergens section explicitly states it contains egg."
+        },
+        {
+          "statement": "Gluten-Free Brioche contains dairy.",
+          "verdict": 1,
+          "reason": "The allergens section explicitly states it contains dairy."
+        }
+      ],
+      "context_precision": 0.999999999990909,
+      "context_precision_detail": {
+        "score": 0.999999999990909,
+        "k": 11,
+        "n_relevant_retrieved": 11,
+        "numerator": 11.0,
+        "denominator": 11.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "gf-brioche::structure::c003",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "gf-brioche::structure::c001",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "classic-brioche::structure::c003",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "gf-brioche::structure::c000",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "chocolate-brioche::structure::c003",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "gf-brioche::structure::c002",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "classic-brioche::structure::c002",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 8,
+            "chunk_id": "chocolate-brioche::structure::c002",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 9,
+            "chunk_id": "classic-brioche::structure::c000",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 10,
+            "chunk_id": "chocolate-brioche::structure::c000",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 11,
+            "chunk_id": "classic-brioche::structure::c001",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "gf-brioche",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": 1,
+        "donors_on_screen": [
+          "gf-brioche"
+        ],
+        "relevant_above": [],
+        "declined": false,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c20",
+      "mode": "compares-only-retrieved-cards",
+      "recipe": "the sourdoughs",
+      "constraint": "which has the lowest salt, and swap the others to match",
+      "reference_relevant_recipe_ids": [
+        "rye-sourdough",
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution can be made.\nThe result is titled 2kg Country Sourdough.\nIt is based on the recipe sourdough-2kg.\n{\"removed\": \"18 g\", \"added\": \"18 g\", \"evidence_chunk_id\": \"sourdough-2kg::structure::c001\"}\nThe ingredients are: Strong white bread flour 950 g; Wholemeal rye flour 50 g; Water (28 C) 760 g; Stiff sourdough starter 200 g; Fine sea salt 18 g.\nThe method is: Whisk the starter into the water until no lumps remain, then add both flours and mix to a shaggy mass. Cover and autolyse for forty minutes. Hold the salt back at this stage: added before the autolyse it tightens the gluten and the dough fights you for the rest of the day. Sprinkle the fine sea salt over the rested dough and pinch it through with wet hands until you can no longer feel grains. Bulk ferment at 24 C for four hours, folding the dough in the bowl every forty-five minutes for the first three. Divide, pre-shape, and rest for twenty minutes. Shape into two tight boules, seam side up in floured baskets, then cold retard at 4 C overnight for twelve to fourteen hours. Bake straight from the fridge at 250 C with steam for twenty minutes, then vent the oven and drop to 230 C for a further twenty-five minutes until the crust is deeply coloured.\nThe oven setting is 250 C with steam for twenty minutes, then vent the oven and drop to 230 C for a further twenty-five minutes.\nAllergen warning: Contains wheat and rye (gluten). Made in a kitchen that also handles sesame and tree nuts.",
+      "faithfulness": 0.9545454545454546,
+      "n_statements": 22,
+      "n_supported": 21,
+      "verdicts": [
+        {
+          "statement": "The requested substitution can be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled 2kg Country Sourdough.",
+          "verdict": 1,
+          "reason": "The context explicitly titles the recipe 2kg Country Sourdough."
+        },
+        {
+          "statement": "The result is based on the recipe sourdough-2kg.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe ID as sourdough-2kg."
+        },
+        {
+          "statement": "The ingredients are Strong white bread flour 950 g, Wholemeal rye flour 50 g, Water (28 C) 760 g, Stiff sourdough starter 200 g, and Fine sea salt 18 g.",
+          "verdict": 1,
+          "reason": "These ingredients and weights are listed in the context for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to whisk the starter into the water until no lumps remain.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to add both flours and mix to a shaggy mass.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to cover and autolyse for forty minutes.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to hold the salt back during the autolyse stage.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "Adding salt before the autolyse tightens the gluten.",
+          "verdict": 1,
+          "reason": "The context explicitly states that adding salt before the autolyse tightens the gluten."
+        },
+        {
+          "statement": "The method is to sprinkle the fine sea salt over the rested dough.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to pinch the fine sea salt through the dough with wet hands until no grains are felt.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to bulk ferment at 24 C for four hours.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to fold the dough in the bowl every forty-five minutes for the first three hours of bulk fermentation.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to divide, pre-shape, and rest the dough for twenty minutes.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to shape the dough into two tight boules.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to place the boules seam side up in floured baskets.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to cold retard the boules at 4 C overnight for twelve to fourteen hours.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to bake the boules straight from the fridge at 250 C with steam for twenty minutes.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The method is to vent the oven and drop the temperature to 230 C for a further twenty-five minutes until the crust is deeply coloured.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The oven setting is 250 C with steam for twenty minutes, then vent the oven and drop to 230 C for a further twenty-five minutes.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The recipe contains an allergen warning for wheat and rye (gluten).",
+          "verdict": 1,
+          "reason": "The context explicitly states the recipe contains wheat and rye (gluten)."
+        },
+        {
+          "statement": "The recipe is made in a kitchen that also handles sesame and tree nuts.",
+          "verdict": 1,
+          "reason": "The context explicitly states the recipe is made in a kitchen that also handles sesame and tree nuts."
+        }
+      ],
+      "context_precision": 0.9999999999888889,
+      "context_precision_detail": {
+        "score": 0.9999999999888889,
+        "k": 9,
+        "n_relevant_retrieved": 9,
+        "numerator": 9.0,
+        "denominator": 9.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "sourdough-2kg::structure::c003",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "sourdough-2kg::structure::c002",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "wholemeal-sourdough::structure::c000",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "sourdough-2kg::structure::c000",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "sourdough-2kg::structure::c004",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "wholemeal-sourdough::structure::c002",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "sourdough-2kg::structure::c001",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 8,
+            "chunk_id": "wholemeal-sourdough::structure::c001",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 9,
+            "chunk_id": "rye-sourdough::structure::c001",
+            "recipe_id": "rye-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "sourdough-2kg",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": 1,
+        "donors_on_screen": [
+          "sourdough-2kg"
+        ],
+        "relevant_above": [],
+        "declined": false,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c21",
+      "mode": "compares-only-retrieved-cards",
+      "recipe": "the gluten-free loaves",
+      "constraint": "which one is already vegan",
+      "reference_relevant_recipe_ids": [
+        "gf-brioche",
+        "gf-sandwich-loaf"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution can be made.\nThe result is titled Gluten-Free Sandwich Loaf.\nIt is based on the recipe gf-sandwich-loaf.\nThe ingredients are: Gluten-free flour blend 500 g; Xanthan gum 10 g; Psyllium husk 15 g; Instant dried yeast 7 g; Fine sea salt 10 g; Water (30 C) 400 g; Olive oil 30 g.\nThe method is: Whisk the flour blend, xanthan gum, psyllium husk, yeast and salt together dry so both gums disperse before they meet water. Psyllium hydrates far faster than xanthan, so skipping the dry mix leaves you picking gel lumps out of the batter. Add the warm water and oil, beat for four minutes, then rest the batter for twenty so the psyllium sets up. It should hold a peak rather than pour. Scrape into a lined tin, prove until risen by half, and bake at 200 C for 45 minutes.\nThe oven setting is 200 C.\nAllergen warning: Gluten free, provided the flour blend is certified. No egg or dairy.",
+      "faithfulness": 0.9444444444444444,
+      "n_statements": 18,
+      "n_supported": 17,
+      "verdicts": [
+        {
+          "statement": "The requested substitution can be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Gluten-Free Sandwich Loaf.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe gf-sandwich-loaf.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe ID as gf-sandwich-loaf."
+        },
+        {
+          "statement": "The ingredients are Gluten-free flour blend 500 g, Xanthan gum 10 g, Psyllium husk 15 g, Instant dried yeast 7 g, Fine sea salt 10 g, Water (30 C) 400 g, and Olive oil 30 g.",
+          "verdict": 1,
+          "reason": "These ingredients and weights are listed in the ingredients table."
+        },
+        {
+          "statement": "The method is to whisk the flour blend, xanthan gum, psyllium husk, yeast and salt together dry so both gums disperse before they meet water.",
+          "verdict": 1,
+          "reason": "This is stated verbatim in the method section."
+        },
+        {
+          "statement": "Psyllium hydrates far faster than xanthan.",
+          "verdict": 1,
+          "reason": "This is stated verbatim in the method section."
+        },
+        {
+          "statement": "Skipping the dry mix leaves the baker picking gel lumps out of the batter.",
+          "verdict": 1,
+          "reason": "This is stated verbatim in the method section."
+        },
+        {
+          "statement": "The baker adds the warm water and oil.",
+          "verdict": 1,
+          "reason": "This is stated in the method section."
+        },
+        {
+          "statement": "The baker beats the batter for four minutes.",
+          "verdict": 1,
+          "reason": "This is stated in the method section."
+        },
+        {
+          "statement": "The baker rests the batter for twenty minutes so the psyllium sets up.",
+          "verdict": 1,
+          "reason": "This is stated in the method section."
+        },
+        {
+          "statement": "The batter should hold a peak rather than pour.",
+          "verdict": 1,
+          "reason": "This is stated in the method section."
+        },
+        {
+          "statement": "The baker scrapes the batter into a lined tin.",
+          "verdict": 1,
+          "reason": "This is stated in the method section."
+        },
+        {
+          "statement": "The baker proves the batter until risen by half.",
+          "verdict": 1,
+          "reason": "This is stated in the method section."
+        },
+        {
+          "statement": "The baker bakes the loaf at 200 C for 45 minutes.",
+          "verdict": 1,
+          "reason": "This is stated in the method section."
+        },
+        {
+          "statement": "The oven setting is 200 C.",
+          "verdict": 1,
+          "reason": "The method specifies baking at 200 C."
+        },
+        {
+          "statement": "The recipe is gluten free, provided the flour blend is certified.",
+          "verdict": 1,
+          "reason": "This is stated in the allergens section."
+        },
+        {
+          "statement": "The recipe contains no egg.",
+          "verdict": 1,
+          "reason": "The allergens section explicitly states no egg."
+        },
+        {
+          "statement": "The recipe contains no dairy.",
+          "verdict": 1,
+          "reason": "The allergens section explicitly states no dairy."
+        }
+      ],
+      "context_precision": 0.99999999998,
+      "context_precision_detail": {
+        "score": 0.99999999998,
+        "k": 6,
+        "n_relevant_retrieved": 5,
+        "numerator": 5.0,
+        "denominator": 5.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "gf-sandwich-loaf::structure::c001",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "gf-sandwich-loaf::structure::c003",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "gf-sandwich-loaf::structure::c002",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "gf-sandwich-loaf::structure::c000",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "gf-brioche::structure::c001",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "lemon-drizzle-cake::structure::c003",
+            "recipe_id": "lemon-drizzle-cake",
+            "v_k": 0,
+            "precision_at_k": 0.833333,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "gf-sandwich-loaf",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": 1,
+        "donors_on_screen": [
+          "gf-sandwich-loaf"
+        ],
+        "relevant_above": [],
+        "declined": false,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c22",
+      "mode": "says-missing-while-on-screen",
+      "recipe": "classic brioche",
+      "constraint": "swap the milk for the same weight the gluten-free brioche uses",
+      "reference_relevant_recipe_ids": [
+        "classic-brioche",
+        "gf-brioche"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution can be made.\nThe result is titled Classic Brioche.\nIt is based on the recipe classic-brioche.\n{\"removed\": \"Whole milk (32 C) | 100 g\", \"added\": \"Whole milk (32 C) | 150 g\", \"evidence_chunk_id\": \"gf-brioche::structure::c001\"}\nThe ingredients are: Strong white bread flour 500 g; Caster sugar 60 g; Instant dried yeast 8 g; Fine sea salt 9 g; Whole eggs 250 g; Whole milk (32 C) 150 g; Unsalted butter, softened 250 g.\nThe method is: Whisk the flour, sugar, yeast and salt together dry, then beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl. Add the softened butter in five additions, waiting for each to disappear before the next. The dough should end up glossy and slack enough to fall from the hook in a sheet. Chill overnight at 4 C. Scale into a lined tin the next morning, prove until risen by half, and bake at 180 C for 35 minutes.\nThe oven setting is 180 C.\nAllergen warning: Contains wheat (gluten), egg and dairy.\nThe following could not be grounded in the archive: The total flour weight is 500 g in both recipes, so no adjustment is needed.",
+      "faithfulness": 0.5333333333333333,
+      "n_statements": 15,
+      "n_supported": 8,
+      "verdicts": [
+        {
+          "statement": "The requested substitution can be made.",
+          "verdict": 0,
+          "reason": "The context does not define a requested substitution."
+        },
+        {
+          "statement": "The result is titled Classic Brioche.",
+          "verdict": 0,
+          "reason": "The context does not specify a result title for a substitution."
+        },
+        {
+          "statement": "The result is based on the recipe classic-brioche.",
+          "verdict": 0,
+          "reason": "The context does not specify a result recipe."
+        },
+        {
+          "statement": "The removed ingredient is Whole milk (32 C) | 100 g.",
+          "verdict": 0,
+          "reason": "The context does not define a removal process."
+        },
+        {
+          "statement": "The added ingredient is Whole milk (32 C) | 150 g.",
+          "verdict": 0,
+          "reason": "The context does not define an addition process."
+        },
+        {
+          "statement": "The evidence chunk id is gf-brioche::structure::c001.",
+          "verdict": 0,
+          "reason": "The context does not define an evidence chunk id."
+        },
+        {
+          "statement": "The ingredients are Strong white bread flour 500 g, Caster sugar 60 g, Instant dried yeast 8 g, Fine sea salt 9 g, Whole eggs 250 g, Whole milk (32 C) 150 g, and Unsalted butter, softened 250 g.",
+          "verdict": 0,
+          "reason": "This specific combination of ingredients does not exist in any single recipe in the context."
+        },
+        {
+          "statement": "The method is to whisk the flour, sugar, yeast and salt together dry, then beat in the eggs and warm milk until the dough climbs the hook and cleans the bowl.",
+          "verdict": 1,
+          "reason": "This is the method described for the Classic Brioche recipe."
+        },
+        {
+          "statement": "The method includes adding the softened butter in five additions, waiting for each to disappear before the next.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method sections for Classic and Chocolate Chip Brioche."
+        },
+        {
+          "statement": "The dough should end up glossy and slack enough to fall from the hook in a sheet.",
+          "verdict": 1,
+          "reason": "This is explicitly stated in the method section for Classic Brioche."
+        },
+        {
+          "statement": "The dough should be chilled overnight at 4 C.",
+          "verdict": 1,
+          "reason": "This is stated in the method sections for all three recipes."
+        },
+        {
+          "statement": "The dough should be scaled into a lined tin the next morning, proved until risen by half, and baked at 180 C for 35 minutes.",
+          "verdict": 1,
+          "reason": "This is stated in the method sections for all three recipes."
+        },
+        {
+          "statement": "The oven setting is 180 C.",
+          "verdict": 1,
+          "reason": "This is stated in the method sections for all three recipes."
+        },
+        {
+          "statement": "The allergen warning is that the recipe contains wheat (gluten), egg and dairy.",
+          "verdict": 1,
+          "reason": "This is stated in the allergen section for Classic Brioche."
+        },
+        {
+          "statement": "The statement that the total flour weight is 500 g in both recipes, so no adjustment is needed, could not be grounded in the archive.",
+          "verdict": 1,
+          "reason": "The context confirms both recipes use 500g of flour, so the statement that it could not be grounded is false, making the statement itself false."
+        }
+      ],
+      "context_precision": 0.9861111110987848,
+      "context_precision_detail": {
+        "score": 0.9861111110987848,
+        "k": 11,
+        "n_relevant_retrieved": 8,
+        "numerator": 7.888888888888889,
+        "denominator": 8.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "classic-brioche::structure::c002",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "gf-brioche::structure::c003",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "gf-brioche::structure::c000",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "classic-brioche::structure::c000",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "classic-brioche::structure::c003",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "gf-brioche::structure::c002",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "classic-brioche::structure::c001",
+            "recipe_id": "classic-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 8,
+            "chunk_id": "chocolate-brioche::structure::c002",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.875,
+            "contribution": 0.0
+          },
+          {
+            "rank": 9,
+            "chunk_id": "gf-brioche::structure::c001",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 0.888889,
+            "contribution": 0.888889
+          },
+          {
+            "rank": 10,
+            "chunk_id": "chocolate-brioche::structure::c003",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.8,
+            "contribution": 0.0
+          },
+          {
+            "rank": 11,
+            "chunk_id": "chocolate-brioche::structure::c000",
+            "recipe_id": "chocolate-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.727273,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "classic-brioche",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": 2,
+        "donors_on_screen": [
+          "gf-brioche"
+        ],
+        "relevant_above": [],
+        "declined": false,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c23",
+      "mode": "says-missing-while-on-screen",
+      "recipe": "2kg country sourdough",
+      "constraint": "raise the hydration to match the wettest loaf in the archive",
+      "reference_relevant_recipe_ids": [
+        "classic-focaccia",
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled 2kg Country Sourdough.\nIt is based on the recipe sourdough-2kg.\nThe following could not be grounded in the archive: The archive does not provide hydration percentages for other recipes to determine the wettest loaf, nor does it provide a method to adjust the water quantity in the base recipe.",
+      "faithfulness": 0.8,
+      "n_statements": 5,
+      "n_supported": 4,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled 2kg Country Sourdough.",
+          "verdict": 1,
+          "reason": "The title section of the recipe explicitly states 2kg Country Sourdough."
+        },
+        {
+          "statement": "The result is based on the recipe sourdough-2kg.",
+          "verdict": 1,
+          "reason": "The context explicitly identifies the recipe ID as sourdough-2kg."
+        },
+        {
+          "statement": "The archive does not provide hydration percentages for other recipes to determine the wettest loaf.",
+          "verdict": 1,
+          "reason": "The provided context only contains ingredient lists for the 2kg Country Sourdough recipe."
+        },
+        {
+          "statement": "The archive does not provide a method to adjust the water quantity in the base recipe.",
+          "verdict": 1,
+          "reason": "The method section describes the process but does not provide instructions for adjusting ingredient quantities."
+        }
+      ],
+      "context_precision": 0.9999999999833333,
+      "context_precision_detail": {
+        "score": 0.9999999999833333,
+        "k": 7,
+        "n_relevant_retrieved": 6,
+        "numerator": 6.0,
+        "denominator": 6.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "sourdough-2kg::structure::c001",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "sourdough-2kg::structure::c003",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "sourdough-2kg::structure::c000",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "sourdough-2kg::structure::c004",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "sourdough-2kg::structure::c002",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "wholemeal-sourdough::structure::c000",
+            "recipe_id": "wholemeal-sourdough",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "rye-sourdough::structure::c000",
+            "recipe_id": "rye-sourdough",
+            "v_k": 0,
+            "precision_at_k": 0.857143,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "sourdough-2kg",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": 6,
+        "donors_on_screen": [
+          "wholemeal-sourdough"
+        ],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": true,
+        "wrongly_grounded": true
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c24",
+      "mode": "refuses-when-no-recipe-named",
+      "recipe": "",
+      "constraint": "make it dairy free",
+      "reference_relevant_recipe_ids": [
+        "chicken-tikka-masala",
+        "chocolate-brioche",
+        "classic-brioche",
+        "gf-brioche",
+        "lemon-drizzle-cake",
+        "milk-kefir"
+      ],
+      "reference_ambiguous": true,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Milk Kefir.\nIt is based on the recipe milk-kefir.\nThe following could not be grounded in the archive: There is no dairy-free alternative for whole cow's milk provided in the archive.",
+      "faithfulness": 0.75,
+      "n_statements": 4,
+      "n_supported": 3,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Milk Kefir.",
+          "verdict": 1,
+          "reason": "The context explicitly states the recipe title is Milk Kefir."
+        },
+        {
+          "statement": "The result is based on the recipe milk-kefir.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe ID as milk-kefir."
+        },
+        {
+          "statement": "There is no dairy-free alternative for whole cow's milk provided in the archive.",
+          "verdict": 1,
+          "reason": "The provided context for the milk-kefir recipe only lists whole cow's milk as an ingredient and does not offer dairy-free alternatives."
+        }
+      ],
+      "context_precision": 0.968253968240136,
+      "context_precision_detail": {
+        "score": 0.968253968240136,
+        "k": 12,
+        "n_relevant_retrieved": 7,
+        "numerator": 6.777777777777778,
+        "denominator": 7.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "milk-kefir::structure::c003",
+            "recipe_id": "milk-kefir",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "milk-kefir::structure::c001",
+            "recipe_id": "milk-kefir",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "milk-kefir::structure::c002",
+            "recipe_id": "milk-kefir",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "gf-brioche::structure::c003",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "gf-brioche::structure::c001",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "gf-brioche::structure::c002",
+            "recipe_id": "gf-brioche",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "pad-thai::structure::c000",
+            "recipe_id": "pad-thai",
+            "v_k": 0,
+            "precision_at_k": 0.857143,
+            "contribution": 0.0
+          },
+          {
+            "rank": 8,
+            "chunk_id": "shakshuka::structure::c000",
+            "recipe_id": "shakshuka",
+            "v_k": 0,
+            "precision_at_k": 0.75,
+            "contribution": 0.0
+          },
+          {
+            "rank": 9,
+            "chunk_id": "chicken-tikka-masala::structure::c000",
+            "recipe_id": "chicken-tikka-masala",
+            "v_k": 1,
+            "precision_at_k": 0.777778,
+            "contribution": 0.777778
+          },
+          {
+            "rank": 10,
+            "chunk_id": "pad-thai::structure::c004",
+            "recipe_id": "pad-thai",
+            "v_k": 0,
+            "precision_at_k": 0.7,
+            "contribution": 0.0
+          },
+          {
+            "rank": 11,
+            "chunk_id": "chana-masala::structure::c000",
+            "recipe_id": "chana-masala",
+            "v_k": 0,
+            "precision_at_k": 0.636364,
+            "contribution": 0.0
+          },
+          {
+            "rank": 12,
+            "chunk_id": "congee::structure::c000",
+            "recipe_id": "congee",
+            "v_k": 0,
+            "precision_at_k": 0.583333,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "milk-kefir",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": null,
+        "donors_on_screen": [],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "c25",
+      "mode": "refuses-when-no-recipe-named",
+      "recipe": "the loaf",
+      "constraint": "gluten free",
+      "reference_relevant_recipe_ids": [
+        "chocolate-brioche",
+        "classic-brioche",
+        "gf-brioche",
+        "gf-sandwich-loaf",
+        "lemon-drizzle-cake",
+        "rye-sourdough",
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "reference_ambiguous": true,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Lemon Drizzle Loaf.\nIt is based on the recipe lemon-drizzle-cake.\nThe following could not be grounded in the archive: The archive does not contain a gluten-free version of the Lemon Drizzle Loaf, nor does it provide a method to substitute wheat flour with a gluten-free flour blend for this specific recipe.",
+      "faithfulness": 0.8,
+      "n_statements": 5,
+      "n_supported": 4,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention a requested substitution."
+        },
+        {
+          "statement": "The result is titled Lemon Drizzle Loaf.",
+          "verdict": 1,
+          "reason": "The title section of the lemon-drizzle-cake recipe explicitly states this title."
+        },
+        {
+          "statement": "The result is based on the recipe lemon-drizzle-cake.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe as lemon-drizzle-cake."
+        },
+        {
+          "statement": "The archive does not contain a gluten-free version of the Lemon Drizzle Loaf.",
+          "verdict": 1,
+          "reason": "The provided context only contains a gluten-free sandwich loaf and a standard lemon drizzle loaf containing wheat."
+        },
+        {
+          "statement": "The archive does not provide a method to substitute wheat flour with a gluten-free flour blend for the Lemon Drizzle Loaf recipe.",
+          "verdict": 1,
+          "reason": "The context for the lemon-drizzle-cake recipe does not include instructions for substituting ingredients."
+        }
+      ],
+      "context_precision": 0.9999999999875,
+      "context_precision_detail": {
+        "score": 0.9999999999875,
+        "k": 8,
+        "n_relevant_retrieved": 8,
+        "numerator": 8.0,
+        "denominator": 8.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "gf-sandwich-loaf::structure::c003",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "gf-sandwich-loaf::structure::c001",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "gf-sandwich-loaf::structure::c000",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "gf-sandwich-loaf::structure::c002",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "lemon-drizzle-cake::structure::c003",
+            "recipe_id": "lemon-drizzle-cake",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "lemon-drizzle-cake::structure::c000",
+            "recipe_id": "lemon-drizzle-cake",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "lemon-drizzle-cake::structure::c002",
+            "recipe_id": "lemon-drizzle-cake",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 8,
+            "chunk_id": "sourdough-2kg::structure::c000",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "lemon-drizzle-cake",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 5,
+        "best_base_rank": 5,
+        "best_donor_rank": 1,
+        "donors_on_screen": [
+          "gf-sandwich-loaf"
+        ],
+        "relevant_above": [
+          "gf-sandwich-loaf"
+        ],
+        "declined": true,
+        "declined_with_donor_on_screen": true,
+        "wrongly_grounded": true
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "r01",
+      "mode": "refuses-swap-instead-of-quoting-card",
+      "recipe": "chicken tikka masala",
+      "constraint": "can i use greek yoghurt in the tikka masala",
+      "reference_relevant_recipe_ids": [
+        "chicken-tikka-masala"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Chicken Tikka Masala.\nIt is based on the recipe chicken-tikka-masala.\nThe following could not be grounded in the archive: The provided context does not contain information regarding the use of Greek yoghurt as a substitute for full fat yoghurt.",
+      "faithfulness": 0.75,
+      "n_statements": 4,
+      "n_supported": 3,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Chicken Tikka Masala.",
+          "verdict": 1,
+          "reason": "The context explicitly states the title as Chicken Tikka Masala."
+        },
+        {
+          "statement": "The result is based on the recipe chicken-tikka-masala.",
+          "verdict": 1,
+          "reason": "The context identifies the recipe as chicken-tikka-masala."
+        },
+        {
+          "statement": "The provided context does not contain information regarding the use of Greek yoghurt as a substitute for full fat yoghurt.",
+          "verdict": 1,
+          "reason": "The context lacks any mention of Greek yoghurt or substitution advice."
+        }
+      ],
+      "context_precision": 0.99999999998,
+      "context_precision_detail": {
+        "score": 0.99999999998,
+        "k": 7,
+        "n_relevant_retrieved": 5,
+        "numerator": 5.0,
+        "denominator": 5.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "chicken-tikka-masala::structure::c000",
+            "recipe_id": "chicken-tikka-masala",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "chicken-tikka-masala::structure::c001",
+            "recipe_id": "chicken-tikka-masala",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "chicken-tikka-masala::structure::c002",
+            "recipe_id": "chicken-tikka-masala",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "chicken-tikka-masala::structure::c004",
+            "recipe_id": "chicken-tikka-masala",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "chicken-tikka-masala::structure::c003",
+            "recipe_id": "chicken-tikka-masala",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "chana-masala::structure::c001",
+            "recipe_id": "chana-masala",
+            "v_k": 0,
+            "precision_at_k": 0.833333,
+            "contribution": 0.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "chana-masala::structure::c003",
+            "recipe_id": "chana-masala",
+            "v_k": 0,
+            "precision_at_k": 0.714286,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "chicken-tikka-masala",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": null,
+        "donors_on_screen": [],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "r02",
+      "mode": "refuses-swap-instead-of-quoting-card",
+      "recipe": "napa cabbage kimchi",
+      "constraint": "can i swap the fish sauce in the kimchi for soy sauce",
+      "reference_relevant_recipe_ids": [
+        "napa-kimchi"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Napa Cabbage Kimchi.\nIt is based on the recipe napa-kimchi.\nThe following could not be grounded in the archive: The archive does not contain a recipe or instruction that grounds the substitution of fish sauce with soy sauce.",
+      "faithfulness": 0.75,
+      "n_statements": 4,
+      "n_supported": 3,
+      "verdicts": [
+        {
+          "statement": "The requested substitution of fish sauce for soy sauce cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention soy sauce or address the possibility of substitutions."
+        },
+        {
+          "statement": "The result is titled Napa Cabbage Kimchi.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe napa-kimchi.",
+          "verdict": 1,
+          "reason": "The context explicitly identifies the recipe as napa-kimchi."
+        },
+        {
+          "statement": "The archive does not contain a recipe or instruction that grounds the substitution of fish sauce with soy sauce.",
+          "verdict": 1,
+          "reason": "The provided context lacks any information regarding soy sauce or instructions for ingredient substitutions."
+        }
+      ],
+      "context_precision": 0.99999999998,
+      "context_precision_detail": {
+        "score": 0.99999999998,
+        "k": 7,
+        "n_relevant_retrieved": 5,
+        "numerator": 5.0,
+        "denominator": 5.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "napa-kimchi::structure::c002",
+            "recipe_id": "napa-kimchi",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "napa-kimchi::structure::c003",
+            "recipe_id": "napa-kimchi",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "napa-kimchi::structure::c004",
+            "recipe_id": "napa-kimchi",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "napa-kimchi::structure::c000",
+            "recipe_id": "napa-kimchi",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "napa-kimchi::structure::c001",
+            "recipe_id": "napa-kimchi",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "red-sauerkraut::structure::c003",
+            "recipe_id": "red-sauerkraut",
+            "v_k": 0,
+            "precision_at_k": 0.833333,
+            "contribution": 0.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "pad-thai::structure::c003",
+            "recipe_id": "pad-thai",
+            "v_k": 0,
+            "precision_at_k": 0.714286,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "napa-kimchi",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": null,
+        "donors_on_screen": [],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    },
+    {
+      "case_id": "r03",
+      "mode": "refuses-swap-instead-of-quoting-card",
+      "recipe": "gluten-free sandwich loaf",
+      "constraint": "what can i use instead of psyllium husk",
+      "reference_relevant_recipe_ids": [
+        "gf-sandwich-loaf"
+      ],
+      "reference_ambiguous": false,
+      "rendered_answer": "The requested substitution cannot be made.\nThe result is titled Gluten-Free Sandwich Loaf.\nIt is based on the recipe gf-sandwich-loaf.\nThe following could not be grounded in the archive: The provided context does not contain any information regarding a substitute for psyllium husk.",
+      "faithfulness": 0.75,
+      "n_statements": 4,
+      "n_supported": 3,
+      "verdicts": [
+        {
+          "statement": "The requested substitution cannot be made.",
+          "verdict": 0,
+          "reason": "The context does not mention any requested substitution."
+        },
+        {
+          "statement": "The result is titled Gluten-Free Sandwich Loaf.",
+          "verdict": 1,
+          "reason": "The title is explicitly stated in the context."
+        },
+        {
+          "statement": "The result is based on the recipe gf-sandwich-loaf.",
+          "verdict": 1,
+          "reason": "The context explicitly identifies the recipe as gf-sandwich-loaf."
+        },
+        {
+          "statement": "The provided context does not contain any information regarding a substitute for psyllium husk.",
+          "verdict": 1,
+          "reason": "The context lacks any information about substituting psyllium husk."
+        }
+      ],
+      "context_precision": 0.999999999975,
+      "context_precision_detail": {
+        "score": 0.999999999975,
+        "k": 7,
+        "n_relevant_retrieved": 4,
+        "numerator": 4.0,
+        "denominator": 4.0000000001,
+        "ranks": [
+          {
+            "rank": 1,
+            "chunk_id": "gf-sandwich-loaf::structure::c003",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 2,
+            "chunk_id": "gf-sandwich-loaf::structure::c000",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 3,
+            "chunk_id": "gf-sandwich-loaf::structure::c001",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 4,
+            "chunk_id": "gf-sandwich-loaf::structure::c002",
+            "recipe_id": "gf-sandwich-loaf",
+            "v_k": 1,
+            "precision_at_k": 1.0,
+            "contribution": 1.0
+          },
+          {
+            "rank": 5,
+            "chunk_id": "lemon-drizzle-cake::structure::c003",
+            "recipe_id": "lemon-drizzle-cake",
+            "v_k": 0,
+            "precision_at_k": 0.8,
+            "contribution": 0.0
+          },
+          {
+            "rank": 6,
+            "chunk_id": "sourdough-2kg::structure::c000",
+            "recipe_id": "sourdough-2kg",
+            "v_k": 0,
+            "precision_at_k": 0.666667,
+            "contribution": 0.0
+          },
+          {
+            "rank": 7,
+            "chunk_id": "gf-brioche::structure::c001",
+            "recipe_id": "gf-brioche",
+            "v_k": 0,
+            "precision_at_k": 0.571429,
+            "contribution": 0.0
+          }
+        ]
+      },
+      "grounding": {
+        "grounded_recipe_id": "gf-sandwich-loaf",
+        "grounded_in_reference_base": true,
+        "grounding_rank": 1,
+        "best_base_rank": 1,
+        "best_donor_rank": null,
+        "donors_on_screen": [],
+        "relevant_above": [],
+        "declined": true,
+        "declined_with_donor_on_screen": false,
+        "wrongly_grounded": false
+      },
+      "_calls": 2,
+      "_cached": 0
+    }
+  ]
+}
