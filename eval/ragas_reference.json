@@ -1,0 +1,587 @@
+{
+  "_note": "GROUND TRUTH for RAGAS context precision. Which recipe card(s) a correct answer to each case would have to ground itself in. Built 2026-09-03 by three independent readers who saw ONLY eval/substitution_cases.jsonl and the 21 cards under data/ - never the app's answers, the hand labels or the judge verdicts. Reconciled by per-recipe_id majority (>=2 of 3); see eval/build_ragas_reference.py for the rule, stated before it was applied. Committed BEFORE eval/run_ragas.py was run so the order is provable. relevant_recipe_ids = base UNION donor and is the set the metric uses.",
+  "built": "2026-09-03",
+  "readers": [
+    "case-first",
+    "card-first",
+    "adversarial"
+  ],
+  "reader_strategies": {
+    "case-first": "walk the case list, then hunt the corpus for a donor per case",
+    "card-first": "map the corpus's near-duplicate families first, assign cases after",
+    "adversarial": "state the obvious pick, then actively try to break it; keep it only if unbroken"
+  },
+  "reconciliation_rule": "per recipe_id majority, >=2 of 3 readers",
+  "cases_file": "eval/substitution_cases.jsonl",
+  "cases_sha256": "9688d5a30d4fbf812ec90989d617751b4c6abbdef2a74d0c4e9d9c4bf2f7db41",
+  "substitutions_sha256": "f50218d27cf5bf2e00ab641c2c3242001e8a5fe415e7e2eb7ef3720343ba6849",
+  "n": 25,
+  "n_cases_with_a_split": 3,
+  "raw_maps": "out/ragas_raw/reference_maps.json",
+  "reference": {
+    "c01": {
+      "base_recipe_ids": [
+        "classic-brioche"
+      ],
+      "donor_recipe_ids": [
+        "gf-brioche"
+      ],
+      "relevant_recipe_ids": [
+        "classic-brioche",
+        "gf-brioche"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "gf-brioche is the same 500 g enriched overnight dough (identical sugar 60 g/12%, yeast 8 g/1.6%, salt 9 g/1.8%, eggs 250 g/50%, same overnight 4 C chill and 180 C/35 min bake) with the flour swapped for a GF blend plus xanthan gum 6 g/1.2%, milk raised 100 to 150 g and butter dropped 250 to 175 g, so the whole swap reads off one card.",
+        "card-first": "gf-brioche is the same enriched overnight dough on a 500 g GF blend (Xanthan gum 6 g/1.2%, milk up 100->150 g, butter down 250->175 g) with the identical whisk-dry / butter-in-five-additions / chill-4C / bake-180C-35min method, so the swap reads straight off it, and only card-08 is titled Classic Brioche.",
+        "adversarial": "gf-brioche is the same enriched dough at the same 500 g flour base with identical sugar 12%, yeast 1.6%, salt 1.8% and eggs 50%, and only the gluten variable moved (GF blend + xanthan 1.2%, milk 20%->30%, butter 50%->35%)."
+      }
+    },
+    "c02": {
+      "base_recipe_ids": [
+        "chocolate-brioche"
+      ],
+      "donor_recipe_ids": [],
+      "relevant_recipe_ids": [
+        "chocolate-brioche"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "All three brioche cards list Whole milk plus Unsalted butter, and every dairy-free card in the archive (gf-sandwich-loaf, classic-focaccia, the three sourdoughs) is a lean water-and-oil build, so no card shows a dairy-free enriched dough to read the swap off.",
+        "card-first": "chocolate-brioche's dairy rows are Whole milk 100 g/20% and Unsalted butter 225 g/45%, and no card is a dairy-free enriched dough: gf-sandwich-loaf is the only butter-free tin loaf but it is lean (Water 400 g, Olive oil 30 g, no egg, no sugar), so nothing supplies a butter-or-milk replacement for an enriched dough.",
+        "adversarial": "chocolate-brioche's dairy is whole milk 100 g (20%) and butter 225 g (45%), and no card in the archive is a dairy-free enriched dough; gf-sandwich-loaf is dairy-free but lean (water 80% + olive oil 6%, no eggs), so it drops the enrichment rather than substituting for it."
+      }
+    },
+    "c03": {
+      "base_recipe_ids": [
+        "napa-kimchi"
+      ],
+      "donor_recipe_ids": [],
+      "relevant_recipe_ids": [
+        "napa-kimchi"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "napa-kimchi's paste is built on Fish sauce 45 g/4.5% and salted shrimp paste 20 g/2%, and the archive's vegan ferments are separate recipes (red-sauerkraut is dry-salted with apple, caraway and juniper over 3-4 weeks; dill-pickles is a brine ferment; white-miso is a soy-koji paste), none of which is a gochugaru cabbage ferment without fish or shellfish.",
+        "card-first": "the kimchi card's Fish sauce 45 g/4.5% and Salted shrimp paste (saeujeot) 20 g/2% have no vegan counterpart anywhere; red-sauerkraut and dill-pickles are vegan but are a dry-salt kraut and a brine pickle with no chilli-paste stage, and white-miso is a soy ferment, not a fish-sauce stand-in on any card.",
+        "adversarial": "The non-vegan items are fish sauce 45 g (4.5%) and salted shrimp paste 20 g (2%) inside the gochugaru/rice-porridge paste, and no card shows a fish-free paste; red-sauerkraut is vegan cabbage but dry-salted with no paste at all (salt, apple, caraway, juniper, 3-4 weeks) so the swap cannot be read off it."
+      }
+    },
+    "c04": {
+      "base_recipe_ids": [
+        "sourdough-2kg"
+      ],
+      "donor_recipe_ids": [
+        "wholemeal-sourdough"
+      ],
+      "relevant_recipe_ids": [
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "wholemeal-sourdough runs the same 1000 g-flour sourdough method (starter 200 g/20%, salt pinched in after the autolyse, bulk at 24 C with 45-minute folds, overnight 4 C retard, steam bake) with the flour moved from 95/5 white-rye to 70% wholemeal / 30% white and water to 800 g/80%.",
+        "card-first": "wholemeal-sourdough is the same starter-into-water / autolyse / pinch-the-salt-through / bulk-at-24C-with-folds / cold-retard-4C build at Wholemeal 700 g/70% + white 300 g/30% against sourdough-2kg's 950 g/95% + 50 g rye, so only the flour rows change.",
+        "adversarial": "wholemeal-sourdough is the same 1000 g-flour naturally leavened build with the same 20% stiff starter and overnight 4 C retard, flour swapped to wholemeal 70%/white 30%, and it spells out the knock-on changes (water 76%->80%, salt 1.8%->2%, autolyse 40 min->1 hour because bran drinks slowly)."
+      }
+    },
+    "c05": {
+      "base_recipe_ids": [
+        "gf-sandwich-loaf"
+      ],
+      "donor_recipe_ids": [
+        "gf-brioche"
+      ],
+      "relevant_recipe_ids": [
+        "gf-brioche",
+        "gf-sandwich-loaf"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "gf-brioche shares the same 500 g gluten-free flour blend plus xanthan gum base but is the enriched build (sugar 60 g/12%, eggs 250 g/50%, milk 150 g/30%, butter 175 g/35%) in place of the lean water 400 g/80% and olive oil 30 g/6%, so it is the archive's own enriched GF counterpart.",
+        "card-first": "gf-brioche already is the enriched GF loaf: same 500 g gluten-free blend and xanthan and the same dry-whisk-the-gum-first method, but with Caster sugar 60 g, Whole eggs 250 g, Whole milk 150 g and Unsalted butter 175 g in place of the lean loaf's Water 400 g and Olive oil 30 g.",
+        "adversarial": "gf-brioche is simultaneously gluten-free and enriched on the same 500 g GF flour blend, so the target state is read straight off it (eggs 50%, milk 30%, butter 35%, sugar 12%, xanthan dropped from 2% to 1.2% and psyllium removed)."
+      }
+    },
+    "c06": {
+      "base_recipe_ids": [
+        "chicken-tikka-masala"
+      ],
+      "donor_recipe_ids": [],
+      "relevant_recipe_ids": [
+        "chicken-tikka-masala"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "medium",
+      "unanimous": false,
+      "split_on": {
+        "donor_recipe_ids": {
+          "chana-masala": 1
+        }
+      },
+      "why": {
+        "case-first": "The card's animal rows (chicken thigh 900 g, full fat yoghurt 250 g, double cream 150 g, ghee 50 g) have no vegan counterpart anywhere; chana-masala is the nearest card (vegan Indian curry on the same onion / tinned plum tomato / ginger / garlic base with sunflower oil for ghee) but it is a different dish rather than a tikka masala with one variable changed, and nothing in the archive replaces the yoghurt marinade or the cream finish.",
+        "card-first": "Full fat yoghurt 250 g, Double cream 150 g and Ghee 50 g have no dairy-free counterpart on any card; chana-masala is the nearest vegan Indian card (Sunflower oil 45 g, same onion-ginger-garlic-tomato base) but it is a chickpea curry with no marinade and no cream finish, so it demonstrates the ghee swap only and not the request - medium because a grader could defensibly list it as a partial donor.",
+        "adversarial": "chana-masala is already a vegan, dairy-free Indian masala gravy built by the identical technique (fry onion 15 min, then ginger/garlic, then ground spices, then tomatoes until the oil separates) with sunflower oil 45 g in place of ghee and chickpeas as the protein, so the oil-for-ghee and pulse-for-chicken swaps are readable; I part-disagree with groundable=False because a donor does exist for that half, though nothing in the archive replaces the yoghurt marinade 250 g or the cream 150 g."
+      }
+    },
+    "c09": {
+      "base_recipe_ids": [
+        "rye-sourdough"
+      ],
+      "donor_recipe_ids": [
+        "wholemeal-sourdough"
+      ],
+      "relevant_recipe_ids": [
+        "rye-sourdough",
+        "wholemeal-sourdough"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "rye-sourdough states Water 780 g/78% and wholemeal-sourdough states Water 800 g/80% on the same 1000 g-flour, 200 g starter sourdough method, so a same-family card already demonstrates the higher hydration.",
+        "card-first": "rye-sourdough states Water (28 C) 780 g/78% and wholemeal-sourdough is the only naturally leavened card above it, at 800 g/80% on the same 1000 g flour and the same method skeleton; classic-focaccia and gf-sandwich-loaf also state 80% but are a yeasted tray bread and a GF batter, so neither is a readable hydration donor for a rye sourdough.",
+        "adversarial": "rye-sourdough states water 780 g / 78% and wholemeal-sourdough is the only sourdough-family card above it at 800 g / 80% on the same 1000 g flour and same 20% starter, so it is the in-family demonstration of a wetter build (sourdough-2kg is lower at 76%)."
+      }
+    },
+    "c11": {
+      "base_recipe_ids": [
+        "classic-brioche"
+      ],
+      "donor_recipe_ids": [
+        "gf-brioche"
+      ],
+      "relevant_recipe_ids": [
+        "classic-brioche",
+        "gf-brioche"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "The GF half of the request has the same donor as c01 (gf-brioche is the identical dough on a GF blend plus xanthan), so a donor card does exist and I disagree with groundable=false on the field's stated definition; only the halving to 250 g flour is ungrounded arithmetic.",
+        "card-first": "same base and donor as c01 - gf-brioche supplies every GF row (blend 500 g, Xanthan gum 6 g/1.2%, milk 150 g, butter 175 g) - and the added 'halve to 250 g flour' is arithmetic that changes no card, so I read the case's groundable=false as a claim about whole-request answerability rather than donor existence, which its own note concedes.",
+        "adversarial": "The retrieval need is unchanged by the halving: classic-brioche is the base and gf-brioche is the same enriched dough with the GF flour blend and xanthan, and both cards carry baker's % against their 500 g flour so a 250 g rescale needs no extra card; groundable=False here is about the forbidden arithmetic, and the field's own note concedes the swap is groundable."
+      }
+    },
+    "c12": {
+      "base_recipe_ids": [
+        "sourdough-2kg"
+      ],
+      "donor_recipe_ids": [
+        "wholemeal-sourdough"
+      ],
+      "relevant_recipe_ids": [
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "wholemeal-sourdough is the same wholemeal donor as c04 and the case's own note concedes 'donor exists', so on the field's stated definition a donor card is present and only the rescale to 500 g total flour has nothing behind it.",
+        "card-first": "identical to c04 for grounding purposes - wholemeal-sourdough's 700/300 wholemeal-white split at 80% hydration is the donor - and the '500 g total flour' rescale needs no extra card, so a donor does exist even though the case marks groundable=false for the arithmetic.",
+        "adversarial": "Same card pair as c04, and both state percentages relative to a 1000 g total flour weight so the 500 g target is a straight reading of the same two cards; groundable=False refers to the rescale arithmetic, not to a missing donor."
+      }
+    },
+    "c13": {
+      "base_recipe_ids": [
+        "gf-sandwich-loaf"
+      ],
+      "donor_recipe_ids": [],
+      "relevant_recipe_ids": [
+        "gf-sandwich-loaf"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "No ingredient change is asked for at all, only doubling the batch, and no card in the archive shows a larger version of this GF blend / xanthan / psyllium dough.",
+        "card-first": "no substitution is requested at all, so there is nothing for a second card to demonstrate; 'gluten-free sandwich loaf' matches card-10's title exactly and gf-brioche is titled a brioche, so the base is not ambiguous either.",
+        "adversarial": "Nothing is being swapped, only doubled, so the one card that states the quantities to double (GF blend 500 g, xanthan 10 g, psyllium 15 g, yeast 7 g, salt 10 g, water 400 g, oil 30 g) is all a correct answer can ground in."
+      }
+    },
+    "c14": {
+      "base_recipe_ids": [
+        "red-sauerkraut"
+      ],
+      "donor_recipe_ids": [],
+      "relevant_recipe_ids": [
+        "red-sauerkraut"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "The card states Fine sea salt 20 g / 2% against 1000 g shredded cabbage so the ratio is on screen, but no other card is a 2 kg kraut and napa-kimchi is a different ferment at 4% dry-brine salt, so nothing demonstrates the doubled batch.",
+        "card-first": "the card fixes Fine sea salt 20 g at 2% of the 1000 g shredded cabbage, so the ratio needed is already on the base card; no other card is a 2 kg kraut, and dill-pickles' 2.4% brine is a different ferment with a different salt basis.",
+        "adversarial": "red-sauerkraut states its own scaling rule (percentages relative to 1000 g shredded cabbage, fine sea salt 20 g = 2%), so no second card is involved; dill-pickles is the other brine ferment but it is a poured brine at 2.4% of cucumber weight and does not bear on doubling a dry-salted kraut."
+      }
+    },
+    "c15": {
+      "base_recipe_ids": [
+        "chocolate-brioche"
+      ],
+      "donor_recipe_ids": [
+        "classic-brioche"
+      ],
+      "relevant_recipe_ids": [
+        "chocolate-brioche",
+        "classic-brioche"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "classic-brioche is the same dough with the Dark chocolate chips 150 g/30% row absent, and it also carries the two figures that move back with it (Caster sugar 60 g/12% against 70 g/14%, butter 250 g/50% against 225 g/45%), both cards giving a baker's percentage on every row.",
+        "card-first": "classic-brioche is the plain build of the same dough and differs in exactly the rows the answer must name - no Dark chocolate chips 150 g/30%, Caster sugar 60 g/12% against 70 g/14%, Unsalted butter 250 g/50% against 225 g/45% - and both cards carry a baker's % on every row.",
+        "adversarial": "classic-brioche is the same dough minus the 150 g / 30% chips and shows the two knock-on rows the chips cost: sugar 70 g / 14% back down to 60 g / 12% and butter 225 g / 45% back up to 250 g / 50%."
+      }
+    },
+    "c16": {
+      "base_recipe_ids": [
+        "wholemeal-sourdough"
+      ],
+      "donor_recipe_ids": [
+        "rye-sourdough"
+      ],
+      "relevant_recipe_ids": [
+        "rye-sourdough",
+        "wholemeal-sourdough"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "rye-sourdough is the same 1000 g-flour, 200 g/20% starter sourdough at 80% white / 20% dark rye with Water 780 g/78% and salt 19 g/1.9%, every row percentaged, so the wholemeal-to-light-rye move is a straight card-to-card read.",
+        "card-first": "rye-sourdough is titled Light Rye Sourdough and runs white 800 g/80% + Dark rye 200 g/20% against wholemeal's 700/300, with Water 780 g/78% vs 800 g/80% and salt 19 g/1.9% vs 20 g/2%, so every changed row has a percentage; sourdough-2kg's 50 g/5% rye is a different ratio and not 'light rye'.",
+        "adversarial": "rye-sourdough is the same 1000 g-flour, 20%-starter, overnight-retard build with the flour variable set to white 80% / dark rye 20%, and it states the accompanying changes (water 80%->78%, salt 2%->1.9%, autolyse 1 hour->40 min, bulk 3.5 h->3 h)."
+      }
+    },
+    "c17": {
+      "base_recipe_ids": [
+        "gf-brioche"
+      ],
+      "donor_recipe_ids": [],
+      "relevant_recipe_ids": [
+        "gf-brioche"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "medium",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "gf-brioche's eggs 250 g/50%, milk 150 g/30% and butter 175 g/35% have no vegan counterpart at those levels; gf-sandwich-loaf is the near-miss (same GF blend, tagged vegan and dairy-free, psyllium husk 3% and olive oil 6% doing the binding and fat) but it is a lean tin loaf at 80% water rather than an enriched dough, so the substitution quantities cannot be read off it.",
+        "card-first": "gf-brioche's Whole eggs 250 g/50%, Whole milk 150 g/30% and Unsalted butter 175 g/35% have no enriched vegan counterpart; gf-sandwich-loaf is the archive's only vegan GF loaf and would supply water-for-milk and olive-oil-for-butter, but it carries no sugar, no egg and Psyllium husk 15 g/3% doing the egg's binding job, so it is a different recipe rather than the same dough with one swap - this is the call I am least confident about.",
+        "adversarial": "gf-brioche's eggs 250 g (50%), milk 150 g (30%) and butter 175 g (35%) all need replacing and no card shows an enriched dough without egg or dairy; gf-sandwich-loaf is vegan and GF but reaches structure by abandoning enrichment for psyllium 3% + xanthan 2% and water 80%, so it does not demonstrate a vegan enriched dough."
+      }
+    },
+    "c18": {
+      "base_recipe_ids": [
+        "classic-brioche"
+      ],
+      "donor_recipe_ids": [
+        "chocolate-brioche"
+      ],
+      "relevant_recipe_ids": [
+        "chocolate-brioche",
+        "classic-brioche"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "chocolate-brioche is the identical dough plus Dark chocolate chips 150 g/30% folded through by hand at the end, and it states the two accompanying changes explicitly, sugar 60 to 70 g (12 to 14%) and butter 250 to 225 g (50 to 45%).",
+        "card-first": "chocolate-brioche is the same dough with the chips added and states the two consequential changes on its own rows - Caster sugar 70 g/14% against classic's 60 g/12% and Unsalted butter 225 g/45% against 250 g/50% - plus the fold-by-hand-at-the-end instruction.",
+        "adversarial": "chocolate-brioche is the same dough with chips added and states exactly what the addition costs (sugar 60 g -> 70 g, butter 250 g -> 225 g, chips 150 g / 30%) plus the method note to fold them in by hand at the end."
+      }
+    },
+    "c19": {
+      "base_recipe_ids": [
+        "chocolate-brioche",
+        "classic-brioche",
+        "gf-brioche"
+      ],
+      "donor_recipe_ids": [
+        "gf-brioche"
+      ],
+      "relevant_recipe_ids": [
+        "chocolate-brioche",
+        "classic-brioche",
+        "gf-brioche"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "'The brioches' names exactly the three cards titled brioche, so all three must be in view for the comparison rather than whichever two rank highest, and gf-brioche appears again as the donor because it is the one card that demonstrates the GF route (GF blend plus xanthan 6 g/1.2%, milk up to 30%, butter down to 35%).",
+        "card-first": "'the brioches' is a set query rather than an ambiguous one - exactly three cards are titled brioche (Classic, Chocolate Chip, Gluten-Free) - and gf-brioche is both a member of the compared set and the card proving the change is possible; gf-sandwich-loaf is gluten-free but is not a brioche, so it stays out.",
+        "adversarial": "\"The brioches\" names a determinate set of exactly three cards (not an ambiguity), all three must be in view to say which can go GF, and gf-brioche is also the donor since it is the one already carrying the GF blend and xanthan 1.2%."
+      }
+    },
+    "c20": {
+      "base_recipe_ids": [
+        "rye-sourdough",
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "donor_recipe_ids": [
+        "sourdough-2kg"
+      ],
+      "relevant_recipe_ids": [
+        "rye-sourdough",
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "The three sourdough cards state salt at 18 g/1.8% (sourdough-2kg), 19 g/1.9% (rye-sourdough) and 20 g/2% (wholemeal-sourdough), so a two-card answer names the wrong winner, and sourdough-2kg doubles as the donor row the other two would be swapped down to.",
+        "card-first": "the three naturally leavened cards state Fine sea salt 18 g/1.8% (sourdough-2kg), 19 g/1.9% (rye) and 20 g/2% (wholemeal), so sourdough-2kg is the winner and is also the target the other two get swapped to; classic-focaccia and gf-sandwich-loaf are both 2% but neither is a sourdough, so they do not enter the comparison.",
+        "adversarial": "The three sourdough cards state salt 18 g / 1.8%, 20 g / 2% and 19 g / 1.9% respectively, so all three are required to name the winner and sourdough-2kg at 1.8% is both the answer and the card the other two would be matched to; this is a required set, not an ambiguity."
+      }
+    },
+    "c21": {
+      "base_recipe_ids": [
+        "gf-brioche",
+        "gf-sandwich-loaf"
+      ],
+      "donor_recipe_ids": [
+        "gf-sandwich-loaf"
+      ],
+      "relevant_recipe_ids": [
+        "gf-brioche",
+        "gf-sandwich-loaf"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": false,
+      "split_on": {
+        "donor_recipe_ids": {
+          "gf-sandwich-loaf": 2
+        }
+      },
+      "why": {
+        "case-first": "These are the archive's only two gluten-free loaves and the answer needs both side by side (gf-sandwich-loaf is tagged [gluten-free, vegan, dairy-free] with 'No egg or dairy' in its allergens, against gf-brioche's eggs 250 g, milk 150 g and butter 175 g); no change is actually requested, so there is nothing for a donor to demonstrate and my donor list is empty even though the case marks it groundable.",
+        "card-first": "only two cards are gluten-free loaves: gf-brioche (dietary_tags contains-egg, contains-dairy; eggs 250 g, milk 150 g, butter 175 g) and gf-sandwich-loaf (dietary_tags gluten-free, vegan, dairy-free; Allergens says 'No egg or dairy'), so the answer is gf-sandwich-loaf; lemon-drizzle-cake is titled Lemon Drizzle Loaf but uses self-raising wheat flour, so it is not a candidate.",
+        "adversarial": "These are the archive's only two gluten-free loaves, and the answer sits in their frontmatter side by side: gf-sandwich-loaf is tagged [gluten-free, vegan, dairy-free] while gf-brioche is tagged [gluten-free, contains-egg, contains-dairy], so both must be retrieved and gf-sandwich-loaf is the card that already is what was asked about."
+      }
+    },
+    "c22": {
+      "base_recipe_ids": [
+        "classic-brioche"
+      ],
+      "donor_recipe_ids": [
+        "gf-brioche"
+      ],
+      "relevant_recipe_ids": [
+        "classic-brioche",
+        "gf-brioche"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "gf-brioche's table states Whole milk (32 C) 150 g / 30% against classic-brioche's 100 g / 20%, so the requested figure is a direct lookup on the named donor card.",
+        "card-first": "gf-brioche states Whole milk (32 C) 150 g/30% against classic-brioche's 100 g/20%, so the figure is a direct lift, and 'the gluten-free brioche' names card-07 uniquely - gf-sandwich-loaf is gluten-free but has no milk row at all.",
+        "adversarial": "The request names the donor outright and the figure is a stated table row: gf-brioche lists Whole milk (32 C) 150 g / 30% against classic-brioche's 100 g / 20%, both on a 500 g flour base so the weight transfers directly."
+      }
+    },
+    "c23": {
+      "base_recipe_ids": [
+        "sourdough-2kg"
+      ],
+      "donor_recipe_ids": [
+        "classic-focaccia",
+        "wholemeal-sourdough"
+      ],
+      "relevant_recipe_ids": [
+        "classic-focaccia",
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "medium",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "sourdough-2kg states Water 760 g/76% and the wettest stated hydration in the archive is 80%, which is a three-way tie: wholemeal-sourdough 800 g/80% (same sourdough method, so the transferable donor), classic-focaccia 800 g/80%, and also gf-sandwich-loaf 400 g/80%, a third 80% card the case's own note misses (I left it out of the donor list because its GF gum-and-psyllium dough makes the number untransferable).",
+        "card-first": "sourdough-2kg is Water (28 C) 760 g/76% and the archive tops out at 80%, stated by wholemeal-sourdough (800 g on 1000 g flour) and classic-focaccia (800 g on 1000 g flour), either of which supplies the 800 g target; gf-sandwich-loaf also states 80% (Water 400 g) which the case's own note misses, but as a GF batter it does not change the answer, and 'loaf' arguably excludes the focaccia tray bread, which is why this is medium.",
+        "adversarial": "sourdough-2kg is at water 760 g / 76% and the archive ceiling is 80%, stated by wholemeal-sourdough (800 g) and classic-focaccia (800 g); note the prior's own reasoning misses that gf-sandwich-loaf is also 80% (400 g on a 500 g blend), which I exclude because its hydration sits on a GF blend with psyllium and is not comparable to a wheat sourdough, so a retrieval hit on it is defensible but not required."
+      }
+    },
+    "c24": {
+      "base_recipe_ids": [
+        "chicken-tikka-masala",
+        "chocolate-brioche",
+        "classic-brioche",
+        "gf-brioche",
+        "lemon-drizzle-cake",
+        "milk-kefir"
+      ],
+      "donor_recipe_ids": [],
+      "relevant_recipe_ids": [
+        "chicken-tikka-masala",
+        "chocolate-brioche",
+        "classic-brioche",
+        "gf-brioche",
+        "lemon-drizzle-cake",
+        "milk-kefir"
+      ],
+      "ambiguous": true,
+      "ambiguous_votes": "3/3",
+      "confidence": "medium",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "No dish is named, so the defensible reading is every card that actually contains dairy and would need the change - chicken-tikka-masala (yoghurt 250 g, double cream 150 g, ghee 50 g), lemon-drizzle-cake (unsalted butter 225 g), milk-kefir (whole cow's milk 1000 g/100%) and all three brioches (whole milk plus unsalted butter) - and none of the six has a dairy-free counterpart card, so the donor list is empty.",
+        "card-first": "no dish is named at all, so every defensible reading is a card that actually contains dairy - tikka masala (yoghurt 250 g, cream 150 g, ghee 50 g), lemon-drizzle-cake (butter 225 g), milk-kefir (whole milk 1000 g) and all three brioches (milk plus butter) - and none has a dairy-free counterpart card, so donors are empty; medium because a stricter reader would leave base empty since nothing is named.",
+        "adversarial": "No dish is named at all, so every defensible reading is a card carrying the contains-dairy tag, and those are exactly these six (tikka masala's yoghurt/cream/ghee, the drizzle loaf's 225 g butter, the three brioches' milk and butter, and kefir's 1000 g cow's milk); no donor applies until a reading is picked."
+      }
+    },
+    "c25": {
+      "base_recipe_ids": [
+        "chocolate-brioche",
+        "classic-brioche",
+        "lemon-drizzle-cake",
+        "rye-sourdough",
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "donor_recipe_ids": [
+        "gf-brioche",
+        "gf-sandwich-loaf"
+      ],
+      "relevant_recipe_ids": [
+        "chocolate-brioche",
+        "classic-brioche",
+        "gf-brioche",
+        "gf-sandwich-loaf",
+        "lemon-drizzle-cake",
+        "rye-sourdough",
+        "sourdough-2kg",
+        "wholemeal-sourdough"
+      ],
+      "ambiguous": true,
+      "ambiguous_votes": "3/3",
+      "confidence": "medium",
+      "unanimous": false,
+      "split_on": {
+        "base_recipe_ids": {
+          "gf-brioche": 1,
+          "gf-sandwich-loaf": 1
+        }
+      },
+      "why": {
+        "case-first": "A bare 'the loaf' matches every card the archive itself calls a loaf - the three brioches all 'scale into a lined tin', gf-sandwich-loaf ('a lean tin loaf'), the three cards opening 'a ... naturally leavened loaf', and lemon-drizzle-cake, titled 'Lemon Drizzle Loaf' and baked in a 900 g loaf tin (the weakest reading) - and because gf-brioche and gf-sandwich-loaf are real GF demonstrations for the brioche and lean-loaf readings I disagree with groundable=false on the field's stated definition, though nothing in the archive shows a GF sourdough or a GF cake.",
+        "card-first": "'the loaf' plus 'gluten free' fits every gluten-containing loaf in the archive - the three sourdoughs (all tagged contains-gluten or wheat-and-rye), the two wheat brioches, and lemon-drizzle-cake which is literally titled Lemon Drizzle Loaf and uses self-raising flour - and I exclude the two already-GF loaves from base since 'make it gluten free' presupposes it is not; a donor does exist for the brioche reading (gf-brioche) and a lean-loaf donor for the sourdough reading (gf-sandwich-loaf, though it is yeasted not levain), so what is missing here is a determinate base, not a donor.",
+        "adversarial": "Six cards are gluten-containing loaves a careful reader could not choose between (lemon-drizzle-cake is titled \"Lemon Drizzle Loaf\" and baked in a 900 g loaf tin, the two wheat brioches go into lined tins, and all three sourdough cards open by calling themselves a loaf), while gf-brioche and gf-sandwich-loaf are already gluten-free loaves so they are both the demonstrators and part of the right answer; the prior's False reflects the ambiguity, not an absent donor."
+      }
+    },
+    "r01": {
+      "base_recipe_ids": [
+        "chicken-tikka-masala"
+      ],
+      "donor_recipe_ids": [],
+      "relevant_recipe_ids": [
+        "chicken-tikka-masala"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "The card's table states 'Full fat yoghurt | 250 g | for the marinade' and the method says 'The acid in the yoghurt does the tenderising', which is everything a correct answer needs; no other card uses Greek yoghurt, and milk-kefir is a drinkable grain-cultured milk rather than a marinade donor.",
+        "card-first": "the base card alone settles it - the row reads 'Full fat yoghurt | 250 g | for the marinade' and the method says 'The acid in the yoghurt does the tenderising; more than twenty-four hours and the texture turns mealy' - and no other card uses yoghurt (milk-kefir is a cultured-milk recipe, not a yoghurt stand-in), so no donor is needed or available.",
+        "adversarial": "The answer is a direct reading of one card, which lists Full fat yoghurt 250 g for the marinade and explains the mechanism (\"the acid in the yoghurt does the tenderising\", over 24 hours turns mealy), so Greek yoghurt qualifies as a full-fat yoghurt; milk-kefir is the only other cultured dairy card and it demonstrates a drinkable ferment, not a marinade swap."
+      }
+    },
+    "r02": {
+      "base_recipe_ids": [
+        "napa-kimchi"
+      ],
+      "donor_recipe_ids": [],
+      "relevant_recipe_ids": [
+        "napa-kimchi"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "high",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "napa-kimchi lists Fish sauce 45 g/4.5% next to saeujeot 20 g/2%, and although congee (light soy 20 g), sesame-soy-aubergine (light soy 60 g) and white-miso (a vegan fermented-soy paste) all use soy, none of them is a kimchi with soy standing in for fish sauce, so no card demonstrates the swap.",
+        "card-first": "the kimchi card lists Fish sauce 45 g/4.5% alongside Salted shrimp paste 20 g/2% and flags both in Allergens, so the base grounds the question, but no card pairs soy sauce with fish sauce: congee (Light soy sauce 20 g) and sesame-soy-aubergine (Light soy sauce 60 g) merely use soy sauce in unrelated dishes and demonstrate no equivalence, and pad-thai uses fish sauce with no soy.",
+        "adversarial": "napa-kimchi states fish sauce 45 g / 4.5% and also salted shrimp paste 20 g / 2%, and no card is a soy-sauce-seasoned ferment; congee (soy 20 g) and sesame-soy-aubergine (soy 60 g + mirin) use soy sauce as a cooked-dish seasoning and white-miso is a soy ferment recipe in its own right, so none of them demonstrates soy standing in for fish sauce in a kimchi paste."
+      }
+    },
+    "r03": {
+      "base_recipe_ids": [
+        "gf-sandwich-loaf"
+      ],
+      "donor_recipe_ids": [],
+      "relevant_recipe_ids": [
+        "gf-sandwich-loaf"
+      ],
+      "ambiguous": false,
+      "ambiguous_votes": "0/3",
+      "confidence": "medium",
+      "unanimous": true,
+      "split_on": {},
+      "why": {
+        "case-first": "gf-sandwich-loaf is the only card in the archive containing psyllium husk (15 g / 3%) and its method states the job it does ('rest the batter for twenty so the psyllium sets up. It should hold a peak rather than pour'); gf-brioche is a GF dough that stands without psyllium on xanthan 1.2% alone, but its structure comes from eggs 250 g/50%, so it does not demonstrate a psyllium-free lean vegan loaf.",
+        "card-first": "psyllium husk appears on exactly one card - gf-sandwich-loaf, 'Psyllium husk | 15 g | 3%', with the method explaining it hydrates faster than xanthan and 'sets up' so the batter 'holds a peak rather than pour' - so the request is determinate despite naming no recipe; gf-brioche is the only other GF card and does manage without psyllium, but it binds with 250 g egg and less xanthan (1.2% vs 2%), so no copyable substitute figure exists and I keep donors empty.",
+        "adversarial": "The card itself defines psyllium's distinct job (15 g / 3%, \"hydrates far faster than xanthan\", makes the batter \"hold a peak rather than pour\") and no card offers a replacement; gf-brioche is the closest retrieval hit as the archive's only other GF dough and it does run xanthan-only at 1.2% with no psyllium, but it gets that structure from eggs 50% and butter 35%, which would void this loaf's vegan and dairy-free tags, so it is not an in-place substitute."
+      }
+    }
+  }
+}
