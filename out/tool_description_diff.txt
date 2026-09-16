@@ -1,0 +1,70 @@
+TOOL DESCRIPTION DIFF, v1 -> v2
+================================
+
+v1 had TWO tools and their descriptions overlapped: search_recipes said it
+returns "matching recipes with their ingredient lists", and scale_recipe said it
+returns "a recipe's ingredient list with the amounts adjusted". Both promised the
+ingredient list, so nothing in the text told the model which one to reach for.
+
+v2 fixes that in three ways, none of which is a bigger model or a sterner system
+prompt:
+
+  1. each description opens with ONE capitalised verb - FIND, MULTIPLY, REPORT -
+     so the single job is the first thing read
+  2. each ends with an explicit "Does not ..." naming the other tools' jobs, so
+     the boundary is stated rather than left to be inferred
+  3. the new tool's `allergen` parameter is an ENUM of the nine values that
+     actually appear in the corpus frontmatter. A wrong value is now rejected by
+     the schema instead of silently matching nothing and coming back clean,
+     which would have read as "no allergens found"
+
+The third tool, get_allergen_profile, takes a LIST OF INGREDIENT NAMES rather
+than a recipe_id. Keyed on recipe_id it could only answer "what is wrong with the
+original"; the list form also answers "is the replacement I just chose safe",
+which is what a cascade needs, and it still does exactly one thing. It
+deliberately does not choose the replacement, because choosing is the only part
+of this task that is not fixed and the verdict depends on being able to see it.
+
+--- tools v1 (2 tools)
++++ tools v2 (3 tools)
+@@ -1,20 +1,33 @@
+ name: search_recipes
+ description:
+-    Search the recipe archive and return matching recipes with their ingredient lists, amounts and dietary tags.
+-    Use this to look up a recipe and see what is in it.
++    FIND a recipe in the archive by name and return its recipe_id, title and original unscaled ingredient names.
++    Call this FIRST, to learn the recipe_id.
++    Does not scale amounts and does not assess allergens.
+ parameters:
+     query: string
+-        What to search for.
++        Recipe name to look for.
+     limit: integer
+-        How many to return.
++        Maximum matches to return.
+ 
+ name: scale_recipe
+ description:
+-    Get a recipe's ingredient list with the amounts adjusted for a different number of servings.
+-    Returns the ingredients and the method.
++    MULTIPLY the amounts of one already-identified recipe by a factor, and return those scaled amounts plus the method text.
++    Requires a recipe_id from search_recipes.
++    Does not find recipes and does not assess allergens.
+ parameters:
+     recipe_id: string
+-        The recipe to scale.
++        recipe_id from search_recipes.
+     scale_factor: number
+         Multiplier, e.g. 2 to double.
+ 
++name: get_allergen_profile
++description:
++    REPORT which of the ingredient names you supply carry one specified allergen.
++    Use it on the recipe's ingredients to find what must go, then again on any replacement you propose, to confirm the replacement is itself clear.
++    Does not find recipes, does not scale, and does not choose a replacement for you.
++parameters:
++    ingredients: array
++        Ingredient names to check. May be one proposed substitute.
++    allergen: string  enum=['contains-egg', 'contains-dairy', 'contains-gluten', 'contains-soy', 'contains-shellfish', 'contains-sesame', 'contains-peanut', 'contains-fish', 'contains-alcohol']
++        The single allergen to test for.
++

@@ -1,0 +1,114 @@
+WEEK 7 - BUDGET TERMINATION LOG
+==============================================================================
+Each run below trips one budget. None raises. Every one returns
+terminated_by set to the budget that fired, and stops.
+
+------------------------------------------------------------------------------
+RUN: expecting max_laps to fire
+budgets: max_laps=2 max_tokens=40000 max_cost_usd=0.02 max_seconds=90.0
+request: Make the Chicken Tikka Masala 2x and completely dairy free.
+
+  {"event": "model_turn", "lap": 1, "tool_calls": ["search_recipes"], "input_tokens": 788, "output_tokens": 20, "cumulative_tokens": 808, "cumulative_cost_usd": 8.7e-05, "elapsed_s": 1.01}
+  {"event": "tool_result", "lap": 1, "tool": "search_recipes", "args": {"query": "Chicken Tikka Masala"}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 2, "tool_calls": ["scale_recipe"], "input_tokens": 1473, "output_tokens": 30, "cumulative_tokens": 2311, "cumulative_cost_usd": 0.000246, "elapsed_s": 2.41}
+  {"event": "budget_exceeded", "budget": "max_laps", "lap": 2}
+
+  terminated_by : max_laps
+  ok            : False
+  error         : budget max_laps exceeded
+  laps          : 2
+  tokens        : 2311
+  cost          : $0.000246
+  latency       : 2412 ms
+  raised        : no (clean termination)
+
+------------------------------------------------------------------------------
+RUN: expecting max_tokens to fire
+budgets: max_laps=8 max_tokens=3000 max_cost_usd=0.02 max_seconds=90.0
+request: Make the Chicken Tikka Masala 2x and completely dairy free.
+
+  {"event": "model_turn", "lap": 1, "tool_calls": ["search_recipes"], "input_tokens": 788, "output_tokens": 20, "cumulative_tokens": 808, "cumulative_cost_usd": 8.7e-05, "elapsed_s": 1.27}
+  {"event": "tool_result", "lap": 1, "tool": "search_recipes", "args": {"query": "Chicken Tikka Masala"}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 2, "tool_calls": ["scale_recipe"], "input_tokens": 1473, "output_tokens": 30, "cumulative_tokens": 2311, "cumulative_cost_usd": 0.000246, "elapsed_s": 2.97}
+  {"event": "tool_result", "lap": 2, "tool": "scale_recipe", "args": {"scale_factor": 2, "recipe_id": "chicken-tikka-masala"}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 3, "tool_calls": ["get_allergen_profile"], "input_tokens": 2207, "output_tokens": 40, "cumulative_tokens": 4558, "cumulative_cost_usd": 0.000483, "elapsed_s": 3.98}
+  {"event": "budget_exceeded", "budget": "max_tokens", "lap": 3}
+
+  terminated_by : max_tokens
+  ok            : False
+  error         : budget max_tokens exceeded
+  laps          : 3
+  tokens        : 4558
+  cost          : $0.000483
+  latency       : 3985 ms
+  raised        : no (clean termination)
+
+------------------------------------------------------------------------------
+RUN: expecting max_cost_usd to fire
+budgets: max_laps=8 max_tokens=40000 max_cost_usd=0.0004 max_seconds=90.0
+request: Make the Chicken Tikka Masala 2x and completely dairy free.
+
+  {"event": "model_turn", "lap": 1, "tool_calls": ["search_recipes"], "input_tokens": 788, "output_tokens": 20, "cumulative_tokens": 808, "cumulative_cost_usd": 8.7e-05, "elapsed_s": 1.19}
+  {"event": "tool_result", "lap": 1, "tool": "search_recipes", "args": {"query": "Chicken Tikka Masala"}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 2, "tool_calls": ["scale_recipe"], "input_tokens": 1473, "output_tokens": 30, "cumulative_tokens": 2311, "cumulative_cost_usd": 0.000246, "elapsed_s": 2.62}
+  {"event": "tool_result", "lap": 2, "tool": "scale_recipe", "args": {"scale_factor": 2, "recipe_id": "chicken-tikka-masala"}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 3, "tool_calls": ["get_allergen_profile"], "input_tokens": 2207, "output_tokens": 40, "cumulative_tokens": 4558, "cumulative_cost_usd": 0.000483, "elapsed_s": 3.97}
+  {"event": "budget_exceeded", "budget": "max_cost_usd", "lap": 3}
+
+  terminated_by : max_cost_usd
+  ok            : False
+  error         : budget max_cost_usd exceeded
+  laps          : 3
+  tokens        : 4558
+  cost          : $0.000483
+  latency       : 3970 ms
+  raised        : no (clean termination)
+
+------------------------------------------------------------------------------
+RUN: expecting max_seconds to fire
+budgets: max_laps=8 max_tokens=40000 max_cost_usd=0.02 max_seconds=4.0
+request: Make the Chicken Tikka Masala 2x and completely dairy free.
+
+  {"event": "model_turn", "lap": 1, "tool_calls": ["search_recipes"], "input_tokens": 788, "output_tokens": 20, "cumulative_tokens": 808, "cumulative_cost_usd": 8.7e-05, "elapsed_s": 1.09}
+  {"event": "tool_result", "lap": 1, "tool": "search_recipes", "args": {"query": "Chicken Tikka Masala"}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 2, "tool_calls": ["scale_recipe"], "input_tokens": 1473, "output_tokens": 30, "cumulative_tokens": 2311, "cumulative_cost_usd": 0.000246, "elapsed_s": 2.03}
+  {"event": "tool_result", "lap": 2, "tool": "scale_recipe", "args": {"scale_factor": 2, "recipe_id": "chicken-tikka-masala"}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 3, "tool_calls": ["get_allergen_profile"], "input_tokens": 2207, "output_tokens": 40, "cumulative_tokens": 4558, "cumulative_cost_usd": 0.000483, "elapsed_s": 3.4}
+  {"event": "tool_result", "lap": 3, "tool": "get_allergen_profile", "args": {"ingredients": ["Full fat yoghurt", "Double cream", "Ghee"], "allergen": "contains-dairy"}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 4, "tool_calls": ["get_allergen_profile"], "input_tokens": 2357, "output_tokens": 39, "cumulative_tokens": 6954, "cumulative_cost_usd": 0.000734, "elapsed_s": 4.69}
+  {"event": "budget_exceeded", "budget": "max_seconds", "lap": 4}
+
+  terminated_by : max_seconds
+  ok            : False
+  error         : budget max_seconds exceeded
+  laps          : 4
+  tokens        : 6954
+  cost          : $0.000734
+  latency       : 4690 ms
+  raised        : no (clean termination)
+
+------------------------------------------------------------------------------
+RUN: expecting max_laps (spin guard, production budgets otherwise) to fire
+budgets: max_laps=5 max_tokens=40000 max_cost_usd=0.02 max_seconds=90.0
+request: Make the Pad Thai 2x with no peanuts, no shellfish, no egg, no fish and no soy, and keep substit
+
+  {"event": "model_turn", "lap": 1, "tool_calls": ["search_recipes"], "input_tokens": 809, "output_tokens": 17, "cumulative_tokens": 826, "cumulative_cost_usd": 8.8e-05, "elapsed_s": 1.08}
+  {"event": "tool_result", "lap": 1, "tool": "search_recipes", "args": {"query": "Pad Thai"}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 2, "tool_calls": ["get_allergen_profile"], "input_tokens": 1155, "output_tokens": 85, "cumulative_tokens": 2066, "cumulative_cost_usd": 0.000237, "elapsed_s": 2.57}
+  {"event": "tool_result", "lap": 2, "tool": "get_allergen_profile", "args": {"ingredients": ["Flat rice noodles", "Raw prawns", "Firm tofu", "Eggs", "Tamarind paste", "Palm sugar", "Fish sauce", "Roasted peanuts", "Beansprouts", "Garlic chives", "Neutral oil"], "allergen": "contains-peanut"}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 3, "tool_calls": ["get_allergen_profile"], "input_tokens": 1371, "output_tokens": 81, "cumulative_tokens": 3518, "cumulative_cost_usd": 0.000407, "elapsed_s": 4.56}
+  {"event": "tool_result", "lap": 3, "tool": "get_allergen_profile", "args": {"ingredients": ["Flat rice noodles", "Raw prawns", "Firm tofu", "Eggs", "Tamarind paste", "Palm sugar", "Fish sauce", "Beansprouts", "Garlic chives", "Neutral oil"], "allergen": "contains-shellfish"}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 4, "tool_calls": ["get_allergen_profile"], "input_tokens": 1580, "output_tokens": 75, "cumulative_tokens": 5173, "cumulative_cost_usd": 0.000595, "elapsed_s": 7.38}
+  {"event": "tool_result", "lap": 4, "tool": "get_allergen_profile", "args": {"allergen": "contains-egg", "ingredients": ["Flat rice noodles", "Firm tofu", "Eggs", "Tamarind paste", "Palm sugar", "Fish sauce", "Beansprouts", "Garlic chives", "Neutral oil"]}, "ok": true, "error": ""}
+  {"event": "model_turn", "lap": 5, "tool_calls": ["get_allergen_profile"], "input_tokens": 1776, "output_tokens": 71, "cumulative_tokens": 7020, "cumulative_cost_usd": 0.000801, "elapsed_s": 29.66}
+  {"event": "budget_exceeded", "budget": "max_laps", "lap": 5}
+
+  terminated_by : max_laps
+  ok            : False
+  error         : budget max_laps exceeded
+  laps          : 5
+  tokens        : 7020
+  cost          : $0.000801
+  latency       : 29663 ms
+  raised        : no (clean termination)
+

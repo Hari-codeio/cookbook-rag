@@ -94,6 +94,27 @@ def check(answer: dict[str, Any], case: dict[str, Any]) -> tuple[bool, list[str]
         if forbidden.lower() in removed_blob:
             problems.append(f"substituted {forbidden!r}, which should have been left alone")
 
+    # THE CASCADE TEST. Checking only that the banned ingredient left is not
+    # enough: swapping light soy sauce for tamari removes the row and still
+    # serves soy. So every replacement is put through the same allergen check
+    # the original ingredients went through. This is the one assertion the four
+    # cascade cases turn on, and it is deterministic - no model is asked.
+    avoid = case.get("avoid_allergen") or ""
+    if avoid:
+        from rag.tools import ALLERGENS, _carries
+
+        if avoid in ALLERGENS:
+            for s in subs:
+                if not isinstance(s, dict):
+                    continue
+                replacement = str(s.get("to") or "").strip()
+                if not replacement or replacement.lower() in {"none", "-", "n/a", "omit", "removed"}:
+                    continue  # straight removal is a valid answer
+                if _carries(replacement, avoid):
+                    problems.append(
+                        f"replacement {replacement!r} still carries {avoid}"
+                    )
+
     method = str(answer.get("method") or "").strip()
     if not method:
         problems.append("method is empty")
