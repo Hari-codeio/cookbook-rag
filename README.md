@@ -81,6 +81,13 @@ $PY eval/run_eval.py --judge eval/judge_v2.txt   # THE one command: assertions,
 # 7b. Week 6 bonus — RAGAS faithfulness + context precision
 $PY eval/build_ragas_reference.py   # reconcile the 3 blind reference maps (no API)
 $PY eval/run_ragas.py               # the two metrics + the free grounding check
+
+# 8. Week 7 — does this need to be an agent at all?
+$PY eval/test_allergens.py          # 35 matcher cases, both directions, no API
+$PY -m rag.agent    "Double the Congee and remove anything with sesame"
+$PY -m rag.workflow "Double the Congee and remove anything with sesame"
+$PY eval/run_race.py --systems all  # the 8 numbers -> out/race.csv, out/race.md
+$PY eval/budget_demo.py             # all four budgets firing -> out/budget_termination.log
 ```
 
 The judge and the RAGAS metrics are both cached on the sha256 of their prompt and
