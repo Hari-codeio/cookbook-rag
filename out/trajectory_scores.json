@@ -1,0 +1,1453 @@
+{
+  "summary": {
+    "agent_v1": {
+      "n": 10,
+      "outcome_pass": 10,
+      "outcome_rate": 1.0,
+      "trajectory_pass": 1,
+      "trajectory_rate": 0.1,
+      "gap_points": 90.0,
+      "tool_choice_accuracy": 0.1,
+      "argument_validity": 1.0,
+      "args_checked": 20,
+      "step_efficiency": 0.6,
+      "cost_p50": 0.0005315000000000001,
+      "cost_max": 0.000615,
+      "cost_mean": 0.0005429,
+      "modes": {
+        "skipped-allergen-check": 9,
+        "unverified-substitute": 0,
+        "hallucinated-argument": 0,
+        "wrong-tool-order": 9,
+        "redundant-call": 0,
+        "unrequested-tool-use": 0,
+        "budget-terminated": 0,
+        "unparseable-final": 0
+      }
+    },
+    "agent_v2": {
+      "n": 10,
+      "outcome_pass": 10,
+      "outcome_rate": 1.0,
+      "trajectory_pass": 10,
+      "trajectory_rate": 1.0,
+      "gap_points": 0.0,
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": 1.0,
+      "args_checked": 38,
+      "step_efficiency": 1.025,
+      "cost_p50": 0.001028,
+      "cost_max": 0.001311,
+      "cost_mean": 0.0010335000000000001,
+      "modes": {
+        "skipped-allergen-check": 0,
+        "unverified-substitute": 0,
+        "hallucinated-argument": 0,
+        "wrong-tool-order": 0,
+        "redundant-call": 0,
+        "unrequested-tool-use": 0,
+        "budget-terminated": 0,
+        "unparseable-final": 0
+      }
+    },
+    "workflow": {
+      "n": 10,
+      "outcome_pass": 10,
+      "outcome_rate": 1.0,
+      "trajectory_pass": 10,
+      "trajectory_rate": 1.0,
+      "gap_points": 0.0,
+      "tool_choice_accuracy": 1.0,
+      "argument_validity": null,
+      "args_checked": 0,
+      "step_efficiency": 1.0,
+      "cost_p50": 0.000274,
+      "cost_max": 0.00031,
+      "cost_mean": 0.0002715,
+      "modes": {
+        "skipped-allergen-check": 0,
+        "unverified-substitute": 0,
+        "hallucinated-argument": 0,
+        "wrong-tool-order": 0,
+        "redundant-call": 0,
+        "unrequested-tool-use": 0,
+        "budget-terminated": 0,
+        "unparseable-final": 0
+      }
+    }
+  },
+  "runs": {
+    "agent_v1": [
+      {
+        "case_id": "c01",
+        "system": "agent_v1",
+        "outcome_pass": true,
+        "trajectory_pass": false,
+        "modes": [
+          "skipped-allergen-check",
+          "wrong-tool-order"
+        ],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 4,
+        "step_efficiency": 0.5,
+        "args_valid": 2,
+        "args_checked": 2,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 1,
+        "cost_usd": 0.000611,
+        "latency_ms": 10177.4,
+        "total_tokens": 4392
+      },
+      {
+        "case_id": "c02",
+        "system": "agent_v1",
+        "outcome_pass": true,
+        "trajectory_pass": false,
+        "modes": [
+          "skipped-allergen-check",
+          "wrong-tool-order"
+        ],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 4,
+        "step_efficiency": 0.5,
+        "args_valid": 2,
+        "args_checked": 2,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 3,
+        "cost_usd": 0.000606,
+        "latency_ms": 13573.8,
+        "total_tokens": 4314
+      },
+      {
+        "case_id": "c03",
+        "system": "agent_v1",
+        "outcome_pass": true,
+        "trajectory_pass": false,
+        "modes": [
+          "skipped-allergen-check",
+          "wrong-tool-order"
+        ],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 4,
+        "step_efficiency": 0.5,
+        "args_valid": 2,
+        "args_checked": 2,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 2,
+        "cost_usd": 0.000615,
+        "latency_ms": 15618.5,
+        "total_tokens": 4675
+      },
+      {
+        "case_id": "c04",
+        "system": "agent_v1",
+        "outcome_pass": true,
+        "trajectory_pass": false,
+        "modes": [
+          "skipped-allergen-check",
+          "wrong-tool-order"
+        ],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 4,
+        "step_efficiency": 0.5,
+        "args_valid": 2,
+        "args_checked": 2,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 1,
+        "cost_usd": 0.000531,
+        "latency_ms": 12985.4,
+        "total_tokens": 3725
+      },
+      {
+        "case_id": "s01",
+        "system": "agent_v1",
+        "outcome_pass": true,
+        "trajectory_pass": false,
+        "modes": [
+          "skipped-allergen-check",
+          "wrong-tool-order"
+        ],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 3,
+        "step_efficiency": 0.6666666666666666,
+        "args_valid": 2,
+        "args_checked": 2,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 1,
+        "cost_usd": 0.000484,
+        "latency_ms": 18766.1,
+        "total_tokens": 3626
+      },
+      {
+        "case_id": "s02",
+        "system": "agent_v1",
+        "outcome_pass": true,
+        "trajectory_pass": false,
+        "modes": [
+          "skipped-allergen-check",
+          "wrong-tool-order"
+        ],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 3,
+        "step_efficiency": 0.6666666666666666,
+        "args_valid": 2,
+        "args_checked": 2,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 1,
+        "cost_usd": 0.000526,
+        "latency_ms": 15313.0,
+        "total_tokens": 3545
+      },
+      {
+        "case_id": "s03",
+        "system": "agent_v1",
+        "outcome_pass": true,
+        "trajectory_pass": false,
+        "modes": [
+          "skipped-allergen-check",
+          "wrong-tool-order"
+        ],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 4,
+        "step_efficiency": 0.5,
+        "args_valid": 2,
+        "args_checked": 2,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 1,
+        "cost_usd": 0.000516,
+        "latency_ms": 10226.2,
+        "total_tokens": 3575
+      },
+      {
+        "case_id": "s04",
+        "system": "agent_v1",
+        "outcome_pass": true,
+        "trajectory_pass": false,
+        "modes": [
+          "skipped-allergen-check",
+          "wrong-tool-order"
+        ],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 4,
+        "step_efficiency": 0.5,
+        "args_valid": 2,
+        "args_checked": 2,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 2,
+        "cost_usd": 0.000548,
+        "latency_ms": 10774.2,
+        "total_tokens": 3867
+      },
+      {
+        "case_id": "s05",
+        "system": "agent_v1",
+        "outcome_pass": true,
+        "trajectory_pass": false,
+        "modes": [
+          "skipped-allergen-check",
+          "wrong-tool-order"
+        ],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 3,
+        "step_efficiency": 0.6666666666666666,
+        "args_valid": 2,
+        "args_checked": 2,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 1,
+        "cost_usd": 0.00046,
+        "latency_ms": 12927.9,
+        "total_tokens": 3197
+      },
+      {
+        "case_id": "s06",
+        "system": "agent_v1",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 2,
+        "step_efficiency": 1.0,
+        "args_valid": 2,
+        "args_checked": 2,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 0,
+        "cost_usd": 0.000532,
+        "latency_ms": 8067.3,
+        "total_tokens": 3854
+      }
+    ],
+    "agent_v2": [
+      {
+        "case_id": "c01",
+        "system": "agent_v2",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 4,
+        "args_checked": 4,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.001142,
+        "latency_ms": 19750.3,
+        "total_tokens": 9764
+      },
+      {
+        "case_id": "c02",
+        "system": "agent_v2",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 4,
+        "args_checked": 4,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 3,
+        "cost_usd": 0.001256,
+        "latency_ms": 23057.2,
+        "total_tokens": 10108
+      },
+      {
+        "case_id": "c03",
+        "system": "agent_v2",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 4,
+        "args_checked": 4,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 2,
+        "cost_usd": 0.001222,
+        "latency_ms": 37095.0,
+        "total_tokens": 10498
+      },
+      {
+        "case_id": "c04",
+        "system": "agent_v2",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 4,
+        "args_checked": 4,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.001036,
+        "latency_ms": 25521.8,
+        "total_tokens": 8542
+      },
+      {
+        "case_id": "s01",
+        "system": "agent_v2",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 3,
+        "steps_needed": 3,
+        "step_efficiency": 1.0,
+        "args_valid": 3,
+        "args_checked": 3,
+        "arg_problems": [],
+        "n_allergen_calls": 1,
+        "n_substitutions": 1,
+        "cost_usd": 0.000811,
+        "latency_ms": 16355.8,
+        "total_tokens": 6473
+      },
+      {
+        "case_id": "s02",
+        "system": "agent_v2",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 4,
+        "args_checked": 4,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.00102,
+        "latency_ms": 19636.1,
+        "total_tokens": 8258
+      },
+      {
+        "case_id": "s03",
+        "system": "agent_v2",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 4,
+        "args_checked": 4,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.001015,
+        "latency_ms": 18844.9,
+        "total_tokens": 8391
+      },
+      {
+        "case_id": "s04",
+        "system": "agent_v2",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 5,
+        "steps_needed": 4,
+        "step_efficiency": 1.25,
+        "args_valid": 5,
+        "args_checked": 5,
+        "arg_problems": [],
+        "n_allergen_calls": 3,
+        "n_substitutions": 1,
+        "cost_usd": 0.001311,
+        "latency_ms": 30236.6,
+        "total_tokens": 11241
+      },
+      {
+        "case_id": "s05",
+        "system": "agent_v2",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "get_allergen_profile",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "get_allergen_profile",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 4,
+        "args_checked": 4,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.000917,
+        "latency_ms": 21603.8,
+        "total_tokens": 7383
+      },
+      {
+        "case_id": "s06",
+        "system": "agent_v2",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 2,
+        "step_efficiency": 1.0,
+        "args_valid": 2,
+        "args_checked": 2,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 0,
+        "cost_usd": 0.000605,
+        "latency_ms": 15553.4,
+        "total_tokens": 4586
+      }
+    ],
+    "workflow": [
+      {
+        "case_id": "c01",
+        "system": "workflow",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 0,
+        "args_checked": 0,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.000276,
+        "latency_ms": 6237.0,
+        "total_tokens": 1259
+      },
+      {
+        "case_id": "c02",
+        "system": "workflow",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 0,
+        "args_checked": 0,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 3,
+        "cost_usd": 0.00031,
+        "latency_ms": 6679.5,
+        "total_tokens": 1391
+      },
+      {
+        "case_id": "c03",
+        "system": "workflow",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 0,
+        "args_checked": 0,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 2,
+        "cost_usd": 0.00024,
+        "latency_ms": 7138.0,
+        "total_tokens": 1112
+      },
+      {
+        "case_id": "c04",
+        "system": "workflow",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 0,
+        "args_checked": 0,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.000287,
+        "latency_ms": 8351.1,
+        "total_tokens": 1271
+      },
+      {
+        "case_id": "s01",
+        "system": "workflow",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 0,
+        "args_checked": 0,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.000257,
+        "latency_ms": 11130.1,
+        "total_tokens": 1198
+      },
+      {
+        "case_id": "s02",
+        "system": "workflow",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 0,
+        "args_checked": 0,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.000281,
+        "latency_ms": 10318.4,
+        "total_tokens": 1287
+      },
+      {
+        "case_id": "s03",
+        "system": "workflow",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 0,
+        "args_checked": 0,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.000272,
+        "latency_ms": 14321.6,
+        "total_tokens": 1278
+      },
+      {
+        "case_id": "s04",
+        "system": "workflow",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 0,
+        "args_checked": 0,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.000285,
+        "latency_ms": 8046.2,
+        "total_tokens": 1294
+      },
+      {
+        "case_id": "s05",
+        "system": "workflow",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe",
+          "get_allergen_profile"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe",
+            "get_allergen_profile"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe"
+          ],
+          [
+            "search_recipes",
+            "get_allergen_profile",
+            "scale_recipe",
+            "get_allergen_profile"
+          ]
+        ],
+        "steps_taken": 4,
+        "steps_needed": 4,
+        "step_efficiency": 1.0,
+        "args_valid": 0,
+        "args_checked": 0,
+        "arg_problems": [],
+        "n_allergen_calls": 2,
+        "n_substitutions": 1,
+        "cost_usd": 0.000243,
+        "latency_ms": 11281.9,
+        "total_tokens": 1134
+      },
+      {
+        "case_id": "s06",
+        "system": "workflow",
+        "outcome_pass": true,
+        "trajectory_pass": true,
+        "modes": [],
+        "sequence": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "collapsed": [
+          "search_recipes",
+          "scale_recipe"
+        ],
+        "accepted": [
+          [
+            "search_recipes",
+            "scale_recipe"
+          ]
+        ],
+        "steps_taken": 2,
+        "steps_needed": 2,
+        "step_efficiency": 1.0,
+        "args_valid": 0,
+        "args_checked": 0,
+        "arg_problems": [],
+        "n_allergen_calls": 0,
+        "n_substitutions": 0,
+        "cost_usd": 0.000264,
+        "latency_ms": 12810.2,
+        "total_tokens": 1220
+      }
+    ]
+  }
+}

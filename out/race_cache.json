@@ -63,13 +63,99 @@
     "output_tokens": 544,
     "total_tokens": 6473,
     "cost_usd": 0.000811,
-    "latency_ms": 7906.6,
+    "latency_ms": 16355.8,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 797,
+        "output_tokens": 20,
+        "cumulative_tokens": 817,
+        "cumulative_cost_usd": 8.8e-05,
+        "elapsed_s": 1.48
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Red Pepper Shakshuka"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1282,
+        "output_tokens": 29,
+        "cumulative_tokens": 2128,
+        "cumulative_cost_usd": 0.000228,
+        "elapsed_s": 4.89
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "recipe_id": "shakshuka",
+          "scale_factor": 1.5
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 1873,
+        "output_tokens": 28,
+        "cumulative_tokens": 4029,
+        "cumulative_cost_usd": 0.000426,
+        "elapsed_s": 10.17
+      },
+      {
+        "event": "tool_result",
+        "lap": 3,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-egg",
+          "ingredients": [
+            "Eggs"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 4,
+        "tool_calls": [],
+        "input_tokens": 1977,
+        "output_tokens": 467,
+        "cumulative_tokens": 6473,
+        "cumulative_cost_usd": 0.000811,
+        "elapsed_s": 16.36
+      },
+      {
+        "event": "answered",
+        "lap": 4
+      }
     ]
   },
   "agent_v2::s02": {
@@ -140,7 +226,7 @@
     "output_tokens": 647,
     "total_tokens": 8258,
     "cost_usd": 0.00102,
-    "latency_ms": 12213.9,
+    "latency_ms": 19636.1,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -148,6 +234,117 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 783,
+        "output_tokens": 17,
+        "cumulative_tokens": 800,
+        "cumulative_cost_usd": 8.5e-05,
+        "elapsed_s": 2.74
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Pad Thai"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1129,
+        "output_tokens": 26,
+        "cumulative_tokens": 1955,
+        "cumulative_cost_usd": 0.000208,
+        "elapsed_s": 6.07
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "recipe_id": "pad-thai",
+          "scale_factor": 2
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 1795,
+        "output_tokens": 30,
+        "cumulative_tokens": 3780,
+        "cumulative_cost_usd": 0.0004,
+        "elapsed_s": 9.44
+      },
+      {
+        "event": "tool_result",
+        "lap": 3,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-shellfish",
+          "ingredients": [
+            "Raw prawns"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 4,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 1904,
+        "output_tokens": 30,
+        "cumulative_tokens": 5714,
+        "cumulative_cost_usd": 0.000602,
+        "elapsed_s": 13.17
+      },
+      {
+        "event": "tool_result",
+        "lap": 4,
+        "tool": "get_allergen_profile",
+        "args": {
+          "ingredients": [
+            "Firm tofu"
+          ],
+          "allergen": "contains-shellfish"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 5,
+        "tool_calls": [],
+        "input_tokens": 2000,
+        "output_tokens": 544,
+        "cumulative_tokens": 8258,
+        "cumulative_cost_usd": 0.00102,
+        "elapsed_s": 19.64
+      },
+      {
+        "event": "answered",
+        "lap": 5
+      }
     ]
   },
   "agent_v2::s03": {
@@ -222,7 +419,7 @@
     "output_tokens": 587,
     "total_tokens": 8391,
     "cost_usd": 0.001015,
-    "latency_ms": 11873.1,
+    "latency_ms": 18844.9,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -230,6 +427,117 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 784,
+        "output_tokens": 19,
+        "cumulative_tokens": 803,
+        "cumulative_cost_usd": 8.6e-05,
+        "elapsed_s": 3.31
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Beef Bourguignon"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1145,
+        "output_tokens": 30,
+        "cumulative_tokens": 1978,
+        "cumulative_cost_usd": 0.000213,
+        "elapsed_s": 5.85
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 0.5,
+          "recipe_id": "beef-bourguignon"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 1851,
+        "output_tokens": 33,
+        "cumulative_tokens": 3862,
+        "cumulative_cost_usd": 0.000411,
+        "elapsed_s": 8.64
+      },
+      {
+        "event": "tool_result",
+        "lap": 3,
+        "tool": "get_allergen_profile",
+        "args": {
+          "ingredients": [
+            "Red wine (Burgundy)"
+          ],
+          "allergen": "contains-alcohol"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 4,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 1965,
+        "output_tokens": 29,
+        "cumulative_tokens": 5856,
+        "cumulative_cost_usd": 0.000619,
+        "elapsed_s": 11.25
+      },
+      {
+        "event": "tool_result",
+        "lap": 4,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-alcohol",
+          "ingredients": [
+            "Beef stock"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 5,
+        "tool_calls": [],
+        "input_tokens": 2059,
+        "output_tokens": 476,
+        "cumulative_tokens": 8391,
+        "cumulative_cost_usd": 0.001015,
+        "elapsed_s": 18.84
+      },
+      {
+        "event": "answered",
+        "lap": 5
+      }
     ]
   },
   "agent_v2::s04": {
@@ -296,7 +604,7 @@
     "output_tokens": 622,
     "total_tokens": 11241,
     "cost_usd": 0.001311,
-    "latency_ms": 30419.6,
+    "latency_ms": 30236.6,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -305,6 +613,143 @@
       "get_allergen_profile",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 791,
+        "output_tokens": 21,
+        "cumulative_tokens": 812,
+        "cumulative_cost_usd": 8.8e-05,
+        "elapsed_s": 5.02
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Napa Cabbage Kimchi"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1321,
+        "output_tokens": 28,
+        "cumulative_tokens": 2161,
+        "cumulative_cost_usd": 0.000231,
+        "elapsed_s": 8.16
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "recipe_id": "napa-kimchi",
+          "scale_factor": 2
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 1950,
+        "output_tokens": 42,
+        "cumulative_tokens": 4153,
+        "cumulative_cost_usd": 0.000443,
+        "elapsed_s": 13.08
+      },
+      {
+        "event": "tool_result",
+        "lap": 3,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-fish",
+          "ingredients": [
+            "Fish sauce",
+            "Salted shrimp paste (saeujeot)"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 4,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 2081,
+        "output_tokens": 37,
+        "cumulative_tokens": 6271,
+        "cumulative_cost_usd": 0.000666,
+        "elapsed_s": 21.22
+      },
+      {
+        "event": "tool_result",
+        "lap": 4,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-fish",
+          "ingredients": [
+            "Salted shrimp paste (saeujeot)"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 5,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 2191,
+        "output_tokens": 29,
+        "cumulative_tokens": 8491,
+        "cumulative_cost_usd": 0.000896,
+        "elapsed_s": 25.87
+      },
+      {
+        "event": "tool_result",
+        "lap": 5,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-fish",
+          "ingredients": [
+            "Soy sauce"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 6,
+        "tool_calls": [],
+        "input_tokens": 2285,
+        "output_tokens": 465,
+        "cumulative_tokens": 11241,
+        "cumulative_cost_usd": 0.001311,
+        "elapsed_s": 30.24
+      },
+      {
+        "event": "answered",
+        "lap": 6
+      }
     ]
   },
   "agent_v2::s05": {
@@ -367,7 +812,7 @@
     "output_tokens": 597,
     "total_tokens": 7383,
     "cost_usd": 0.000917,
-    "latency_ms": 8119.8,
+    "latency_ms": 21603.8,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -375,6 +820,124 @@
       "get_allergen_profile",
       "scale_recipe",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 783,
+        "output_tokens": 17,
+        "cumulative_tokens": 800,
+        "cumulative_cost_usd": 8.5e-05,
+        "elapsed_s": 2.68
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Congee"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 1071,
+        "output_tokens": 68,
+        "cumulative_tokens": 1939,
+        "cumulative_cost_usd": 0.000219,
+        "elapsed_s": 6.95
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-sesame",
+          "ingredients": [
+            "Short grain rice",
+            "Water",
+            "Ginger",
+            "Spring onion",
+            "Light soy sauce",
+            "Toasted sesame oil",
+            "Fine sea salt",
+            "White pepper"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1254,
+        "output_tokens": 25,
+        "cumulative_tokens": 3218,
+        "cumulative_cost_usd": 0.000355,
+        "elapsed_s": 10.55
+      },
+      {
+        "event": "tool_result",
+        "lap": 3,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 3,
+          "recipe_id": "congee"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 4,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 1791,
+        "output_tokens": 30,
+        "cumulative_tokens": 5039,
+        "cumulative_cost_usd": 0.000546,
+        "elapsed_s": 16.58
+      },
+      {
+        "event": "tool_result",
+        "lap": 4,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-sesame",
+          "ingredients": [
+            "Neutral oil"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 5,
+        "tool_calls": [],
+        "input_tokens": 1887,
+        "output_tokens": 457,
+        "cumulative_tokens": 7383,
+        "cumulative_cost_usd": 0.000917,
+        "elapsed_s": 21.6
+      },
+      {
+        "event": "answered",
+        "lap": 5
+      }
     ]
   },
   "agent_v2::s06": {
@@ -419,12 +982,73 @@
     "output_tokens": 489,
     "total_tokens": 4586,
     "cost_usd": 0.000605,
-    "latency_ms": 4223.8,
+    "latency_ms": 15553.4,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 791,
+        "output_tokens": 19,
+        "cumulative_tokens": 810,
+        "cumulative_cost_usd": 8.7e-05,
+        "elapsed_s": 3.88
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Country Sourdough"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1393,
+        "output_tokens": 31,
+        "cumulative_tokens": 2234,
+        "cumulative_cost_usd": 0.000238,
+        "elapsed_s": 9.01
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 0.5,
+          "recipe_id": "sourdough-2kg"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [],
+        "input_tokens": 1913,
+        "output_tokens": 439,
+        "cumulative_tokens": 4586,
+        "cumulative_cost_usd": 0.000605,
+        "elapsed_s": 15.55
+      },
+      {
+        "event": "answered",
+        "lap": 3
+      }
     ]
   },
   "agent_v2::c01": {
@@ -491,7 +1115,7 @@
     "output_tokens": 552,
     "total_tokens": 9764,
     "cost_usd": 0.001142,
-    "latency_ms": 46692.1,
+    "latency_ms": 19750.3,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -499,6 +1123,117 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 794,
+        "output_tokens": 22,
+        "cumulative_tokens": 816,
+        "cumulative_cost_usd": 8.8e-05,
+        "elapsed_s": 2.24
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Sesame and Soy Aubergine"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1581,
+        "output_tokens": 33,
+        "cumulative_tokens": 2430,
+        "cumulative_cost_usd": 0.000259,
+        "elapsed_s": 5.46
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 1.5,
+          "recipe_id": "sesame-soy-aubergine"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 2175,
+        "output_tokens": 30,
+        "cumulative_tokens": 4635,
+        "cumulative_cost_usd": 0.000489,
+        "elapsed_s": 8.73
+      },
+      {
+        "event": "tool_result",
+        "lap": 3,
+        "tool": "get_allergen_profile",
+        "args": {
+          "ingredients": [
+            "Light soy sauce"
+          ],
+          "allergen": "contains-soy"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 4,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 2283,
+        "output_tokens": 30,
+        "cumulative_tokens": 6948,
+        "cumulative_cost_usd": 0.000729,
+        "elapsed_s": 15.05
+      },
+      {
+        "event": "tool_result",
+        "lap": 4,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-soy",
+          "ingredients": [
+            "Coconut aminos"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 5,
+        "tool_calls": [],
+        "input_tokens": 2379,
+        "output_tokens": 437,
+        "cumulative_tokens": 9764,
+        "cumulative_cost_usd": 0.001142,
+        "elapsed_s": 19.75
+      },
+      {
+        "event": "answered",
+        "lap": 5
+      }
     ]
   },
   "agent_v2::c02": {
@@ -591,7 +1326,7 @@
     "output_tokens": 817,
     "total_tokens": 10108,
     "cost_usd": 0.001256,
-    "latency_ms": 5683.3,
+    "latency_ms": 23057.2,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -599,6 +1334,121 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 787,
+        "output_tokens": 20,
+        "cumulative_tokens": 807,
+        "cumulative_cost_usd": 8.7e-05,
+        "elapsed_s": 3.49
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Chicken Tikka Masala"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1472,
+        "output_tokens": 30,
+        "cumulative_tokens": 2309,
+        "cumulative_cost_usd": 0.000246,
+        "elapsed_s": 7.7
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "recipe_id": "chicken-tikka-masala",
+          "scale_factor": 2
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 2206,
+        "output_tokens": 40,
+        "cumulative_tokens": 4555,
+        "cumulative_cost_usd": 0.000483,
+        "elapsed_s": 13.54
+      },
+      {
+        "event": "tool_result",
+        "lap": 3,
+        "tool": "get_allergen_profile",
+        "args": {
+          "ingredients": [
+            "Full fat yoghurt",
+            "Double cream",
+            "Ghee"
+          ],
+          "allergen": "contains-dairy"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 4,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 2356,
+        "output_tokens": 39,
+        "cumulative_tokens": 6950,
+        "cumulative_cost_usd": 0.000734,
+        "elapsed_s": 16.48
+      },
+      {
+        "event": "tool_result",
+        "lap": 4,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-dairy",
+          "ingredients": [
+            "Coconut yoghurt",
+            "Coconut cream",
+            "Coconut oil"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 5,
+        "tool_calls": [],
+        "input_tokens": 2470,
+        "output_tokens": 688,
+        "cumulative_tokens": 10108,
+        "cumulative_cost_usd": 0.001256,
+        "elapsed_s": 23.06
+      },
+      {
+        "event": "answered",
+        "lap": 5
+      }
     ]
   },
   "agent_v2::c03": {
@@ -662,7 +1512,7 @@
     "output_tokens": 574,
     "total_tokens": 10498,
     "cost_usd": 0.001222,
-    "latency_ms": 5550.9,
+    "latency_ms": 37095.0,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -670,6 +1520,119 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 791,
+        "output_tokens": 18,
+        "cumulative_tokens": 809,
+        "cumulative_cost_usd": 8.6e-05,
+        "elapsed_s": 9.91
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Classic Brioche"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1818,
+        "output_tokens": 29,
+        "cumulative_tokens": 2656,
+        "cumulative_cost_usd": 0.00028,
+        "elapsed_s": 19.05
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 0.5,
+          "recipe_id": "classic-brioche"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 2307,
+        "output_tokens": 42,
+        "cumulative_tokens": 5005,
+        "cumulative_cost_usd": 0.000527,
+        "elapsed_s": 25.4
+      },
+      {
+        "event": "tool_result",
+        "lap": 3,
+        "tool": "get_allergen_profile",
+        "args": {
+          "ingredients": [
+            "Whole milk (32 C)",
+            "Unsalted butter, softened"
+          ],
+          "allergen": "contains-dairy"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 4,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 2450,
+        "output_tokens": 36,
+        "cumulative_tokens": 7491,
+        "cumulative_cost_usd": 0.000787,
+        "elapsed_s": 29.25
+      },
+      {
+        "event": "tool_result",
+        "lap": 4,
+        "tool": "get_allergen_profile",
+        "args": {
+          "ingredients": [
+            "Oat milk",
+            "Vegan butter block"
+          ],
+          "allergen": "contains-dairy"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 5,
+        "tool_calls": [],
+        "input_tokens": 2558,
+        "output_tokens": 449,
+        "cumulative_tokens": 10498,
+        "cumulative_cost_usd": 0.001222,
+        "elapsed_s": 37.09
+      },
+      {
+        "event": "answered",
+        "lap": 5
+      }
     ]
   },
   "agent_v2::c04": {
@@ -732,7 +1695,7 @@
     "output_tokens": 606,
     "total_tokens": 8542,
     "cost_usd": 0.001036,
-    "latency_ms": 5164.6,
+    "latency_ms": 25521.8,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -740,6 +1703,117 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 787,
+        "output_tokens": 20,
+        "cumulative_tokens": 807,
+        "cumulative_cost_usd": 8.7e-05,
+        "elapsed_s": 4.46
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Lemon Drizzle Loaf"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1294,
+        "output_tokens": 29,
+        "cumulative_tokens": 2130,
+        "cumulative_cost_usd": 0.000228,
+        "elapsed_s": 10.74
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 2,
+          "recipe_id": "lemon-drizzle-cake"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 1847,
+        "output_tokens": 30,
+        "cumulative_tokens": 4007,
+        "cumulative_cost_usd": 0.000424,
+        "elapsed_s": 14.1
+      },
+      {
+        "event": "tool_result",
+        "lap": 3,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-dairy",
+          "ingredients": [
+            "Unsalted butter"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 4,
+        "tool_calls": [
+          "get_allergen_profile"
+        ],
+        "input_tokens": 1955,
+        "output_tokens": 31,
+        "cumulative_tokens": 5993,
+        "cumulative_cost_usd": 0.000632,
+        "elapsed_s": 17.84
+      },
+      {
+        "event": "tool_result",
+        "lap": 4,
+        "tool": "get_allergen_profile",
+        "args": {
+          "allergen": "contains-dairy",
+          "ingredients": [
+            "Dairy-free margarine"
+          ]
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 5,
+        "tool_calls": [],
+        "input_tokens": 2053,
+        "output_tokens": 496,
+        "cumulative_tokens": 8542,
+        "cumulative_cost_usd": 0.001036,
+        "elapsed_s": 25.52
+      },
+      {
+        "event": "answered",
+        "lap": 5
+      }
     ]
   },
   "workflow::s01": {
@@ -810,7 +1884,7 @@
     "output_tokens": 456,
     "total_tokens": 1198,
     "cost_usd": 0.000257,
-    "latency_ms": 43318.1,
+    "latency_ms": 11130.1,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -818,6 +1892,64 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_call",
+        "step": 1,
+        "input_tokens": 156,
+        "output_tokens": 38,
+        "cumulative_tokens": 194,
+        "cumulative_cost_usd": 3.1e-05
+      },
+      {
+        "event": "extracted",
+        "query": "Red Pepper Shakshuka",
+        "scale_factor": 1.5,
+        "allergen": "contains-egg"
+      },
+      {
+        "event": "tool",
+        "tool": "search_recipes",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "scale_recipe",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "original"
+      },
+      {
+        "event": "unsafe_found",
+        "ingredients": [
+          "Eggs"
+        ]
+      },
+      {
+        "event": "model_call",
+        "step": 2,
+        "input_tokens": 586,
+        "output_tokens": 418,
+        "cumulative_tokens": 1198,
+        "cumulative_cost_usd": 0.000257
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "replacements"
+      },
+      {
+        "event": "answered",
+        "step": 2
+      }
     ]
   },
   "workflow::s02": {
@@ -892,7 +2024,7 @@
     "output_tokens": 508,
     "total_tokens": 1287,
     "cost_usd": 0.000281,
-    "latency_ms": 3083.3,
+    "latency_ms": 10318.4,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -900,6 +2032,64 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_call",
+        "step": 1,
+        "input_tokens": 142,
+        "output_tokens": 34,
+        "cumulative_tokens": 176,
+        "cumulative_cost_usd": 2.8e-05
+      },
+      {
+        "event": "extracted",
+        "query": "Pad Thai",
+        "scale_factor": 2.0,
+        "allergen": "contains-shellfish"
+      },
+      {
+        "event": "tool",
+        "tool": "search_recipes",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "scale_recipe",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "original"
+      },
+      {
+        "event": "unsafe_found",
+        "ingredients": [
+          "Raw prawns"
+        ]
+      },
+      {
+        "event": "model_call",
+        "step": 2,
+        "input_tokens": 637,
+        "output_tokens": 474,
+        "cumulative_tokens": 1287,
+        "cumulative_cost_usd": 0.000281
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "replacements"
+      },
+      {
+        "event": "answered",
+        "step": 2
+      }
     ]
   },
   "workflow::s03": {
@@ -974,7 +2164,7 @@
     "output_tokens": 479,
     "total_tokens": 1278,
     "cost_usd": 0.000272,
-    "latency_ms": 2779.2,
+    "latency_ms": 14321.6,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -982,6 +2172,64 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_call",
+        "step": 1,
+        "input_tokens": 143,
+        "output_tokens": 37,
+        "cumulative_tokens": 180,
+        "cumulative_cost_usd": 2.9e-05
+      },
+      {
+        "event": "extracted",
+        "query": "Beef Bourguignon",
+        "scale_factor": 0.5,
+        "allergen": "contains-alcohol"
+      },
+      {
+        "event": "tool",
+        "tool": "search_recipes",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "scale_recipe",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "original"
+      },
+      {
+        "event": "unsafe_found",
+        "ingredients": [
+          "Red wine (Burgundy)"
+        ]
+      },
+      {
+        "event": "model_call",
+        "step": 2,
+        "input_tokens": 656,
+        "output_tokens": 442,
+        "cumulative_tokens": 1278,
+        "cumulative_cost_usd": 0.000272
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "replacements"
+      },
+      {
+        "event": "answered",
+        "step": 2
+      }
     ]
   },
   "workflow::s04": {
@@ -1048,7 +2296,7 @@
     "output_tokens": 517,
     "total_tokens": 1294,
     "cost_usd": 0.000285,
-    "latency_ms": 3774.4,
+    "latency_ms": 8046.2,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -1056,6 +2304,64 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_call",
+        "step": 1,
+        "input_tokens": 150,
+        "output_tokens": 37,
+        "cumulative_tokens": 187,
+        "cumulative_cost_usd": 3e-05
+      },
+      {
+        "event": "extracted",
+        "query": "Napa Cabbage Kimchi",
+        "scale_factor": 2.0,
+        "allergen": "contains-fish"
+      },
+      {
+        "event": "tool",
+        "tool": "search_recipes",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "scale_recipe",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "original"
+      },
+      {
+        "event": "unsafe_found",
+        "ingredients": [
+          "Fish sauce"
+        ]
+      },
+      {
+        "event": "model_call",
+        "step": 2,
+        "input_tokens": 627,
+        "output_tokens": 480,
+        "cumulative_tokens": 1294,
+        "cumulative_cost_usd": 0.000285
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "replacements"
+      },
+      {
+        "event": "answered",
+        "step": 2
+      }
     ]
   },
   "workflow::s05": {
@@ -1118,7 +2424,7 @@
     "output_tokens": 432,
     "total_tokens": 1134,
     "cost_usd": 0.000243,
-    "latency_ms": 2414.2,
+    "latency_ms": 11281.9,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -1126,6 +2432,64 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_call",
+        "step": 1,
+        "input_tokens": 142,
+        "output_tokens": 34,
+        "cumulative_tokens": 176,
+        "cumulative_cost_usd": 2.8e-05
+      },
+      {
+        "event": "extracted",
+        "query": "Congee",
+        "scale_factor": 3.0,
+        "allergen": "contains-sesame"
+      },
+      {
+        "event": "tool",
+        "tool": "search_recipes",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "scale_recipe",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "original"
+      },
+      {
+        "event": "unsafe_found",
+        "ingredients": [
+          "Toasted sesame oil"
+        ]
+      },
+      {
+        "event": "model_call",
+        "step": 2,
+        "input_tokens": 560,
+        "output_tokens": 398,
+        "cumulative_tokens": 1134,
+        "cumulative_cost_usd": 0.000243
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "replacements"
+      },
+      {
+        "event": "answered",
+        "step": 2
+      }
     ]
   },
   "workflow::s06": {
@@ -1170,12 +2534,56 @@
     "output_tokens": 472,
     "total_tokens": 1220,
     "cost_usd": 0.000264,
-    "latency_ms": 2649.8,
+    "latency_ms": 12810.2,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_call",
+        "step": 1,
+        "input_tokens": 150,
+        "output_tokens": 33,
+        "cumulative_tokens": 183,
+        "cumulative_cost_usd": 2.8e-05
+      },
+      {
+        "event": "extracted",
+        "query": "Country Sourdough",
+        "scale_factor": 0.5,
+        "allergen": ""
+      },
+      {
+        "event": "tool",
+        "tool": "search_recipes",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "scale_recipe",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "unsafe_found",
+        "ingredients": []
+      },
+      {
+        "event": "model_call",
+        "step": 2,
+        "input_tokens": 598,
+        "output_tokens": 439,
+        "cumulative_tokens": 1220,
+        "cumulative_cost_usd": 0.000264
+      },
+      {
+        "event": "answered",
+        "step": 2
+      }
     ]
   },
   "workflow::c01": {
@@ -1242,7 +2650,7 @@
     "output_tokens": 502,
     "total_tokens": 1259,
     "cost_usd": 0.000276,
-    "latency_ms": 2927.9,
+    "latency_ms": 6237.0,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -1250,6 +2658,64 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_call",
+        "step": 1,
+        "input_tokens": 153,
+        "output_tokens": 40,
+        "cumulative_tokens": 193,
+        "cumulative_cost_usd": 3.1e-05
+      },
+      {
+        "event": "extracted",
+        "query": "Sesame and Soy Aubergine",
+        "scale_factor": 1.5,
+        "allergen": "contains-soy"
+      },
+      {
+        "event": "tool",
+        "tool": "search_recipes",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "scale_recipe",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "original"
+      },
+      {
+        "event": "unsafe_found",
+        "ingredients": [
+          "Light soy sauce"
+        ]
+      },
+      {
+        "event": "model_call",
+        "step": 2,
+        "input_tokens": 604,
+        "output_tokens": 462,
+        "cumulative_tokens": 1259,
+        "cumulative_cost_usd": 0.000276
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "replacements"
+      },
+      {
+        "event": "answered",
+        "step": 2
+      }
     ]
   },
   "workflow::c02": {
@@ -1342,7 +2808,7 @@
     "output_tokens": 568,
     "total_tokens": 1391,
     "cost_usd": 0.00031,
-    "latency_ms": 2808.0,
+    "latency_ms": 6679.5,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -1350,6 +2816,66 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_call",
+        "step": 1,
+        "input_tokens": 146,
+        "output_tokens": 36,
+        "cumulative_tokens": 182,
+        "cumulative_cost_usd": 2.9e-05
+      },
+      {
+        "event": "extracted",
+        "query": "Chicken Tikka Masala",
+        "scale_factor": 2.0,
+        "allergen": "contains-dairy"
+      },
+      {
+        "event": "tool",
+        "tool": "search_recipes",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "scale_recipe",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "original"
+      },
+      {
+        "event": "unsafe_found",
+        "ingredients": [
+          "Full fat yoghurt",
+          "Double cream",
+          "Ghee"
+        ]
+      },
+      {
+        "event": "model_call",
+        "step": 2,
+        "input_tokens": 677,
+        "output_tokens": 532,
+        "cumulative_tokens": 1391,
+        "cumulative_cost_usd": 0.00031
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "replacements"
+      },
+      {
+        "event": "answered",
+        "step": 2
+      }
     ]
   },
   "workflow::c03": {
@@ -1413,7 +2939,7 @@
     "output_tokens": 429,
     "total_tokens": 1112,
     "cost_usd": 0.00024,
-    "latency_ms": 43920.5,
+    "latency_ms": 7138.0,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -1421,6 +2947,65 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_call",
+        "step": 1,
+        "input_tokens": 150,
+        "output_tokens": 36,
+        "cumulative_tokens": 186,
+        "cumulative_cost_usd": 2.9e-05
+      },
+      {
+        "event": "extracted",
+        "query": "Classic Brioche",
+        "scale_factor": 0.5,
+        "allergen": "contains-dairy"
+      },
+      {
+        "event": "tool",
+        "tool": "search_recipes",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "scale_recipe",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "original"
+      },
+      {
+        "event": "unsafe_found",
+        "ingredients": [
+          "Whole milk (32 C)",
+          "Unsalted butter, softened"
+        ]
+      },
+      {
+        "event": "model_call",
+        "step": 2,
+        "input_tokens": 533,
+        "output_tokens": 393,
+        "cumulative_tokens": 1112,
+        "cumulative_cost_usd": 0.00024
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "replacements"
+      },
+      {
+        "event": "answered",
+        "step": 2
+      }
     ]
   },
   "workflow::c04": {
@@ -1483,7 +3068,7 @@
     "output_tokens": 533,
     "total_tokens": 1271,
     "cost_usd": 0.000287,
-    "latency_ms": 3504.3,
+    "latency_ms": 8351.1,
     "terminated_by": "",
     "error": "",
     "tools_called": [
@@ -1491,6 +3076,64 @@
       "scale_recipe",
       "get_allergen_profile",
       "get_allergen_profile"
+    ],
+    "log": [
+      {
+        "event": "model_call",
+        "step": 1,
+        "input_tokens": 146,
+        "output_tokens": 36,
+        "cumulative_tokens": 182,
+        "cumulative_cost_usd": 2.9e-05
+      },
+      {
+        "event": "extracted",
+        "query": "Lemon Drizzle Loaf",
+        "scale_factor": 2.0,
+        "allergen": "contains-dairy"
+      },
+      {
+        "event": "tool",
+        "tool": "search_recipes",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "scale_recipe",
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "original"
+      },
+      {
+        "event": "unsafe_found",
+        "ingredients": [
+          "Unsalted butter"
+        ]
+      },
+      {
+        "event": "model_call",
+        "step": 2,
+        "input_tokens": 592,
+        "output_tokens": 497,
+        "cumulative_tokens": 1271,
+        "cumulative_cost_usd": 0.000287
+      },
+      {
+        "event": "tool",
+        "tool": "get_allergen_profile",
+        "ok": true,
+        "scope": "replacements"
+      },
+      {
+        "event": "answered",
+        "step": 2
+      }
     ]
   },
   "agent_v1::s01": {
@@ -1557,12 +3200,73 @@
     "output_tokens": 406,
     "total_tokens": 3626,
     "cost_usd": 0.000484,
-    "latency_ms": 3695.5,
+    "latency_ms": 18766.1,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 553,
+        "output_tokens": 20,
+        "cumulative_tokens": 573,
+        "cumulative_cost_usd": 6.3e-05,
+        "elapsed_s": 6.97
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Red Pepper Shakshuka"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1038,
+        "output_tokens": 29,
+        "cumulative_tokens": 1640,
+        "cumulative_cost_usd": 0.000179,
+        "elapsed_s": 11.07
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "recipe_id": "shakshuka",
+          "scale_factor": 1.5
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [],
+        "input_tokens": 1629,
+        "output_tokens": 357,
+        "cumulative_tokens": 3626,
+        "cumulative_cost_usd": 0.000484,
+        "elapsed_s": 18.77
+      },
+      {
+        "event": "answered",
+        "lap": 3
+      }
     ]
   },
   "agent_v1::s02": {
@@ -1633,12 +3337,73 @@
     "output_tokens": 570,
     "total_tokens": 3545,
     "cost_usd": 0.000526,
-    "latency_ms": 4297.6,
+    "latency_ms": 15313.0,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 539,
+        "output_tokens": 17,
+        "cumulative_tokens": 556,
+        "cumulative_cost_usd": 6.1e-05,
+        "elapsed_s": 3.4
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Pad Thai"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 885,
+        "output_tokens": 26,
+        "cumulative_tokens": 1467,
+        "cumulative_cost_usd": 0.00016,
+        "elapsed_s": 9.62
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "recipe_id": "pad-thai",
+          "scale_factor": 2
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [],
+        "input_tokens": 1551,
+        "output_tokens": 527,
+        "cumulative_tokens": 3545,
+        "cumulative_cost_usd": 0.000526,
+        "elapsed_s": 15.31
+      },
+      {
+        "event": "answered",
+        "lap": 3
+      }
     ]
   },
   "agent_v1::s03": {
@@ -1713,12 +3478,73 @@
     "output_tokens": 527,
     "total_tokens": 3575,
     "cost_usd": 0.000516,
-    "latency_ms": 3452.8,
+    "latency_ms": 10226.2,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 540,
+        "output_tokens": 19,
+        "cumulative_tokens": 559,
+        "cumulative_cost_usd": 6.2e-05,
+        "elapsed_s": 3.01
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Beef Bourguignon"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 901,
+        "output_tokens": 30,
+        "cumulative_tokens": 1490,
+        "cumulative_cost_usd": 0.000164,
+        "elapsed_s": 5.34
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 0.5,
+          "recipe_id": "beef-bourguignon"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [],
+        "input_tokens": 1607,
+        "output_tokens": 478,
+        "cumulative_tokens": 3575,
+        "cumulative_cost_usd": 0.000516,
+        "elapsed_s": 10.23
+      },
+      {
+        "event": "answered",
+        "lap": 3
+      }
     ]
   },
   "agent_v1::s04": {
@@ -1790,12 +3616,73 @@
     "output_tokens": 537,
     "total_tokens": 3867,
     "cost_usd": 0.000548,
-    "latency_ms": 6964.9,
+    "latency_ms": 10774.2,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 547,
+        "output_tokens": 21,
+        "cumulative_tokens": 568,
+        "cumulative_cost_usd": 6.3e-05,
+        "elapsed_s": 2.9
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Napa Cabbage Kimchi"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1077,
+        "output_tokens": 28,
+        "cumulative_tokens": 1673,
+        "cumulative_cost_usd": 0.000182,
+        "elapsed_s": 7.17
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 2,
+          "recipe_id": "napa-kimchi"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [],
+        "input_tokens": 1706,
+        "output_tokens": 488,
+        "cumulative_tokens": 3867,
+        "cumulative_cost_usd": 0.000548,
+        "elapsed_s": 10.77
+      },
+      {
+        "event": "answered",
+        "lap": 3
+      }
     ]
   },
   "agent_v1::s05": {
@@ -1854,12 +3741,73 @@
     "output_tokens": 467,
     "total_tokens": 3197,
     "cost_usd": 0.00046,
-    "latency_ms": 4652.3,
+    "latency_ms": 12927.9,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 539,
+        "output_tokens": 17,
+        "cumulative_tokens": 556,
+        "cumulative_cost_usd": 6.1e-05,
+        "elapsed_s": 4.02
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Congee"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 827,
+        "output_tokens": 25,
+        "cumulative_tokens": 1408,
+        "cumulative_cost_usd": 0.000153,
+        "elapsed_s": 8.14
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 3,
+          "recipe_id": "congee"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [],
+        "input_tokens": 1364,
+        "output_tokens": 425,
+        "cumulative_tokens": 3197,
+        "cumulative_cost_usd": 0.00046,
+        "elapsed_s": 12.93
+      },
+      {
+        "event": "answered",
+        "lap": 3
+      }
     ]
   },
   "agent_v1::s06": {
@@ -1904,12 +3852,73 @@
     "output_tokens": 489,
     "total_tokens": 3854,
     "cost_usd": 0.000532,
-    "latency_ms": 46046.2,
+    "latency_ms": 8067.3,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 547,
+        "output_tokens": 19,
+        "cumulative_tokens": 566,
+        "cumulative_cost_usd": 6.2e-05,
+        "elapsed_s": 4.13
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Country Sourdough"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1149,
+        "output_tokens": 31,
+        "cumulative_tokens": 1746,
+        "cumulative_cost_usd": 0.00019,
+        "elapsed_s": 5.83
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 0.5,
+          "recipe_id": "sourdough-2kg"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [],
+        "input_tokens": 1669,
+        "output_tokens": 439,
+        "cumulative_tokens": 3854,
+        "cumulative_cost_usd": 0.000532,
+        "elapsed_s": 8.07
+      },
+      {
+        "event": "answered",
+        "lap": 3
+      }
     ]
   },
   "agent_v1::c01": {
@@ -1976,12 +3985,73 @@
     "output_tokens": 574,
     "total_tokens": 4392,
     "cost_usd": 0.000611,
-    "latency_ms": 7450.7,
+    "latency_ms": 10177.4,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 550,
+        "output_tokens": 22,
+        "cumulative_tokens": 572,
+        "cumulative_cost_usd": 6.4e-05,
+        "elapsed_s": 2.97
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Sesame and Soy Aubergine"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1337,
+        "output_tokens": 33,
+        "cumulative_tokens": 1942,
+        "cumulative_cost_usd": 0.000211,
+        "elapsed_s": 5.59
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 1.5,
+          "recipe_id": "sesame-soy-aubergine"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [],
+        "input_tokens": 1931,
+        "output_tokens": 519,
+        "cumulative_tokens": 4392,
+        "cumulative_cost_usd": 0.000611,
+        "elapsed_s": 10.18
+      },
+      {
+        "event": "answered",
+        "lap": 3
+      }
     ]
   },
   "agent_v1::c02": {
@@ -2074,12 +4144,73 @@
     "output_tokens": 581,
     "total_tokens": 4314,
     "cost_usd": 0.000606,
-    "latency_ms": 4403.4,
+    "latency_ms": 13573.8,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 543,
+        "output_tokens": 20,
+        "cumulative_tokens": 563,
+        "cumulative_cost_usd": 6.2e-05,
+        "elapsed_s": 3.47
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Chicken Tikka Masala"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1228,
+        "output_tokens": 30,
+        "cumulative_tokens": 1821,
+        "cumulative_cost_usd": 0.000197,
+        "elapsed_s": 6.65
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 2,
+          "recipe_id": "chicken-tikka-masala"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [],
+        "input_tokens": 1962,
+        "output_tokens": 531,
+        "cumulative_tokens": 4314,
+        "cumulative_cost_usd": 0.000606,
+        "elapsed_s": 13.57
+      },
+      {
+        "event": "answered",
+        "lap": 3
+      }
     ]
   },
   "agent_v1::c03": {
@@ -2143,12 +4274,73 @@
     "output_tokens": 491,
     "total_tokens": 4675,
     "cost_usd": 0.000615,
-    "latency_ms": 4580.2,
+    "latency_ms": 15618.5,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 547,
+        "output_tokens": 18,
+        "cumulative_tokens": 565,
+        "cumulative_cost_usd": 6.2e-05,
+        "elapsed_s": 4.78
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Classic Brioche"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1574,
+        "output_tokens": 29,
+        "cumulative_tokens": 2168,
+        "cumulative_cost_usd": 0.000231,
+        "elapsed_s": 8.92
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "recipe_id": "classic-brioche",
+          "scale_factor": 0.5
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [],
+        "input_tokens": 2063,
+        "output_tokens": 444,
+        "cumulative_tokens": 4675,
+        "cumulative_cost_usd": 0.000615,
+        "elapsed_s": 15.62
+      },
+      {
+        "event": "answered",
+        "lap": 3
+      }
     ]
   },
   "agent_v1::c04": {
@@ -2211,12 +4403,73 @@
     "output_tokens": 529,
     "total_tokens": 3725,
     "cost_usd": 0.000531,
-    "latency_ms": 4579.3,
+    "latency_ms": 12985.4,
     "terminated_by": "",
     "error": "",
     "tools_called": [
       "search_recipes",
       "scale_recipe"
+    ],
+    "log": [
+      {
+        "event": "model_turn",
+        "lap": 1,
+        "tool_calls": [
+          "search_recipes"
+        ],
+        "input_tokens": 543,
+        "output_tokens": 20,
+        "cumulative_tokens": 563,
+        "cumulative_cost_usd": 6.2e-05,
+        "elapsed_s": 2.89
+      },
+      {
+        "event": "tool_result",
+        "lap": 1,
+        "tool": "search_recipes",
+        "args": {
+          "query": "Lemon Drizzle Loaf"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 2,
+        "tool_calls": [
+          "scale_recipe"
+        ],
+        "input_tokens": 1050,
+        "output_tokens": 29,
+        "cumulative_tokens": 1642,
+        "cumulative_cost_usd": 0.000179,
+        "elapsed_s": 5.39
+      },
+      {
+        "event": "tool_result",
+        "lap": 2,
+        "tool": "scale_recipe",
+        "args": {
+          "scale_factor": 2,
+          "recipe_id": "lemon-drizzle-cake"
+        },
+        "ok": true,
+        "error": ""
+      },
+      {
+        "event": "model_turn",
+        "lap": 3,
+        "tool_calls": [],
+        "input_tokens": 1603,
+        "output_tokens": 480,
+        "cumulative_tokens": 3725,
+        "cumulative_cost_usd": 0.000531,
+        "elapsed_s": 12.99
+      },
+      {
+        "event": "answered",
+        "lap": 3
+      }
     ]
   }
 }

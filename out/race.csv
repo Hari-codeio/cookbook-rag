@@ -1,4 +1,4 @@
 system,description,n,pass_rate,p50_latency_ms,total_tokens,cost_per_request_usd,cascade_pass,plain_pass,mean_laps
-agent_v2,"agent, 3 tools, sharpened descriptions",10,1.00,8013,85244,0.001034,4/4,6/6,4.8
-workflow,"fixed workflow, no loop",10,1.00,3006,12444,0.000271,4/4,6/6,2.0
-agent_v1,"agent, 2 tools, overlapping descriptions",10,1.00,4580,38770,0.000543,4/4,6/6,3.0
+agent_v2,"agent, 3 tools, sharpened descriptions",10,1.00,20677,85244,0.001034,4/4,6/6,4.8
+workflow,"fixed workflow, no loop",10,1.00,9335,12444,0.000271,4/4,6/6,2.0
+agent_v1,"agent, 2 tools, overlapping descriptions",10,1.00,12957,38770,0.000543,4/4,6/6,3.0

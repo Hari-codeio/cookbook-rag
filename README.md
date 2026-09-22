@@ -88,6 +88,12 @@ $PY -m rag.agent    "Double the Congee and remove anything with sesame"
 $PY -m rag.workflow "Double the Congee and remove anything with sesame"
 $PY eval/run_race.py --systems all  # the 8 numbers -> out/race.csv, out/race.md
 $PY eval/budget_demo.py             # all four budgets firing -> out/budget_termination.log
+
+# 9. Week 8 - score the PATH, not just the answer
+$PY eval/trajectory_eval.py         # four trajectory numbers + the gap  (no API)
+$PY eval/compare_modes.py --before agent_v1 --after workflow --mode skipped-allergen-check
+                                    # one mitigation, before->after, price  (no API)
+$PY eval/injection_demo.py          # bonus: indirect prompt injection  [needs API key]
 ```
 
 The judge and the RAGAS metrics are both cached on the sha256 of their prompt and

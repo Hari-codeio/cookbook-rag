@@ -105,6 +105,12 @@ def run_one(client, system: str, case: dict[str, Any]) -> dict[str, Any]:
         "error": result.error,
         "tools_called": [e.get("tool") for e in result.log if e.get("event") == "tool_result"]
         or [e.get("tool") for e in result.log if e.get("event") == "tool"],
+        # The FULL log, arguments included. Week 8 scores the path, not just the
+        # destination, and argument validity ("were the recipe ids real or
+        # fluent fiction?") cannot be checked from tool names alone. Storing it
+        # here means the trajectory eval is a pure re-read of a finished race
+        # rather than another 150 API calls.
+        "log": result.log,
     }
 
 
