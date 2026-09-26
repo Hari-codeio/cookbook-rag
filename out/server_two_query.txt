@@ -1,0 +1,93 @@
+$ python -m rag.mcp_host --max-tokens 80000 --max-cost 0.05 "Make the pad thai 1.5x for someone with a peanut allergy. Swap the peanuts for something safe, and tell me the swap's protein per 100 g."
+server 'recipe_search': recipe-search v1.30.0 (protocol 2025-11-25) -> tools/list: search_recipes, scale_recipe, get_allergen_profile
+server 'ingredient_db': ingredient-db v1.30.0 (protocol 2025-11-25) -> tools/list: lookup_ingredient, get_allergens, get_nutrition_per_100g
+6 tools discovered: search_recipes, scale_recipe, get_allergen_profile, lookup_ingredient, get_allergens, get_nutrition_per_100g
+attached resource: ingredients://allergen-flags
+run_id 0809c43b
+
+{"event": "model_turn", "lap": 1, "tool_calls": ["search_recipes"], "input_tokens": 1326, "output_tokens": 17, "cumulative_tokens": 1343, "cumulative_cost_usd": 0.000139, "elapsed_s": 41.89}
+{"event": "tool_result", "lap": 1, "tool": "search_recipes", "args": {"query": "pad thai"}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 2, "tool_calls": ["scale_recipe"], "input_tokens": 1672, "output_tokens": 28, "cumulative_tokens": 3043, "cumulative_cost_usd": 0.000318, "elapsed_s": 44.28}
+{"event": "tool_result", "lap": 2, "tool": "scale_recipe", "args": {"scale_factor": 1.5, "recipe_id": "pad-thai"}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 3, "tool_calls": ["get_allergens"], "input_tokens": 2340, "output_tokens": 19, "cumulative_tokens": 5402, "cumulative_cost_usd": 0.000559, "elapsed_s": 46.43}
+{"event": "tool_result", "lap": 3, "tool": "get_allergens", "args": {"ingredient": "Roasted sunflower seeds"}, "ok": false, "error": "Error executing tool get_allergens: no ingredient matched 'Roasted sunflower seeds'. Try: 'sesame-seeds', 'sunflower-seeds-roasted'."}
+{"event": "model_turn", "lap": 4, "tool_calls": ["get_allergens"], "input_tokens": 2409, "output_tokens": 22, "cumulative_tokens": 7833, "cumulative_cost_usd": 0.000809, "elapsed_s": 47.93}
+{"event": "tool_result", "lap": 4, "tool": "get_allergens", "args": {"ingredient": "sunflower-seeds-roasted"}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 5, "tool_calls": ["get_nutrition_per_100g"], "input_tokens": 2477, "output_tokens": 28, "cumulative_tokens": 10338, "cumulative_cost_usd": 0.001068, "elapsed_s": 50.05}
+{"event": "tool_result", "lap": 5, "tool": "get_nutrition_per_100g", "args": {"ingredient": "sunflower-seeds-roasted"}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 6, "tool_calls": [], "input_tokens": 2649, "output_tokens": 499, "cumulative_tokens": 13486, "cumulative_cost_usd": 0.001533, "elapsed_s": 57.75}
+{"event": "answered", "lap": 6}
+
+MCP tools/call trace (server -> tool):
+  [recipe_search] search_recipes({"query": "pad thai"}) -> ok
+  [recipe_search] scale_recipe({"scale_factor": 1.5, "recipe_id": "pad-thai"}) -> ok
+  [ingredient_db] get_allergens({"ingredient": "Roasted sunflower seeds"}) -> ERROR
+      Error executing tool get_allergens: no ingredient matched 'Roasted sunflower seeds'. Try: 'sesame-seeds', 'sunflower-seeds-roasted'.
+  [ingredient_db] get_allergens({"ingredient": "sunflower-seeds-roasted"}) -> ok
+  [ingredient_db] get_nutrition_per_100g({"ingredient": "sunflower-seeds-roasted"}) -> ok
+
+ok            : True
+terminated_by : (ran to completion)
+laps          : 6
+tokens        : 13486
+cost          : $0.001533
+{
+  "recipe_id": "pad-thai",
+  "title": "Prawn Pad Thai",
+  "scale_factor": 1.5,
+  "ingredients": [
+    {
+      "ingredient": "Flat rice noodles",
+      "amount": "375 g"
+    },
+    {
+      "ingredient": "Raw prawns",
+      "amount": "450 g"
+    },
+    {
+      "ingredient": "Firm tofu",
+      "amount": "225 g"
+    },
+    {
+      "ingredient": "Eggs",
+      "amount": "3 whole"
+    },
+    {
+      "ingredient": "Tamarind paste",
+      "amount": "90 g"
+    },
+    {
+      "ingredient": "Palm sugar",
+      "amount": "75 g"
+    },
+    {
+      "ingredient": "Fish sauce",
+      "amount": "67.5 g"
+    },
+    {
+      "ingredient": "Roasted sunflower seeds",
+      "amount": "90 g"
+    },
+    {
+      "ingredient": "Beansprouts",
+      "amount": "225 g"
+    },
+    {
+      "ingredient": "Garlic chives",
+      "amount": "75 g"
+    },
+    {
+      "ingredient": "Neutral oil",
+      "amount": "60 g"
+    }
+  ],
+  "substitutions": [
+    {
+      "from": "Roasted peanuts",
+      "to": "Roasted sunflower seeds",
+      "reason": "Peanut allergy. Roasted sunflower seeds have 19.3 g of protein per 100 g."
+    }
+  ],
+  "method": "## Method\n\nSoak the noodles in warm water for thirty minutes until pliable but still firm at the core.\nThey finish cooking in the pan and will turn to paste if you soften them fully now.\n\nMelt the palm sugar with the tamarind and fish sauce over low heat until it forms a smooth\nsyrup. This sauce is the whole dish; taste it and adjust before it goes near the wok.\n\nGet the wok properly hot. Fry the tofu until it takes colour, add the prawns and cook until\njust opaque, then push everything to one side and scramble the eggs in the clear space.\nAdd the drained noodles and the sauce and toss hard for two minutes. Kill the heat, fold\nthrough the beansprouts and chives so they stay crisp, and finish with the sunflower seeds.",
+  "unsupported": ""
+}

@@ -1,0 +1,5 @@
+$ python -m rag.mcp_host --list-tools        # mcp_config.json with server two added
+server 'recipe_search': recipe-search v1.30.0 (protocol 2025-11-25) -> tools/list: search_recipes, scale_recipe, get_allergen_profile
+server 'ingredient_db': ingredient-db v1.30.0 (protocol 2025-11-25) -> tools/list: lookup_ingredient, get_allergens, get_nutrition_per_100g
+6 tools discovered: search_recipes, scale_recipe, get_allergen_profile, lookup_ingredient, get_allergens, get_nutrition_per_100g
+attached resource: ingredients://allergen-flags

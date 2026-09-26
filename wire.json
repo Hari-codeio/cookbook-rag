@@ -1,0 +1,267 @@
+{
+  "what_this_is": "A raw JSON-RPC 2.0 exchange with the ingredient-db MCP server over stdio, captured by eval/capture_wire.py with no MCP library on the client side. Each `raw` field is the line exactly as it crossed the pipe (verbatim copy: out/wire_raw.jsonl). Each `annotations` field is written by hand, one entry per top-level field of that message.",
+  "where_the_model_call_happens": "The model call (Gemini, via rag/llm.py call_with_tools) happens only in the HOST process (rag/mcp_host.py -> rag/agent.py). It never happens in the ingredient-db server, which only receives a tool name and arguments over stdin and answers with JSON, and none of the 9 messages below carries a prompt, a model name or an API key.",
+  "exchange": [
+    {
+      "step": "1. initialize (request)",
+      "direction": "host -> server",
+      "raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-11-25",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "cookbook-rag-host",
+            "version": "week9"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "Protocol tag. Always the string \"2.0\"; MCP is JSON-RPC 2.0, nothing custom.",
+        "id": "1. Chosen by the HOST. The reply must echo it, which is how a reply is matched to its request on a pipe that carries many messages.",
+        "method": "\"initialize\": the handshake. Must be the first request on a new connection; no tool can be listed or called before it.",
+        "params": "What the host offers. protocolVersion = the spec revision the host speaks (2025-11-25). capabilities = features the HOST supports for the server to use (sampling, roots, elicitation); empty here, so this server can never ask our side to run a model. clientInfo = the host's self-reported name/version, unauthenticated."
+      }
+    },
+    {
+      "step": "2. initialize (response)",
+      "direction": "server -> host",
+      "raw": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "protocolVersion": "2025-11-25",
+          "capabilities": {
+            "experimental": {},
+            "prompts": {
+              "listChanged": false
+            },
+            "resources": {
+              "subscribe": false,
+              "listChanged": false
+            },
+            "tools": {
+              "listChanged": false
+            }
+          },
+          "serverInfo": {
+            "name": "ingredient-db",
+            "version": "1.30.0"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\" again: every message carries it.",
+        "id": "1. Same id as the request, so this is the answer to message 1.",
+        "result": "Present instead of `error` because the handshake succeeded. protocolVersion = the version the server agrees to (it may downgrade; the host must accept or disconnect). capabilities = what the SERVER offers: tools, resources, prompts, each with listChanged=false (the list is fixed for the whole session, so the host does not need to watch for changes). serverInfo = the server's self-reported name and version. Note that \"version\" is 1.30.0, the MCP SDK's version, not a release number the content team assigned, so it cannot be used to pin or verify which build of the server we are running."
+      }
+    },
+    {
+      "step": "3. notifications/initialized (notification)",
+      "direction": "host -> server",
+      "raw": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "method": "\"notifications/initialized\": the host confirms it has accepted the server's answer and normal traffic can start.",
+        "(no id)": "A message with NO id is a notification. The server must not reply, and it does not; there is no server -> host line for this step."
+      }
+    },
+    {
+      "step": "4. tools/list (request)",
+      "direction": "host -> server",
+      "raw": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list"
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "id": "2. The next request id.",
+        "method": "\"tools/list\": DISCOVERY. The host asks which tools exist instead of having them hard-coded. rag/mcp_host.py sends exactly this once per server at start-up.",
+        "(no params)": "Omitted. It could carry a pagination `cursor`; this server returns everything in one page."
+      }
+    },
+    {
+      "step": "5. tools/list (response)",
+      "direction": "server -> host",
+      "raw": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "tools": [
+            {
+              "name": "lookup_ingredient",
+              "description": "Search the ingredient database by name and return candidate records\n(id, canonical name, aliases). Use the returned id or name with\nget_allergens or get_nutrition_per_100g.",
+              "inputSchema": {
+                "properties": {
+                  "name": {
+                    "title": "Name",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "title": "lookup_ingredientArguments",
+                "type": "object"
+              },
+              "outputSchema": {
+                "additionalProperties": true,
+                "title": "lookup_ingredientDictOutput",
+                "type": "object"
+              }
+            },
+            {
+              "name": "get_allergens",
+              "description": "Return the EU-14 allergen flags for one ingredient: `contains` (present\nby recipe) and `may_contain` (cross-contact risk declared by the supplier).\nAn empty `contains` list with a non-empty `may_contain` is NOT allergen-free.",
+              "inputSchema": {
+                "properties": {
+                  "ingredient": {
+                    "title": "Ingredient",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ingredient"
+                ],
+                "title": "get_allergensArguments",
+                "type": "object"
+              },
+              "outputSchema": {
+                "additionalProperties": true,
+                "title": "get_allergensDictOutput",
+                "type": "object"
+              }
+            },
+            {
+              "name": "get_nutrition_per_100g",
+              "description": "Return nutrition per 100 g for one ingredient: kcal, protein, fat,\ncarbohydrate, sugars, fibre and salt, all in grams except kcal.",
+              "inputSchema": {
+                "properties": {
+                  "ingredient": {
+                    "title": "Ingredient",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ingredient"
+                ],
+                "title": "get_nutrition_per_100gArguments",
+                "type": "object"
+              },
+              "outputSchema": {
+                "additionalProperties": true,
+                "title": "get_nutrition_per_100gDictOutput",
+                "type": "object"
+              }
+            }
+          ]
+        }
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "id": "2, answering message 4.",
+        "result": "result.tools = the 3 tools this server exposes. Per tool: name = what the model will call; description = the Python DOCSTRING, which is the text the model reads when choosing a tool (so it is a prompt); inputSchema = JSON Schema generated from the type hints, which the host forwards to Gemini unchanged as parameters_json_schema; outputSchema = the shape of structuredContent in results. The allergen legend is NOT here: it is a resource (resources/list), which the host attaches itself instead of letting the model fetch it each turn. No nextCursor, so this is the complete list."
+      }
+    },
+    {
+      "step": "6. tools/call (request, a hit)",
+      "direction": "host -> server",
+      "raw": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "get_allergens",
+          "arguments": {
+            "ingredient": "creme fraiche"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "id": "3.",
+        "method": "\"tools/call\": run one tool. In the live agent the host sends this only after the MODEL, running in the host process, has replied with a function call. The server never learns that a model was involved.",
+        "params": "name = the tool (get_allergens). arguments = the JSON object the model produced, validated by the server against inputSchema. This string (the user's ingredient) is exactly what the third-party server sees and writes to its query log."
+      }
+    },
+    {
+      "step": "7. tools/call (response, a hit)",
+      "direction": "server -> host",
+      "raw": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"id\": \"creme-fraiche\",\n  \"name\": \"Creme fraiche, full fat\",\n  \"contains\": [\n    \"milk\"\n  ],\n  \"may_contain\": []\n}"
+            }
+          ],
+          "structuredContent": {
+            "id": "creme-fraiche",
+            "name": "Creme fraiche, full fat",
+            "contains": [
+              "milk"
+            ],
+            "may_contain": []
+          },
+          "isError": false
+        }
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "id": "3, answering message 6.",
+        "result": "content = a list of content blocks; here one text block holding the JSON as a string, which is what rag/mcp_host.py parses and hands to the model. structuredContent = the same data as a real JSON object, matching outputSchema, for hosts that validate. isError=false: the tool ran and found the ingredient (milk)."
+      }
+    },
+    {
+      "step": "8. tools/call (request, a miss)",
+      "direction": "host -> server",
+      "raw": {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "method": "tools/call",
+        "params": {
+          "name": "get_allergens",
+          "arguments": {
+            "ingredient": "creme fraiche lite"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "id": "4.",
+        "method": "\"tools/call\".",
+        "params": "Same tool, an ingredient the database does not have (the brief's own example)."
+      }
+    },
+    {
+      "step": "9. tools/call (response, a miss)",
+      "direction": "server -> host",
+      "raw": {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Error executing tool get_allergens: no ingredient matched 'creme fraiche lite'. Try: 'creme-fraiche'."
+            }
+          ],
+          "isError": true
+        }
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "id": "4, answering message 8.",
+        "result": "Still a `result`, NOT a JSON-RPC `error`. The PROTOCOL call succeeded; the TOOL failed. isError=true tells the host this is a tool failure, and content carries the message the model will read: \"no ingredient matched ... Try: 'creme-fraiche'\". That is a RECOVERABLE error: it names the miss and the next move. A JSON-RPC `error` object (code -32601 etc.) is reserved for protocol faults like an unknown method, and hosts usually do not show those to the model at all."
+      }
+    }
+  ]
+}

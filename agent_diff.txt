@@ -1,0 +1,31 @@
+# agent_diff.txt: the agent module between SERVER ONE (f499c39) and SERVER ONE + TWO (7225574)
+#
+# Agent module = the files that decide what the model is offered and how a tool call is made:
+#   rag/agent.py     the loop and its four budgets (Week 7)
+#   rag/mcp_host.py  MCP host: config -> initialize -> tools/list -> registry
+#   rag/llm.py       the only place a model is called
+#   rag/tools.py     ToolResult + the functions server one wraps
+#   rag/contract.py  RunResult
+
+$ git diff --stat f499c39 7225574 -- rag/agent.py rag/mcp_host.py rag/llm.py rag/tools.py rag/contract.py
+(no output = no file changed)
+
+$ git diff --numstat f499c39 7225574 -- rag/agent.py rag/mcp_host.py rag/llm.py rag/tools.py rag/contract.py | awk '{a+=$1; d+=$2} END {print a+0, "added,", d+0, "deleted"}'
+0 added, 0 deleted
+
+$ git diff --exit-code --quiet f499c39 7225574 -- rag/ && echo "rag/: 0 changed lines"
+rag/: 0 changed lines
+
+# For contrast, everything that DID change between the two commits:
+$ git diff --stat f499c39 7225574
+ mcp_config.json                            |   6 ++
+ mcp_servers/ingredient_db/README.md        |  21 +++++
+ mcp_servers/ingredient_db/ingredients.json |  77 +++++++++++++++++++
+ mcp_servers/ingredient_db/server.py        | 118 +++++++++++++++++++++++++++++
+ 4 files changed, 222 insertions(+)
+
+# f0e0497 is a code drop of the content team's server (a new directory the agent does not import).
+# The ONLY file the swap itself touched (f0e0497 -> 7225574):
+$ git diff --stat f0e0497 7225574
+ mcp_config.json | 6 ++++++
+ 1 file changed, 6 insertions(+)

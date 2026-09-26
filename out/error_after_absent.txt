@@ -1,0 +1,30 @@
+$ python -m rag.mcp_host --max-tokens 80000 --max-cost 0.05 "Make the moussaka 2x"   # server one with the rewritten docstring + error (after)
+server 'recipe_search': recipe-search v1.30.0 (protocol 2025-11-25) -> tools/list: search_recipes, scale_recipe, get_allergen_profile
+server 'ingredient_db': ingredient-db v1.30.0 (protocol 2025-11-25) -> tools/list: lookup_ingredient, get_allergens, get_nutrition_per_100g
+6 tools discovered: search_recipes, scale_recipe, get_allergen_profile, lookup_ingredient, get_allergens, get_nutrition_per_100g
+attached resource: ingredients://allergen-flags
+run_id a810d957
+
+{"event": "model_turn", "lap": 1, "tool_calls": ["search_recipes"], "input_tokens": 1466, "output_tokens": 18, "cumulative_tokens": 1484, "cumulative_cost_usd": 0.000154, "elapsed_s": 2.01}
+{"event": "tool_result", "lap": 1, "tool": "search_recipes", "args": {"query": "moussaka"}, "ok": false, "error": "Error executing tool search_recipes: no recipe title matched 'moussaka', and no title is spelled like it: this dish is not in the 21-card archive. Searching again will not find it. Answer now, with 'moussaka' under \"unsupported\". This is a no-match, not a server fault."}
+{"event": "model_turn", "lap": 2, "tool_calls": [], "input_tokens": 1571, "output_tokens": 58, "cumulative_tokens": 3113, "cumulative_cost_usd": 0.000334, "elapsed_s": 4.41}
+{"event": "answered", "lap": 2}
+
+MCP tools/call trace (server -> tool):
+  [recipe_search] search_recipes({"query": "moussaka"}) -> ERROR
+      Error executing tool search_recipes: no recipe title matched 'moussaka', and no title is spelled like it: this dish is not in the 21-card archive. Searching again will not find it. Answer now, with 'moussaka' under "unsupported". This is a no-match, not a server fault.
+
+ok            : True
+terminated_by : (ran to completion)
+laps          : 2
+tokens        : 3113
+cost          : $0.000334
+{
+  "recipe_id": "",
+  "title": "",
+  "scale_factor": 2,
+  "ingredients": [],
+  "substitutions": [],
+  "method": "",
+  "unsupported": "moussaka"
+}

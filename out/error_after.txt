@@ -1,0 +1,82 @@
+$ python -m rag.mcp_host --max-tokens 80000 --max-cost 0.05 "Make the shakshouka 1.5x and take out the egg"   # server one with the rewritten docstring + error (after)
+server 'recipe_search': recipe-search v1.30.0 (protocol 2025-11-25) -> tools/list: search_recipes, scale_recipe, get_allergen_profile
+server 'ingredient_db': ingredient-db v1.30.0 (protocol 2025-11-25) -> tools/list: lookup_ingredient, get_allergens, get_nutrition_per_100g
+6 tools discovered: search_recipes, scale_recipe, get_allergen_profile, lookup_ingredient, get_allergens, get_nutrition_per_100g
+attached resource: ingredients://allergen-flags
+run_id 44de5227
+
+{"event": "model_turn", "lap": 1, "tool_calls": ["search_recipes"], "input_tokens": 1474, "output_tokens": 20, "cumulative_tokens": 1494, "cumulative_cost_usd": 0.000155, "elapsed_s": 2.56}
+{"event": "tool_result", "lap": 1, "tool": "search_recipes", "args": {"query": "shakshouka"}, "ok": false, "error": "Error executing tool search_recipes: no recipe title matched 'shakshouka'. Close spellings in the archive: 'Red Pepper Shakshuka' (recipe_id 'shakshuka'). If that is the dish the user meant, call search_recipes again with query='shakshuka'. This is a no-match, not a server fault."}
+{"event": "model_turn", "lap": 2, "tool_calls": ["search_recipes"], "input_tokens": 1587, "output_tokens": 19, "cumulative_tokens": 3100, "cumulative_cost_usd": 0.000322, "elapsed_s": 5.9}
+{"event": "tool_result", "lap": 2, "tool": "search_recipes", "args": {"query": "shakshuka"}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 3, "tool_calls": ["scale_recipe"], "input_tokens": 1897, "output_tokens": 29, "cumulative_tokens": 5026, "cumulative_cost_usd": 0.000523, "elapsed_s": 7.76}
+{"event": "tool_result", "lap": 3, "tool": "scale_recipe", "args": {"scale_factor": 1.5, "recipe_id": "shakshuka"}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 4, "tool_calls": ["get_allergen_profile"], "input_tokens": 2488, "output_tokens": 77, "cumulative_tokens": 7591, "cumulative_cost_usd": 0.000803, "elapsed_s": 9.59}
+{"event": "tool_result", "lap": 4, "tool": "get_allergen_profile", "args": {"allergen": "contains-egg", "ingredients": ["Red peppers", "Brown onion", "Tinned plum tomatoes", "Olive oil", "Garlic", "Sweet paprika", "Ground cumin", "Fine sea salt", "Eggs", "Flat leaf parsley"]}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 5, "tool_calls": [], "input_tokens": 2689, "output_tokens": 442, "cumulative_tokens": 10722, "cumulative_cost_usd": 0.001248, "elapsed_s": 12.68}
+{"event": "answered", "lap": 5}
+
+MCP tools/call trace (server -> tool):
+  [recipe_search] search_recipes({"query": "shakshouka"}) -> ERROR
+      Error executing tool search_recipes: no recipe title matched 'shakshouka'. Close spellings in the archive: 'Red Pepper Shakshuka' (recipe_id 'shakshuka'). If that is the dish the user meant, call search_recipes again with query='shakshuka'. This is a no-match, not a server fault.
+  [recipe_search] search_recipes({"query": "shakshuka"}) -> ok
+  [recipe_search] scale_recipe({"scale_factor": 1.5, "recipe_id": "shakshuka"}) -> ok
+  [recipe_search] get_allergen_profile({"allergen": "contains-egg", "ingredients": ["Red peppers", "Brown onion", "Tinned plum tomatoes", "Olive oil", "Garlic", "Sweet paprika", "Ground cumin", "Fine sea salt", "Eggs", "Flat leaf parsley"]}) -> ok
+
+ok            : True
+terminated_by : (ran to completion)
+laps          : 5
+tokens        : 10722
+cost          : $0.001248
+{
+  "recipe_id": "shakshuka",
+  "title": "Red Pepper Shakshuka",
+  "scale_factor": 1.5,
+  "ingredients": [
+    {
+      "ingredient": "Red peppers",
+      "amount": "675 g"
+    },
+    {
+      "ingredient": "Brown onion",
+      "amount": "300 g"
+    },
+    {
+      "ingredient": "Tinned plum tomatoes",
+      "amount": "600 g"
+    },
+    {
+      "ingredient": "Olive oil",
+      "amount": "60 g"
+    },
+    {
+      "ingredient": "Garlic",
+      "amount": "22.5 g"
+    },
+    {
+      "ingredient": "Sweet paprika",
+      "amount": "9 g"
+    },
+    {
+      "ingredient": "Ground cumin",
+      "amount": "6 g"
+    },
+    {
+      "ingredient": "Fine sea salt",
+      "amount": "12 g"
+    },
+    {
+      "ingredient": "Flat leaf parsley",
+      "amount": "22.5 g"
+    }
+  ],
+  "substitutions": [
+    {
+      "from": "Eggs",
+      "to": "None",
+      "reason": "User requested to remove eggs."
+    }
+  ],
+  "method": "## Method\n\nSoften the peppers and onion in the olive oil over a low flame for twenty minutes. They\nshould slump rather than colour. Add the garlic, paprika and cumin and stir for one minute.\n\nAdd the tomatoes and salt, break them down with the back of a spoon, and simmer uncovered\nuntil the sauce holds a channel when you drag a spoon through it — about fifteen minutes.\n\nScatter the parsley and serve straight from the pan.",
+  "unsupported": ""
+}

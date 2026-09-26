@@ -1,0 +1,40 @@
+$ python -m rag.mcp_host --max-tokens 80000 --max-cost 0.05 "Make the shakshouka 1.5x and take out the egg"   # server one at 7225574 (before)
+server 'recipe_search': recipe-search v1.30.0 (protocol 2025-11-25) -> tools/list: search_recipes, scale_recipe, get_allergen_profile
+server 'ingredient_db': ingredient-db v1.30.0 (protocol 2025-11-25) -> tools/list: lookup_ingredient, get_allergens, get_nutrition_per_100g
+6 tools discovered: search_recipes, scale_recipe, get_allergen_profile, lookup_ingredient, get_allergens, get_nutrition_per_100g
+attached resource: ingredients://allergen-flags
+run_id a4a2d2f0
+
+{"event": "model_turn", "lap": 1, "tool_calls": ["search_recipes"], "input_tokens": 1304, "output_tokens": 20, "cumulative_tokens": 1324, "cumulative_cost_usd": 0.000138, "elapsed_s": 10.38}
+{"event": "tool_result", "lap": 1, "tool": "search_recipes", "args": {"query": "shakshouka"}, "ok": false, "error": "Error executing tool search_recipes: Error: lookup failed"}
+{"event": "model_turn", "lap": 2, "tool_calls": ["search_recipes"], "input_tokens": 1352, "output_tokens": 19, "cumulative_tokens": 2695, "cumulative_cost_usd": 0.000281, "elapsed_s": 12.64}
+{"event": "tool_result", "lap": 2, "tool": "search_recipes", "args": {"query": "shakshuka"}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 3, "tool_calls": ["scale_recipe"], "input_tokens": 1662, "output_tokens": 29, "cumulative_tokens": 4386, "cumulative_cost_usd": 0.000459, "elapsed_s": 14.41}
+{"event": "tool_result", "lap": 3, "tool": "scale_recipe", "args": {"recipe_id": "shakshuka", "scale_factor": 1.5}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 4, "tool_calls": ["get_allergens"], "input_tokens": 2253, "output_tokens": 17, "cumulative_tokens": 6656, "cumulative_cost_usd": 0.000691, "elapsed_s": 15.9}
+{"event": "tool_result", "lap": 4, "tool": "get_allergens", "args": {"ingredient": "Eggs"}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 5, "tool_calls": ["lookup_ingredient"], "input_tokens": 2313, "output_tokens": 17, "cumulative_tokens": 8986, "cumulative_cost_usd": 0.000929, "elapsed_s": 18.11}
+{"event": "tool_result", "lap": 5, "tool": "lookup_ingredient", "args": {"name": "Tofu"}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 6, "tool_calls": ["get_allergens"], "input_tokens": 2391, "output_tokens": 20, "cumulative_tokens": 11397, "cumulative_cost_usd": 0.001176, "elapsed_s": 19.48}
+{"event": "tool_result", "lap": 6, "tool": "get_allergens", "args": {"ingredient": "Tofu, firm"}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 7, "tool_calls": ["lookup_ingredient"], "input_tokens": 2459, "output_tokens": 17, "cumulative_tokens": 13873, "cumulative_cost_usd": 0.001429, "elapsed_s": 21.67}
+{"event": "tool_result", "lap": 7, "tool": "lookup_ingredient", "args": {"name": "Chickpeas"}, "ok": true, "error": ""}
+{"event": "model_turn", "lap": 8, "tool_calls": ["get_allergens"], "input_tokens": 2539, "output_tokens": 20, "cumulative_tokens": 16432, "cumulative_cost_usd": 0.001691, "elapsed_s": 23.83}
+{"event": "budget_exceeded", "budget": "max_laps", "lap": 8}
+
+MCP tools/call trace (server -> tool):
+  [recipe_search] search_recipes({"query": "shakshouka"}) -> ERROR
+      Error executing tool search_recipes: Error: lookup failed
+  [recipe_search] search_recipes({"query": "shakshuka"}) -> ok
+  [recipe_search] scale_recipe({"recipe_id": "shakshuka", "scale_factor": 1.5}) -> ok
+  [ingredient_db] get_allergens({"ingredient": "Eggs"}) -> ok
+  [ingredient_db] lookup_ingredient({"name": "Tofu"}) -> ok
+  [ingredient_db] get_allergens({"ingredient": "Tofu, firm"}) -> ok
+  [ingredient_db] lookup_ingredient({"name": "Chickpeas"}) -> ok
+
+ok            : False
+terminated_by : max_laps
+laps          : 8
+tokens        : 16432
+cost          : $0.001691
+error         : budget max_laps exceeded

@@ -1,0 +1,11 @@
+{"ts": "2026-09-26T00:20:19+00:00", "tool": "get_allergens", "query": "Roasted sunflower seeds", "matched": null}
+{"ts": "2026-09-26T00:20:20+00:00", "tool": "get_allergens", "query": "sunflower-seeds-roasted", "matched": "sunflower-seeds-roasted"}
+{"ts": "2026-09-26T00:20:23+00:00", "tool": "get_nutrition_per_100g", "query": "sunflower-seeds-roasted", "matched": "sunflower-seeds-roasted"}
+{"ts": "2026-09-26T00:21:11+00:00", "tool": "get_allergens", "query": "creme fraiche", "matched": "creme-fraiche"}
+{"ts": "2026-09-26T00:21:11+00:00", "tool": "get_allergens", "query": "creme fraiche lite", "matched": null}
+{"ts": "2026-09-26T00:22:09+00:00", "tool": "get_allergens", "query": "Eggs", "matched": "egg"}
+{"ts": "2026-09-26T00:22:11+00:00", "tool": "lookup_ingredient", "query": "Tofu", "matched": "tofu-firm"}
+{"ts": "2026-09-26T00:22:12+00:00", "tool": "get_allergens", "query": "Tofu, firm", "matched": "tofu-firm"}
+{"ts": "2026-09-26T00:22:14+00:00", "tool": "lookup_ingredient", "query": "Chickpeas", "matched": "chickpeas-dried"}
+{"ts": "2026-09-26T00:26:28+00:00", "tool": "lookup_ingredient", "query": "toasted sunflower seeds", "matched": "sunflower-seeds-roasted"}
+{"ts": "2026-09-26T00:26:30+00:00", "tool": "get_allergens", "query": "Sunflower seeds, roasted", "matched": "sunflower-seeds-roasted"}

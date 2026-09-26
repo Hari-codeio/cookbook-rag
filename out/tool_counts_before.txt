@@ -1,0 +1,3 @@
+$ git show f499c39:mcp_config.json > config_before.json && python -m rag.mcp_host --config config_before.json --list-tools
+server 'recipe_search': recipe-search v1.30.0 (protocol 2025-11-25) -> tools/list: search_recipes, scale_recipe, get_allergen_profile
+3 tools discovered: search_recipes, scale_recipe, get_allergen_profile

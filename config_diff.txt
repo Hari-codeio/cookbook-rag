@@ -1,0 +1,18 @@
+$ git diff f0e0497 7225574 -- mcp_config.json
+diff --git a/mcp_config.json b/mcp_config.json
+index 86078b3..98739b3 100644
+--- a/mcp_config.json
++++ b/mcp_config.json
+@@ -3,6 +3,12 @@
+     "recipe_search": {
+       "command": "python",
+       "args": ["-m", "mcp_servers.recipe_search.server"]
++    },
++    "ingredient_db": {
++      "command": "python",
++      "args": ["mcp_servers/ingredient_db/server.py"],
++      "env": {"INGREDIENT_DB_QUERY_LOG": "out/ingredient_db_queries.log"},
++      "attach_resources": ["ingredients://allergen-flags"]
+     }
+   }
+ }
