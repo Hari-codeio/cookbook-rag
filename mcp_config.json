@@ -3,6 +3,12 @@
     "recipe_search": {
       "command": "python",
       "args": ["-m", "mcp_servers.recipe_search.server"]
+    },
+    "ingredient_db": {
+      "command": "python",
+      "args": ["mcp_servers/ingredient_db/server.py"],
+      "env": {"INGREDIENT_DB_QUERY_LOG": "out/ingredient_db_queries.log"},
+      "attach_resources": ["ingredients://allergen-flags"]
     }
   }
 }
