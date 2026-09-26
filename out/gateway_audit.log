@@ -1,0 +1,6 @@
+{"ts": "2026-09-26T00:26:22+00:00", "caller": "menu-bot", "tool": "search_recipes", "upstream": "recipe_search", "ingredient_queried": "pad thai", "decision": "allow", "isError": false}
+{"ts": "2026-09-26T00:26:25+00:00", "caller": "menu-bot", "tool": "scale_recipe", "upstream": "recipe_search", "ingredient_queried": "pad-thai", "decision": "allow", "isError": false}
+{"ts": "2026-09-26T00:26:28+00:00", "caller": "menu-bot", "tool": "lookup_ingredient", "upstream": "ingredient_db", "ingredient_queried": "toasted sunflower seeds", "decision": "allow", "isError": false}
+{"ts": "2026-09-26T00:26:30+00:00", "caller": "menu-bot", "tool": "get_allergens", "upstream": "ingredient_db", "ingredient_queried": "Sunflower seeds, roasted", "decision": "allow", "isError": false}
+{"ts": "2026-09-26T00:26:31+00:00", "caller": "menu-bot", "tool": "get_nutrition_per_100g", "upstream": "ingredient_db", "ingredient_queried": "Sunflower seeds, roasted", "decision": "deny", "isError": true}
+{"ts": "2026-09-26T00:26:32+00:00", "caller": "menu-bot", "tool": "get_nutrition_per_100g", "upstream": "ingredient_db", "ingredient_queried": "Sunflower seeds", "decision": "deny", "isError": true}
