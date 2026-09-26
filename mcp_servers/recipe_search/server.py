@@ -20,6 +20,8 @@ comment.
 
 from __future__ import annotations
 
+import difflib
+import re
 from typing import Any, Literal
 
 from mcp.server.fastmcp import FastMCP
@@ -51,10 +53,55 @@ def _unwrap(result: archive.ToolResult) -> dict[str, Any]:
     return result.data
 
 
+def _closest_titles(query: str, n: int = 3) -> list[tuple[str, str]]:
+    """(title, recipe_id) pairs whose words are spelled like the query's words."""
+    words = [w for w in re.split(r"[^a-z0-9]+", query.lower()) if len(w) > 2]
+    scored = []
+    for card in archive._corpus().values():
+        names = re.split(r"[^a-z0-9]+", f"{card.title} {card.recipe_id}".lower())
+        best = max(
+            (difflib.SequenceMatcher(None, w, name).ratio() for w in words for name in names if name),
+            default=0.0,
+        )
+        if best >= 0.75:
+            scored.append((best, card.title, card.recipe_id))
+    scored.sort(key=lambda s: (-s[0], s[2]))
+    return [(title, rid) for _, title, rid in scored[:n]]
+
+
 @mcp.tool()
 def search_recipes(query: str, limit: int = 5) -> dict[str, Any]:
-    """Name match over the 21 cards. No embedding call, so it is free and fast."""
-    return _unwrap(archive.search_recipes(query, limit))
+    """FIND a recipe in the 21-card archive by dish name. Call this FIRST:
+    scale_recipe and every later step need the recipe_id it returns.
+
+    Pass only the dish name, e.g. "shakshuka" or "focaccia". Words from the
+    request such as "double" or "without egg" are in no title and only
+    weaken the match.
+
+    Returns recipe_id, title, cuisine, dietary_tags and the ORIGINAL,
+    unscaled ingredient names. Does not scale (use scale_recipe) and does not
+    check allergens (use get_allergen_profile).
+
+    If nothing matches, the error says whether a spelling variant exists and
+    gives its exact query to retry with. If it says the dish is not in the
+    archive, do not search again and do not adapt a different recipe: answer
+    with that dish listed under "unsupported"."""
+    result = archive.search_recipes(query, limit)
+    if result.ok:
+        return result.data
+    close = _closest_titles(query)
+    if close:
+        options = "; ".join(f"'{t}' (recipe_id '{rid}')" for t, rid in close)
+        raise ToolError(
+            f"no recipe title matched {query!r}. Close spellings in the archive: {options}. "
+            f"If that is the dish the user meant, call search_recipes again with "
+            f"query='{close[0][1]}'. This is a no-match, not a server fault."
+        )
+    raise ToolError(
+        f"no recipe title matched {query!r}, and no title is spelled like it: this dish is "
+        f"not in the 21-card archive. Searching again will not find it. Answer now, with "
+        f"{query!r} under \"unsupported\". This is a no-match, not a server fault."
+    )
 
 
 @mcp.tool()
