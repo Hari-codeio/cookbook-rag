@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 .env
 out/chroma/
+out/mcp_servers.stderr.log
+.venv/pyvenv.cfg.bak
