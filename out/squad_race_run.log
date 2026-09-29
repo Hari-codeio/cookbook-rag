@@ -1,0 +1,72 @@
+s01  single        PASS calls=4  tok=9337     17.0s
+s01  squad         PASS calls=6  tok=4215     21.8s
+s02  single        PASS calls=6  tok=14319    48.8s
+s02  squad         PASS calls=6  tok=4279     22.3s
+s03  single        fail calls=8  tok=19876    38.7s  <- no answer produced
+s03  squad         PASS calls=6  tok=4481     44.9s
+s04  single        fail calls=8  tok=20907    31.5s  <- no answer produced
+s04  squad         PASS calls=6  tok=4492     23.5s
+s05  single        PASS calls=7  tok=16055    50.3s
+s05  squad         PASS calls=6  tok=3990     27.0s
+s06  single        PASS calls=3  tok=6641     13.2s
+s06  squad         PASS calls=2  tok=1286      9.0s
+c01  single        fail calls=8  tok=22778    32.7s  <- no answer produced
+c01  squad         PASS calls=6  tok=4236     25.2s
+c02  single        fail calls=8  tok=22541    33.0s  <- no answer produced
+c02  squad         PASS calls=6  tok=4844     24.2s
+c03  single        fail calls=8  tok=23668    29.9s  <- no answer produced
+c03  squad         PASS calls=6  tok=4112     21.3s
+c04  single        PASS calls=6  tok=14817    45.6s
+c04  squad         PASS calls=6  tok=4139     23.5s
+s01  single_3tools PASS calls=4  tok=6734     18.8s
+s02  single_3tools PASS calls=5  tok=9014     24.8s
+s03  single_3tools fail calls=8  tok=16575    51.7s  <- no answer produced
+s04  single_3tools PASS calls=6  tok=12225    17.2s
+s05  single_3tools PASS calls=4  tok=6042     34.2s
+s06  single_3tools PASS calls=3  tok=5042      9.9s
+c01  single_3tools PASS calls=5  tok=10534    21.6s
+c02  single_3tools PASS calls=5  tok=10868    21.4s
+c03  single_3tools PASS calls=5  tok=11254    16.8s
+c04  single_3tools PASS calls=5  tok=9292     20.8s
+# Race: kitchen squad vs single agent
+
+Same 10 cases (s01, s02, s03, s04, s05, s06, c01, c02, c03, c04) from `eval/race_cases.jsonl`,
+graded by `rag/contract.check`, same pinned model, same MCP servers, arms interleaved per case.
+
+| arm | pass rate | p50 latency | p99 latency | total tokens | cost / question |
+|---|---|---|---|---|---|
+| single agent (6 MCP tools) | 5/10 | 32.9 s | 50.3 s | 170,939 | $0.001854 |
+| squad (orchestrator + 2 workers) | 10/10 | 23.5 s | 44.9 s | 40,074 | $0.000664 |
+| *control:* single agent, 3 tools (server one only) | 9/10 | 21.1 s | 51.7 s | 97,580 | $0.001161 |
+
+Control multiplier, squad / 3-tool single: 40,074 / 97,580 = 0.4x. The control ran after the race, not interleaved with it.
+
+Mean model calls per question: single 6.6, squad 5.6.
+p99 over 10 runs is nearest-rank, i.e. the slowest run.
+
+**Context re-send multiplier: 40,074 / 170,939 = 0.2x.**
+Largest squad token share: `orchestrator -> allergen_worker`, 35% of all squad tokens.
+
+## Per case
+
+| case | cascade | single | squad | single tokens | squad tokens | single s | squad s |
+|---|---|---|---|---|---|---|---|
+| `s01` | no | PASS | PASS | 9,337 | 4,215 | 17.0 | 21.8 |
+| `s02` | no | PASS | PASS | 14,319 | 4,279 | 48.8 | 22.3 |
+| `s03` | no | fail | PASS | 19,876 | 4,481 | 38.7 | 44.9 |
+| `s04` | no | fail | PASS | 20,907 | 4,492 | 31.5 | 23.5 |
+| `s05` | no | PASS | PASS | 16,055 | 3,990 | 50.3 | 27.0 |
+| `s06` | no | PASS | PASS | 6,641 | 1,286 | 13.2 | 9.0 |
+| `c01` | yes | fail | PASS | 22,778 | 4,236 | 32.7 | 25.2 |
+| `c02` | yes | fail | PASS | 22,541 | 4,844 | 33.0 | 24.2 |
+| `c03` | yes | fail | PASS | 23,668 | 4,112 | 29.9 | 21.3 |
+| `c04` | yes | PASS | PASS | 14,817 | 4,139 | 45.6 | 23.5 |
+
+## Failures, with the grader's reason
+
+- single `s03`: no answer produced (terminated_by max_laps)
+- single `s04`: no answer produced (terminated_by max_laps)
+- single `c01`: no answer produced (terminated_by max_laps)
+- single `c02`: no answer produced (terminated_by max_laps)
+- single `c03`: no answer produced (terminated_by max_laps)
+- single_3tools `s03`: no answer produced (terminated_by max_laps)

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "recipe_search": {
+      "command": "python",
+      "args": ["-m", "mcp_servers.recipe_search.server"]
+    }
+  }
+}

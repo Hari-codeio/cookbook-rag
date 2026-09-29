@@ -1,0 +1,211 @@
+{
+  "arm": "squad",
+  "case_id": "s01",
+  "cascade": false,
+  "passed": true,
+  "problems": [],
+  "ran_ok": true,
+  "error": "",
+  "terminated_by": "",
+  "model_calls": 5,
+  "input_tokens": 2569,
+  "output_tokens": 698,
+  "total_tokens": 3267,
+  "cost_usd": 0.000536,
+  "latency_ms": 16068.7,
+  "handoffs": [
+    {
+      "name": "user -> orchestrator.plan",
+      "model_calls": 1,
+      "input_tokens": 176,
+      "output_tokens": 40,
+      "cost_usd": 3.3600000000000004e-05,
+      "ms": 3747.341599999345,
+      "status": "ok",
+      "payload_chars": 105,
+      "detail": {},
+      "total_tokens": 216
+    },
+    {
+      "name": "orchestrator -> recipe_search (MCP, no model)",
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": 0.0,
+      "ms": 43.98349999974016,
+      "status": "ok",
+      "payload_chars": 0,
+      "detail": {},
+      "total_tokens": 0
+    },
+    {
+      "name": "orchestrator -> allergen_worker",
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": 0.0,
+      "ms": 0.0,
+      "status": "HTTP 500",
+      "payload_chars": 0,
+      "detail": {
+        "attempt": 1
+      },
+      "total_tokens": 0
+    },
+    {
+      "name": "orchestrator -> allergen_worker",
+      "model_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": 0.0,
+      "ms": 0.0,
+      "status": "HTTP 500",
+      "payload_chars": 0,
+      "detail": {
+        "attempt": 2
+      },
+      "total_tokens": 0
+    },
+    {
+      "name": "orchestrator -> substitution_worker",
+      "model_calls": 3,
+      "input_tokens": 1615,
+      "output_tokens": 185,
+      "cost_usd": 0.00023550000000000003,
+      "ms": 8174.481399997603,
+      "status": "ok",
+      "payload_chars": 235,
+      "detail": {
+        "tools_called": [
+          "get_allergen_profile",
+          "get_allergen_profile"
+        ]
+      },
+      "total_tokens": 1800
+    },
+    {
+      "name": "orchestrator.synthesise (both reports + scaled recipe)",
+      "model_calls": 1,
+      "input_tokens": 778,
+      "output_tokens": 473,
+      "cost_usd": 0.00026700000000000004,
+      "ms": 4102.324499999668,
+      "status": "ok",
+      "payload_chars": 1933,
+      "detail": {},
+      "total_tokens": 1251
+    }
+  ],
+  "answer": {
+    "recipe_id": "shakshuka",
+    "title": "Red Pepper Shakshuka",
+    "scale_factor": 1.5,
+    "ingredients": [
+      {
+        "ingredient": "Red peppers",
+        "amount": "675 g"
+      },
+      {
+        "ingredient": "Brown onion",
+        "amount": "300 g"
+      },
+      {
+        "ingredient": "Tinned plum tomatoes",
+        "amount": "600 g"
+      },
+      {
+        "ingredient": "Olive oil",
+        "amount": "60 g"
+      },
+      {
+        "ingredient": "Garlic",
+        "amount": "22.5 g"
+      },
+      {
+        "ingredient": "Sweet paprika",
+        "amount": "9 g"
+      },
+      {
+        "ingredient": "Ground cumin",
+        "amount": "6 g"
+      },
+      {
+        "ingredient": "Fine sea salt",
+        "amount": "12 g"
+      },
+      {
+        "ingredient": "firm tofu cubes",
+        "amount": "9 whole"
+      },
+      {
+        "ingredient": "Flat leaf parsley",
+        "amount": "22.5 g"
+      }
+    ],
+    "substitutions": [
+      {
+        "from": "eggs",
+        "to": "firm tofu cubes",
+        "reason": "Firm tofu provides a similar texture and protein content to poached eggs when simmered in the tomato sauce."
+      }
+    ],
+    "method": "## Method\n\nSoften the peppers and onion in the olive oil over a low flame for twenty minutes. They\nshould slump rather than colour. Add the garlic, paprika and cumin and stir for one minute.\n\nAdd the tomatoes and salt, break them down with the back of a spoon, and simmer uncovered\nuntil the sauce holds a channel when you drag a spoon through it — about fifteen minutes.\n\nScatter the parsley and serve straight from the pan.",
+    "unsupported": "allergen_worker returned HTTP 500 Internal Server Error; no allergen findings are available for this request. Tofu does not cook exactly like eggs; press the tofu well before adding it to the sauce to improve texture. Consider adding a pinch of kala namak (black salt) to the tofu to mimic the sulfurous flavor of eggs."
+  },
+  "log": [
+    {
+      "event": "handoff",
+      "handoff": "user -> orchestrator.plan",
+      "status": "ok",
+      "model_calls": 1,
+      "tokens": 216,
+      "ms": 3747.3
+    },
+    {
+      "event": "handoff",
+      "handoff": "orchestrator -> recipe_search (MCP, no model)",
+      "status": "ok",
+      "model_calls": 0,
+      "tokens": 0,
+      "ms": 44.0
+    },
+    {
+      "event": "handoff",
+      "handoff": "orchestrator -> allergen_worker",
+      "status": "HTTP 500",
+      "model_calls": 0,
+      "tokens": 0,
+      "ms": 0.0,
+      "attempt": 1
+    },
+    {
+      "event": "handoff",
+      "handoff": "orchestrator -> allergen_worker",
+      "status": "HTTP 500",
+      "model_calls": 0,
+      "tokens": 0,
+      "ms": 0.0,
+      "attempt": 2
+    },
+    {
+      "event": "handoff",
+      "handoff": "orchestrator -> substitution_worker",
+      "status": "ok",
+      "model_calls": 3,
+      "tokens": 1800,
+      "ms": 8174.5,
+      "tools_called": [
+        "get_allergen_profile",
+        "get_allergen_profile"
+      ]
+    },
+    {
+      "event": "handoff",
+      "handoff": "orchestrator.synthesise (both reports + scaled recipe)",
+      "status": "ok",
+      "model_calls": 1,
+      "tokens": 1251,
+      "ms": 4102.3
+    }
+  ]
+}
