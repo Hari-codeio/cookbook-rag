@@ -1,0 +1,41 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "Kitchen Squad Orchestrator",
+  "description": "Adapts a recipe from a fixed 21-card archive: finds it, scales it by a multiplier, removes every ingredient carrying one named allergen, and substitutes a replacement that is itself checked clear of that allergen. Works only from the archive; will not invent recipes, amounts or allergen claims.",
+  "url": "http://localhost:8010/a2a/v1",
+  "preferredTransport": "JSONRPC",
+  "version": "week10",
+  "provider": {
+    "organization": "cookbook-rag (recipe assistant team)",
+    "url": "https://github.com/Hari-codeio/cookbook-rag"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": true
+  },
+  "securitySchemes": {
+    "bearer": {
+      "type": "http",
+      "scheme": "bearer",
+      "description": "Per-caller token issued by the recipe team. Scopes mirror the Week 9 gateway: recipe:adapt, allergen:read, nutrition:read."
+    }
+  },
+  "security": [{"bearer": ["recipe:adapt", "allergen:read"]}],
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["application/json"],
+  "skills": [
+    {
+      "id": "adapt-recipe-for-allergen",
+      "name": "Scale a recipe and remove one allergen",
+      "description": "Given a dish name, a multiplier and ONE allergen to avoid, returns the scaled ingredient list with every carrier of that allergen replaced by a verified-clear substitute, plus the method. If the allergen check cannot be completed the task FAILS rather than returning an unchecked recipe. If the request names no allergen but implies one ('safe for my son'), the task pauses at input-required to ask for it.",
+      "tags": ["recipe", "allergen", "substitution", "scaling"],
+      "examples": [
+        "Make the Red Pepper Shakshuka 1.5 times the recipe, and leave out anything with egg in it.",
+        "Double the Chicken Tikka Masala and make it completely dairy free."
+      ],
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["application/json"]
+    }
+  ]
+}
