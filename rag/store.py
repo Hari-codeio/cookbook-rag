@@ -13,23 +13,32 @@ different embedders measures nothing.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
-
-import chromadb
-from chromadb.utils import embedding_functions
+from typing import TYPE_CHECKING, Any
 
 from .chunkers.base import Chunk
 from .config import CHROMA_DIR, COLLECTION_NAMES, EMBED_MODEL, HNSW_SPACE, TOP_K
 
+if TYPE_CHECKING:
+    import chromadb
+
+# chromadb is imported inside the two functions that use it, not at module
+# level. Importing this module (rag/generate.py does, for build_client) must
+# not drag chromadb -> grpc in for callers that never touch the vector store:
+# the agent, the squad and the race only need a Gemini client.
+
 
 def build_embedding_function():
     """all-MiniLM-L6-v2 under onnxruntime. Identical for index and query."""
+    from chromadb.utils import embedding_functions
+
     if hasattr(embedding_functions, "DefaultEmbeddingFunction"):
         return embedding_functions.DefaultEmbeddingFunction()
     return embedding_functions.ONNXMiniLM_L6_V2()  # pragma: no cover
 
 
 def get_client() -> chromadb.ClientAPI:
+    import chromadb
+
     CHROMA_DIR.mkdir(parents=True, exist_ok=True)
     return chromadb.PersistentClient(path=str(CHROMA_DIR))
 
