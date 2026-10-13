@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import time
 from dataclasses import asdict, dataclass, field
 from typing import Any
@@ -118,6 +119,45 @@ RULES
 }
 """
 
+# Week 11: synth-v2. v1's rule 1 said "Copy scaled amounts AND THE METHOD
+# exactly", and rule 2 allowed deleting a sentence only if it "depends on" a
+# removed ingredient. Read together, they told the model to paste the original
+# method back verbatim, so a "dairy-free" tikka masala still said "soften the
+# onion in the ghee". 8 of 9 dairy-free answers in the Week 11 production log
+# did this. v2 changes exactly those two rules and nothing else: amounts are
+# still copied, and the method is copied EXCEPT that every removed ingredient
+# is renamed to its replacement.
+SYNTHESIS_PROMPT_V2 = """\
+You are the orchestrator writing the final answer from your team's reports.
+You are given the scaled recipe (amounts already computed), the allergen
+worker's report and the substitution worker's report.
+
+RULES
+1. Copy scaled amounts exactly. Never recompute anything.
+2. Apply each substitution: the replacement takes the removed ingredient's row
+   and amount.
+3. Copy the method, but wherever it names a removed ingredient, write the name
+   of its replacement instead: "soften the onion in the ghee" becomes "soften
+   the onion in the sunflower oil". A removed ingredient must not be named
+   anywhere in the method, not even by a short form such as "the butter" for
+   "Unsalted butter". If a sentence only makes sense for the removed
+   ingredient, delete it. Change nothing else in the method.
+4. Make no allergen claim a report does not make. If a report is missing or
+   failed, say so in "unsupported"; do not fill the gap yourself.
+5. Every caveat in either report goes into "unsupported", word for word.
+6. Reply with ONE JSON object and no other text:
+
+{
+  "recipe_id": "...",
+  "title": "...",
+  "scale_factor": <number>,
+  "ingredients": [{"ingredient": "...", "amount": "<scaled amount>"}],
+  "substitutions": [{"from": "...", "to": "...", "reason": "..."}],
+  "method": "...",
+  "unsupported": "<caveats and gaps, or an empty string>"
+}
+"""
+
 ALLERGEN_TOOLS = ("get_allergen_profile", "get_nutrition_per_100g")
 SUBSTITUTION_TOOLS = ("get_allergen_profile",)
 WORKER_BUDGETS = Budgets(max_laps=6, max_tokens=30_000, max_cost_usd=0.01, max_seconds=60.0)
@@ -137,8 +177,39 @@ PROMPTS: dict[str, dict[str, tuple[str, str]]] = {
         "substitution_worker": ("substitution-v1", SUBSTITUTION_WORKER_PROMPT),
         "synthesise": ("synth-v1", SYNTHESIS_PROMPT),
     },
+    # Week 11 fix: one prompt changed, three untouched.
+    "squad-v2": {
+        "plan": ("plan-v1", PLAN_PROMPT),
+        "allergen_worker": ("allergen-v1", ALLERGEN_WORKER_PROMPT),
+        "substitution_worker": ("substitution-v1", SUBSTITUTION_WORKER_PROMPT),
+        "synthesise": ("synth-v2", SYNTHESIS_PROMPT_V2),
+    },
 }
-RELEASE = "squad-v1"
+
+# ---------------------------------------------------------------------------
+# Which release answers is a SETTING, not a deploy, so shipping and undoing a
+# prompt change are both one environment variable:
+#
+#   SQUAD_RELEASE=squad-v1        rollback: everyone back on the old prompts
+#   SQUAD_CANARY_PERCENT=10       canary: 10% of users (a stable hash of the
+#                                 user id, so a user does not flip-flop between
+#                                 requests) get RELEASE, the rest PREVIOUS_RELEASE
+#
+# Every trace records the release that answered it, so the canary is read by
+# slicing the log on prompt_version. See release_notes.md for the plan.
+# ---------------------------------------------------------------------------
+RELEASE = os.environ.get("SQUAD_RELEASE", "squad-v2").strip()
+PREVIOUS_RELEASE = "squad-v1"
+CANARY_PERCENT = int(os.environ.get("SQUAD_CANARY_PERCENT", "100"))
+if RELEASE not in PROMPTS:
+    raise SystemExit(f"SQUAD_RELEASE={RELEASE!r} is not one of {sorted(PROMPTS)}")
+
+
+def release_for(user_id: str) -> str:
+    if CANARY_PERCENT >= 100 or RELEASE == PREVIOUS_RELEASE:
+        return RELEASE
+    bucket = int(hashlib.sha256(user_id.encode("utf-8")).hexdigest()[:8], 16) % 100
+    return RELEASE if bucket < CANARY_PERCENT else PREVIOUS_RELEASE
 
 
 def prompt_manifest(release: str) -> dict[str, dict[str, str]]:
@@ -250,7 +321,7 @@ def _worker(client, host: MCPHost, name: str, system: str, tools: tuple[str, ...
 def run_squad(client, host: MCPHost, request: str, inject_500: bool = False, *,
               user_id: str = "anon", session_id: str = "", trace: bool = True,
               trace_meta: dict[str, Any] | None = None, release: str | None = None) -> SquadResult:
-    release = release or RELEASE
+    release = release or release_for(user_id)
     steps = PROMPTS[release]
     result = SquadResult(release=release)
     rec = obs.Recorder()
