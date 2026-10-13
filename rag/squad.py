@@ -249,8 +249,8 @@ def _worker(client, host: MCPHost, name: str, system: str, tools: tuple[str, ...
 
 def run_squad(client, host: MCPHost, request: str, inject_500: bool = False, *,
               user_id: str = "anon", session_id: str = "", trace: bool = True,
-              trace_meta: dict[str, Any] | None = None) -> SquadResult:
-    release = RELEASE
+              trace_meta: dict[str, Any] | None = None, release: str | None = None) -> SquadResult:
+    release = release or RELEASE
     steps = PROMPTS[release]
     result = SquadResult(release=release)
     rec = obs.Recorder()
