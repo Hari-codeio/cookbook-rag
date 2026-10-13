@@ -79,10 +79,15 @@ def git_sha() -> str:
     """Short HEAD sha, so a trace names the code that produced it."""
     global _GIT_SHA
     if _GIT_SHA is None:
+        repo = Path(__file__).resolve().parent.parent
         try:
+            # safe.directory: on a machine where the checkout is owned by a
+            # different Windows account, plain `git rev-parse` refuses to run
+            # ("dubious ownership") and every trace said git_sha=unknown. The
+            # Week 11 drill found that; the first 36 production traces carry it.
             _GIT_SHA = subprocess.run(
-                ["git", "rev-parse", "--short", "HEAD"],
-                cwd=str(Path(__file__).resolve().parent.parent),
+                ["git", "-c", f"safe.directory={repo.as_posix()}", "rev-parse", "--short", "HEAD"],
+                cwd=str(repo),
                 capture_output=True,
                 text=True,
                 timeout=10,
