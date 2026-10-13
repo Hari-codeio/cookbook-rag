@@ -21,20 +21,75 @@ WHAT IS INDEXED, AND THE ONE THING THAT IS NOT (YET)
   spans      every span, with stage, latency, tokens, cost
   fts        request_text and answer_text, porter-stemmed
 
-There is no column for "did the answer break the user's constraint". Finding
-that means reading answers. Whether that costs the drill its five minutes is
-what the drill is for.
+THE WEEK 11 BONUS: the field whose absence cost the drill its time. Drill 1
+was spent reading 22 swap lines by eye, because nothing in the index answered
+"did this answer put back the allergen the user asked to avoid?". These
+DERIVED columns answer it, computed from the logged answer with the same
+deterministic check the suite grades with (rag.contract.allergen_residue), so
+every old trace is backfilled the moment the index rebuilds:
+
+  asked             allergens the user's OWN WORDS ask to avoid ("no dairy",
+                    "lactose free", "milk allergy"), read from the request,
+                    not from the planner
+  missed            asked allergens the planner did NOT pick: the planner
+                    dropped what the user asked for
+  residue_swaps     replacements that carry an avoided allergen
+  residue_rows      ingredient rows that still carry it
+  residue_method    method phrases that still tell the cook to use it
+  residue           1 if any of the three is non-empty
+
+`eval/drill.py slice --residue swap` is then one query, not a reading task.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import re
 import sqlite3
 from pathlib import Path
 from typing import Any
 
 from rag import obs
+
+# What a request's own words ask to avoid. Phrases, not bare nouns, so "Make
+# the milk kefir 2x" is not read as a dairy-free request.
+ASKED: dict[str, str] = {
+    "contains-dairy": r"\bdairy|\blactose|\bmilk[- ]free|\bmilk allerg|\bno (butter|milk|cream)\b|\bwithout (any )?(milk|butter|cream)\b",
+    "contains-egg": r"\begg[- ]free|\bno eggs?\b|\bwithout (any )?eggs?\b|\begg allerg|\banything with egg",
+    "contains-gluten": r"\bgluten|\bcoeliac|\bceliac",
+    "contains-soy": r"\bsoy[- ]free|\bno soy\b|\bwithout (any )?soy\b",
+    "contains-sesame": r"\bsesame[- ]free|\bno sesame\b|\bwithout sesame\b|\bremove sesame\b|\banything containing sesame",
+    "contains-fish": r"\bfish[- ]free|\bfree of fish\b|\bno fish\b|\bwithout (the )?fish\b",
+    "contains-shellfish": r"\bshellfish",
+    "contains-alcohol": r"\balcohol|\bwithout (the )?wine\b|\bno wine\b",
+    "contains-peanut": r"\bpeanut|\bnut[- ]free|\bnut allerg",
+}
+
+
+def asked_allergens(text: str) -> list[str]:
+    low = text.lower()
+    return sorted(a for a, pat in ASKED.items() if re.search(pat, low))
+
+
+def residue_for(rec: dict[str, Any]) -> dict[str, Any]:
+    """Residue against every allergen the user asked about OR the planner chose."""
+    from rag.contract import allergen_residue
+
+    req = rec.get("request") or {}
+    answer = (rec.get("output") or {}).get("answer") or {}
+    asked = asked_allergens(req.get("text", ""))
+    targets = sorted(set(asked) | ({req["allergen"]} if req.get("allergen") else set()))
+    swaps, rows, method = [], [], []
+    for a in targets if answer else []:
+        r = allergen_residue(answer, a)
+        swaps += [f"{a}: {x}" for x in r["swaps"]]
+        rows += [f"{a}: {x}" for x in r["ingredients"]]
+        method += [f"{a}: {x}" for x in r["method"]]
+    missed = [a for a in asked if a != req.get("allergen")]
+    return {"asked": ",".join(asked), "missed": ",".join(missed), "residue_swaps": " | ".join(swaps),
+            "residue_rows": " | ".join(rows), "residue_method": " | ".join(method),
+            "residue": int(bool(swaps or rows or method))}
 
 SCHEMA = """
 CREATE TABLE meta (k TEXT PRIMARY KEY, v TEXT);
@@ -42,7 +97,8 @@ CREATE TABLE requests (
     trace_id TEXT PRIMARY KEY, ts TEXT, day TEXT, user_id TEXT, session_id TEXT,
     input_type TEXT, allergen TEXT, recipe_id TEXT, prompt_version TEXT, model TEXT,
     status TEXT, latency_ms REAL, model_calls INTEGER, tokens INTEGER, cost_usd REAL,
-    rate_limited INTEGER, request_text TEXT, answer_text TEXT
+    rate_limited INTEGER, request_text TEXT, answer_text TEXT,
+    asked TEXT, missed TEXT, residue_swaps TEXT, residue_rows TEXT, residue_method TEXT, residue INTEGER
 );
 CREATE TABLE spans (
     trace_id TEXT, span_id TEXT, parent_id TEXT, name TEXT, stage TEXT, start_ms REAL,
@@ -56,6 +112,7 @@ CREATE INDEX ix_user ON requests(user_id);
 CREATE INDEX ix_type ON requests(input_type, allergen);
 CREATE INDEX ix_prompt ON requests(prompt_version);
 CREATE INDEX ix_cost ON requests(cost_usd);
+CREATE INDEX ix_residue ON requests(residue);
 """
 
 
@@ -63,9 +120,12 @@ def db_path_for(log: Path) -> Path:
     return log.with_name(log.stem + ".index.sqlite")
 
 
+INDEX_VERSION = "3"  # bump when the schema changes, so an old index file is rebuilt
+
+
 def _fingerprint(log: Path) -> str:
     st = log.stat()
-    return f"{st.st_size}:{st.st_mtime_ns}"
+    return f"v{INDEX_VERSION}:{st.st_size}:{st.st_mtime_ns}"
 
 
 def row_for(rec: dict[str, Any]) -> dict[str, Any]:
@@ -92,6 +152,7 @@ def row_for(rec: dict[str, Any]) -> dict[str, Any]:
         "rate_limited": tot.get("rate_limited", 0),
         "request_text": req.get("text", ""),
         "answer_text": out.get("answer_text") or obs.flatten_answer(out.get("answer")),
+        **residue_for(rec),
     }
 
 

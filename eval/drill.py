@@ -24,6 +24,12 @@ THE FIVE SLICES the brief names, and the flag for each:
     input type      --type allergen-swap  [--allergen contains-dairy]
     cost outlier    --cost-outlier        (cost more than 2 sigma above the mean)
 
+and, added after drill 1 as the bonus (derived columns, see rag/obs_index.py):
+
+    residue         --residue swap|rows|method|any   the answer put the allergen back
+    asked           --asked contains-dairy           what the user's own words asked to avoid
+    plan mismatch   --plan-mismatch                  the user asked, the planner did not pick it
+
 plus --text, full-text over the request (--field request), the answer
 (--field answer) or both. The complaint describes the OUTPUT, so the answer has
 to be searchable; a tool that only searched requests would fail this drill.
@@ -154,6 +160,17 @@ def cmd_slice(args: argparse.Namespace) -> None:
         if val:
             where.append(f"r.{col} = ?")
             params.append(val)
+    # Week 11 bonus: the derived columns (rag/obs_index.py) turn the drill
+    # from reading answers into one query.
+    if args.residue:
+        col = {"any": "r.residue = 1", "swap": "r.residue_swaps != ''", "rows": "r.residue_rows != ''",
+               "method": "r.residue_method != ''"}[args.residue]
+        where.append(col)
+    if args.asked:
+        where.append("(',' || r.asked || ',') LIKE ?")
+        params.append(f"%,{args.asked},%")
+    if args.plan_mismatch:
+        where.append("r.missed != ''")
     join = ""
     if args.text:
         join = "JOIN requests_fts ON requests_fts.trace_id = r.trace_id"
@@ -178,6 +195,12 @@ def cmd_slice(args: argparse.Namespace) -> None:
         print(f"{r['trace_id']:<16} {r['ts'][:19]:<19} {r['user_id']:<7} {r['input_type']:<13} "
               f"{r['allergen'] or '-':<17} {r['recipe_id'][:22]:<22} {r['prompt_version']:<9} "
               f"{r['cost_usd']:>9.6f} {r['latency_ms'] / 1000:>5.1f}")
+        if args.residue or args.plan_mismatch:
+            print(f"    request: {r['request_text']!r}   asked={r['asked'] or '-'}   "
+                  f"planner dropped={r['missed'] or '-'}")
+            for label, col in (("swap", "residue_swaps"), ("rows", "residue_rows"), ("method", "residue_method")):
+                if r[col]:
+                    print(f"    residue {label:<6} {r[col][:150]}")
         if args.show_answer:
             print(f"    request: {r['request_text']}")
             for line in (r["answer_text"] or "").splitlines():
@@ -252,6 +275,11 @@ def main() -> None:
     p.add_argument("--text", help="full-text search terms")
     p.add_argument("--field", choices=("request", "answer", "both"), default="both")
     p.add_argument("--cost-outlier", action="store_true")
+    p.add_argument("--residue", choices=("any", "swap", "rows", "method"),
+                   help="bonus: answers that put an avoided allergen back (derived column)")
+    p.add_argument("--asked", help="bonus: allergen the user's own words ask to avoid, e.g. contains-dairy")
+    p.add_argument("--plan-mismatch", action="store_true",
+                   help="bonus: the user asked to avoid an allergen the planner did not pick")
     p.add_argument("--show-answer", action="store_true", help="print each answer under its row")
     p.add_argument("--grep", help="with --show-answer, only answer lines containing this")
     p.add_argument("--limit", type=int, default=200)

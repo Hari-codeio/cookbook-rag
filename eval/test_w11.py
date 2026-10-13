@@ -155,12 +155,51 @@ def test_plant_and_seal() -> None:
         expect("seal rejects any other id", drill.seal_matches("tr_other"), False)
 
 
+def test_asked() -> None:
+    print("\n6. bonus: what the user's own words asked to avoid")
+    from rag.obs_index import asked_allergens
+
+    expect("'shellfish free' is not a fish request (word boundary)",
+           asked_allergens("Make the napa kimchi shellfish free"), ["contains-shellfish"])
+    expect("a recipe NAMED milk kefir is not a dairy-free request",
+           asked_allergens("Make the milk kefir 2x"), [])
+    expect("two constraints are both read",
+           asked_allergens("Gluten-free brioche but dairy free too"), ["contains-dairy", "contains-gluten"])
+    expect("'no butter or milk' reads as dairy",
+           asked_allergens("Lemon drizzle loaf, no butter or milk, double it"), ["contains-dairy"])
+    expect("'my son has a milk allergy' reads as dairy",
+           asked_allergens("Tikka masala with no dairy, my son has a milk allergy"), ["contains-dairy"])
+
+
+def test_canary() -> None:
+    print("\n5. canary and rollback")
+    import rag.squad as squad
+
+    saved = (squad.RELEASE, squad.CANARY_PERCENT)
+    try:
+        users = [f"u_{i:04d}" for i in range(2000)]
+        squad.RELEASE, squad.CANARY_PERCENT = "squad-v2", 10
+        share = sum(squad.release_for(u) == "squad-v2" for u in users) / len(users)
+        expect("canary 10% puts 8-12% of users on the new release", 0.08 <= share <= 0.12, True)
+        expect("a user's release is stable between requests",
+               all(squad.release_for(u) == squad.release_for(u) for u in users[:200]), True)
+        squad.RELEASE, squad.CANARY_PERCENT = "squad-v1", 10
+        expect("rollback: SQUAD_RELEASE=squad-v1 puts everyone on v1",
+               {squad.release_for(u) for u in users}, {"squad-v1"})
+        squad.RELEASE, squad.CANARY_PERCENT = "squad-v2", 100
+        expect("full rollout: everyone on v2", {squad.release_for(u) for u in users}, {"squad-v2"})
+    finally:
+        squad.RELEASE, squad.CANARY_PERCENT = saved
+
+
 def main() -> None:
     os.environ["RAG_TRACE"] = "0"
     test_residue()
     test_stage_totals()
     test_index()
     test_plant_and_seal()
+    test_canary()
+    test_asked()
     print()
     if FAILS:
         print(f"{len(FAILS)} FAILED")
