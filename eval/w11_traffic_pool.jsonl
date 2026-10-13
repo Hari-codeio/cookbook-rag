@@ -1,0 +1,37 @@
+{"_note": "WEEK 11 TRAFFIC POOL. 36 requests from 12 test users, written 2026-10-13 BEFORE any of them was run, so the log they produce is a haystack nobody tuned. Mix: 9 scale-only, 27 allergen rewrites across 8 allergens, of which 11 are dairy and 3 of those name a recipe with no dairy in it. Phrasing is deliberately uneven (typos are not invented, but 'no butter or milk', 'lactose free' and 'my son has a milk allergy' all mean dairy). These are TEST users; every trace they produce is real model output from the live squad."}
+{"id": "t01", "user_id": "u_0107", "session_id": "s_0107a", "request": "Double the chana masala for a party"}
+{"id": "t02", "user_id": "u_0113", "session_id": "s_0113a", "request": "Make the Chicken Tikka Masala twice the size and dairy free"}
+{"id": "t03", "user_id": "u_0121", "session_id": "s_0121a", "request": "Half the 2kg country sourdough please"}
+{"id": "t04", "user_id": "u_0134", "session_id": "s_0134a", "request": "Make the shakshuka egg free, my daughter is allergic"}
+{"id": "t05", "user_id": "u_0142", "session_id": "s_0142a", "request": "Scale the congee to 3x"}
+{"id": "t06", "user_id": "u_0156", "session_id": "s_0156a", "request": "Make the lemon drizzle cake dairy-free"}
+{"id": "t07", "user_id": "u_0107", "session_id": "s_0107a", "request": "Sesame soy aubergine with no soy, double it"}
+{"id": "t08", "user_id": "u_0163", "session_id": "s_0163a", "request": "Beef bourguignon without the wine"}
+{"id": "t09", "user_id": "u_0178", "session_id": "s_0178a", "request": "Make 1.5x the focaccia"}
+{"id": "t10", "user_id": "u_0185", "session_id": "s_0185a", "request": "Classic brioche dairy free, half batch"}
+{"id": "t11", "user_id": "u_0192", "session_id": "s_0192a", "request": "Kimchi without fish sauce, double batch"}
+{"id": "t12", "user_id": "u_0204", "session_id": "s_0204a", "request": "Shakshuka dairy free"}
+{"id": "t13", "user_id": "u_0219", "session_id": "s_0219a", "request": "Triple the half-sour dill pickles"}
+{"id": "t14", "user_id": "u_0113", "session_id": "s_0113a", "request": "Lemon drizzle loaf without eggs please, 1.5x"}
+{"id": "t15", "user_id": "u_0121", "session_id": "s_0121b", "request": "Tikka masala with no dairy, my son has a milk allergy"}
+{"id": "t16", "user_id": "u_0134", "session_id": "s_0134a", "request": "Remove sesame from the congee"}
+{"id": "t17", "user_id": "u_0142", "session_id": "s_0142b", "request": "Make the beef bourguignon gluten free"}
+{"id": "t18", "user_id": "u_0156", "session_id": "s_0156b", "request": "Half quantity of the beef bourguignon"}
+{"id": "t19", "user_id": "u_0163", "session_id": "s_0163a", "request": "Chocolate brioche without any dairy"}
+{"id": "t20", "user_id": "u_0178", "session_id": "s_0178a", "request": "Pad thai with no shellfish, for 3x"}
+{"id": "t21", "user_id": "u_0185", "session_id": "s_0185b", "request": "Classic brioche with no egg"}
+{"id": "t22", "user_id": "u_0192", "session_id": "s_0192a", "request": "Double the red cabbage sauerkraut"}
+{"id": "t23", "user_id": "u_0204", "session_id": "s_0204b", "request": "Gluten-free brioche but dairy free too"}
+{"id": "t24", "user_id": "u_0219", "session_id": "s_0219a", "request": "Sesame and soy aubergine, sesame free, 1.5x"}
+{"id": "t25", "user_id": "u_0107", "session_id": "s_0107b", "request": "Can the milk kefir be made dairy free?"}
+{"id": "t26", "user_id": "u_0113", "session_id": "s_0113b", "request": "Alcohol-free beef bourguignon, half size"}
+{"id": "t27", "user_id": "u_0121", "session_id": "s_0121b", "request": "Make the white rice miso at half size"}
+{"id": "t28", "user_id": "u_0134", "session_id": "s_0134b", "request": "Gluten free focaccia please"}
+{"id": "t29", "user_id": "u_0142", "session_id": "s_0142b", "request": "Pad thai for 2x but no egg"}
+{"id": "t30", "user_id": "u_0156", "session_id": "s_0156b", "request": "Dairy-free beef bourguignon, 1.5x"}
+{"id": "t31", "user_id": "u_0163", "session_id": "s_0163b", "request": "Lemon drizzle loaf, no butter or milk, double it"}
+{"id": "t32", "user_id": "u_0178", "session_id": "s_0178b", "request": "Make the lemon drizzle gluten free"}
+{"id": "t33", "user_id": "u_0185", "session_id": "s_0185b", "request": "Double the pad thai"}
+{"id": "t34", "user_id": "u_0192", "session_id": "s_0192b", "request": "Lactose free tikka masala"}
+{"id": "t35", "user_id": "u_0204", "session_id": "s_0204b", "request": "Chana masala, dairy free"}
+{"id": "t36", "user_id": "u_0219", "session_id": "s_0219b", "request": "Make the napa kimchi shellfish free"}

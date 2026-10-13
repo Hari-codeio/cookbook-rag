@@ -29,16 +29,20 @@ filtered by name per worker. Nothing here imports rag/tools.py functions directl
 
 from __future__ import annotations
 
+import hashlib
 import json
 import time
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from typing import Any
 
+from rag import obs
 from rag.agent import Budgets, _parse_answer, run_agent
+from rag.config import GEN_PIN, GEN_PINNED_MODEL, GEN_PROVIDER
 from rag.contract import RunResult
 from rag.llm import call_with_tools, user_part
 from rag.mcp_host import MCPHost
 from rag.tools import ALLERGENS
+from rag.trace import git_sha
 
 PLAN_PROMPT = """\
 You are the orchestrator of a small kitchen team. Read ONE recipe adaptation
@@ -118,6 +122,29 @@ ALLERGEN_TOOLS = ("get_allergen_profile", "get_nutrition_per_100g")
 SUBSTITUTION_TOOLS = ("get_allergen_profile",)
 WORKER_BUDGETS = Budgets(max_laps=6, max_tokens=30_000, max_cost_usd=0.01, max_seconds=60.0)
 
+# ---------------------------------------------------------------------------
+# Week 11: every prompt has a version, and a RELEASE names the set that answered.
+#
+# Week 10 shipped these four prompts with no version at all, so a trace could
+# not say which wording produced an answer, and a fix could not be rolled back
+# by name. The release id is what a trace is sliced on; the per-step version
+# and sha256 say exactly which text changed between two releases.
+# ---------------------------------------------------------------------------
+PROMPTS: dict[str, dict[str, tuple[str, str]]] = {
+    "squad-v1": {
+        "plan": ("plan-v1", PLAN_PROMPT),
+        "allergen_worker": ("allergen-v1", ALLERGEN_WORKER_PROMPT),
+        "substitution_worker": ("substitution-v1", SUBSTITUTION_WORKER_PROMPT),
+        "synthesise": ("synth-v1", SYNTHESIS_PROMPT),
+    },
+}
+RELEASE = "squad-v1"
+
+
+def prompt_manifest(release: str) -> dict[str, dict[str, str]]:
+    return {step: {"version": v, "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest()}
+            for step, (v, text) in PROMPTS[release].items()}
+
 
 class WorkerHTTPError(RuntimeError):
     """What a remote worker behind HTTP (A2A or plain REST) looks like when it dies."""
@@ -149,6 +176,8 @@ class Handoff:
 @dataclass
 class SquadResult(RunResult):
     handoffs: list[Handoff] = field(default_factory=list)
+    trace_id: str | None = None
+    release: str = RELEASE
 
 
 def _add(result: SquadResult, h: Handoff) -> None:
@@ -162,39 +191,86 @@ def _add(result: SquadResult, h: Handoff) -> None:
                        "ms": round(h.ms, 1), **h.detail})
 
 
-def _model_step(client, name: str, system: str, payload: dict[str, Any]) -> tuple[Handoff, dict[str, Any] | None]:
+def _model_step(client, name: str, system: str, payload: dict[str, Any], rec: obs.Recorder,
+                span_name: str, prompt_version: str, keep_output: bool = True,
+                ) -> tuple[Handoff, dict[str, Any] | None]:
     user = json.dumps(payload, ensure_ascii=False)
+    start_ms = rec.now_ms()
     started = time.perf_counter()
     turn = call_with_tools(client, system, [user_part(user)], None)
-    h = Handoff(name, 1, turn.input_tokens, turn.output_tokens, turn.cost_usd,
-                (time.perf_counter() - started) * 1000.0, payload_chars=len(user))
-    return h, _parse_answer(turn.text)
+    ms = (time.perf_counter() - started) * 1000.0
+    h = Handoff(name, 1, turn.input_tokens, turn.output_tokens, turn.cost_usd, ms, payload_chars=len(user))
+    answer = _parse_answer(turn.text)
+    sp = rec.add(span_name, "generation", start_ms, ms, model=turn.model, prompt_version=prompt_version,
+                 status="ok" if answer is not None else "error: reply was not parseable JSON",
+                 attrs={"payload_chars": len(user), "rate_limited": turn.rate_limited, "quota": turn.quota,
+                        "output": (answer if answer is not None else turn.text[:2000]) if keep_output
+                        else "(the final answer; see output.answer)"})
+    sp.tokens(turn.input_tokens, turn.output_tokens)
+    return h, answer
 
 
 def _worker(client, host: MCPHost, name: str, system: str, tools: tuple[str, ...],
-            payload: dict[str, Any]) -> tuple[Handoff, dict[str, Any] | None]:
-    """A worker is the Week 7 agent loop with a narrow prompt and a tool subset."""
+            payload: dict[str, Any], rec: obs.Recorder, span_name: str, prompt_version: str,
+            ) -> tuple[Handoff, dict[str, Any] | None]:
+    """A worker is the Week 7 agent loop with a narrow prompt and a tool subset.
+
+    It becomes one container span plus a child span per lap (generation) and per
+    tool call (tool), so a slow or expensive worker can be pinned to the lap.
+    """
     user = json.dumps(payload, ensure_ascii=False)
     schemas = [s for s in host.tool_schemas if s["name"] in tools]
     registry = {k: v for k, v in host.registry.items() if k in tools}
+    start_ms = rec.now_ms()
     run = run_agent(client, user, WORKER_BUDGETS, schemas, registry, system)
     h = Handoff(name, run.laps, run.input_tokens, run.output_tokens, run.cost_usd,
                 run.latency_ms, "ok" if run.ok else f"failed: {run.error}", len(user),
                 {"tools_called": [e["tool"] for e in run.log if e.get("event") == "tool_result"]})
+
+    parent = rec.add(span_name, obs.CONTAINER, start_ms, run.latency_ms, prompt_version=prompt_version,
+                     status="ok" if run.ok else f"error: {run.error}",
+                     attrs={"laps": run.laps, "terminated_by": run.terminated_by,
+                            "payload_chars": len(user), "output": run.answer if run.ok else None})
+    for e in run.log:
+        if e.get("event") == "model_turn":
+            sp = rec.add(f"{span_name}.lap{e['lap']}", "generation", start_ms + e.get("started_ms", 0.0),
+                         e.get("ms", 0.0), parent=parent, model=e.get("model", ""),
+                         prompt_version=prompt_version,
+                         attrs={"tool_calls": e["tool_calls"], "rate_limited": e.get("rate_limited", 0),
+                                "quota": e.get("quota", "")})
+            sp.tokens(e["input_tokens"], e["output_tokens"])
+        elif e.get("event") == "tool_result":
+            rec.add(f"{span_name}.{e['tool']}", "tool", start_ms + e.get("started_ms", 0.0),
+                    e.get("ms", 0.0), parent=parent,
+                    status="ok" if e.get("ok") else f"error: {e.get('error')}",
+                    attrs={"tool": e["tool"], "args": e["args"], "result": e.get("result")})
     return h, run.answer if run.ok else None
 
 
-def run_squad(client, host: MCPHost, request: str, inject_500: bool = False) -> SquadResult:
-    result = SquadResult()
+def run_squad(client, host: MCPHost, request: str, inject_500: bool = False, *,
+              user_id: str = "anon", session_id: str = "", trace: bool = True,
+              trace_meta: dict[str, Any] | None = None) -> SquadResult:
+    release = RELEASE
+    steps = PROMPTS[release]
+    result = SquadResult(release=release)
+    rec = obs.Recorder()
+    ts = obs.utc_now()
     started = time.perf_counter()
+    ctx: dict[str, Any] = {"input_type": "unparsed", "allergen": "", "query": "", "factor": None,
+                           "context_ids": [], "used": ""}
 
     def done(error: str = "") -> SquadResult:
         result.error = error
         result.latency_ms = (time.perf_counter() - started) * 1000.0
+        if trace and obs.tracing_enabled():
+            result.trace_id = obs.new_trace_id()
+            obs.write(_trace_record(result, rec, ts, request, release, user_id, session_id,
+                                    trace_meta or {}, ctx))
         return result
 
     # 1. user -> orchestrator.plan -------------------------------------------
-    h, plan = _model_step(client, "user -> orchestrator.plan", PLAN_PROMPT, {"request": request})
+    h, plan = _model_step(client, "user -> orchestrator.plan", steps["plan"][1], {"request": request},
+                          rec, "plan", steps["plan"][0])
     _add(result, h)
     if not plan:
         return done("orchestrator could not plan the request")
@@ -204,15 +280,29 @@ def run_squad(client, host: MCPHost, request: str, inject_500: bool = False) -> 
         factor = 1.0
     allergen = str(plan.get("allergen") or "").strip()
     query = str(plan.get("recipe_query") or "").strip()
+    ctx.update(input_type="allergen-swap" if allergen else "scale-only", allergen=allergen,
+               query=query, factor=factor)
 
     # 2. orchestrator -> recipe_search, over MCP, no model --------------------
+    #    Two spans: finding the card is RETRIEVAL, multiplying it is a TOOL.
     t0 = time.perf_counter()
-    found = host.call("search_recipes", {"query": query})
-    scaled = host.call("scale_recipe", {"recipe_id": found.data["matches"][0]["recipe_id"],
-                                        "scale_factor": factor}) if found.ok else found
+    with rec.span("recipe_search", "retrieval", query=query) as sp:
+        found = host.call("search_recipes", {"query": query})
+        matches = found.data.get("matches", []) if found.ok else []
+        ctx["context_ids"] = [m["recipe_id"] for m in matches]
+        sp.attrs["context_ids"] = ctx["context_ids"]
+        sp.status = "ok" if found.ok else f"error: {found.error}"
+    if found.ok:
+        ctx["used"] = matches[0]["recipe_id"]
+        with rec.span("scale_recipe", "tool", recipe_id=ctx["used"], scale_factor=factor) as sp:
+            scaled = host.call("scale_recipe", {"recipe_id": ctx["used"], "scale_factor": factor})
+            sp.status = "ok" if scaled.ok else f"error: {scaled.error}"
+    else:
+        scaled = found
     _add(result, Handoff("orchestrator -> recipe_search (MCP, no model)", ms=(time.perf_counter() - t0) * 1000.0,
                          status="ok" if scaled.ok else f"failed: {scaled.error}"))
     if not scaled.ok:
+        ctx["input_type"] = "unresolved"
         return done(scaled.error)
     recipe = scaled.data
     names = [r["ingredient"] for r in recipe["ingredients"]]
@@ -227,9 +317,13 @@ def run_squad(client, host: MCPHost, request: str, inject_500: bool = False) -> 
                 if inject_500:
                     raise WorkerHTTPError(500, "allergen_worker")
                 h, report = _worker(client, host, "orchestrator -> allergen_worker",
-                                    ALLERGEN_WORKER_PROMPT, ALLERGEN_TOOLS,
-                                    {"ingredients": names, "allergen": allergen})
+                                    steps["allergen_worker"][1], ALLERGEN_TOOLS,
+                                    {"ingredients": names, "allergen": allergen},
+                                    rec, "allergen_worker", steps["allergen_worker"][0])
             except WorkerHTTPError as exc:
+                rec.add("allergen_worker", obs.CONTAINER, rec.now_ms(), 0.0,
+                        prompt_version=steps["allergen_worker"][0], status=f"error: HTTP {exc.status}",
+                        attrs={"attempt": attempts})
                 _add(result, Handoff("orchestrator -> allergen_worker", status=f"HTTP {exc.status}",
                                      detail={"attempt": attempts}))
                 if attempts < 2:  # one retry, as for any flaky dependency
@@ -246,15 +340,16 @@ def run_squad(client, host: MCPHost, request: str, inject_500: bool = False) -> 
     sub_report: dict[str, Any] = {"substitutions": [], "caveats": []}
     if allergen:
         h, report = _worker(client, host, "orchestrator -> substitution_worker",
-                            SUBSTITUTION_WORKER_PROMPT, SUBSTITUTION_TOOLS,
+                            steps["substitution_worker"][1], SUBSTITUTION_TOOLS,
                             {"recipe_title": recipe["title"], "allergen": allergen,
-                             "allergen_report": allergen_report})
+                             "allergen_report": allergen_report},
+                            rec, "substitution_worker", steps["substitution_worker"][0])
         _add(result, h)
         sub_report = report or {"error": "substitution worker gave no parseable report"}
 
     # 5. orchestrator.synthesise ----------------------------------------------
     h, answer = _model_step(client, "orchestrator.synthesise (both reports + scaled recipe)",
-                            SYNTHESIS_PROMPT, {
+                            steps["synthesise"][1], {
                                 "request": request,
                                 "recipe_id": recipe["recipe_id"], "title": recipe["title"],
                                 "scale_factor": factor,
@@ -263,13 +358,44 @@ def run_squad(client, host: MCPHost, request: str, inject_500: bool = False) -> 
                                 "method": recipe["method"],
                                 "allergen_report": allergen_report,
                                 "substitution_report": sub_report,
-                            })
+                            }, rec, "synthesise", steps["synthesise"][0], keep_output=False)
     _add(result, h)
     if not answer:
         return done("synthesis did not return parseable JSON")
     result.answer = answer
     result.ok = True
     return done()
+
+
+def _trace_record(result: SquadResult, rec: obs.Recorder, ts: str, request: str, release: str,
+                  user_id: str, session_id: str, meta: dict[str, Any], ctx: dict[str, Any]) -> dict[str, Any]:
+    """One request, as the line the drill searches and the cost report sums."""
+    spans = [asdict(s) for s in rec.spans]
+    models = sorted({s["model"] for s in spans if s["model"]})
+    return {
+        "trace_schema": obs.TRACE_SCHEMA,
+        "trace_id": result.trace_id,
+        "ts": ts,
+        "app": {"entrypoint": "rag.squad.run_squad", "git_sha": git_sha(), "release": release},
+        "user": {"user_id": user_id, "session_id": session_id},
+        "meta": meta,
+        "request": {"text": request, "input_type": ctx["input_type"], "allergen": ctx["allergen"],
+                    "recipe_query": ctx["query"], "scale_factor": ctx["factor"]},
+        "prompt_version": release,
+        "prompts": prompt_manifest(release),
+        "model": {"provider": GEN_PROVIDER, "pinned": GEN_PINNED_MODEL if GEN_PIN else None, "used": models},
+        "retrieval": {"context_ids": ctx["context_ids"], "used": ctx["used"]},
+        "spans": spans,
+        "totals": {"latency_ms": round(result.latency_ms, 1), "model_calls": result.laps,
+                   "input_tokens": result.input_tokens, "output_tokens": result.output_tokens,
+                   "cost_usd": round(result.cost_usd, 8),
+                   "rate_limited": sum(s["attrs"].get("rate_limited", 0) for s in spans)},
+        "cost_by_stage": obs.stage_totals(spans),
+        "pricing": obs.pricing(),
+        "output": {"ok": result.ok, "error": result.error, "answer": result.answer or None,
+                   "answer_text": obs.flatten_answer(result.answer)},
+        "status": "ok" if result.ok else "error",
+    }
 
 
 def main() -> None:
@@ -280,15 +406,19 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="Run the kitchen squad on one request.")
     ap.add_argument("request")
     ap.add_argument("--inject-500", action="store_true", help="the allergen worker returns HTTP 500")
+    ap.add_argument("--user", default="cli", help="user id stamped on the trace")
+    ap.add_argument("--session", default="", help="session id stamped on the trace")
     args = ap.parse_args()
 
     with MCPHost() as host:
-        result = run_squad(build_client(), host, args.request, args.inject_500)
+        result = run_squad(build_client(), host, args.request, args.inject_500,
+                           user_id=args.user, session_id=args.session)
     for h in result.handoffs:
         print(f"{h.name:<58} calls={h.model_calls} tokens={h.total_tokens:<6} "
               f"{h.ms:>7.0f}ms  {h.status}")
     print(f"\nok: {result.ok}  tokens: {result.total_tokens}  cost: ${result.cost_usd:.6f}  "
           f"latency: {result.latency_ms:.0f} ms")
+    print(f"trace_id: {result.trace_id}  release: {result.release}  log: {obs.trace_path()}")
     if result.answer:
         print(json.dumps(result.answer, indent=2, ensure_ascii=False))
     elif result.error:

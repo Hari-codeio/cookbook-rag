@@ -151,6 +151,10 @@ def run_agent(
             result.log.append({"event": "budget_exceeded", "budget": tripped, "lap": result.laps})
             break
 
+        # Week 11: started_ms / ms are the span timing (wall clock, including
+        # any 429 back-off), so a trace can say WHICH lap was slow, not only that
+        # the run was. Additive keys only; nothing that reads this log changes.
+        lap_started = time.perf_counter()
         turn = call_with_tools(client, system_prompt, contents, tool_schemas)
         result.laps += 1
         result.input_tokens += turn.input_tokens
@@ -167,6 +171,11 @@ def run_agent(
                 "cumulative_tokens": result.total_tokens,
                 "cumulative_cost_usd": round(result.cost_usd, 6),
                 "elapsed_s": round(time.perf_counter() - started, 2),
+                "started_ms": round((lap_started - started) * 1000.0, 1),
+                "ms": round((time.perf_counter() - lap_started) * 1000.0, 1),
+                "model": turn.model,
+                "rate_limited": turn.rate_limited,
+                "quota": turn.quota,
             }
         )
 
@@ -198,6 +207,7 @@ def run_agent(
         response_parts = []
         for call in turn.tool_calls:
             fn = registry.get(call.name)
+            tool_started = time.perf_counter()
             if fn is None:
                 payload = {"ok": False, "error": f"no such tool {call.name!r}"}
             else:
@@ -214,6 +224,9 @@ def run_agent(
                     "args": call.args,
                     "ok": bool(payload.get("ok")),
                     "error": payload.get("error", ""),
+                    "started_ms": round((tool_started - started) * 1000.0, 1),
+                    "ms": round((time.perf_counter() - tool_started) * 1000.0, 1),
+                    "result": payload,
                 }
             )
             response_parts.append(function_response_part(call.name, payload))

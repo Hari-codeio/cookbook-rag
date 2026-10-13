@@ -14,6 +14,7 @@ returns per-call usage and the loop accumulates it.
 
 from __future__ import annotations
 
+import re
 import time
 from dataclasses import dataclass, field
 from typing import Any
@@ -25,11 +26,17 @@ from rag.config import (
     GEN_RETRY_WAIT_SECONDS,
 )
 
-# Gemini free-tier pricing for gemini-3.1-flash-lite, USD per 1M tokens.
-# Held here as one constant so the cost column in race.csv is reproducible and
-# a pricing change is a one-line diff rather than a hunt.
-USD_PER_1M_INPUT = 0.10
-USD_PER_1M_OUTPUT = 0.40
+# gemini-3.1-flash-lite LIST price (paid tier), USD per 1M tokens, from
+# https://ai.google.dev/pricing, checked 2026-10-13. Output includes thinking
+# tokens. Held here as one constant so every cost column is reproducible and a
+# pricing change is a one-line diff rather than a hunt.
+#
+# Weeks 7-10 used 0.10 / 0.40, an older flash-lite price, so their cost columns
+# read 2.5x low on input and 3.75x low on output. Their TOKEN counts are
+# unaffected. On the free tier the invoice is $0; this is what the same traffic
+# costs once it outgrows the free tier, which is the number the 10x plan needs.
+USD_PER_1M_INPUT = 0.25
+USD_PER_1M_OUTPUT = 1.50
 
 
 def usd(input_tokens: int, output_tokens: int) -> float:
@@ -55,6 +62,12 @@ class Turn:
     model: str = ""
     latency_ms: float = 0.0
     finish_reason: str = ""
+    # Week 11: a 429 used to be retried silently, so a rate limit showed up only
+    # as a slow call. These make it visible in the trace: how many attempts were
+    # turned away, how long we slept, and the quota the last 429 named.
+    rate_limited: int = 0
+    retry_wait_s: float = 0.0
+    quota: str = ""
 
     @property
     def total_tokens(self) -> int:
@@ -126,6 +139,9 @@ def call_with_tools(
         )
 
     last_error: Exception | None = None
+    rate_limited = 0
+    waited_s = 0.0
+    quota = ""
     for attempt in range(1, GEN_RETRY_ATTEMPTS + 1):
         for model_name in GEMINI_MODELS:
             started = time.perf_counter()
@@ -147,6 +163,9 @@ def call_with_tools(
                 )
                 if not transient:
                     raise
+                if "429" in str(exc) or "resource_exhausted" in lowered:
+                    rate_limited += 1
+                    quota = _quota_named(str(exc)) or quota
                 continue
 
             latency_ms = (time.perf_counter() - started) * 1000.0
@@ -156,6 +175,9 @@ def call_with_tools(
                 output_tokens=int(getattr(usage, "candidates_token_count", 0) or 0),
                 model=model_name,
                 latency_ms=latency_ms,
+                rate_limited=rate_limited,
+                retry_wait_s=waited_s,
+                quota=quota,
             )
 
             candidates = getattr(response, "candidates", None) or []
@@ -177,5 +199,17 @@ def call_with_tools(
 
         if attempt < GEN_RETRY_ATTEMPTS:
             time.sleep(GEN_RETRY_WAIT_SECONDS)
+            waited_s += GEN_RETRY_WAIT_SECONDS
 
     raise RuntimeError(f"all {GEN_RETRY_ATTEMPTS} attempts failed: {last_error}")
+
+
+_QUOTA_RE = re.compile(r"quota(?:Id|_id)['\"]?\s*[:=]\s*['\"]?([A-Za-z0-9_-]+).*?quota(?:Value|_value)['\"]?\s*[:=]\s*['\"]?(\d+)", re.S)
+
+
+def _quota_named(message: str) -> str:
+    """'GenerateRequestsPerDayPerProjectPerModel-FreeTier=500' from a 429 body,
+    or '' if the body names no quota. This is the only place the API says what
+    the limit actually is, so it is worth keeping rather than retrying past."""
+    m = _QUOTA_RE.search(message)
+    return f"{m.group(1)}={m.group(2)}" if m else ""
