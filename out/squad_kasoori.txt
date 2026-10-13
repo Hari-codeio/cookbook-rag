@@ -1,0 +1,67 @@
+user -> orchestrator.plan                                  calls=1 tokens=202       6930ms  ok
+orchestrator -> recipe_search (MCP, no model)              calls=0 tokens=0           13ms  ok
+orchestrator.synthesise (both reports + scaled recipe)     calls=1 tokens=1213     20714ms  ok
+
+ok: True  tokens: 1415  cost: $0.000294  latency: 27657 ms
+{
+  "recipe_id": "chicken-tikka-masala",
+  "title": "Chicken Tikka Masala",
+  "scale_factor": 1.0,
+  "ingredients": [
+    {
+      "ingredient": "Chicken thigh, boneless",
+      "amount": "900 g"
+    },
+    {
+      "ingredient": "Full fat yoghurt",
+      "amount": "250 g"
+    },
+    {
+      "ingredient": "Double cream",
+      "amount": "150 g"
+    },
+    {
+      "ingredient": "Tinned plum tomatoes",
+      "amount": "400 g"
+    },
+    {
+      "ingredient": "Brown onion",
+      "amount": "250 g"
+    },
+    {
+      "ingredient": "Ghee",
+      "amount": "50 g"
+    },
+    {
+      "ingredient": "Ginger, grated",
+      "amount": "25 g"
+    },
+    {
+      "ingredient": "Garlic, crushed",
+      "amount": "20 g"
+    },
+    {
+      "ingredient": "Garam masala",
+      "amount": "10 g"
+    },
+    {
+      "ingredient": "Ground turmeric",
+      "amount": "5 g"
+    },
+    {
+      "ingredient": "Kashmiri chilli powder",
+      "amount": "8 g"
+    },
+    {
+      "ingredient": "Fine sea salt",
+      "amount": "12 g"
+    },
+    {
+      "ingredient": "Kasoori methi",
+      "amount": "4 g"
+    }
+  ],
+  "substitutions": [],
+  "method": "## Method\n\nMarinate the chicken in the yoghurt with half the ginger, garlic and spices for at least\nfour hours, ideally overnight. The acid in the yoghurt does the tenderising; more than\ntwenty-four hours and the texture turns mealy.\n\nThread onto skewers and grill hard until the edges char in places. You want colour, not\ndoneness — the pieces finish in the sauce.\n\nSoften the onion in the ghee, add the remaining ginger, garlic and spices, then the tomatoes.\nCook until thick and glossy, blend smooth, and return to the pan. Add the grilled chicken\nand simmer for ten minutes, then stir in the cream and the crushed kasoori methi off the\nheat.",
+  "unsupported": ""
+}

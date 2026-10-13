@@ -1,0 +1,85 @@
+user -> orchestrator.plan                                  calls=1 tokens=204       9962ms  ok
+orchestrator -> recipe_search (MCP, no model)              calls=0 tokens=0           21ms  ok
+orchestrator -> allergen_worker                            calls=2 tokens=1699     14199ms  ok
+orchestrator -> substitution_worker                        calls=2 tokens=1405     44153ms  ok
+orchestrator.synthesise (both reports + scaled recipe)     calls=1 tokens=1695      3201ms  ok
+
+ok: True  tokens: 5003  cost: $0.000882  latency: 71537 ms
+{
+  "recipe_id": "chicken-tikka-masala",
+  "title": "Chicken Tikka Masala",
+  "scale_factor": 2.0,
+  "ingredients": [
+    {
+      "ingredient": "Chicken thigh, boneless",
+      "amount": "1800 g"
+    },
+    {
+      "ingredient": "Unsweetened coconut yoghurt",
+      "amount": "500 g"
+    },
+    {
+      "ingredient": "Full-fat coconut milk",
+      "amount": "300 g"
+    },
+    {
+      "ingredient": "Tinned plum tomatoes",
+      "amount": "800 g"
+    },
+    {
+      "ingredient": "Brown onion",
+      "amount": "500 g"
+    },
+    {
+      "ingredient": "Neutral oil or avocado oil",
+      "amount": "100 g"
+    },
+    {
+      "ingredient": "Ginger, grated",
+      "amount": "50 g"
+    },
+    {
+      "ingredient": "Garlic, crushed",
+      "amount": "40 g"
+    },
+    {
+      "ingredient": "Garam masala",
+      "amount": "20 g"
+    },
+    {
+      "ingredient": "Ground turmeric",
+      "amount": "10 g"
+    },
+    {
+      "ingredient": "Kashmiri chilli powder",
+      "amount": "16 g"
+    },
+    {
+      "ingredient": "Fine sea salt",
+      "amount": "24 g"
+    },
+    {
+      "ingredient": "Kasoori methi",
+      "amount": "8 g"
+    }
+  ],
+  "substitutions": [
+    {
+      "from": "Full fat yoghurt",
+      "to": "Unsweetened coconut yoghurt",
+      "reason": "Provides the necessary acidity and creamy texture for the marinade without dairy."
+    },
+    {
+      "from": "Double cream",
+      "to": "Full-fat coconut milk",
+      "reason": "Adds the required richness and creaminess to the sauce."
+    },
+    {
+      "from": "Ghee",
+      "to": "Neutral oil or avocado oil",
+      "reason": "Provides a high smoke point for cooking the chicken and aromatics without dairy fat."
+    }
+  ],
+  "method": "## Method\n\nMarinate the chicken in the yoghurt with half the ginger, garlic and spices for at least\nfour hours, ideally overnight. \n\nThread onto skewers and grill hard until the edges char in places. You want colour, not\ndoneness — the pieces finish in the sauce.\n\nSoften the onion in the ghee, add the remaining ginger, garlic and spices, then the tomatoes.\nCook until thick and glossy, blend smooth, and return to the pan. Add the grilled chicken\nand simmer for ten minutes, then stir in the cream and the crushed kasoori methi off the\nheat.",
+  "unsupported": "Chicken thigh, boneless, Tinned plum tomatoes, Brown onion, Ginger, grated, Garlic, crushed, Garam masala, Ground turmeric, Kashmiri chilli powder, Fine sea salt, Kasoori methi. Using coconut-based alternatives will introduce a subtle coconut flavor to the final dish. Ensure the coconut milk is full-fat canned variety for the best texture. Chicken thigh, boneless, Tinned plum tomatoes, Brown onion, Ginger, grated, Garlic, crushed, Garam masala, Ground turmeric, Kashmiri chilli powder, Fine sea salt, Kasoori methi are all naturally dairy-free."
+}

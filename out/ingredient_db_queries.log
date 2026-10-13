@@ -38,3 +38,21 @@
 {"ts": "2026-09-29T21:54:39+00:00", "tool": "lookup_ingredient", "query": "Vegan butter", "matched": "vegan-butter-block"}
 {"ts": "2026-09-29T21:54:42+00:00", "tool": "get_allergens", "query": "Plant-based butter block", "matched": "vegan-butter-block"}
 {"ts": "2026-09-29T21:55:22+00:00", "tool": "lookup_ingredient", "query": "dairy-free margarine", "matched": "vegan-butter-block"}
+{"ts": "2026-10-01T16:12:08+00:00", "tool": "lookup_ingredient", "query": "Ginger, grated", "matched": "ginger"}
+{"ts": "2026-10-01T16:12:08+00:00", "tool": "lookup_ingredient", "query": "creme fraiche lite", "matched": "creme-fraiche"}
+{"ts": "2026-10-01T16:12:08+00:00", "tool": "lookup_ingredient", "query": "tahinni", "matched": "tahini"}
+{"ts": "2026-10-01T16:12:08+00:00", "tool": "get_allergens", "query": "creme fraiche lite", "matched": null}
+{"ts": "2026-10-01T16:13:47+00:00", "tool": "lookup_ingredient", "query": "toasted sunflower seeds", "matched": "sunflower-seeds-roasted"}
+{"ts": "2026-10-01T16:14:01+00:00", "tool": "get_nutrition_per_100g", "query": "Sunflower seeds, roasted", "matched": "sunflower-seeds-roasted"}
+{"ts": "2026-10-01T16:14:03+00:00", "tool": "get_allergens", "query": "Sunflower seeds, roasted", "matched": "sunflower-seeds-roasted"}
+{"ts": "2026-10-01T16:30:13+00:00", "tool": "lookup_ingredient", "query": "Tofu", "matched": "tofu-firm"}
+{"ts": "2026-10-01T16:30:14+00:00", "tool": "get_allergens", "query": "Tofu, firm", "matched": "tofu-firm"}
+{"ts": "2026-10-09T16:02:49+00:00", "tool": "get_allergens", "query": "Eggs", "matched": "egg"}
+{"ts": "2026-10-09T16:02:51+00:00", "tool": "lookup_ingredient", "query": "chickpeas", "matched": "chickpeas-dried"}
+{"ts": "2026-10-09T16:02:52+00:00", "tool": "get_allergens", "query": "Chickpeas, dried", "matched": "chickpeas-dried"}
+{"ts": "2026-10-09T16:10:07+00:00", "tool": "get_allergens", "query": "Eggs", "matched": "egg"}
+{"ts": "2026-10-09T16:10:25+00:00", "tool": "lookup_ingredient", "query": "chickpeas", "matched": "chickpeas-dried"}
+{"ts": "2026-10-09T16:10:26+00:00", "tool": "get_allergens", "query": "Chickpeas, dried", "matched": "chickpeas-dried"}
+{"ts": "2026-10-09T17:16:37+00:00", "tool": "get_allergens", "query": "Eggs", "matched": "egg"}
+{"ts": "2026-10-09T17:16:43+00:00", "tool": "lookup_ingredient", "query": "chickpeas", "matched": "chickpeas-dried"}
+{"ts": "2026-10-09T17:17:04+00:00", "tool": "get_allergens", "query": "Chickpeas, dried", "matched": "chickpeas-dried"}

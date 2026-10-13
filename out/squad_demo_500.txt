@@ -1,0 +1,64 @@
+user -> orchestrator.plan                                  calls=1 tokens=216       6036ms  ok
+orchestrator -> recipe_search (MCP, no model)              calls=0 tokens=0           46ms  ok
+orchestrator -> allergen_worker                            calls=0 tokens=0            0ms  HTTP 500
+orchestrator -> allergen_worker                            calls=0 tokens=0            0ms  HTTP 500
+orchestrator -> substitution_worker                        calls=3 tokens=1800     35868ms  ok
+orchestrator.synthesise (both reports + scaled recipe)     calls=1 tokens=1242      9137ms  ok
+
+ok: True  tokens: 3258  cost: $0.000532  latency: 51087 ms
+{
+  "recipe_id": "shakshuka",
+  "title": "Red Pepper Shakshuka",
+  "scale_factor": 1.5,
+  "ingredients": [
+    {
+      "ingredient": "Red peppers",
+      "amount": "675 g"
+    },
+    {
+      "ingredient": "Brown onion",
+      "amount": "300 g"
+    },
+    {
+      "ingredient": "Tinned plum tomatoes",
+      "amount": "600 g"
+    },
+    {
+      "ingredient": "Olive oil",
+      "amount": "60 g"
+    },
+    {
+      "ingredient": "Garlic",
+      "amount": "22.5 g"
+    },
+    {
+      "ingredient": "Sweet paprika",
+      "amount": "9 g"
+    },
+    {
+      "ingredient": "Ground cumin",
+      "amount": "6 g"
+    },
+    {
+      "ingredient": "Fine sea salt",
+      "amount": "12 g"
+    },
+    {
+      "ingredient": "firm tofu cubes",
+      "amount": "9 whole"
+    },
+    {
+      "ingredient": "Flat leaf parsley",
+      "amount": "22.5 g"
+    }
+  ],
+  "substitutions": [
+    {
+      "from": "eggs",
+      "to": "firm tofu cubes",
+      "reason": "Firm tofu provides a similar texture and protein content to poached eggs when simmered in the tomato sauce."
+    }
+  ],
+  "method": "## Method\n\nSoften the peppers and onion in the olive oil over a low flame for twenty minutes. They\nshould slump rather than colour. Add the garlic, paprika and cumin and stir for one minute.\n\nAdd the tomatoes and salt, break them down with the back of a spoon, and simmer uncovered\nuntil the sauce holds a channel when you drag a spoon through it — about fifteen minutes.\n\nScatter the parsley and serve straight from the pan.",
+  "unsupported": "allergen_worker returned HTTP 500 Internal Server Error. Tofu does not cook exactly like eggs; press the tofu well before adding it to the sauce to improve texture. Consider adding a pinch of kala namak (black salt) to the tofu to mimic the sulfurous flavor of eggs."
+}
