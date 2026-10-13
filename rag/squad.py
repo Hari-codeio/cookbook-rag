@@ -212,15 +212,21 @@ PROMPTS: dict[str, dict[str, tuple[str, str]]] = {
 #   SQUAD_CANARY_PERCENT=10       canary: 10% of users (a stable hash of the
 #                                 user id, so a user does not flip-flop between
 #                                 requests) get RELEASE, the rest PREVIOUS_RELEASE
+#   SQUAD_PREVIOUS_RELEASE=...    what the canary is compared against
 #
 # Every trace records the release that answered it, so the canary is read by
 # slicing the log on prompt_version. See release_notes.md for the plan.
+#
+# squad-v3 (the cost change) passed the suite 11/11 but is NOT the default:
+# it ships in its own canary AFTER squad-v2's, because two changes in one
+# canary cannot be told apart.
 # ---------------------------------------------------------------------------
 RELEASE = os.environ.get("SQUAD_RELEASE", "squad-v2").strip()
-PREVIOUS_RELEASE = "squad-v1"
+PREVIOUS_RELEASE = os.environ.get("SQUAD_PREVIOUS_RELEASE", "squad-v1").strip()
 CANARY_PERCENT = int(os.environ.get("SQUAD_CANARY_PERCENT", "100"))
-if RELEASE not in PROMPTS:
-    raise SystemExit(f"SQUAD_RELEASE={RELEASE!r} is not one of {sorted(PROMPTS)}")
+for _name, _rel in (("SQUAD_RELEASE", RELEASE), ("SQUAD_PREVIOUS_RELEASE", PREVIOUS_RELEASE)):
+    if _rel not in PROMPTS:
+        raise SystemExit(f"{_name}={_rel!r} is not one of {sorted(PROMPTS)}")
 
 
 def release_for(user_id: str) -> str:
