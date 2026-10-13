@@ -138,11 +138,16 @@ def aggregate(rows: list[dict[str, Any]]) -> tuple[list[str], dict[str, Any]]:
 
 def tenx(rows: list[dict[str, Any]]) -> tuple[list[str], str]:
     quotas = {s["attrs"].get("quota") for r in rows for s in r["spans"] if s["attrs"].get("quota")}
-    rpd, src = RPD_LIMIT, LIMIT_SOURCE
+    rpd, rpm = RPD_LIMIT, RPM_LIMIT
+    rpd_src = rpm_src = LIMIT_SOURCE
     for q in quotas:
+        # The API names the quota it enforced in the 429 body. That beats any table.
         if "PerDay" in q:
-            rpd, src = int(q.split("=")[1]), f"from a real 429 in the log: {q}"
+            rpd, rpd_src = int(q.split("=")[1]), f"named by a real 429 in this log: {q}"
+        if "PerMinute" in q:
+            rpm, rpm_src = int(q.split("=")[1]), f"named by a real 429 in this log: {q}"
     limited = sum(r["totals"].get("rate_limited", 0) for r in rows)
+    waited = sum(s["latency_ms"] for r in rows for s in r["spans"] if s["attrs"].get("rate_limited"))
 
     by_day: Counter = Counter()
     calls_by_day: Counter = Counter()
@@ -161,29 +166,32 @@ def tenx(rows: list[dict[str, Any]]) -> tuple[list[str], str]:
     lat = [r["totals"]["latency_ms"] for r in rows]
 
     breaks_at_rpd = rpd / calls_day if calls_day else float("inf")
-    # A published per-minute cap that our own log has already exceeded WITHOUT
-    # a 429 is wrong for this key. Say so, and do not use it as the answer.
-    rpm_contradicted = peak_min > RPM_LIMIT and limited == 0
-    breaks_at_rpm = float("inf") if rpm_contradicted else (RPM_LIMIT / peak_min if peak_min else float("inf"))
-    rpm_cell = f"~~{RPM_LIMIT}/min~~ (>= {peak_min} seen, no 429)" if rpm_contradicted else f"**{RPM_LIMIT}/min**"
+    # A per-minute cap that our own log exceeded WITHOUT any 429 is wrong for
+    # this key: say so, and do not use it as the answer.
+    rpm_contradicted = peak_min > rpm and limited == 0
+    breaks_at_rpm = float("inf") if rpm_contradicted else (rpm / peak_min if peak_min else float("inf"))
+    rpm_cell = f"~~{rpm}/min~~ (>= {peak_min} seen, no 429)" if rpm_contradicted else f"**{rpm}/min**"
     L = ["| at | requests/day | model calls/day | peak calls/min | $/day (list price) | p50 latency |",
          "|---|---|---|---|---|---|",
          f"| 1x (busiest day, {day}) | {req_day} | {calls_day} | {peak_min} | {req_day * mean_cost:.4f} | {pct(lat, .5) / 1000:.1f} s |",
          f"| 10x | {10 * req_day} | {10 * calls_day} | {10 * peak_min} | {10 * req_day * mean_cost:.4f} | "
          f"{pct(lat, .5) / 1000:.1f} s if nothing queues |",
          f"| limit | | **{rpd}/day** | {rpm_cell} | none | |", "",
-         f"Daily cap is reached at **{breaks_at_rpd:.1f}x** today's volume. "
-         + (f"The published {RPM_LIMIT}/min cap is contradicted by this log: the busiest minute made "
-            f"{peak_min} model calls and drew no 429, so the real per-minute cap is at least {peak_min} "
-            f"and cannot be the answer until a 429 names it. "
-            if rpm_contradicted else
-            f"The per-minute cap is reached at **{breaks_at_rpm:.1f}x** today's busiest minute. ")
-         + f"429s seen at 1x: {limited}. Limits: {src}."]
+         f"Per-minute cap ({rpm_src}): the busiest minute made **{peak_min}** model calls, "
+         f"{'already over' if peak_min > rpm else 'under'} the cap at 1x"
+         f"{f', and {limited} call(s) drew a 429, costing {waited / 1000:.0f} s of back-off between them' if limited else ''}. "
+         f"Daily cap ({rpd_src}): reached at **{breaks_at_rpd:.1f}x** today's volume."]
     first = min(("rate limit (requests per day)", breaks_at_rpd), ("rate limit (requests per minute)", breaks_at_rpm),
                 key=lambda kv: kv[1])
-    line = (f"At 10x, the {first[0]} breaks first: 10x is {10 * calls_day} model calls/day against a "
-            f"{rpd}/day cap, hit at {breaks_at_rpd:.1f}x, while cost is only ${10 * req_day * mean_cost:.2f}/day "
-            f"and latency does not move until requests start queuing behind the cap.")
+    if first[0].endswith("minute)"):
+        line = (f"At 10x the per-minute rate limit breaks first, and it already bit at 1x: the busiest minute "
+                f"made {peak_min} model calls against the {rpm}/min cap the API named in its own 429, so 10x is "
+                f"{10 * peak_min} calls/min ({10 * peak_min / rpm:.0f}x the cap); the {rpd}/day cap follows at "
+                f"{breaks_at_rpd:.1f}x, and cost at 10x is only ${10 * req_day * mean_cost:.2f}/day.")
+    else:
+        line = (f"At 10x the daily rate limit breaks first: 10x is {10 * calls_day} model calls/day against a "
+                f"{rpd}/day cap, hit at {breaks_at_rpd:.1f}x, while cost is only "
+                f"${10 * req_day * mean_cost:.2f}/day and latency does not move until requests queue.")
     return L, line
 
 

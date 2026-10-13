@@ -1,0 +1,56 @@
+{
+ "n": 36,
+ "mean_cost": 0.0020163194444444443,
+ "mean_calls": 5.25,
+ "p50_s": 14.393799999999999,
+ "p95_s": 28.689400000000003,
+ "stage_cost": {
+  "retrieval": 0.0,
+  "generation": 0.0725875,
+  "tool": 0.0
+ },
+ "steps": {
+  "plan|generation": {
+   "calls": 36,
+   "in": 5781,
+   "out": 1294,
+   "cost": 0.003386249999999999
+  },
+  "recipe_search|retrieval": {
+   "calls": 36,
+   "in": 0,
+   "out": 0,
+   "cost": 0.0
+  },
+  "scale_recipe|tool": {
+   "calls": 36,
+   "in": 0,
+   "out": 0,
+   "cost": 0.0
+  },
+  "synthesise|generation": {
+   "calls": 36,
+   "in": 28391,
+   "out": 18847,
+   "cost": 0.03536825000000001
+  },
+  "allergen_worker|generation": {
+   "calls": 56,
+   "in": 38023,
+   "out": 4954,
+   "cost": 0.01693675
+  },
+  "get_allergen_profile|tool": {
+   "calls": 65,
+   "in": 0,
+   "out": 0,
+   "cost": 0.0
+  },
+  "substitution_worker|generation": {
+   "calls": 61,
+   "in": 32935,
+   "out": 5775,
+   "cost": 0.016896249999999995
+  }
+ }
+}
