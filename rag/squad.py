@@ -158,6 +158,14 @@ RULES
 }
 """
 
+# Not a prompt: the description of the code that replaces the allergen worker
+# in squad-v3. Versioned and hashed like a prompt so a trace still says
+# exactly what did this step.
+ALLERGEN_STEP_IN_CODE = """\
+(no model) get_allergen_profile(ingredient names, allergen) over MCP, then
+must_remove = carries_allergen, caveats = unknown_to_the_archive.
+"""
+
 ALLERGEN_TOOLS = ("get_allergen_profile", "get_nutrition_per_100g")
 SUBSTITUTION_TOOLS = ("get_allergen_profile",)
 WORKER_BUDGETS = Budgets(max_laps=6, max_tokens=30_000, max_cost_usd=0.01, max_seconds=60.0)
@@ -181,6 +189,16 @@ PROMPTS: dict[str, dict[str, tuple[str, str]]] = {
     "squad-v2": {
         "plan": ("plan-v1", PLAN_PROMPT),
         "allergen_worker": ("allergen-v1", ALLERGEN_WORKER_PROMPT),
+        "substitution_worker": ("substitution-v1", SUBSTITUTION_WORKER_PROMPT),
+        "synthesise": ("synth-v2", SYNTHESIS_PROMPT_V2),
+    },
+    # Week 11 cost change, measured separately from the fix: the allergen step
+    # is routed to CODE. Its whole job is one get_allergen_profile call and a
+    # copy of the answer, and in 27 of 28 production requests the model's
+    # report was exactly the tool's answer. Same prompts otherwise.
+    "squad-v3": {
+        "plan": ("plan-v1", PLAN_PROMPT),
+        "allergen_worker": ("allergen-code-v1", ALLERGEN_STEP_IN_CODE),
         "substitution_worker": ("substitution-v1", SUBSTITUTION_WORKER_PROMPT),
         "synthesise": ("synth-v2", SYNTHESIS_PROMPT_V2),
     },
@@ -318,6 +336,29 @@ def _worker(client, host: MCPHost, name: str, system: str, tools: tuple[str, ...
     return h, run.answer if run.ok else None
 
 
+def _allergen_step_in_code(host: MCPHost, names: list[str], allergen: str, rec: obs.Recorder,
+                           version: str) -> tuple[Handoff, dict[str, Any] | None]:
+    """squad-v3: the allergen worker's job, done by the tool it always called.
+
+    One tool span, no generation span. The report has the worker's exact shape,
+    so the substitution worker and synthesis see the same input as before.
+    """
+    started = time.perf_counter()
+    with rec.span("allergen_step", "tool", tool="get_allergen_profile", args={"n": len(names)}) as sp:
+        sp.prompt_version = version
+        prof = host.call("get_allergen_profile", {"ingredients": names, "allergen": allergen})
+        sp.status = "ok" if prof.ok else f"error: {prof.error}"
+        sp.attrs["result"] = prof.data if prof.ok else prof.error
+    h = Handoff("orchestrator -> allergen_step (code, no model)", 0,
+                ms=(time.perf_counter() - started) * 1000.0,
+                status="ok" if prof.ok else f"failed: {prof.error}")
+    if not prof.ok:
+        return h, None
+    return h, {"allergen": allergen,
+               "must_remove": [c["ingredient"] for c in prof.data.get("carries_allergen", [])],
+               "caveats": list(prof.data.get("unknown_to_the_archive", []))}
+
+
 def run_squad(client, host: MCPHost, request: str, inject_500: bool = False, *,
               user_id: str = "anon", session_id: str = "", trace: bool = True,
               trace_meta: dict[str, Any] | None = None, release: str | None = None) -> SquadResult:
@@ -387,10 +428,14 @@ def run_squad(client, host: MCPHost, request: str, inject_500: bool = False, *,
             try:
                 if inject_500:
                     raise WorkerHTTPError(500, "allergen_worker")
-                h, report = _worker(client, host, "orchestrator -> allergen_worker",
-                                    steps["allergen_worker"][1], ALLERGEN_TOOLS,
-                                    {"ingredients": names, "allergen": allergen},
-                                    rec, "allergen_worker", steps["allergen_worker"][0])
+                if steps["allergen_worker"][0].startswith("allergen-code"):
+                    h, report = _allergen_step_in_code(host, names, allergen, rec,
+                                                       steps["allergen_worker"][0])
+                else:
+                    h, report = _worker(client, host, "orchestrator -> allergen_worker",
+                                        steps["allergen_worker"][1], ALLERGEN_TOOLS,
+                                        {"ingredients": names, "allergen": allergen},
+                                        rec, "allergen_worker", steps["allergen_worker"][0])
             except WorkerHTTPError as exc:
                 rec.add("allergen_worker", obs.CONTAINER, rec.now_ms(), 0.0,
                         prompt_version=steps["allergen_worker"][0], status=f"error: HTTP {exc.status}",
