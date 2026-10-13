@@ -5,3 +5,8 @@ __pycache__/
 out/chroma/
 out/mcp_servers.stderr.log
 .venv/pyvenv.cfg.bak
+
+# Week 11: the trace index is derived from the log and rebuilt on demand
+out/w11/*.index.sqlite
+out/w11/drill/*.index.sqlite
+out/w11/drill/clock.json

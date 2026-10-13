@@ -1,0 +1,186 @@
+{
+ "_note": "2026-10-13. 14 dairy-free requests sent to the WEEK 6 path (rag/substitute.py, prompt substitute-v1, untraced) to see whether it reproduces the squad's dairy failure. 13 declined; 1 (tikka masala) swapped yoghurt, cream and ghee all to sunflower oil, which is odd but dairy-free. So a regression case added to the Week 6 suite would be GREEN before any fix, which is why the case goes into the squad's suite instead.",
+ "probes": [
+  {
+   "recipe": "classic brioche",
+   "constraint": "dairy free",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "The provided archive does not contain a dairy-free alternative for the ingredients in the Classic Brioche recipe.",
+   "tokens": [
+    1956,
+    107
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "chicken tikka masala",
+   "constraint": "dairy free",
+   "can_substitute": true,
+   "swaps": [
+    [
+     "Full fat yoghurt",
+     "Sunflower oil"
+    ],
+    [
+     "Double cream",
+     "Sunflower oil"
+    ],
+    [
+     "Ghee",
+     "Sunflower oil"
+    ]
+   ],
+   "unsupported": "",
+   "tokens": [
+    1452,
+    1032
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "lemon drizzle cake",
+   "constraint": "dairy free",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "The archive does not contain a dairy-free substitute for butter or any other dairy ingredients used in the Lemon Drizzle Loaf recipe.",
+   "tokens": [
+    1962,
+    117
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "gluten-free brioche",
+   "constraint": "dairy free",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "dairy-free substitutes for whole milk and unsalted butter",
+   "tokens": [
+    1322,
+    102
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "milk kefir",
+   "constraint": "dairy free",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "The archive contains no information on how to make a dairy-free version of milk kefir or any dairy-free substitutes for cow's milk in this recipe.",
+   "tokens": [
+    1370,
+    119
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "chocolate brioche",
+   "constraint": "dairy free",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "dairy free",
+   "tokens": [
+    1731,
+    90
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "lemon drizzle cake",
+   "constraint": "dairy free - can i use ghee instead of the butter?",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "The provided context does not contain information regarding the use of ghee as a substitute for butter, nor does it provide a dairy-free version of the Lemon Drizzle Loaf recipe.",
+   "tokens": [
+    2026,
+    126
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "classic brioche",
+   "constraint": "dairy free, swap the butter for ghee like the tikka masala uses",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "The archive does not contain a dairy-free brioche recipe or evidence that ghee can be used as a substitute for butter in a brioche recipe.",
+   "tokens": [
+    2294,
+    116
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "chicken tikka masala",
+   "constraint": "lactose free",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "The provided context does not contain information on how to substitute dairy ingredients (yoghurt, double cream, ghee) with lactose-free alternatives.",
+   "tokens": [
+    1605,
+    120
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "classic brioche",
+   "constraint": "lactose free",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "lactose free",
+   "tokens": [
+    1957,
+    90
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "chicken tikka masala",
+   "constraint": "dairy free but keep it rich and creamy",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "The archive does not contain a dairy-free substitute for yoghurt, double cream, or ghee that maintains the richness and creaminess of the original recipe.",
+   "tokens": [
+    1610,
+    121
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "lemon drizzle cake",
+   "constraint": "dairy free for my son with a milk allergy",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "The provided context does not contain a dairy-free substitute for unsalted butter that can be used in the Lemon Drizzle Loaf recipe.",
+   "tokens": [
+    2129,
+    118
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "gluten-free brioche",
+   "constraint": "dairy free, keep it buttery",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "The archive does not contain a dairy-free substitute for milk or butter that maintains the buttery quality of the brioche.",
+   "tokens": [
+    1326,
+    113
+   ],
+   "model": "gemini-3.1-flash-lite"
+  },
+  {
+   "recipe": "chicken tikka masala",
+   "constraint": "no cream or yoghurt please, dairy free",
+   "can_substitute": false,
+   "swaps": [],
+   "unsupported": "The archive does not provide a dairy-free substitute for yoghurt or cream in the context of the Chicken Tikka Masala recipe.",
+   "tokens": [
+    1610,
+    117
+   ],
+   "model": "gemini-3.1-flash-lite"
+  }
+ ]
+}
