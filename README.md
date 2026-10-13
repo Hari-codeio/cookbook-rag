@@ -94,7 +94,28 @@ $PY eval/trajectory_eval.py         # four trajectory numbers + the gap  (no API
 $PY eval/compare_modes.py --before agent_v1 --after workflow --mode skipped-allergen-check
                                     # one mitigation, before->after, price  (no API)
 $PY eval/injection_demo.py          # bonus: indirect prompt injection  [needs API key]
+
+# 10. Week 11 - production: traces, the support drill, cost, the failure -> test loop
+#     (write-up: results_week11.md; plain-language companion: WEEK11_WALKTHROUGH.md)
+$PY eval/test_w11.py                # 40 offline checks, no API
+$PY -m rag.squad "..." --user u_1   # every squad request now writes one trace to out/w11/traces.jsonl
+$PY eval/w11_traffic.py             # 36 test requests -> the production log      [needs API key]
+$PY eval/w11_plant.py --random      # squadmate: plant one bad answer in a COPY of the log
+$PY eval/drill.py start --finder Hari
+$PY eval/drill.py slice --since 7d --type allergen-swap --allergen contains-dairy
+$PY eval/drill.py slice --since 7d --asked contains-dairy --residue swap
+$PY eval/drill.py found tr_xxx --slice "..." --timer "<squadmate>"
+$PY eval/run_suite.py --label red --release squad-v1   # race + regression cases, live [needs API key]
+$PY eval/w11_cost.py                # cost per request by stage + the 10x table, from the log
 ```
+
+Week 11 deliverables: `drill.md`, `trace.json`, `eval/regression_cases.jsonl`,
+`out/w11/suite_red.md` + `out/w11/suite_green.md`, `cost_by_stage.md`,
+`tenx.md`, `release_notes.md`.
+
+Which squad release answers is a setting: `SQUAD_RELEASE` (default
+`squad-v2`; `squad-v1` rolls back), `SQUAD_CANARY_PERCENT`,
+`SQUAD_PREVIOUS_RELEASE`.
 
 The judge and the RAGAS metrics are both cached on the sha256 of their prompt and
 their inputs, so re-running costs no API calls and cannot quietly return different
